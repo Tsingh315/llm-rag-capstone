@@ -5,3 +5,8 @@ __pycache__/
 *.zip
 .DS_Store
 data/
+
+# Generated from the course dataset; not committed
+chroma_db/
+papers_txt/
+CapstoneDatasets/

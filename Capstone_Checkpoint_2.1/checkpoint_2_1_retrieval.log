@@ -1,0 +1,43 @@
+[2026-09-25T13:23:48] QUERY 1: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+retrieved=
+    0.707  Probabilistic Verification of Fairness Properties via Concentration  [DBLP_journals_pacmpl_Bastani0S19.pdf]
+    0.707  Probabilistic Verification of Fairness Properties via Concentration  [DBLP_journals_corr_abs-1812-02573.pdf]
+    0.555  Probabilistic Verification of Fairness Properties via Concentration  [DBLP_journals_pacmpl_Bastani0S19.pdf]
+    0.554  Probabilistic Verification of Fairness Properties via Concentration  [DBLP_journals_corr_abs-1812-02573.pdf]
+    0.453  Probabilistic Verification of Fairness Properties via Concentration  [DBLP_journals_corr_abs-1812-02573.pdf]
+answer=The provided documents do **not** give the specific runtime or sample count for the deep recurrent neural network at error probability \(10^{-10}\).
+
+They do say that VeriFair was evaluated on a deep RNN benchmark and that “we show that VeriFair scales substantially better than FairSqare on every large problem instance in their benchmark (with \(\Delta = 10^{-10}\)),” but the exact time and number of samples for the RNN case are not included in the text you provided.
+------------------------------------------------------------------------
+[2026-09-25T13:23:50] QUERY 2: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+retrieved=
+    0.781  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agen  [DBLP_conf_icse_JeonQFFS16.pdf]
+    0.528  ReaS: Combining Numerical Optimization with SAT Solving  [DBLP_journals_corr_abs-1802-04408.pdf]
+    0.454  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agen  [DBLP_conf_icse_JeonQFFS16.pdf]
+    0.446  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agen  [DBLP_conf_icse_JeonQFFS16.pdf]
+    0.359  Metric Program Synthesis  [DBLP_journals_corr_abs-2206-06164.pdf]
+answer=The documents support **two papers** making this kind of comparison:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - Baseline SMT tools: **dReal** and **Z3**  
+   - The paper says: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**even Z3 could not solve with a timeout of 60 minutes**,” concluding that “**traditional SMT approaches do not scale for these kinds of synthesis problems**.”
+
+2. **Metric Program Synthesis**  
+   - SMT-based baseline: **Regel**  
+   - The excerpt says Regel “**uses a number of SMT-based pruning strategies to reduce the search space**.”
+
+From the provided documents, **ReaS** is the one that explicitly argues SMT solving limits scalability. The **Metric Program Synthesis** excerpt names an SMT-based baseline (**Regel**) but does **not** explicitly say SMT solving limits scalability in the excerpt shown.
+------------------------------------------------------------------------
+[2026-09-25T13:23:52] QUERY 3: Is there a technique that re-runs a whole computation from the beginning, guided by a log of earlier results, to get back to a paused point? How did its speed compare with a logic-programming language on the queens puzzle?
+retrieved=
+    0.500  StatusQuo: Making Familiar Abstractions Perform Using Program Analysis  [DBLP_conf_cidr_CheungAMSM13.pdf]
+    0.500  Capturing the Future by Replaying the Past Functional Pearl  [DBLP_journals_corr_abs-1710-10385.pdf]
+    0.500  Capturing the Future by Replaying the Past Functional Pearl  [DBLP_journals_pacmpl_KoppelSS18.pdf]
+    0.488  Capturing the Future by Replaying the Past Functional Pearl  [DBLP_journals_pacmpl_KoppelSS18.pdf]
+    0.485  Capturing the Future by Replaying the Past Functional Pearl  [DBLP_journals_corr_abs-1710-10385.pdf]
+answer=Yes. The document describes a replay-based technique where “the whole computation [is] replayed” and “it restarts the whole computation u with future P+1, exactly like our implementation.”
+
+On speed for the queens benchmark, it says the replay-based approach was competitive with logic programming: “optimized thermometers are just as fast as replay-nondeterminism.” It also says the benchmark compared against “GNU Prolog 1.4.4,” and that “the optimizations described in Section 6 suffice to remove the additional overhead.”
+
+So, according to the document, the replay-based method could re-run the computation from the beginning using recorded history, and after optimization it was “just as fast” as the replay-nondeterminism approach on N-queens.
+------------------------------------------------------------------------

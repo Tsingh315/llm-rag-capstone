@@ -1,3 +1,8 @@
 langchain-openai
 langchain-core
+langchain-chroma
+langchain-text-splitters
+rank-bm25
 python-dotenv
+requests
+pypdf

@@ -1,0 +1,22 @@
+# GROBID service for parsing research-paper PDFs into structured TEI XML.
+#
+# Build:  docker build -f Dockerfile.grobid -t grobid-local .
+# Run:    docker run --rm --init --ulimit core=0 -p 8070:8070 grobid-local
+# Check:  curl http://localhost:8070/api/isalive        (prints "true")
+#
+# Variants (pick with --build-arg GROBID_VERSION=...):
+#   0.9.1-crf   CPU-only, lighter and faster, slightly less accurate (default; fine on a Mac)
+#   0.9.1-full  deep-learning models, more accurate, heavier, best with a GPU
+ARG GROBID_VERSION=0.9.1-crf
+FROM grobid/grobid:${GROBID_VERSION}
+
+# Port used by the GROBID REST API.
+EXPOSE 8070
+
+# Report unhealthy if the API stops answering. GROBID needs a while to load its models,
+# so allow a generous start period before failures count.
+HEALTHCHECK --interval=30s --timeout=10s --start-period=90s --retries=3 \
+    CMD curl -fsS http://localhost:8070/api/isalive || exit 1
+
+# The base image already defines the entrypoint that starts the GROBID server,
+# so no CMD/ENTRYPOINT is needed here.
