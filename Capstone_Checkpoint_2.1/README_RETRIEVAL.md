@@ -16,7 +16,7 @@ the way it is, and what changes for production. The PDF -> text step is a separa
 - **Status:** **implemented and run end to end.** The file was restructured along the lab's lines (main
   guard, retriever classes, retrieval separate from the LLM step), reads the parsed papers from
   `papers_txt/`, chunks them, indexes the same chunks in BM25 and Chroma, and fuses by `chunk_id`. The
-  three bugs in section 3 are fixed. Results of the first run are in section 9.
+  three bugs in section 2 are fixed. Results of the first run are in section 8.
 
 ---
 
@@ -41,111 +41,15 @@ python capstone_checkpoint_2_1_baseline_retrieval_starter.py --chat    # interac
 
 ---
 
-## 2. Python constructs explained
+## 2. Hybrid retriever: notes and known issues
 
-*Sections 2.1-2.6 explain constructs from the earlier keyword-overlap baseline (`retrieve`, `SAMPLE_DOCS`,
-`DOC_BY_ID`, `run()`), which the hybrid version replaced. The explanations still hold; the exact lines are no
-longer in the file, except `tokenize`, `enumerate` and the set/`float` ideas in spirit.*
-
-### 2.1 Tokenizer: `re.findall(r"[a-z0-9]+", text.lower())`
-
-Turns a string into a list of lowercase alphanumeric words.
-
-- `text.lower()` — case-fold so "Apple" and "apple" match.
-- `[a-z0-9]+` — one or more consecutive lowercase letters/digits; everything else (spaces, punctuation) is
-  a separator and is dropped.
-- `r""` — raw string so backslashes reach the regex engine untouched (not needed here, good habit).
-
-```python
-re.findall(r"[a-z0-9]+", "Hello, World! RAG-based retrieval v2.0 costs $5.".lower())
-# ['hello', 'world', 'rag', 'based', 'retrieval', 'v2', '0', 'costs', '5']
-```
-
-Limitations: non-ASCII letters become separators ("café" -> `['caf']`, Chinese/Hindi -> nothing); no
-stemming ("retrieving" != "retrieval"); apostrophes split words ("don't" -> `don`, `t`); hyphenated terms
-and decimals are split. `r"\w+"` is the common Unicode-aware alternative (it also matches underscores). The
-later `tokenize()` in the file adds stop-word removal via `_STOPWORDS`.
-
-### 2.2 Set intersection: `q & _tokens(d["text"])`
-
-`&` on two sets is **intersection** (not bitwise AND): the words present in both.
-
-```python
-q = {"what", "is", "rag", "retrieval"}
-doc = {"rag", "combines", "retrieval", "with", "generation"}
-q & doc        # {"rag", "retrieval"}
-len(q & doc)   # 2  -> the overlap score
-```
-
-In the keyword-overlap baseline: `scored = [(d["id"], float(len(q & _tokens(d["text"])))) for d in SAMPLE_DOCS]`.
-
-Because sets are used: each word counts **once** (10 mentions of "rag" still add 1), word order and
-frequency are ignored, and common words count as matches unless removed as stop-words. That is why it is
-only a baseline; BM25 fixes both with term-frequency and rarity weighting.
-
-### 2.3 Why `float(len(...))` when the count is an integer?
-
-Not needed for correctness. It is for **interface consistency**: `retrieve` is declared
-`-> list[tuple[str, float]]`, because real retrievers return fractional scores (BM25 `7.32`, cosine `0.83`,
-fused/reranker scores). Keeping `float` means any retriever can be swapped in without touching downstream
-code (printing, thresholds, evaluation, score fusion). Python type checkers accept `int` where `float` is
-declared, so the cast is about clear intent and uniform output (`2.0`, not `2`). Using `int` end-to-end
-would work identically here.
-
-### 2.4 Order of slice and filter: `[(doc_id, score) for doc_id, score in scored[:k] if score > 0]`
-
-The iterable after `in` is evaluated first, then each item is filtered:
-
-1. `scored[:k]` — take the top `k` of the already-sorted list.
-2. Iterate over those `k` items.
-3. `if score > 0` — keep only items with a positive score.
-
-So the filter can only **remove** items from the top `k`; it never pulls in extras. The result has **at most
-`k`** entries, possibly fewer. Fewer than `k` happens when:
-
-- the corpus has fewer than `k` documents, or
-- fewer than `k` documents share a word with the query (zero-overlap docs are dropped).
-
-Scores can't be negative here (`len` >= 0), so `score > 0` means "shares at least one word". If the query
-matches nothing, `retrieve` returns `[]` and callers must handle it (`run()` prints a "nothing matched" note
-and `continue`s). Returning fewer results instead of padding with zero-overlap documents is intentional: it
-keeps irrelevant context away from the LLM.
-
-### 2.5 The guard in `for i in doc_ids if i in DOC_BY_ID`
-
-`i` is a **doc ID (string key)**, not a positional index; `DOC_BY_ID` is a dict `{id: doc}`. The guard
-prevents a `KeyError` from `DOC_BY_ID[i]` when `answer()` receives an ID that isn't in the dict (made-up
-IDs, another retriever over a different/stale index, a stale saved list, an LLM- or reranker-hallucinated
-ID). With the current `retrieve` it is redundant, since IDs come from the same `SAMPLE_DOCS`; it is
-defensive so `answer` stays safe when other retrievers are plugged in.
-
-Trade-off: silently skipping hides bugs (an answer built on less context, no error). Some prefer letting the
-`KeyError` surface early.
-
-### 2.6 `for i, query in enumerate(queries, 1)`
-
-`enumerate(iterable, start)` pairs each item with a counter starting at `start` (default 0). Here `start=1`
-so the output reads `QUERY 1`, `QUERY 2`, `QUERY 3`.
-
-```python
-list(enumerate(["a", "b", "c"], 1))   # [(1, 'a'), (2, 'b'), (3, 'c')]
-```
-
-It replaces a manual `i += 1`, which is bug-prone: the `continue` in `run()` (when nothing matched) would
-skip a trailing `i += 1`. Note this `i` (query number) is a different variable from the `i` in section 2.5
-(a doc ID).
-
----
-
-## 3. Hybrid retriever: notes and known issues
-
-**All three issues below (3.1-3.3) are fixed in the current file;** they are kept here as a record.
+**All three issues below (2.1-2.3) are fixed in the current file;** they are kept here as a record.
 
 `HybridRetriever.getTopK` fuses BM25 and vector search: take the top candidates from each, min-max
 normalize each score list (vector distances are **inverted**, since lower distance = better), merge by file
 name, and combine with `WEIGHT_BM25 * bm + WEIGHT_VECTOR * vec`.
 
-### 3.1 `retrievedContext` should return `(scores, context)`
+### 2.1 `retrievedContext` should return `(scores, context)`
 
 The annotation says `tuple[Dict, str]` but the body returned only a string. To return a sorted map of
 document name -> score plus the joined context string:
@@ -162,7 +66,7 @@ Callers unpack with `scores, context = retriever.retrievedContext(query)`. `Base
 `queryWHistory()` currently treat the return value as a plain `str`, so they must be updated to unpack the
 tuple (and the abstract method signature changed to match).
 
-### 3.2 Bug: wrong list zipped on the vector pass
+### 2.2 Bug: wrong list zipped on the vector pass
 
 ```python
 for (fname, content, _), score in zip(bm_candidates, vector_norm):     # WRONG
@@ -172,14 +76,14 @@ for (fname, content, _), score in zip(vector_candidates, vector_norm): # CORRECT
 Zipping `bm_candidates` with `vector_norm` attaches each vector score to a BM25 file name, so the fused
 ranking is wrong.
 
-### 3.3 Duplicate `getTopK`
+### 2.3 Duplicate `getTopK`
 
 A module-level `getTopK` (outside the class, with `self`) exists in addition to the method inside
 `HybridRetriever`. The module-level copy is dead code and carries the same bug; keep only the method.
 
 ---
 
-## 4. Reading the ingested papers (contract with the ingestion script)
+## 3. Reading the ingested papers (contract with the ingestion script)
 
 The retrieval script only **reads** `papers_txt/`, produced by `ingest_papers.py`. If the folder is missing
 it must fail with a clear message telling you to run ingestion; it must never trigger it.
@@ -199,12 +103,12 @@ it must fail with a clear message telling you to run ingestion; it must never tr
   name).
 - The existing loaders filter on `.endswith(".txt")`, so `manifest.json` in the same folder is ignored by them.
 
-### 4.1 Gotchas
+### 3.1 Gotchas
 
 - **Delete `chroma_db/` after adding titles or changing chunking.** `build_or_load_db` reuses an existing
   non-empty directory, so an old DB would lack the new metadata.
 - **Whole-paper embeddings.** The current code embeds each paper as one document. Papers are long and
-  embedding models have token limits; chunking (section 5) is the likely improvement.
+  embedding models have token limits; chunking (section 4) is the likely improvement.
 - **Repeated papers.** Many papers appear twice (conference and arXiv copies, by identical extracted title;
   not verified). Retrieval would return both and crowd the top-k; decide whether to deduplicate.
 - **Large volumes.** Five files are 350-939-page proceedings volumes (four are in `papers_txt/`). Decide
@@ -212,7 +116,7 @@ it must fail with a clear message telling you to run ingestion; it must never tr
 
 ---
 
-## 5. Chunking and vector search (implemented; section 5.1 lists the design points)
+## 4. Chunking and vector search (implemented; section 4.1 lists the design points)
 
 Chunking splits each paper into smaller, overlapping pieces; each piece becomes its own retrievable
 "document" in BM25 and in the vector DB.
@@ -261,7 +165,7 @@ db = Chroma.from_documents(docs, get_embeddings(), persist_directory=chroma_dir)
 `tokenize` (`[a-z0-9]+`) drops non-ASCII, so "10⁻¹⁰" in a query loses its superscripts and math symbols
 vanish; equations and tables are often garbled and contribute little to either retriever.
 
-### 5.1 Impact on the hybrid retriever code
+### 4.1 Impact on the hybrid retriever code
 
 Moving to chunks is a bigger refactor than swapping the parser, so decide up front whether the capstone
 stays at whole-paper granularity (simpler, weaker) or moves to chunks (better retrieval). If chunking:
@@ -278,7 +182,7 @@ stays at whole-paper granularity (simpler, weaker) or moves to chunks (better re
 
 ---
 
-## 6. The three representative queries and the corpus
+## 5. The three representative queries and the corpus
 
 Checked by searching the 152 parsed texts (the excluded 939-page volume could not be parsed, so this is not
 proof about its contents):
@@ -293,7 +197,7 @@ time, sample count) were not checked against the text.
 
 ---
 
-## 7. What changes in production (retrieval side)
+## 6. What changes in production (retrieval side)
 
 | Concern | Capstone | Production |
 |---|---|---|
@@ -312,7 +216,7 @@ recovery, migration and model upgrades routine. Ingestion-side production notes 
 
 - BM25 index is in-memory and rebuilt at startup.
 - No incremental updates (new/changed/deleted PDFs).
-- Whole-document embeddings, no chunking (unless section 5 is implemented).
+- Whole-document embeddings, no chunking (unless section 4 is implemented).
 - Titles come from GROBID; some are wrong or missing and were only checked by automated tests.
 - BM25 and vector indexes are only kept consistent because they read the same folder.
 - One corpus file (`DBLP_conf_cav_BraggFRS21.pdf`, 939 pages) is a proceedings volume that exceeds GROBID's
@@ -320,20 +224,20 @@ recovery, migration and model upgrades routine. Ingestion-side production notes 
 
 ---
 
-## 8. Checklist
+## 7. Checklist
 
 - [x] Restructured along the lab (main guard, classes, retrieval separate from the LLM step)
 - [x] Reads `papers_txt/` and titles from `manifest.json`; fails clearly if the folder is missing
 - [x] Chunking; same chunks in BM25 and Chroma; fused by `chunk_id`
 - [x] Fixed the `zip` bug, removed the duplicate `getTopK`, `retrievedContext` returns `(scores, context)`
 - [x] Vector DB rebuilds itself when chunks or chunk settings change (no manual `chroma_db/` delete)
-- [x] Ran the three queries (section 9)
-- [ ] Decide whether to deduplicate repeated papers (section 9 shows why it matters)
+- [x] Ran the three queries (section 8)
+- [ ] Decide whether to deduplicate repeated papers (section 8 shows why it matters)
 - [ ] Complete the worksheet using the evidence in `checkpoint_2_1_retrieval.log`
 
 ---
 
-## 9. First run on the research-paper corpus
+## 8. First run on the research-paper corpus
 
 Command: `python capstone_checkpoint_2_1_baseline_retrieval_starter.py` (first run embeds 8,087 chunks, then
 reuses `chroma_db/`). Top 5 chunks go to the LLM. Full output: `checkpoint_2_1_retrieval.log`.

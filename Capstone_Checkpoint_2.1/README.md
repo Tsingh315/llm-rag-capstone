@@ -22,4 +22,4 @@ chunked papers, with an LLM that answers only from the retrieved chunks.
 **Result:** 152 of 153 PDFs parsed (one 939-page proceedings volume exceeds GROBID's limit); 8,087 chunks
 from 148 papers indexed. Queries 1 and 3 retrieved the right paper; query 1's exact numbers were not found;
 query 2 (multi-paper) was the weakest. Repeated copies of the same paper crowd the top results.
-Details in `README_RETRIEVAL.md`, section 9.
+Details in `README_RETRIEVAL.md`, section 8.
