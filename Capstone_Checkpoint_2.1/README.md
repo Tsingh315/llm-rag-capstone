@@ -11,7 +11,7 @@ chunked papers, with an LLM that answers only from the retrieved chunks.
 | `checkpoint_2_1_retrieval.log` | Retrieved chunks (with fused scores) and answers from the run |
 | `ingest_papers.py` | One-time PDF -> text step using GROBID (separate script by design), with a pre-flight size report and sanity tests |
 | `Dockerfile.grobid` | Builds the GROBID image that `ingest_papers.py` starts and stops itself |
-| [`README_RETRIEVAL.md`](README_RETRIEVAL.md) | Notes on the retrieval code, design decisions, bugs fixed, first-run results (section 9) |
+| [`README_RETRIEVAL.md`](README_RETRIEVAL.md) | Notes on the retrieval code, design decisions, bugs fixed, first-run results (section 8) |
 | [`README_INGESTION.md`](README_INGESTION.md) | Notes on the ingestion script, its sanity tests and their limits, corpus data-quality findings |
 
 **Run** (from this folder): `python ingest_papers.py --pdf-dir ../data/ResearchPapers` once (needs Docker), then
