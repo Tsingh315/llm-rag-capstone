@@ -1,3 +1,5 @@
+[← Checkpoint 2.1 README](README.md) · [Ingestion notes](README_INGESTION.md) · [Repository README](../README.md)
+
 # Capstone Checkpoint 2.1 — Hybrid Retrieval Code: Notes & Design Decisions
 
 Notes on `capstone_checkpoint_2_1_baseline_retrieval_starter.py`: how the code works, why it is written

@@ -1,3 +1,5 @@
+[← Repository README](../README.md) · [Next: Checkpoint 2.1 →](../Capstone_Checkpoint_2.1/README.md)
+
 # Capstone Checkpoint 1.1 — Evaluating When Retrieval Is Required
 
 Baseline test of `openai/gpt-5.4-mini` (via OpenRouter) on the Research Paper Navigator

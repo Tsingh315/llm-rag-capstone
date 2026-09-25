@@ -32,12 +32,22 @@ Later checkpoints add retrieval, grounding, and evaluation.
 ├── requirements.txt
 ├── .env.example
 ├── Capstone_Checkpoint_1.1/   # LLM without retrieval — baseline evaluation
+│   ├── README.md
 │   ├── capstone_checkpoint_1_1_baseline_starter.py   # solution file
 │   ├── checkpoint_1_1_responses.log                  # prompt/response evidence
 │   └── Tarundeep_Required_Capstone_Checkpoint_1_1_Worksheet.pdf
-├── Capstone_Checkpoint_2.1/   # added in Module 2
+├── Capstone_Checkpoint_2.1/   # hybrid retrieval (BM25 + vector) over chunked papers
+│   ├── README.md              # folder index and results
+│   ├── README_RETRIEVAL.md    # retrieval code: design, bugs fixed, first-run results
+│   ├── README_INGESTION.md    # PDF -> text (GROBID): design, sanity tests, corpus findings
+│   ├── capstone_checkpoint_2_1_baseline_retrieval_starter.py   # solution file
+│   ├── ingest_papers.py, Dockerfile.grobid
+│   └── checkpoint_2_1_retrieval.log
 └── ...                        # one folder per module checkpoint
 ```
+
+Each checkpoint folder has its own README: [Checkpoint 1.1](Capstone_Checkpoint_1.1/README.md) ·
+[Checkpoint 2.1](Capstone_Checkpoint_2.1/README.md).
 
 ## Setup
 

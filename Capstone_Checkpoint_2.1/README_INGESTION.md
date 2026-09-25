@@ -1,3 +1,5 @@
+[← Checkpoint 2.1 README](README.md) · [Retrieval notes](README_RETRIEVAL.md) · [Repository README](../README.md)
+
 # PDF Ingestion (`ingest_papers.py`) — Notes & Design Decisions
 
 Covers only the one-time PDF -> text step. For the retrieval code see [README_RETRIEVAL.md](README_RETRIEVAL.md).
