@@ -74,3 +74,4 @@ retrieval over it starts in Checkpoint 2.1.
 | Checkpoint | Topic | Status |
 |---|---|---|
 | 1.1 | Testing the LLM without retrieval | ✅ Complete |
+| 2.1 | Retrieval strategy design and baseline (hybrid BM25 + vector) | ✅ Complete |

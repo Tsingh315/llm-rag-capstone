@@ -10,3 +10,8 @@ data/
 chroma_db/
 papers_txt/
 CapstoneDatasets/
+
+# Local-only notes and tools (not part of the capstone)
+CLAUDE.md
+tools/
+corpus_analysis/

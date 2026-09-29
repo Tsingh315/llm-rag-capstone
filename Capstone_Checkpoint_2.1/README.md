@@ -10,6 +10,7 @@ chunked papers, with an LLM that answers only from the retrieved chunks.
 | `capstone_checkpoint_2_1_baseline_retrieval_starter.py` | Solution file: loads the parsed papers, chunks them, indexes the same chunks in BM25 and Chroma, fuses by `chunk_id`, answers the 3 representative queries |
 | `checkpoint_2_1_retrieval.log` | Retrieved chunks (with fused scores) and answers from the run |
 | `ingest_papers.py` | One-time PDF -> text step using GROBID (separate script by design), with a pre-flight size report and sanity tests |
+| `Tarundeep_Required_Capstone_Checkpoint_2_1_Worksheet.docx` | Completed worksheet (retrieval approach, evidence, 3 queries with results, reflection) |
 | `Dockerfile.grobid` | Builds the GROBID image that `ingest_papers.py` starts and stops itself |
 | [`README_RETRIEVAL.md`](README_RETRIEVAL.md) | Notes on the retrieval code, design decisions, bugs fixed, first-run results (section 8) |
 | [`README_INGESTION.md`](README_INGESTION.md) | Notes on the ingestion script, its sanity tests and their limits, corpus data-quality findings |
