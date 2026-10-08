@@ -12,5 +12,6 @@ scenario with **no retrieval**.
 | `Tarundeep_Required_Capstone_Checkpoint_1_1_Worksheet.pdf` | Completed worksheet with the analysis |
 
 **Key finding:** Without access to the papers, the model either declines ("I don't have the paper
-text") or makes up plausible-looking quotes. It can't quote verbatim, compare papers in the
+text") or makes up plausible-looking quotes (see the worksheet, Section 3: one fabricated
+quote, checked against the real paper, Figures 1–2). It can't quote verbatim, compare papers in the
 collection, or tell what is and isn't in the corpus. Retrieval over the paper text is required.

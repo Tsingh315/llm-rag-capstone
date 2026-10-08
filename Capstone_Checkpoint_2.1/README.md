@@ -1,4 +1,4 @@
-[← Repository README](../README.md) · [← Checkpoint 1.1](../Capstone_Checkpoint_1.1/README.md)
+[← Repository README](../README.md) · [← Checkpoint 1.1](../Capstone_Checkpoint_1.1/README.md) · [Next: Checkpoint 3.1 →](../Capstone_Checkpoint_3.1/README.md)
 
 # Capstone Checkpoint 2.1 — Hybrid Retrieval over the Research Papers
 
