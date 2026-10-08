@@ -1,0 +1,77 @@
+[2026-10-03T20:22:10] Q1: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+retrieved:
+  0.707  Probabilistic Verification of Fairness Properties via Concentration (DBLP_journals_pacmpl_Bastani0S19.pdf) [DBLP_journals_pacmpl_Bastani0S19::53]
+  0.707  Probabilistic Verification of Fairness Properties via Concentration (DBLP_journals_corr_abs-1812-02573.pdf) [DBLP_journals_corr_abs-1812-02573::53]
+  0.555  Probabilistic Verification of Fairness Properties via Concentration (DBLP_journals_pacmpl_Bastani0S19.pdf) [DBLP_journals_pacmpl_Bastani0S19::0]
+  0.554  Probabilistic Verification of Fairness Properties via Concentration (DBLP_journals_corr_abs-1812-02573.pdf) [DBLP_journals_corr_abs-1812-02573::0]
+  0.453  Probabilistic Verification of Fairness Properties via Concentration (DBLP_journals_corr_abs-1812-02573.pdf) [DBLP_journals_corr_abs-1812-02573::42]
+verdict=fail
+answer=The provided documents do **not** contain the specific numbers for:
+
+- **how long** the fairness verifier took for the deep recurrent neural network at error probability \(10^{-10}\), or
+- **how many samples** it needed.
+
+The text only says that VeriFair scales to the deep RNN benchmark and mentions the benchmark and experimental setup, but the exact runtime/sample count for \(10^{-10}\) is not included in the provided excerpts.
+------------------------------------------------------------------------
+[2026-10-03T20:22:12] Q2: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+retrieved:
+  0.781  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agents (DBLP_conf_icse_JeonQFFS16.pdf) [DBLP_conf_icse_JeonQFFS16::28]
+  0.528  ReaS: Combining Numerical Optimization with SAT Solving (DBLP_journals_corr_abs-1802-04408.pdf) [DBLP_journals_corr_abs-1802-04408::47]
+  0.454  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agents (DBLP_conf_icse_JeonQFFS16.pdf) [DBLP_conf_icse_JeonQFFS16::40]
+  0.446  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agents (DBLP_conf_icse_JeonQFFS16.pdf) [DBLP_conf_icse_JeonQFFS16::24]
+  0.359  Metric Program Synthesis (DBLP_journals_corr_abs-2206-06164.pdf) [DBLP_journals_corr_abs-2206-06164::59]
+verdict=fail
+answer=Two papers in the provided documents do this:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**
+   - It compares against the SMT solver **dReal**.
+   - The paper says: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**these results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems**.”
+   - It also ran **Z3** on one benchmark and found that “**even Z3 could not solve with a timeout of 60 minutes**.”
+
+2. **Metric Program Synthesis**
+   - It compares against the SMT-based baseline **Regel**.
+   - The document says Regel “**uses a number of SMT-based pruning strategies to reduce the search space**.”
+   - However, the excerpt provided does **not** explicitly say that SMT solving limits scalability in the same direct way as ReaS does.
+
+So, the paper that clearly argues SMT solving limits scalability is **ReaS**, with baseline **dReal** (and also **Z3** on one benchmark).
+------------------------------------------------------------------------
+[2026-10-03T20:22:15] Q3: Is there a technique that re-runs a whole computation from the beginning, guided by a log of earlier results, to get back to a paused point? How did its speed compare with a logic-programming language on the queens puzzle?
+retrieved:
+  0.500  StatusQuo: Making Familiar Abstractions Perform Using Program Analysis (DBLP_conf_cidr_CheungAMSM13.pdf) [DBLP_conf_cidr_CheungAMSM13::5]
+  0.500  Capturing the Future by Replaying the Past Functional Pearl (DBLP_journals_corr_abs-1710-10385.pdf) [DBLP_journals_corr_abs-1710-10385::59]
+  0.500  Capturing the Future by Replaying the Past Functional Pearl (DBLP_journals_pacmpl_KoppelSS18.pdf) [DBLP_journals_pacmpl_KoppelSS18::59]
+  0.487  Capturing the Future by Replaying the Past Functional Pearl (DBLP_journals_pacmpl_KoppelSS18.pdf) [DBLP_journals_pacmpl_KoppelSS18::75]
+  0.485  Capturing the Future by Replaying the Past Functional Pearl (DBLP_journals_corr_abs-1710-10385.pdf) [DBLP_journals_corr_abs-1710-10385::75]
+verdict=fail
+answer=Yes. The document describes a replay-based technique where “**the machine picks**” choices from its recorded “**future F**,” and “**when it finishes computing a value n with past history P, it restarts the whole computation u with future P+1, exactly like our implementation**.” It also says “**This machine never duplicates a continuation K**.”
+
+On speed for the queens benchmark, it says the benchmark is “**NQUEENS**” and that “**optimized thermometers are just as fast as replay-nondeterminism**.” It also notes that “**the generic thermometer-based implementation ... is noticeably slower than the simpler replay-based implementation of nondeterminism**.”
+
+The text does not give a direct, specific speed comparison against GNU Prolog beyond that benchmark table was collected using GNU Prolog too.
+------------------------------------------------------------------------
+[2026-10-03T20:22:16] Q4: What tool did the paper on top-down synthesis for library learning introduce, and how much faster and more memory-efficient is it than DreamCoder?
+retrieved:
+  0.770  Top-Down Synthesis for Library Learning (DBLP_journals_pacmpl_BowersOWGTES23.pdf) [DBLP_journals_pacmpl_BowersOWGTES23::0]
+  0.561  Top-Down Synthesis for Library Learning (DBLP_journals_pacmpl_BowersOWGTES23.pdf) [DBLP_journals_pacmpl_BowersOWGTES23::72]
+  0.467  Top-Down Synthesis for Library Learning (DBLP_journals_pacmpl_BowersOWGTES23.pdf) [DBLP_journals_pacmpl_BowersOWGTES23::56]
+  0.408  Top-Down Synthesis for Library Learning (DBLP_journals_pacmpl_BowersOWGTES23.pdf) [DBLP_journals_pacmpl_BowersOWGTES23::58]
+  0.378  Top-Down Synthesis for Library Learning (DBLP_journals_pacmpl_BowersOWGTES23.pdf) [DBLP_journals_pacmpl_BowersOWGTES23::60]
+verdict=pass
+answer=The paper introduced **Stitch**: “**We present an implementation of the approach in a tool called Stitch**.”
+
+Compared with DreamCoder, the paper says Stitch is **“3-4 orders of magnitude faster”** and uses **“2 orders of magnitude less memory.”**
+------------------------------------------------------------------------
+[2026-10-03T20:22:16] BASELINE PASS RATE
+1/4
+------------------------------------------------------------------------
+[2026-10-03T20:22:21] FRAMEWORK VALIDATION
+reference answer: verdict=pass expected=pass OK
+system answer: verdict=fail (recorded only)
+obvious manipulation: verdict=fail expected=fail OK
+subtle manipulation: verdict=fail expected=fail OK
+system answer=Yes. The document describes a replay-based technique where “the initial computation … gets replayed,” and “when it finishes computing a value … it restarts the whole computation … exactly like our implementation.”
+
+On the queens puzzle, it says the comparison was against “GNU Prolog 1.4.4,” and that “the optimizations described in Section 6 suffice to remove the additional overhead: optimized thermometers are just as fast as replay-nondeterminism.” It also notes that the generic thermometer-based version was “noticeably slower” than the simpler replay-based implementation.
+
+So, in short: it re-runs the whole computation from the beginning using past history, and after optimization its speed was “just as fast as replay-nondeterminism,” while the unoptimized thermometer version was slower.
+------------------------------------------------------------------------
