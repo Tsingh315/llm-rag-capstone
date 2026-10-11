@@ -30,6 +30,9 @@ answers. So far:
 - **3.1, evaluation:** an LLM judge scores answers pass/fail against grading notes, with a
   validation step that checks the judge itself. Baseline: 1/4 pass. The system answers facts
   stated in abstracts but misses facts buried in results sections or spread across papers.
+- **4.1, advanced retrieval:** a paper graph (duplicate copies merged, reading order, paper → baseline-tool
+  relations) walked in two hops, seeded by LLM query decomposition. Same 3.1 evaluation at a matched 8-chunk
+  budget: 2.67/4 pass (mean of 3 runs) vs 1.00/4 for the baseline.
 
 Later checkpoints improve retrieval and keep re-running the same evaluation to measure progress.
 
@@ -57,6 +60,12 @@ Later checkpoints improve retrieval and keep re-running the same evaluation to m
 │   ├── capstone_checkpoint_3_1_evaluation_starter.py   # solution file (imports the 2.1 retriever)
 │   ├── checkpoint_3_1_evaluation.log
 │   └── Tarundeep_Required_Capstone_Checkpoint_3_1_Worksheet.docx
+├── Capstone_Checkpoint_4.1/   # advanced retrieval: paper graph + multi-hop + query decomposition
+│   ├── README.md
+│   ├── capstone_checkpoint_4_1_advanced_retrieval_starter.py   # solution file (imports the 2.1 system)
+│   ├── checkpoint_4_1_responses.log, checkpoint_4_1_results.json, checkpoint_4_1_run_output.txt
+│   ├── screenshots/
+│   └── Tarundeep_Required_Capstone_Checkpoint_4_1_Worksheet.docx
 ├── data/                      # git-ignored, shared by all checkpoints
 │   ├── ResearchPapers/        # the course PDFs
 │   ├── papers_txt/            # parsed text (written by ingest_papers.py)
@@ -66,7 +75,8 @@ Later checkpoints improve retrieval and keep re-running the same evaluation to m
 
 Each checkpoint folder has its own README: [Checkpoint 1.1](Capstone_Checkpoint_1.1/README.md) ·
 [Checkpoint 2.1](Capstone_Checkpoint_2.1/README.md) ·
-[Checkpoint 3.1](Capstone_Checkpoint_3.1/README.md).
+[Checkpoint 3.1](Capstone_Checkpoint_3.1/README.md) ·
+[Checkpoint 4.1](Capstone_Checkpoint_4.1/README.md).
 
 ## Setup
 
@@ -98,6 +108,10 @@ python capstone_checkpoint_2_1_baseline_retrieval_starter.py --papers-dir ../dat
 # 3.1: evaluation (imports the 2.1 retriever; builds data/chroma_db on its first run, then reuses it)
 cd ../Capstone_Checkpoint_3.1
 python capstone_checkpoint_3_1_evaluation_starter.py              # add SHOW_CHUNK_TEXT=1 to print chunk text
+
+# 4.1: advanced retrieval vs baseline (reuses data/; first run extracts tool relations once, ~119 LLM calls)
+cd ../Capstone_Checkpoint_4.1
+python capstone_checkpoint_4_1_advanced_retrieval_starter.py      # or --ask "question" for one traced retrieval
 ```
 
 Building a vector index embeds all 8,087 chunks once (an embedding API cost); later runs reuse it unless the
@@ -111,3 +125,4 @@ chunks change. 2.1 keeps its own index in `Capstone_Checkpoint_2.1/chroma_db/` (
 | 1.1 | Testing the LLM without retrieval | ✅ Complete |
 | 2.1 | Retrieval strategy design and baseline (hybrid BM25 + vector) | ✅ Complete |
 | 3.1 | Evaluation infrastructure and baseline diagnosis (LLM judge) | ✅ Complete |
+| 4.1 | Advanced retrieval: graph-based multi-hop + query decomposition | 🟡 In progress (code and evaluation done; worksheet Steps 1–4 written) |

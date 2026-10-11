@@ -6,3 +6,5 @@ rank-bm25
 python-dotenv
 requests
 pypdf
+networkx
+numpy

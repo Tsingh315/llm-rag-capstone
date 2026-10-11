@@ -1,4 +1,4 @@
-[← Repository README](../README.md) · [← Checkpoint 2.1](../Capstone_Checkpoint_2.1/README.md)
+[← Repository README](../README.md) · [← Checkpoint 2.1](../Capstone_Checkpoint_2.1/README.md) · [Next: Checkpoint 4.1 →](../Capstone_Checkpoint_4.1/README.md)
 
 # Capstone Checkpoint 3.1 — Evaluation Infrastructure and Baseline Diagnosis
 

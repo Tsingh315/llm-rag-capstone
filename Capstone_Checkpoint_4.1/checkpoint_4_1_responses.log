@@ -1,0 +1,689 @@
+[2026-10-11T08:48:40]  baseline_k5 Q1 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+RESPONSE: retrieved:
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::53]
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_corr_abs-1812-02573::53]
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::0]
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_corr_abs-1812-02573::0]
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_corr_abs-1812-02573::42]
+evidence 0/2, papers 1/1, 1.95s
+answer: The documents provided do **not** give the specific running time or the exact number of samples for the deep recurrent neural network at error probability \(10^{-10}\).
+
+What they do say is that VeriFair “**scales linearly with the running time of the classifier and population model**,” and that it can choose “**the probability of error to be extremely small**,” but the excerpt does not include the particular timing/sample-count result you asked for.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  baseline_k5 Q2 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+RESPONSE: retrieved:
+  retrieved                                                  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for [DBLP_conf_icse_JeonQFFS16::28]
+  retrieved                                                  ReaS: Combining Numerical Optimization with SAT Solving [DBLP_journals_corr_abs-1802-04408::47]
+  retrieved                                                  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for [DBLP_conf_icse_JeonQFFS16::40]
+  retrieved                                                  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for [DBLP_conf_icse_JeonQFFS16::24]
+  retrieved                                                  Metric Program Synthesis [DBLP_journals_corr_abs-2206-06164::59]
+evidence 0/3, papers 0/3, 2.67s
+answer: The documents clearly support this for **ReaS**:
+
+- **Paper:** *ReaS: Combining Numerical Optimization with SAT Solving*  
+- **SMT-based baseline:** **dReal** (and they also mention **Z3** on one benchmark)  
+- The paper says: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**these results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems**.”
+
+For the other papers in the provided documents, I do **not** see a direct comparison where they explicitly argue that SMT solving limits scalability in the same way. MANTRA mentions “**SMT-based conflict search**” and “**SMT-validated**” methods, but not a baseline SMT tool being compared against for scalability.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  baseline_k5 Q3 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   Is there a technique that re-runs a whole computation from the beginning, guided by a log of earlier results, to get back to a paused point? How did its speed compare with a logic-programming language on the queens puzzle?
+RESPONSE: retrieved:
+  retrieved                                                  StatusQuo: Making Familiar Abstractions Perform Using Progra [DBLP_conf_cidr_CheungAMSM13::5]
+  retrieved                                                  Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_corr_abs-1710-10385::59]
+  retrieved                                                  Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_pacmpl_KoppelSS18::59]
+  retrieved                                                  Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_pacmpl_KoppelSS18::75]
+  retrieved                                                  Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_corr_abs-1710-10385::75]
+evidence 0/2, papers 1/1, 2.12s
+answer: Yes. The documents describe a replay-based technique where “**the whole computation u**” is “**replayed**” from the beginning using a “**past**” and “**future**” log of choices/results: “**it restarts the whole computation u with future P+1, exactly like our implementation**.”
+
+On the queens puzzle, the paper says the benchmark was **NQUEENS** and that “**the generic thermometer-based implementation … is noticeably slower than the simpler replay-based implementation of nondeterminism**,” while “**optimized thermometers are just as fast as replay-nondeterminism**.” It also says they benchmarked against **GNU Prolog**.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  baseline_k5 Q4 run1 verdict=pass  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   What tool did the paper on top-down synthesis for library learning introduce, and how much faster and more memory-efficient is it than DreamCoder?
+RESPONSE: retrieved:
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::0]
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::72]
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::56]
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::58]
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::60]
+evidence 2/2, papers 1/1, 1.94s
+answer: The paper introduced a tool called **Stitch**: “We present an implementation of the approach in a tool called Stitch.”
+
+Compared with DreamCoder, the paper says Stitch is **3–4 orders of magnitude faster** and uses **2 orders of magnitude less memory**: “Stitch is 3-4 orders of magnitude faster and uses 2 orders of magnitude less memory.”
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  baseline_k5 Q5 run1 verdict=pass  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   On the Hoogle+ benchmark suite alone, what average speedup did the ECTA-based Haskell synthesizer achieve, and how many of the 45 benchmarks did each tool solve?
+RESPONSE: retrieved:
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_corr_abs-2206-07828::7]
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::7]
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_corr_abs-2206-07828::73]
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::73]
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_corr_abs-2206-07828::74]
+evidence 2/2, papers 1/1, 1.61s
+answer: On the Hoogle+ benchmark suite, Hectare achieved an average speedup of **7×** over Hoogle+: “**it achieves an average speedup (geometric mean) of 7× on this suite**.”
+
+For the 45 benchmarks, the documents say: “**Within the timeout, Hectare solves 43 out of 45 benchmarks, whereas Hoogle+ only solves 39.**”
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  baseline_k5 Q6 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   Which papers use the Sketch synthesis tool as their solver backend, and what language were their implementations written in?
+RESPONSE: retrieved:
+  retrieved                                                  JSKETCH: Sketching for Java [DBLP_journals_corr_JeonQFS15::2]
+  retrieved                                                  JSKETCH: Sketching for Java [DBLP_conf_sigsoft_JeonQFS15::2]
+  retrieved                                                  Faceted Execution of Policy-Agnostic Programs [DBLP_conf_plas_AustinYFS13::36]
+  retrieved                                                  JSKETCH: Sketching for Java [DBLP_journals_corr_JeonQFS15::0]
+  retrieved                                                  JSKETCH: Sketching for Java [DBLP_conf_sigsoft_JeonQFS15::0]
+evidence 0/2, papers 0/2, 2.06s
+answer: The documents only clearly identify **JSKETCH: Sketching for Java** as using the **SKETCH synthesis tool** as its solver backend.
+
+From the paper: “**JSKETCH is built as a frontend on top of the SKETCH synthesis system**” and “**JSKETCH then translates the synthesis problem into a SKETCH problem**.”
+
+As for implementation language, the paper says JSKETCH “**bring[s] sketch-based synthesis to Java**” and its input is “**a partial Java program**,” indicating the implementation is in **Java**.
+
+I do **not** see any other paper in the provided documents that explicitly says it uses SKETCH as its solver backend.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  baseline_k8 Q1 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+RESPONSE: retrieved:
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::53]
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_corr_abs-1812-02573::53]
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::0]
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_corr_abs-1812-02573::0]
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_corr_abs-1812-02573::42]
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::42]
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_corr_abs-1812-02573::43]
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::43]
+evidence 0/2, papers 1/1, 1.78s
+answer: The provided documents do **not** contain the specific running time or number of samples for the deep recurrent neural network at error probability \(10^{-10}\).
+
+What the documents do say is that VeriFair was used on this benchmark and that “we can choose the probability of error to be extremely small,” but I do not see the exact verification time or sample count for \(\delta = 10^{-10}\) in the text provided.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  baseline_k8 Q2 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+RESPONSE: retrieved:
+  retrieved                                                  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for [DBLP_conf_icse_JeonQFFS16::28]
+  retrieved                                                  ReaS: Combining Numerical Optimization with SAT Solving [DBLP_journals_corr_abs-1802-04408::47]
+  retrieved                                                  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for [DBLP_conf_icse_JeonQFFS16::40]
+  retrieved                                                  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for [DBLP_conf_icse_JeonQFFS16::24]
+  retrieved                                                  Metric Program Synthesis [DBLP_journals_corr_abs-2206-06164::59]
+  retrieved                                                  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for [DBLP_conf_icse_JeonQFFS16::107]
+  retrieved                                                  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for [DBLP_conf_icse_JeonQFFS16::23]
+  retrieved                                                  Metric Program Synthesis [DBLP_journals_corr_abs-2206-06164::55]
+evidence 0/3, papers 0/3, 2.98s
+answer: The documents support **two papers** making that point:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - It compares against the SMT tools **dReal** and **Z3**.  
+   - The paper says: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**even Z3 could not solve with a timeout of 60 minutes**,” concluding that “**traditional SMT approaches do not scale for these kinds of synthesis problems**.”  
+   - **Baseline name:** **dReal** (and also **Z3** in one benchmark)
+
+2. **Metric Program Synthesis**  
+   - It compares against the SMT-based baseline **Regel**.  
+   - The document says Regel “**uses a number of SMT-based pruning strategies**,” but the excerpt provided does **not explicitly say** that SMT solving limits scalability in the same way as ReaS does.  
+   - So based on the provided text, this paper **does compare against an SMT-based tool**, but the specific claim that “SMT solving limits scalability” is not explicitly stated in the excerpt.
+
+So the clearest match is:
+- **ReaS — baseline: dReal (also Z3)**
+
+And a second paper with an SMT-based baseline:
+- **Metric Program Synthesis — baseline: Regel**
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  baseline_k8 Q3 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   Is there a technique that re-runs a whole computation from the beginning, guided by a log of earlier results, to get back to a paused point? How did its speed compare with a logic-programming language on the queens puzzle?
+RESPONSE: retrieved:
+  retrieved                                                  StatusQuo: Making Familiar Abstractions Perform Using Progra [DBLP_conf_cidr_CheungAMSM13::5]
+  retrieved                                                  Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_corr_abs-1710-10385::59]
+  retrieved                                                  Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_pacmpl_KoppelSS18::59]
+  retrieved                                                  Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_pacmpl_KoppelSS18::75]
+  retrieved                                                  Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_corr_abs-1710-10385::75]
+  retrieved                                                  An empirical study of adaptive concretization for parallel p [DBLP_journals_fmsd_JeonQSF17::18]
+  retrieved                                                  Synthesis of Recursive ADT Transformations from Reusable Tem [DBLP_journals_corr_InalaQLS15::43]
+  retrieved                                                  When Do Skills Help Reinforcement Learning? A Theoretical An [DBLP_conf_icml_LiPS24::49]
+evidence 0/2, papers 1/1, 2.14s
+answer: Yes. The document describes a **“replay-based technique”**: it says that there is an “**initial computation that gets replayed**,” and that “**when it finishes computing a value n with past history P, it restarts the whole computation u with future P+1**.” It also says this “**machine never duplicates a continuation K**.”
+
+On the queens benchmark, the paper says the implementations were all exponential, but that “**the generic thermometer-based implementation … is noticeably slower than the simpler replay-based implementation of nondeterminism**.” It then adds: “**optimized thermometers are just as fast as replay-nondeterminism**.”
+
+So, in short: yes, the technique re-runs the whole computation from the beginning using earlier results as guidance, and on N-Queens the unoptimized version was slower than the logic-programming comparison, while the optimized version matched replay-nondeterminism speed.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  baseline_k8 Q4 run1 verdict=pass  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   What tool did the paper on top-down synthesis for library learning introduce, and how much faster and more memory-efficient is it than DreamCoder?
+RESPONSE: retrieved:
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::0]
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::72]
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::56]
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::58]
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::60]
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::70]
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::85]
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::88]
+evidence 2/2, papers 1/1, 1.64s
+answer: The paper introduced a tool called **Stitch**.
+
+It says Stitch is **“3-4 orders of magnitude faster”** and uses **“2 orders of magnitude less memory”** than DreamCoder.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  baseline_k8 Q5 run1 verdict=pass  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   On the Hoogle+ benchmark suite alone, what average speedup did the ECTA-based Haskell synthesizer achieve, and how many of the 45 benchmarks did each tool solve?
+RESPONSE: retrieved:
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_corr_abs-2206-07828::7]
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::7]
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_corr_abs-2206-07828::73]
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::73]
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_corr_abs-2206-07828::74]
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::74]
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_corr_abs-2206-07828::71]
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::71]
+evidence 2/2, papers 1/1, 1.82s
+answer: On the Hoogle+ benchmark suite, the ECTA-based synthesizer Hectare achieved an average speedup of **7×** on commonly solved benchmarks: “**it achieves an average speedup (geometric mean) of 7× on this suite**.”
+
+For solved benchmarks, the document says: “**Within the timeout, Hectare solves 43 out of 45 benchmarks, whereas Hoogle+ only solves 39.**”
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  baseline_k8 Q6 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   Which papers use the Sketch synthesis tool as their solver backend, and what language were their implementations written in?
+RESPONSE: retrieved:
+  retrieved                                                  JSKETCH: Sketching for Java [DBLP_journals_corr_JeonQFS15::2]
+  retrieved                                                  JSKETCH: Sketching for Java [DBLP_conf_sigsoft_JeonQFS15::2]
+  retrieved                                                  Faceted Execution of Policy-Agnostic Programs [DBLP_conf_plas_AustinYFS13::36]
+  retrieved                                                  JSKETCH: Sketching for Java [DBLP_journals_corr_JeonQFS15::0]
+  retrieved                                                  JSKETCH: Sketching for Java [DBLP_conf_sigsoft_JeonQFS15::0]
+  retrieved                                                  The Sketching Approach to Program Synthesis [DBLP_conf_aplas_Solar-Lezama09::0]
+  retrieved                                                  The Sketching Approach to Program Synthesis [DBLP_conf_aplas_Solar-Lezama09::2]
+  retrieved                                                  Modular Synthesis of Sketches Using Models [DBLP_conf_vmcai_SinghSXKS14::5]
+evidence 0/2, papers 0/2, 1.92s
+answer: From the provided documents, the paper that **uses the Sketch synthesis tool as its solver backend** is:
+
+- **“JSKETCH: Sketching for Java”** — it says, **“JSKETCH is built as a frontend on top of the SKETCH synthesis system”** and that it **“brings sketch-based synthesis to Java.”** Its implementation is therefore in **Java**.
+
+I do **not** see any other paper in the provided documents explicitly saying that it uses Sketch as its solver backend. The “Modular Synthesis of Sketches Using Models” document mentions **“the Sketch synthesis system”**, but the excerpt does not say that the paper’s implementation was written in a particular language.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  decomposition_only Q1 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+RESPONSE: sub-queries: ["deep recurrent neural network fairness verification with target error probability 10^-10 runtime", "deep recurrent neural network fairness verification with target error probability 10^-10 sample complexity", "the fairness verifier verified the deep recurrent neural network in N seconds using M samples"]
+retrieved:
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::53]
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_corr_abs-1812-02573::53]
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::0]
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_corr_abs-1812-02573::0]
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::76]
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_corr_abs-1812-02573::76]
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_corr_abs-1812-02573::42]
+  retrieved                                                  Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::42]
+evidence 0/2, papers 1/1, 4.71s
+answer: The provided documents do **not** give the specific verification time or the number of samples for the deep recurrent neural network at error probability \(10^{-10}\).
+
+They only state generally that VeriFair:
+- “can scale to large machine learning models”
+- uses “adaptive concentration inequalities” to “adaptively take samples until it has enough data to make a decision”
+- and that the deep RNN benchmark has “more than 16 million parameters”
+
+But I do not see the exact result for:
+- how long the verifier took, or
+- how many samples it needed
+
+for \(\epsilon = 10^{-10}\) in the supplied text.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  decomposition_only Q2 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+RESPONSE: sub-queries: ["papers that compare against an SMT-based verification or synthesis baseline and report scalability limitations due to SMT solving", "experimental evaluations where the proposed approach is contrasted with an SMT-based tool as the baseline, including the baseline system name", "statements in the paper claiming that SMT solving is the scalability bottleneck or limits scalability", "comparative results identifying each paper’s SMT-based baseline tool by name"]
+retrieved:
+  retrieved                                                  Adaptive Concretization for Parallel Program Synthesis [DBLP_conf_cav_JeonQSF15::38]
+  retrieved                                                  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for [DBLP_conf_icse_JeonQFFS16::45]
+  retrieved                                                  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for [DBLP_conf_icse_JeonQFFS16::34]
+  retrieved                                                  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for [DBLP_conf_icse_JeonQFFS16::23]
+  retrieved                                                  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for [DBLP_conf_icse_JeonQFFS16::40]
+  retrieved                                                  MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for [DBLP_conf_icse_JeonQFFS16::24]
+  retrieved                                                  ReaS: Combining Numerical Optimization with SAT Solving [DBLP_journals_corr_abs-1802-04408::47]
+  retrieved                                                  Program Synthesis from Polymorphic Refinement Types Extended [DBLP_conf_pldi_PolikarpovaKS16::67]
+evidence 0/3, papers 0/3, 7.05s
+answer: The documents mention three papers that make this kind of comparison:
+
+1. **Adaptive Concretization for Parallel Program Synthesis**  
+   - It compares against **SyGuS solvers**: the document section is titled **“Parallel Scalability and Comparison to SyGuS Solvers”**.  
+   - However, the provided excerpt does **not explicitly say** that SMT solving limits scalability.
+
+2. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - It explicitly compares against SMT tools: **dReal** and **Z3**.  
+   - Quote: “**We compared ReaS with dReal, a state-of-the-art SMT solver for reals**...” and “**even Z3 could not solve**...”  
+   - It argues SMT approaches do not scale: “**These results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.**”
+
+3. **Program Synthesis from Polymorphic Refinement Types Extended Version**  
+   - It compares SYNQUID with tools including **LEON** and **JENNISYS** in a section on “Formal Specifications with Deductive Verification.”  
+   - The excerpt says they rely on “**unbounded, SMT-based verification**,” but the provided text does **not explicitly state** that SMT solving limits scalability.
+
+So, the clearest answer from the provided documents is:
+
+- **ReaS** — baseline: **dReal** (and also **Z3** in the comparison)
+- Possibly also **SYNQUID** — baseline: **LEON** and **JENNISYS**, though the excerpt only says they use SMT-based verification, not that SMT limits scalability.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  decomposition_only Q3 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   Is there a technique that re-runs a whole computation from the beginning, guided by a log of earlier results, to get back to a paused point? How did its speed compare with a logic-programming language on the queens puzzle?
+RESPONSE: sub-queries: ["technique that reconstructs program state by replaying execution from the beginning using a log of prior computed values to resume at a checkpoint", "comparison of replay-based recomputation technique versus a logic-programming language on the n-queens puzzle, including relative execution speed", "experimental result stated in paper style: the replay-based method’s speed on the queens problem compared to the logic-programming baseline"]
+retrieved:
+  retrieved                                                  Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_corr_abs-1710-10385::61]
+  retrieved                                                  Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_pacmpl_KoppelSS18::61]
+  retrieved                                                  Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_pacmpl_KoppelSS18::59]
+  retrieved                                                  Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_corr_abs-1710-10385::59]
+  retrieved                                                  Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_corr_abs-1710-10385::60]
+  retrieved                                                  Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_pacmpl_KoppelSS18::60]
+  retrieved                                                  Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_pacmpl_KoppelSS18::58]
+  retrieved                                                  Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_corr_abs-1710-10385::58]
+evidence 2/2, papers 1/1, 3.86s
+answer: Yes. The document describes a “replay-based” technique, where “the overhead of replaying the past” is used in search-heavy nondeterministic programs.
+
+On the queens puzzle, the paper says:
+
+- “For N=13, GNU Prolog takes around 20s, while our slowest ML versions run in 14s.”
+- It concludes that “replay-based approaches are surprisingly practical” and that they “offer reasonable performances” compared to Prolog.
+
+So, the replay-based technique was slower than the faster ML implementations, but still faster than GNU Prolog on that benchmark.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  decomposition_only Q4 run1 verdict=pass  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   What tool did the paper on top-down synthesis for library learning introduce, and how much faster and more memory-efficient is it than DreamCoder?
+RESPONSE: sub-queries: ["Identify the paper on top-down synthesis for library learning and determine the name of the introduced tool/system.", "Extract the reported quantitative comparison against DreamCoder, including runtime speedup and memory reduction.", "Find the paper’s stated experimental result in declarative form: the introduced tool is X times faster and uses Y times less memory than DreamCoder."]
+retrieved:
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::58]
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::0]
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::63]
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::3]
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::59]
+  retrieved                                                  Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::24]
+  retrieved                                                  Lynx: A Programmatic SAT Solver for the RNA-Folding Problem [DBLP_conf_sat_GaneshOSDRS12::3]
+  retrieved                                                  MathDSL: A Domain-Specific Language for Concise Mathematical [DBLP_journals_corr_abs-2409-17490::15]
+evidence 2/2, papers 1/1, 4.05s
+answer: The paper introduced a tool called **Stitch**.
+
+It says: “We present an implementation of the approach in a tool called **Stitch**” and reports that “**Stitch is 3-4 orders of magnitude faster and uses 2 orders of magnitude less memory** while maintaining comparable or better library quality” than DreamCoder.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  decomposition_only Q5 run1 verdict=pass  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   On the Hoogle+ benchmark suite alone, what average speedup did the ECTA-based Haskell synthesizer achieve, and how many of the 45 benchmarks did each tool solve?
+RESPONSE: sub-queries: ["ECTA-based Haskell synthesizer average speedup on the Hoogle+ benchmark suite", "Hoogle+ benchmark suite results: number of benchmarks solved by each tool out of 45", "the ECTA-based Haskell synthesizer achieved an average speedup on Hoogle+ and each tool solved a specified number of the 45 benchmarks"]
+retrieved:
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_corr_abs-2206-07828::73]
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::73]
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_corr_abs-2206-07828::74]
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::74]
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::7]
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_corr_abs-2206-07828::7]
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_corr_abs-2206-07828::71]
+  retrieved                                                  Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::71]
+evidence 2/2, papers 1/1, 3.7s
+answer: On the Hoogle+ benchmark suite, the ECTA-based synthesizer Hectare achieved an average speedup of **7×**: “it achieves an average speedup (geometric mean) of **7×** on this suite.”
+
+For solved benchmarks, the document says: “Within the timeout, **Hectare solves 43 out of 45 benchmarks, whereas Hoogle+ only solves 39**.”
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  decomposition_only Q6 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   Which papers use the Sketch synthesis tool as their solver backend, and what language were their implementations written in?
+RESPONSE: sub-queries: ["papers that use the Sketch synthesis tool as a solver backend and mention Sketch in the implementation or experimental setup", "for each such paper, the programming language used to implement the system or tool", "identify papers whose methods or prototypes are built on top of the Sketch program synthesizer as the backend solver"]
+retrieved:
+  retrieved                                                  JSKETCH: Sketching for Java [DBLP_journals_corr_JeonQFS15::0]
+  retrieved                                                  JSKETCH: Sketching for Java [DBLP_conf_sigsoft_JeonQFS15::0]
+  retrieved                                                  The Sketching Approach to Program Synthesis [DBLP_conf_aplas_Solar-Lezama09::0]
+  retrieved                                                  The Sketching Approach to Program Synthesis [DBLP_conf_aplas_Solar-Lezama09::2]
+  retrieved                                                  JSKETCH: Sketching for Java [DBLP_journals_corr_JeonQFS15::2]
+  retrieved                                                  JSKETCH: Sketching for Java [DBLP_conf_sigsoft_JeonQFS15::2]
+  retrieved                                                  Automated Feedback Generation for Introductory Programming A [DBLP_journals_corr_abs-1204-1751::38]
+  retrieved                                                  Faceted Execution of Policy-Agnostic Programs [DBLP_conf_plas_AustinYFS13::37]
+evidence 0/2, papers 0/2, 4.4s
+answer: From the provided documents, the papers that clearly use the **SKETCH synthesis tool** as a backend are:
+
+1. **JSKETCH: Sketching for Java**
+   - The paper says: “**JSKETCH is built as a frontend on top of the SKETCH synthesis system**.”
+   - It is about Java, and the implementation is presented as a Java-focused tool: “**JSKETCH brings sketch-based synthesis to Java**” and synthesizes “**an executable Java program**.”
+   - So, the implementation language is **Java**.
+
+2. **Automated Feedback Generation for Introductory Programming Assignments**
+   - The document says: “**The tool’s frontend that converts a python program to a SKETCH program is implemented in python itself**.”
+   - So, this paper uses SKETCH as the solver backend, and the implementation language is **Python**.
+
+I do not see evidence in the provided documents that the other listed papers use SKETCH as their solver backend.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  graph_only Q1 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+RESPONSE: hop-1 papers: Probabilistic Verification of Fairness Properties via Concentration; Verifiable Reinforcement Learning via Policy Extraction; Learning to Infer Graphics Programs from Hand-Drawn Images; DBLP_conf_nips_NyeS0L20; The Random Conditional Distribution For Higher-Order Probabilistic Inference; SYNTHESIZING PROGRAMMATIC POLICIES THAT INDUCTIVELY GENERALIZE; Challenges and Paths Towards AI for Software Engineering
+matched relations: VeriFair is compared against the baseline FairSqare, which uses symbolic fairness verification with constraint solving / SMT solvers. less scalable; does not even scale to a neural network with 37 parameters and fails to terminate on some problem instances | VIPER is compared against the baseline an enumerative algorithm for verifying stability, which uses enumerative verification. after more than 10 minutes it only verified a region U0 whose volume was 10^-15 that of U | Learning to Infer Graphics Programs from Hand-Drawn Images is compared against the baseline SMC, which uses sequential Monte Carlo search. used alone to test whether the neural network component is necessary for parsing complicated scenes | our model is compared against the baseline RobustFill, which uses neural program synthesis from input-output examples. assumes a small number of examples and does not attend across examples, making it unsuitable for domains with many diverse examples | adaptive teaching is compared against the baseline RL, which uses PPO with a feed-forward neural network policy. neural network policies fail to generalize to novel environments and take longer to reach goals | Challenges and Paths Towards AI for Software Engineering is compared against the baseline RNNs, which uses recurrent neural networks for vulnerability detection. not stated
+retrieved:
+  PRIMARY                                                    Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::42]
+  PRIMARY                                                    Verifiable Reinforcement Learning via Policy Extraction [DBLP_conf_nips_BastaniPS18::27]
+  PRIMARY                                                    Learning to Infer Graphics Programs from Hand-Drawn Images [DBLP_conf_nips_EllisRST18::8]
+  PRIMARY                                                    DBLP_conf_nips_NyeS0L20 [DBLP_conf_nips_NyeS0L20::1]
+  PRIMARY                                                    The Random Conditional Distribution For Higher-Order Probabi [DBLP_journals_corr_abs-1903-10556::45]
+  CONTEXT (paper reached via relation: adaptive teaching is compared against the baseline RL, which uses PPO with a feed-forward neural network policy. neural network poli) SYNTHESIZING PROGRAMMATIC POLICIES THAT INDUCTIVELY GENERALI [DBLP_conf_iclr_InalaBTS20::32]
+  CONTEXT (paper reached via relation: Challenges and Paths Towards AI for Software Engineering is compared against the baseline RNNs, which uses recurrent neural networks) Challenges and Paths Towards AI for Software Engineering [DBLP_journals_corr_abs-2503-22625::146]
+evidence 0/2, papers 1/1, 4.51s
+answer: The provided documents do **not** state how long the fairness verifier took to verify the deep recurrent neural network with error probability \(10^{-10}\), nor how many samples it needed.
+
+What the primary document does say is that VeriFair was evaluated on a benchmark with a “state-of-the-art deep recurrent neural network (RNN)” and that the two networks “have more than 16 million parameters,” but it does **not** give the verification time or sample count for that specific case in the excerpt provided.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  graph_only Q2 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+RESPONSE: hop-1 papers: Special Issue on Syntax-Guided Synthesis Preface; MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agents; Deductive Optimization of Relational Data Storage; ReaS: Combining Numerical Optimization with SAT Solving; SyGuS-Comp 2016: Results and Analysis; Results and Analysis of SyGuS-Comp'15; Metric Program Synthesis; Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers
+matched relations: refutation-based synthesis in SMT is compared against the baseline SMT solvers, which uses black-box use. prior work used SMT solvers as a black-box, whereas this work argues for accessing the inners of an SMT solver | Castor is compared against the baseline Cozy, which uses program synthesis tool with an SMT solver. the SMT-based verification does not scale to the TPC-H queries | ReaS is compared against the baseline dReal, which uses SMT solver for reals. existing approaches do not perform well on this synthesis task | SyGuS-Comp is compared against the baseline CVC4-1.5.1, which uses SMT/SyGuS solver. solved more benchmarks in general, so the comparison was not particularly fair | SyMetric is compared against the baseline Regel, which uses regular expression synthesis tool. The paper reports SyMetric outperforms it on regex benchmarks, with Regel solving fewer cases. | OptCNF is compared against the baseline CVC4, which uses SMT solver with basic bit-vector CNF encoding. the basic encoding strategy is outperformed; the domain-specific solvers generated by OptCNF solve more benchmarks and improve performance on all domains
+retrieved:
+  PRIMARY                                                    Special Issue on Syntax-Guided Synthesis Preface [DBLP_journals_fmsd_FismanSS21::2]
+  PRIMARY                                                    MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for [DBLP_conf_icse_JeonQFFS16::28]
+  PRIMARY                                                    Deductive Optimization of Relational Data Storage [DBLP_journals_pacmpl_FeserM0S20::57]
+  PRIMARY                                                    ReaS: Combining Numerical Optimization with SAT Solving [DBLP_journals_corr_abs-1802-04408::47]
+  PRIMARY                                                    SyGuS-Comp 2016: Results and Analysis [DBLP_journals_corr_AlurFSS16a::35]
+  CONTEXT (next candidate paper)                             Results and Analysis of SyGuS-Comp'15 [DBLP_journals_corr_AlurFSS16::19]
+  CONTEXT (paper reached via relation: SyMetric is compared against the baseline Regel, which uses regular expression synthesis tool. The paper reports SyMetric outperform) Metric Program Synthesis [DBLP_journals_corr_abs-2206-06164::62]
+  CONTEXT (paper reached via relation: OptCNF is compared against the baseline CVC4, which uses SMT solver with basic bit-vector CNF encoding. the basic encoding strategy ) Synthesis of Domain Specific CNF Encoders for Bit-Vector Sol [DBLP_conf_sat_Inala0S16::34]
+evidence 1/3, papers 1/3, 5.65s
+answer: The documents mention **two papers** that compare against an SMT-based tool and say SMT solving does not scale well:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - Baseline: **dReal**  
+   - The paper says: “*we compared ReaS with dReal, a state-of-the-art SMT solver for reals*” and concludes that “*the traditional SMT approaches do not scale for these kinds of synthesis problems.*”  
+   - It also reports that “*even Z3 could not solve*” one benchmark within 60 minutes.
+
+2. **Results and Analysis of SyGuS-Comp’15** (CONTEXT)  
+   - Baseline: **CVC4-1.5-SYGUS**  
+   - It says: “*The CVC4-1.5-SYGUS solver is the only solver that is implemented inside an SMT solver*” and discusses that “*traditional SMT solvers are focused on instantiation-based methods*,” indicating the SMT-based approach is a baseline in that setting.
+
+If you want, I can also extract the exact quote for the scalability claim from each paper.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  graph_only Q3 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   Is there a technique that re-runs a whole computation from the beginning, guided by a log of earlier results, to get back to a paused point? How did its speed compare with a logic-programming language on the queens puzzle?
+RESPONSE: hop-1 papers: Leveraging Sequential Computation for Programming Efficient and Reliable Distributed Systems; Capturing the Future by Replaying the Past Functional Pearl; Using Program Synthesis for Social Recommendations; Adaptive Concretization for Parallel Program Synthesis; When Do Skills Help Reinforcement Learning? A Theoretical Analysis of Temporal Abstractions; Delta-Decision Procedures for Exists-Forall Problems over the Reals; StatusQuo: Making Familiar Abstractions Perform Using Program Analysis; Faceted Execution of Policy-Agnostic Programs
+matched relations: Leveraging Sequential Computation for Programming Efficient and Reliable Distributed Systems is compared against the baseline reactive values, which uses additional abstraction for propagating changes across nodes. used to handle distributed aspects, indicating sequential computation alone is not sufficient | Sketch is compared against the baseline inductive logic programming tools, which uses inductive logic programming. issues with skewed data and weak generalization guarantees | When Do Skills Help Reinforcement Learning? A Theoretical Analysis of Temporal Abstractions is compared against the baseline arithmetic mean, which uses mean-based difficulty metric. outperformed by the geometric mean when there is variety in 1/q(s) | δ-complete decision procedures is compared against the baseline Z3, which uses SMT solver. provide limited quantified reasoning support for decidable fragments of first-order logic and theories | Jeeves is compared against the baseline symbolic execution, which uses symbolic evaluation and constraint-solving. the earlier Jeeves implementation’s symbolic execution strategy provides strong confidentiality guarantees but limits expressiveness and implementation feasibility
+retrieved:
+  PRIMARY                                                    Leveraging Sequential Computation for Programming Efficient  [DBLP_conf_snapl_KurajS17::46]
+  PRIMARY                                                    Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_pacmpl_KoppelSS18::75]
+  PRIMARY                                                    Using Program Synthesis for Social Recommendations [DBLP_conf_cikm_CheungSM12::7]
+  PRIMARY                                                    Adaptive Concretization for Parallel Program Synthesis [DBLP_conf_cav_JeonQSF15::40]
+  PRIMARY                                                    When Do Skills Help Reinforcement Learning? A Theoretical An [DBLP_conf_icml_LiPS24::65]
+  CONTEXT (paper reached via relation: δ-complete decision procedures is compared against the baseline Z3, which uses SMT solver. provide limited quantified reasoning supp) Delta-Decision Procedures for Exists-Forall Problems over th [DBLP_journals_corr_abs-1807-08137::6]
+  CONTEXT (next candidate paper)                             StatusQuo: Making Familiar Abstractions Perform Using Progra [DBLP_conf_cidr_CheungAMSM13::5]
+  CONTEXT (paper reached via relation: Jeeves is compared against the baseline symbolic execution, which uses symbolic evaluation and constraint-solving. the earlier Jeeve) Faceted Execution of Policy-Agnostic Programs [DBLP_conf_plas_AustinYFS13::5]
+evidence 0/2, papers 1/1, 4.28s
+answer: Yes. The document on **“Capturing the Future by Replaying the Past”** describes a technique where, after finishing a computation, it **“restarts the whole computation u with future P+1, exactly like our implementation”** and uses a log of choices (“past” and “future”) to guide replay.
+
+On performance, the document says it **“was about two times slower than CHR on the queens benchmark”**.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  graph_only Q4 run1 verdict=pass  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   What tool did the paper on top-down synthesis for library learning introduce, and how much faster and more memory-efficient is it than DreamCoder?
+RESPONSE: hop-1 papers: MathDSL: A Domain-Specific Language for Concise Mathematical Solutions Via Program Synthesis; Top-Down Synthesis for Library Learning; DreamCoder: Growing generalizable, interpretable knowledge with wake-sleep Bayesian program learning
+matched relations: MathDSL is compared against the baseline Stitch, which uses corpus-guided top-down synthesis algorithm. only used for refactoring; the paper notes DreamCoder's library rewriting algorithm is outperformed in some domains | Stitch is compared against the baseline DreamCoder, which uses deductive library learning algorithm. 3-4 orders of magnitude slower and uses 2 orders of magnitude more memory; times out on larger/longer corpora | DreamCoder is compared against the baseline Neural Program A, which uses domain-general program synthesizer. used as a state-of-the-art comparator; the paper reports DreamCoder performs comparably rather than better in this setting
+retrieved:
+  PRIMARY                                                    MathDSL: A Domain-Specific Language for Concise Mathematical [DBLP_journals_corr_abs-2409-17490::22]
+  PRIMARY                                                    Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::0]
+  PRIMARY                                                    DreamCoder: Growing generalizable, interpretable knowledge w [DBLP_journals_corr_abs-2006-08381::36]
+evidence 2/2, papers 1/1, 2.79s
+answer: The paper introduced a tool called **Stitch**. It says Stitch is **“3-4 orders of magnitude faster”** and uses **“2 orders of magnitude less memory”** than DreamCoder, while maintaining comparable or better library quality.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  graph_only Q5 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   On the Hoogle+ benchmark suite alone, what average speedup did the ECTA-based Haskell synthesizer achieve, and how many of the 45 benchmarks did each tool solve?
+RESPONSE: hop-1 papers: Searching Entangled Program Spaces; Metric Program Synthesis; An empirical study of adaptive concretization for parallel program synthesis; Deductive Optimization of Relational Data Storage; SyGuS-Comp 2017: Results and Analysis; Synthesis of Recursive ADT Transformations from Reusable Templates; SyGuS-Comp 2016: Results and Analysis; Program Synthesis from Polymorphic Refinement Types Extended Version
+matched relations: equality-constrained tree automata (ECTAs) is compared against the baseline Hoogle+, which uses state-of-the-art type-driven synthesizer; SMT encoding of Petri-net reachability. inferior performance on benchmarks; slower and solves fewer problems than Hectare | SyMetric is compared against the baseline Sketch-Du, which uses Sketch synthesis system adaptation. The paper reports it performs poorly on the inverse CSG benchmarks and is memory-limited, failing many tasks. | Castor is compared against the baseline Cozy, which uses program synthesis tool with an SMT solver. the SMT-based verification does not scale to the TPC-H queries | SyntRec is compared against the baseline Rosette, which uses SyGus solver. required very verbose templates for each benchmark; comparable or slower than SyntRec on smaller benchmarks | SyGuS-Comp is compared against the baseline EUSOLVER, which uses SyGuS solver. solved more benchmarks in general, so the comparison was not particularly fair | SYNQUID is compared against the baseline λ 2, which uses example-based recursive synthesis. SYNQUID is more scalable / handles more complex benchmarks; λ 2 prefers smaller example sets
+retrieved:
+  PRIMARY                                                    Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::7]
+  PRIMARY                                                    Metric Program Synthesis [DBLP_journals_corr_abs-2206-06164::55]
+  PRIMARY                                                    An empirical study of adaptive concretization for parallel p [DBLP_journals_fmsd_JeonQSF17::27]
+  PRIMARY                                                    Deductive Optimization of Relational Data Storage [DBLP_journals_pacmpl_FeserM0S20::57]
+  PRIMARY                                                    SyGuS-Comp 2017: Results and Analysis [DBLP_journals_corr_abs-1711-11438::18]
+  CONTEXT (paper reached via relation: SyntRec is compared against the baseline Rosette, which uses SyGus solver. required very verbose templates for each benchmark; compa) Synthesis of Recursive ADT Transformations from Reusable Tem [DBLP_journals_corr_InalaQLS15::32]
+  CONTEXT (paper reached via relation: SyGuS-Comp is compared against the baseline EUSOLVER, which uses SyGuS solver. solved more benchmarks in general, so the comparison ) SyGuS-Comp 2016: Results and Analysis [DBLP_journals_corr_AlurFSS16a::22]
+  CONTEXT (paper reached via relation: SYNQUID is compared against the baseline λ 2, which uses example-based recursive synthesis. SYNQUID is more scalable / handles more ) Program Synthesis from Polymorphic Refinement Types Extended [DBLP_conf_pldi_PolikarpovaKS16::70]
+evidence 0/2, papers 1/1, 5.1s
+answer: The document says that on the benchmark suite, “Hectare is able to solve 88% of synthesis problems in the combined benchmark suite compared to only 64% by Hoogle+, and on commonly solved benchmarks Hectare is 8× faster on average.”
+
+However, it does **not** give the Hoogle+ benchmark suite–alone speedup, nor does it state the exact number of benchmarks each tool solved out of 45. So I can only confirm from the text that:
+
+- Hectare solved **88%** of the combined benchmarks
+- Hoogle+ solved **64%** of the combined benchmarks
+- Hectare was **8× faster on average** on commonly solved benchmarks
+
+If you want, I can help infer approximate counts from those percentages, but the document itself does not explicitly provide them.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  graph_only Q6 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   Which papers use the Sketch synthesis tool as their solver backend, and what language were their implementations written in?
+RESPONSE: hop-1 papers: JSKETCH: Sketching for Java; SPT: Storyboard Programming Tool; An empirical study of adaptive concretization for parallel program synthesis; Automated Feedback Generation for Introductory Programming Assignments; Modular Synthesis of Sketches Using Models; Adaptive Concretization for Parallel Program Synthesis; Special Issue on Syntax-Guided Synthesis Preface; Metric Program Synthesis
+matched relations: JSKETCH is compared against the baseline SKETCH, which uses sketch-based synthesis tool. not object-oriented, so translating Java sketches to SKETCH is complex | SPT is compared against the baseline Sketch, which uses synthesis solver. the paper reports running-time comparisons with Sketch, but does not state a specific shortcoming in the provided text | adaptive concretization is compared against the baseline Sketch, which uses syntax-guided synthesis tool. | Sketch is compared against the baseline previously published algorithms, which uses synthesis algorithms. our algorithm outperforms them on complex benchmarks | refutation-based synthesis in SMT is compared against the baseline SMT solvers, which uses black-box use. prior work used SMT solvers as a black-box, whereas this work argues for accessing the inners of an SMT solver | SyMetric is compared against the baseline Sketch-Du, which uses Sketch synthesis system adaptation. The paper reports it performs poorly on the inverse CSG benchmarks and is memory-limited, failing many tasks.
+retrieved:
+  PRIMARY                                                    JSKETCH: Sketching for Java [DBLP_conf_sigsoft_JeonQFS15::0]
+  PRIMARY                                                    SPT: Storyboard Programming Tool [DBLP_conf_cav_SinghS12::9]
+  PRIMARY                                                    An empirical study of adaptive concretization for parallel p [DBLP_journals_fmsd_JeonQSF17::3]
+  PRIMARY                                                    Automated Feedback Generation for Introductory Programming A [DBLP_journals_corr_abs-1204-1751::15]
+  PRIMARY                                                    Modular Synthesis of Sketches Using Models [DBLP_conf_vmcai_SinghSXKS14::5]
+  CONTEXT (next candidate paper)                             Adaptive Concretization for Parallel Program Synthesis [DBLP_conf_cav_JeonQSF15::42]
+  CONTEXT (paper reached via relation: refutation-based synthesis in SMT is compared against the baseline SMT solvers, which uses black-box use. prior work used SMT solver) Special Issue on Syntax-Guided Synthesis Preface [DBLP_journals_fmsd_FismanSS21::2]
+  CONTEXT (paper reached via relation: SyMetric is compared against the baseline Sketch-Du, which uses Sketch synthesis system adaptation. The paper reports it performs po) Metric Program Synthesis [DBLP_journals_corr_abs-2206-06164::55]
+evidence 0/2, papers 0/2, 5.33s
+answer: From the provided documents, the papers that explicitly use the **Sketch synthesis tool** as a solver backend are:
+
+1. **JSKETCH: Sketching for Java**  
+   - This paper is about bringing sketch-based synthesis to Java. It says:  
+     > “JSKETCH then translates the synthesis problem into a SKETCH problem … Finally, JSKETCH synthesizes an executable Java program by interpreting the output of SKETCH.”  
+   - **Implementation language:** **Java** (it is “Sketching for Java,” and the tool takes “a partial Java program”).
+
+2. **SPT: Storyboard Programming Tool**  
+   - It says the constraint generator “translates the prolog predicates into a sketch constraint file,” and then:  
+     > “Sketch solver solves the sketch constraint file and produces an output (.out) file...”  
+   - **Implementation language:** **Prolog** for the front-end predicates, with a code generator completing the loop skeleton; the document does not explicitly state the full implementation language of the tool itself, only that it translates “the prolog predicates.”
+
+3. **Automated Feedback Generation for Introductory Programming Assignments**  
+   - It says:  
+     > “We extend the SKETCH synthesizer...”  
+     and  
+     > “the Sketch Translator” translates the program into a sketch program.  
+   - **Implementation language:** **miniPython (MPY)** as the presentation language, and the tool supports “a fairly large subset of python.” The document does not clearly state the implementation language of the system code itself beyond this.
+
+4. **Modular Synthesis of Sketches Using Models**  
+   - It states this work is “in the Sketch synthesis system.”  
+   - **Implementation language:** **not specified in the provided excerpt**.
+
+5. **An empirical study of adaptive concretization for parallel program synthesis**  
+   - This document discusses the technique “in the context of the Sketch synthesis system.”  
+   - **Implementation language:** **not specified in the provided excerpt**.
+
+If you want only the papers where the document explicitly indicates both Sketch use and a clear language implementation, the strongest match is **JSKETCH: Sketching for Java**, implemented for **Java**.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  advanced Q1 run1 verdict=pass  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+RESPONSE: sub-queries: ["Deep recurrent neural network fairness verification with target error probability 10^-10: reported verification runtime and sample complexity", "The fairness verifier terminated in T seconds and used N samples for the deep recurrent neural network at error probability 10^-10"]
+hop-1 papers: Probabilistic Verification of Fairness Properties via Concentration
+matched relations: VeriFair is compared against the baseline FairSqare, which uses symbolic fairness verification with constraint solving / SMT solvers. less scalable; does not even scale to a neural network with 37 parameters and fails to terminate on some problem instances
+retrieved:
+  PRIMARY                                                    Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::53]
+  PRIMARY                                                    Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::42]
+  PRIMARY                                                    Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::12]
+  PRIMARY                                                    Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::0]
+  PRIMARY                                                    Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::5]
+  CONTEXT (passage 1 after PRIMARY 1)                        Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::54]
+  CONTEXT (passage 2 after PRIMARY 1)                        Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::55]
+  CONTEXT (passage 3 after PRIMARY 1)                        Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::56]
+evidence 2/2, papers 1/1, 3.26s
+answer: The paper says that on the deep neural network benchmark, using error probability \( \Delta = 10^{-10} \), VeriFair “terminated in **606 seconds**” and used “**28,000 samples**.”
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  advanced Q2 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+RESPONSE: sub-queries: ["Papers that evaluate their proposed method against an SMT-based baseline and explicitly claim that SMT solving is a scalability bottleneck or limits scalability.", "For each such paper, identify the SMT-based tool used as the comparison baseline, including the tool name and its role in the evaluation setup.", "Papers in which the authors contrast their approach with SMT-based verification or synthesis and present evidence that the baseline does not scale to larger instances or programs."]
+hop-1 papers: Deductive Optimization of Relational Data Storage; MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agents; Special Issue on Syntax-Guided Synthesis Preface; Metric Program Synthesis; ReaS: Combining Numerical Optimization with SAT Solving; SyGuS-Comp 2016: Results and Analysis; Program Synthesis from Polymorphic Refinement Types Extended Version; Probabilistic Verification of Fairness Properties via Concentration
+matched relations: Castor is compared against the baseline Cozy, which uses program synthesis tool with an SMT solver. the SMT-based verification does not scale to the TPC-H queries | MANTRA is compared against the baseline ToolBench, which uses outcome-side evaluation. compares final database states or LLM-judged solutions, so it cannot distinguish compliant from non-compliant execution paths | refutation-based synthesis in SMT is compared against the baseline SMT solvers, which uses black-box use. prior work used SMT solvers as a black-box, whereas this work argues for accessing the inners of an SMT solver | SyMetric is compared against the baseline Regel, which uses regular expression synthesis tool. The paper reports SyMetric outperforms it on regex benchmarks, with Regel solving fewer cases. | ReaS is compared against the baseline dReal, which uses SMT solver for reals. existing approaches do not perform well on this synthesis task | SyGuS-Comp is compared against the baseline CVC4-1.5.1, which uses SMT/SyGuS solver. solved more benchmarks in general, so the comparison was not particularly fair | SYNQUID is compared against the baseline PUFFIN, which uses theory-specific abduction engine for conditional integer-arithmetic expressions. SYNQUID loses to PUFFIN on condition abduction scalability | VeriFair is compared against the baseline FairSqare, which uses symbolic fairness verification with constraint solving / SMT solvers. less scalable; does not even scale to a neural network with 37 parameters and fails to terminate on some problem instances
+retrieved:
+  PRIMARY                                                    Deductive Optimization of Relational Data Storage [DBLP_journals_pacmpl_FeserM0S20::67]
+  PRIMARY                                                    MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for [DBLP_conf_icse_JeonQFFS16::49]
+  PRIMARY                                                    Special Issue on Syntax-Guided Synthesis Preface [DBLP_journals_fmsd_FismanSS21::2]
+  PRIMARY                                                    Metric Program Synthesis [DBLP_journals_corr_abs-2206-06164::59]
+  PRIMARY                                                    ReaS: Combining Numerical Optimization with SAT Solving [DBLP_journals_corr_abs-1802-04408::47]
+  CONTEXT (paper reached via relation: SyGuS-Comp is compared against the baseline CVC4-1.5.1, which uses SMT/SyGuS solver. solved more benchmarks in general, so the compa) SyGuS-Comp 2016: Results and Analysis [DBLP_journals_corr_AlurFSS16a::35]
+  CONTEXT (paper reached via relation: SYNQUID is compared against the baseline PUFFIN, which uses theory-specific abduction engine for conditional integer-arithmetic expr) Program Synthesis from Polymorphic Refinement Types Extended [DBLP_conf_pldi_PolikarpovaKS16::71]
+  CONTEXT (paper reached via relation: VeriFair is compared against the baseline FairSqare, which uses symbolic fairness verification with constraint solving / SMT solvers) Probabilistic Verification of Fairness Properties via Concen [DBLP_journals_pacmpl_Bastani0S19::42]
+evidence 1/3, papers 2/3, 10.89s
+answer: The documents show several papers making this kind of comparison:
+
+- **Deductive Optimization of Relational Data Storage** — it contrasts Castor with **Cozy**, saying: “**The best data structure synthesis tool-Cozy-uses an SMT solver to verify candidates, which does not scale to the TPC-H queries.**”
+- **Metric Program Synthesis** — it compares against **Regel** (not SMT-based itself) and **dReal/Z3** in the quoted comparison; the paper says: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes.**” and “**even Z3 could not solve**” one benchmark, supporting the claim that “**traditional SMT approaches do not scale**.”
+- **ReaS: Combining Numerical Optimization with SAT Solving** — compares with **dReal** and **Z3**, stating: “**traditional SMT approaches do not scale for these kinds of synthesis problems.**”
+- **Program Synthesis from Polymorphic Refinement Types Extended Version** — compares SYNQUID against **PUFFIN**, and says SYNQUID “**loses to PUFFIN’s theory-specific abduction engine**.” This is not directly an SMT-scaling claim, but it is a comparison to a specialized solver in the same synthesis space.
+- **Probabilistic Verification of Fairness Properties via Concentration** — compares VeriFair against **FairSqare**, saying “**VeriFair scales substantially better than FairSqare**,” and notes FairSqare “**time out**” on small examples.
+
+If you want only the papers that **explicitly argue that SMT solving limits scalability**, the clearest ones are:
+
+1. **Deductive Optimization of Relational Data Storage** — baseline: **Cozy**
+2. **ReaS: Combining Numerical Optimization with SAT Solving** — baseline: **dReal** (and also **Z3**)
+3. **Metric Program Synthesis** — baseline(s): **dReal** and **Z3**
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  advanced Q3 run1 verdict=pass  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   Is there a technique that re-runs a whole computation from the beginning, guided by a log of earlier results, to get back to a paused point? How did its speed compare with a logic-programming language on the queens puzzle?
+RESPONSE: sub-queries: ["techniques for replaying or re-executing an entire computation from the initial state using a recorded trace of intermediate results to reconstruct a paused execution point", "a declarative performance result: the replay-based technique solved the queens puzzle faster than the logic-programming language baseline, and by what speedup or runtime comparison", "papers describing pause-and-restart, execution replay, or log-guided recomputation mechanisms in programming systems"]
+hop-1 papers: Capturing the Future by Replaying the Past Functional Pearl
+matched relations: thermometer continuations is compared against the baseline Filinski's construction, which uses delimited continuations implementing monadic effects. in the generic nondeterminism setting, replay-based thermometers can be gratuitously replaying computation and thus less efficient
+retrieved:
+  PRIMARY                                                    Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_pacmpl_KoppelSS18::75]
+  PRIMARY                                                    Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_pacmpl_KoppelSS18::4]
+  PRIMARY                                                    Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_pacmpl_KoppelSS18::59]
+  PRIMARY                                                    Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_pacmpl_KoppelSS18::77]
+  PRIMARY                                                    Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_pacmpl_KoppelSS18::61]
+  CONTEXT (passage 1 after PRIMARY 1)                        Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_pacmpl_KoppelSS18::76]
+  CONTEXT (passage 3 after PRIMARY 1)                        Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_pacmpl_KoppelSS18::78]
+  CONTEXT (passage 1 after PRIMARY 2)                        Capturing the Future by Replaying the Past Functional Pearl [DBLP_journals_pacmpl_KoppelSS18::5]
+evidence 2/2, papers 1/1, 4.25s
+answer: Yes. The paper describes a replay-based technique where “you repeat the entire recipe from the start” and “thermometer continuations hence record the result of all effectful function calls so that they may be replayed in the next execution: the past of one invocation becomes the future of the next.”
+
+On performance, the paper says that for N-queens, “our slowest ML versions run in 14s” for \(N=13\), while “GNU Prolog takes around 20s,” and concludes that “replay-based approaches are surprisingly practical” for search-dominated computations.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  advanced Q4 run1 verdict=pass  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   What tool did the paper on top-down synthesis for library learning introduce, and how much faster and more memory-efficient is it than DreamCoder?
+RESPONSE: sub-queries: ["Identify the synthesis tool introduced in the paper on top-down synthesis for library learning, including its name, architecture, and learning paradigm.", "Compare its empirical performance against DreamCoder in terms of runtime speedup and memory usage reduction; report the quantitative factors stated in the paper.", "State the main experimental result in the paper’s style, e.g., 'the tool was X times faster and used Y times less memory than DreamCoder on the benchmark suite.'"]
+hop-1 papers: Top-Down Synthesis for Library Learning
+matched relations: Stitch is compared against the baseline DreamCoder, which uses deductive library learning algorithm. 3-4 orders of magnitude slower and uses 2 orders of magnitude more memory; times out on larger/longer corpora
+retrieved:
+  PRIMARY                                                    Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::0]
+  PRIMARY                                                    Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::1]
+  PRIMARY                                                    Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::63]
+  PRIMARY                                                    Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::58]
+  PRIMARY                                                    Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::56]
+  CONTEXT (passage 2 after PRIMARY 1)                        Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::2]
+  CONTEXT (passage 3 after PRIMARY 1)                        Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::3]
+  CONTEXT (passage 3 after PRIMARY 2)                        Top-Down Synthesis for Library Learning [DBLP_journals_pacmpl_BowersOWGTES23::4]
+evidence 2/2, papers 1/1, 4.12s
+answer: The paper introduced a tool called **Stitch**: “We present an implementation of the approach in a tool called **Stitch**.”
+
+It says Stitch is **“3-4 orders of magnitude faster and uses 2 orders of magnitude less memory”** than DreamCoder while maintaining comparable or better library quality.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  advanced Q5 run1 verdict=pass  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   On the Hoogle+ benchmark suite alone, what average speedup did the ECTA-based Haskell synthesizer achieve, and how many of the 45 benchmarks did each tool solve?
+RESPONSE: sub-queries: ["ECTA-based Haskell synthesizer performance on the Hoogle+ benchmark suite: average speedup relative to the comparison tool(s) reported in the paper", "On the Hoogle+ benchmark suite, the number of benchmarks solved by each tool out of 45", "The paper's reported result for Hoogle+: the ECTA-based Haskell synthesizer achieved an average speedup of N× and solved M/45 benchmarks, while the baseline tool(s) solved K/45 benchmarks"]
+hop-1 papers: Searching Entangled Program Spaces
+matched relations: equality-constrained tree automata (ECTAs) is compared against the baseline Hoogle+, which uses state-of-the-art type-driven synthesizer; SMT encoding of Petri-net reachability. inferior performance on benchmarks; slower and solves fewer problems than Hectare
+retrieved:
+  PRIMARY                                                    Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::73]
+  PRIMARY                                                    Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::7]
+  PRIMARY                                                    Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::76]
+  PRIMARY                                                    Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::74]
+  PRIMARY                                                    Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::77]
+  CONTEXT (passage 2 after PRIMARY 1)                        Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::75]
+  CONTEXT (passage 1 after PRIMARY 2)                        Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::8]
+  CONTEXT (passage 2 after PRIMARY 2)                        Searching Entangled Program Spaces [DBLP_journals_pacmpl_KoppelGVSP22::9]
+evidence 2/2, papers 1/1, 4.16s
+answer: On the Hoogle+ benchmark suite, the ECTA-based synthesizer Hectare achieved an average speedup of **7×** on commonly solved benchmarks.
+
+It solved **43 out of 45** benchmarks, while **Hoogle+ solved 39 out of 45**.
+
+Quoted evidence:
+- “**Within the timeout, Hectare solves 43 out of 45 benchmarks, whereas Hoogle+ only solves 39.**”
+- “**it achieves an average speedup (geometric mean) of 7× on this suite**”
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  advanced Q6 run1 verdict=fail  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   Which papers use the Sketch synthesis tool as their solver backend, and what language were their implementations written in?
+RESPONSE: sub-queries: ["Papers that employ Sketch as the synthesis backend or solver backend in their implementation pipeline", "For each identified paper, the implementation language or programming language used to write the system implementation", "The paper states that Sketch is used as the solver backend for synthesis in the implementation"]
+hop-1 papers: SPT: Storyboard Programming Tool; Programming by Sketching for Bit-Streaming Programs; JSKETCH: Sketching for Java; An empirical study of adaptive concretization for parallel program synthesis; Automated Feedback Generation for Introductory Programming Assignments; Metric Program Synthesis; Synthesis of Recursive ADT Transformations from Reusable Templates; Modular Synthesis of Sketches Using Models
+matched relations: SPT is compared against the baseline Sketch, which uses synthesis solver. the paper reports running-time comparisons with Sketch, but does not state a specific shortcoming in the provided text | StreamBit is compared against the baseline C, which uses manual tuning / handwritten implementation. requires low-level orchestration and manual optimization; less productive and, in the user study, produced lower-quality code than sketching | JSKETCH is compared against the baseline SKETCH, which uses sketch-based synthesis tool. not object-oriented, so translating Java sketches to SKETCH is complex | adaptive concretization is compared against the baseline Sketch, which uses syntax-guided synthesis tool. | SyMetric is compared against the baseline Sketch-Du, which uses Sketch synthesis system adaptation. The paper reports it performs poorly on the inverse CSG benchmarks and is memory-limited, failing many tasks. | Sketch is compared against the baseline previously published algorithms, which uses synthesis algorithms. our algorithm outperforms them on complex benchmarks
+retrieved:
+  PRIMARY                                                    SPT: Storyboard Programming Tool [DBLP_conf_cav_SinghS12::9]
+  PRIMARY                                                    Programming by Sketching for Bit-Streaming Programs [DBLP_conf_pldi_Solar-LezamaRBE05::12]
+  PRIMARY                                                    JSKETCH: Sketching for Java [DBLP_conf_sigsoft_JeonQFS15::0]
+  PRIMARY                                                    An empirical study of adaptive concretization for parallel p [DBLP_journals_fmsd_JeonQSF17::3]
+  PRIMARY                                                    Automated Feedback Generation for Introductory Programming A [DBLP_journals_corr_abs-1204-1751::18]
+  CONTEXT (paper reached via relation: SyMetric is compared against the baseline Sketch-Du, which uses Sketch synthesis system adaptation. The paper reports it performs po) Metric Program Synthesis [DBLP_journals_corr_abs-2206-06164::52]
+  CONTEXT (next candidate paper)                             Synthesis of Recursive ADT Transformations from Reusable Tem [DBLP_journals_corr_InalaQLS15::43]
+  CONTEXT (paper reached via relation: Sketch is compared against the baseline previously published algorithms, which uses synthesis algorithms. our algorithm outperforms ) Modular Synthesis of Sketches Using Models [DBLP_conf_vmcai_SinghSXKS14::5]
+evidence 0/2, papers 0/2, 8.76s
+answer: From the provided documents, these papers explicitly use the **Sketch synthesis system/tool** as a backend or solver:
+
+1. **SPT: Storyboard Programming Tool**  
+   - It says the constraint generator translates predicates into a Sketch constraint file, and the **“Sketch Solver”** solves it:  
+     > “The Sketch solver solves the sketch constraint file and produces an output (.out) file...”  
+   - The implementation details for the tool’s code generator say it completes the loop skeleton in **C**:  
+     > “...completes the loop skeleton (.c)...”
+
+2. **Programming by Sketching for Bit-Streaming Programs**  
+   - It states:  
+     > “We develop a constraint solver for compiling sketch.”  
+   - The paper is about the StreamBit system, but the excerpt does not explicitly state the implementation language in the provided text.
+
+3. **JSKETCH: Sketching for Java**  
+   - It explicitly uses Sketch as the synthesis backend:  
+     > “JSKETCH then translates the synthesis problem into a SKETCH problem...”  
+   - The implementation is for **Java**, since it is a tool “that brings sketch-based synthesis to Java” and synthesizes “an executable Java program.”
+
+4. **Automated Feedback Generation for Introductory Programming Assignments**  
+   - It says:  
+     > “The SKETCH synthesis system allows programmers to write programs...”  
+   - This paper’s translation target is **MPY/Python**, but the excerpt does not say the tool implementation language.
+
+5. **An empirical study of adaptive concretization for parallel program synthesis**  
+   - It says they explored the technique “in the context of the Sketch synthesis system.”  
+   - The implementation language is **not stated** in the provided excerpt.
+
+6. **Synthesis of Recursive ADT Transformations from Reusable Templates**  
+   - It says:  
+     > “Our implementation itself is built on top of the open source Sketch synthesis system...”  
+   - The implementation language is **not stated** in the provided excerpt.
+
+So, based strictly on the provided documents, the papers that use Sketch are the ones above, and the only implementation languages explicitly mentioned in the excerpts are:
+- **SPT**: **C**
+- **JSKETCH**: **Java**
+
+For the others, the provided text does not specify their implementation language.
+------------------------------------------------------------------------
+[2026-10-11T08:48:40]  SUMMARY  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   ['baseline_k5', 'baseline_k8', 'decomposition_only', 'graph_only', 'advanced'] x ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6'] x 3 runs
+RESPONSE: 
+3.1 evaluation set (Q1-Q4), mean over 3 run(s):
+system               pass rate  evidence  papers  distinct  chunks LLM calls latency s
+baseline_k5           1.00/4        22%     50%       4.0     5.0       1.0       2.1
+baseline_k8           1.00/4        22%     50%       6.5     8.0       1.0       2.1
+decomposition_only    1.67/4        44%     56%       6.0     8.0       2.0       4.2
+graph_only            1.00/4        33%     67%       6.5     6.5       1.0       2.6
+advanced              2.67/4        78%     78%       8.0     8.0       2.0       5.1
+
+Extended set (Q1, Q2, Q3, Q4, Q5, Q6):
+system               pass rate  evidence  papers  distinct  chunks LLM calls latency s
+baseline_k5           2.00/6        31%     44%       3.7     5.0       1.0       2.0
+baseline_k8           2.00/6        31%     44%       6.0     8.0       1.0       2.0
+decomposition_only    2.67/6        46%     48%       5.7     8.0       2.0       4.1
+graph_only            1.00/6        23%     56%       7.0     7.0       1.0       2.8
+advanced              3.67/6        69%     63%       8.0     8.0       2.0       5.2
+
+Per question (passes/runs, evidence found):
+                              Q1           Q2           Q3           Q4           Q5           Q6
+baseline_k5             0/3 ev0%     0/3 ev0%     0/3 ev0%   3/3 ev100%   3/3 ev100%     0/3 ev0%
+baseline_k8             0/3 ev0%     0/3 ev0%     0/3 ev0%   3/3 ev100%   3/3 ev100%     0/3 ev0%
+decomposition_only      0/3 ev0%     0/3 ev0%   2/3 ev100%   3/3 ev100%   3/3 ev100%     0/3 ev0%
+graph_only              0/3 ev0%    0/3 ev33%     0/3 ev0%   3/3 ev100%     0/3 ev0%     0/3 ev0%
+advanced              3/3 ev100%    1/3 ev33%   1/3 ev100%   3/3 ev100%   3/3 ev100%     0/3 ev0%
+------------------------------------------------------------------------
+[2026-10-11T08:48:42]  FRAMEWORK VALIDATION  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   3.1 known-answer cases on Q3 grading notes
+RESPONSE: reference answer: verdict=pass expected=pass OK
+obvious manipulation: verdict=fail expected=fail OK
+subtle manipulation: verdict=fail expected=fail OK
+------------------------------------------------------------------------
+[2026-10-11T08:49:28]  ASK advanced  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+RESPONSE: For the deep recurrent neural network benchmark, VeriFair “terminated in **606 seconds** and uses **28,000 samples**” when the error probability was \(10^{-10}\).
+------------------------------------------------------------------------
+[2026-10-11T08:49:40]  ASK advanced  SCENARIO=research_papers  MODEL=openai/gpt-5.4-mini
+PROMPT:   Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+RESPONSE: The documents support **one clear case** of a paper comparing against an SMT-based tool and arguing that SMT solving limits scalability:
+
+- **ReaS: Combining Numerical Optimization with SAT Solving** compares against **dReal** and also **Z3**. The paper says:  
+  > “we wrote a script to translate the benchmarks written in ReaS into the SMT-lib format and fed them to the dReal solver. However, dReal could not solve any of our benchmarks with a timeout of 60 minutes.”  
+  and  
+  > “even Z3 could not solve with a timeout of 60 minutes. These results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.”
+
+I do **not** see another PRIMARY document here that explicitly makes the same scalability claim against an SMT-based baseline.
+------------------------------------------------------------------------
