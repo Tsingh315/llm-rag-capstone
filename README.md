@@ -125,4 +125,4 @@ chunks change. 2.1 keeps its own index in `Capstone_Checkpoint_2.1/chroma_db/` (
 | 1.1 | Testing the LLM without retrieval | ✅ Complete |
 | 2.1 | Retrieval strategy design and baseline (hybrid BM25 + vector) | ✅ Complete |
 | 3.1 | Evaluation infrastructure and baseline diagnosis (LLM judge) | ✅ Complete |
-| 4.1 | Advanced retrieval: graph-based multi-hop + query decomposition | 🟡 In progress (code and evaluation done; worksheet Steps 1–4 written) |
+| 4.1 | Advanced retrieval: graph-based multi-hop + query decomposition | ✅ Complete |
