@@ -1,21 +1,20 @@
 Checkpoint 4.1 — scenario: research_papers
 Loaded 8087 chunks from 148 papers (skipped 4 whole-volume files over 400,000 chars).
 Loading existing vector DB from /Users/tsingh/projects/llm-rag-capstone/data/chroma_db/
-Paper graph: 8812 nodes {'paper': 119, 'file': 148, 'chunk': 8087, 'tool': 458}; 16678 edges {'compares_against': 409, 'version_of': 148, 'has_chunk': 8087, 'next_chunk': 7939, 'introduces': 95}.
+Paper graph: 8693 nodes {'paper': 148, 'chunk': 8087, 'tool': 458}; 16559 edges {'has_chunk': 8087, 'compares_against': 409, 'next_chunk': 7939, 'duplicate_of': 29, 'introduces': 95}.
 
 Your advanced-retrieval plan:
 {
   "technique": "both",
   "node_types": [
     "paper",
-    "file",
     "chunk",
     "tool"
   ],
   "edge_types": [
-    "version_of",
     "has_chunk",
     "next_chunk",
+    "duplicate_of",
     "introduces",
     "compares_against"
   ],
@@ -29,120 +28,120 @@ Your advanced-retrieval plan:
 Hybrid retriever ready over 8087 chunks.
 
 Evaluating ['baseline_k5', 'baseline_k8', 'decomposition_only', 'graph_only', 'advanced'] x all questions x 3 run(s)...
-  run 1  baseline_k5         Q1  FAIL  evidence 0/2  papers 1/1  1.9s
   run 1  baseline_k5         Q4  PASS  evidence 2/2  papers 1/1  1.9s
-  run 1  baseline_k5         Q3  FAIL  evidence 0/2  papers 1/1  2.1s
-  run 1  baseline_k5         Q2  FAIL  evidence 0/3  papers 0/3  2.7s
+  run 1  baseline_k5         Q1  FAIL  evidence 0/2  papers 1/1  2.2s
+  run 1  baseline_k5         Q2  FAIL  evidence 0/3  papers 0/3  2.9s
+  run 1  baseline_k5         Q3  FAIL  evidence 0/2  papers 1/1  2.8s
   run 1  baseline_k5         Q5  PASS  evidence 2/2  papers 1/1  1.6s
-  run 1  baseline_k8         Q1  FAIL  evidence 0/2  papers 1/1  1.8s
-  run 1  baseline_k5         Q6  FAIL  evidence 0/2  papers 0/2  2.1s
+  run 1  baseline_k5         Q6  FAIL  evidence 0/2  papers 0/2  1.8s
+  run 1  baseline_k8         Q1  FAIL  evidence 0/2  papers 1/1  1.6s
+  run 1  baseline_k8         Q2  FAIL  evidence 0/3  papers 0/3  1.8s
+  run 1  baseline_k8         Q3  FAIL  evidence 0/2  papers 1/1  1.9s
   run 1  baseline_k8         Q4  PASS  evidence 2/2  papers 1/1  1.6s
-  run 1  baseline_k8         Q3  FAIL  evidence 0/2  papers 1/1  2.1s
-  run 1  baseline_k8         Q2  FAIL  evidence 0/3  papers 0/3  3.0s
-  run 1  baseline_k8         Q5  PASS  evidence 2/2  papers 1/1  1.8s
-  run 1  baseline_k8         Q6  FAIL  evidence 0/2  papers 0/2  1.9s
-  run 1  decomposition_only  Q3  FAIL  evidence 2/2  papers 1/1  3.9s
-  run 1  decomposition_only  Q1  FAIL  evidence 0/2  papers 1/1  4.7s
-  run 1  decomposition_only  Q4  PASS  evidence 2/2  papers 1/1  4.0s
-  run 1  decomposition_only  Q2  FAIL  evidence 0/3  papers 0/3  7.0s
-  run 1  decomposition_only  Q5  PASS  evidence 2/2  papers 1/1  3.7s
-  run 1  decomposition_only  Q6  FAIL  evidence 0/2  papers 0/2  4.4s
-  run 1  graph_only          Q1  FAIL  evidence 0/2  papers 1/1  4.5s
-  run 1  graph_only          Q2  FAIL  evidence 1/3  papers 1/3  5.7s
-  run 1  graph_only          Q4  PASS  evidence 2/2  papers 1/1  2.8s
-  run 1  graph_only          Q3  FAIL  evidence 0/2  papers 1/1  4.3s
-  run 1  graph_only          Q5  FAIL  evidence 0/2  papers 1/1  5.1s
-  run 1  advanced            Q1  PASS  evidence 2/2  papers 1/1  3.3s
-  run 1  graph_only          Q6  FAIL  evidence 0/2  papers 0/2  5.3s
-  run 1  advanced            Q3  PASS  evidence 2/2  papers 1/1  4.2s
-  run 1  advanced            Q4  PASS  evidence 2/2  papers 1/1  4.1s
-  run 1  advanced            Q5  PASS  evidence 2/2  papers 1/1  4.2s
-  run 2  baseline_k5         Q1  FAIL  evidence 0/2  papers 1/1  2.3s
-  run 1  advanced            Q2  FAIL  evidence 1/3  papers 2/3  10.9s
-  run 2  baseline_k5         Q2  FAIL  evidence 0/3  papers 0/3  2.6s
-  run 2  baseline_k5         Q3  FAIL  evidence 0/2  papers 1/1  1.8s
-  run 2  baseline_k5         Q4  PASS  evidence 2/2  papers 1/1  1.4s
-  run 2  baseline_k5         Q5  PASS  evidence 2/2  papers 1/1  1.9s
-  run 2  baseline_k5         Q6  FAIL  evidence 0/2  papers 0/2  1.8s
-  run 2  baseline_k8         Q1  FAIL  evidence 0/2  papers 1/1  1.7s
-  run 1  advanced            Q6  FAIL  evidence 0/2  papers 0/2  8.8s
-  run 2  baseline_k8         Q2  FAIL  evidence 0/3  papers 0/3  2.2s
-  run 2  baseline_k8         Q4  PASS  evidence 2/2  papers 1/1  1.7s
-  run 2  baseline_k8         Q3  FAIL  evidence 0/2  papers 1/1  1.9s
-  run 2  baseline_k8         Q5  PASS  evidence 2/2  papers 1/1  1.8s
-  run 2  baseline_k8         Q6  FAIL  evidence 0/2  papers 0/2  1.8s
-  run 2  decomposition_only  Q1  FAIL  evidence 0/2  papers 1/1  3.7s
-  run 2  decomposition_only  Q2  FAIL  evidence 0/3  papers 0/3  3.9s
-  run 2  decomposition_only  Q4  PASS  evidence 2/2  papers 1/1  3.5s
-  run 2  decomposition_only  Q3  PASS  evidence 2/2  papers 1/1  4.2s
-  run 2  graph_only          Q1  FAIL  evidence 0/2  papers 1/1  1.6s
-  run 2  decomposition_only  Q5  PASS  evidence 2/2  papers 1/1  4.0s
-  run 2  decomposition_only  Q6  FAIL  evidence 0/2  papers 0/2  4.3s
-  run 2  graph_only          Q2  FAIL  evidence 1/3  papers 1/3  2.5s
-  run 2  graph_only          Q4  PASS  evidence 2/2  papers 1/1  1.1s
-  run 2  graph_only          Q3  FAIL  evidence 0/2  papers 1/1  1.9s
-  run 2  graph_only          Q5  FAIL  evidence 0/2  papers 1/1  1.8s
-  run 2  graph_only          Q6  FAIL  evidence 0/2  papers 0/2  2.7s
-  run 2  advanced            Q1  PASS  evidence 2/2  papers 1/1  4.5s
-  run 2  advanced            Q3  FAIL  evidence 2/2  papers 1/1  4.2s
-  run 2  advanced            Q4  PASS  evidence 2/2  papers 1/1  4.0s
-  run 3  baseline_k5         Q1  FAIL  evidence 0/2  papers 1/1  1.6s
-  run 2  advanced            Q2  FAIL  evidence 1/3  papers 1/3  8.3s
-  run 2  advanced            Q5  PASS  evidence 2/2  papers 1/1  3.8s
+  run 1  baseline_k8         Q5  PASS  evidence 2/2  papers 1/1  1.5s
+  run 1  baseline_k8         Q6  FAIL  evidence 0/2  papers 0/2  2.3s
+  run 1  decomposition_only  Q1  FAIL  evidence 0/2  papers 1/1  3.3s
+  run 1  decomposition_only  Q2  FAIL  evidence 0/3  papers 0/3  4.1s
+  run 1  decomposition_only  Q3  FAIL  evidence 2/2  papers 1/1  4.2s
+  run 1  decomposition_only  Q4  FAIL  evidence 0/2  papers 1/1  3.8s
+  run 1  decomposition_only  Q5  PASS  evidence 2/2  papers 1/1  3.1s
+  run 1  decomposition_only  Q6  FAIL  evidence 0/2  papers 0/2  3.8s
+  run 1  graph_only          Q1  FAIL  evidence 0/2  papers 1/1  5.2s
+  run 1  graph_only          Q2  FAIL  evidence 1/3  papers 1/3  5.3s
+  run 1  graph_only          Q4  PASS  evidence 2/2  papers 1/1  3.0s
+  run 1  graph_only          Q3  FAIL  evidence 0/2  papers 1/1  4.8s
+  run 1  graph_only          Q5  FAIL  evidence 0/2  papers 1/1  4.0s
+  run 1  advanced            Q1  PASS  evidence 2/2  papers 1/1  4.0s
+  run 1  graph_only          Q6  FAIL  evidence 0/2  papers 0/2  5.1s
+  run 1  advanced            Q3  PASS  evidence 2/2  papers 1/1  4.3s
+  run 1  advanced            Q4  PASS  evidence 2/2  papers 1/1  4.3s
+  run 1  advanced            Q5  PASS  evidence 2/2  papers 1/1  4.1s
+  run 1  advanced            Q2  FAIL  evidence 1/3  papers 2/3  8.8s
+  run 2  baseline_k5         Q1  FAIL  evidence 0/2  papers 1/1  1.7s
+  run 2  baseline_k5         Q2  FAIL  evidence 0/3  papers 0/3  1.9s
+  run 2  baseline_k5         Q3  FAIL  evidence 0/2  papers 1/1  2.1s
+  run 2  baseline_k5         Q4  PASS  evidence 2/2  papers 1/1  1.5s
+  run 2  baseline_k5         Q5  PASS  evidence 2/2  papers 1/1  1.6s
+  run 1  advanced            Q6  FAIL  evidence 0/2  papers 0/2  7.2s
+  run 2  baseline_k5         Q6  FAIL  evidence 0/2  papers 0/2  2.3s
+  run 2  baseline_k8         Q1  FAIL  evidence 0/2  papers 1/1  1.6s
+  run 2  baseline_k8         Q2  FAIL  evidence 0/3  papers 0/3  2.0s
+  run 2  baseline_k8         Q3  FAIL  evidence 0/2  papers 1/1  1.8s
+  run 2  baseline_k8         Q4  PASS  evidence 2/2  papers 1/1  1.5s
+  run 2  baseline_k8         Q5  PASS  evidence 2/2  papers 1/1  1.6s
+  run 2  baseline_k8         Q6  FAIL  evidence 0/2  papers 0/2  1.9s
+  run 2  decomposition_only  Q1  FAIL  evidence 0/2  papers 1/1  4.0s
+  run 2  decomposition_only  Q4  PASS  evidence 2/2  papers 1/1  3.2s
+  run 2  decomposition_only  Q3  FAIL  evidence 2/2  papers 1/1  4.4s
+  run 2  decomposition_only  Q2  FAIL  evidence 0/3  papers 0/3  5.1s
+  run 2  graph_only          Q1  FAIL  evidence 0/2  papers 1/1  2.1s
+  run 2  decomposition_only  Q5  PASS  evidence 2/2  papers 1/1  3.2s
+  run 2  graph_only          Q2  FAIL  evidence 1/3  papers 1/3  2.6s
+  run 2  decomposition_only  Q6  FAIL  evidence 0/2  papers 0/2  4.0s
+  run 2  graph_only          Q4  PASS  evidence 2/2  papers 1/1  1.5s
+  run 2  graph_only          Q5  FAIL  evidence 0/2  papers 1/1  1.7s
+  run 2  graph_only          Q3  FAIL  evidence 0/2  papers 1/1  2.2s
+  run 2  graph_only          Q6  FAIL  evidence 0/2  papers 0/2  2.6s
+  run 2  advanced            Q1  PASS  evidence 2/2  papers 1/1  3.6s
+  run 2  advanced            Q3  PASS  evidence 2/2  papers 1/1  4.5s
+  run 2  advanced            Q4  PASS  evidence 2/2  papers 1/1  3.6s
+  run 2  advanced            Q2  FAIL  evidence 1/3  papers 1/3  6.1s
+  run 3  baseline_k5         Q1  FAIL  evidence 0/2  papers 1/1  1.7s
+  run 3  baseline_k5         Q2  FAIL  evidence 0/3  papers 0/3  1.9s
+  run 2  advanced            Q5  PASS  evidence 2/2  papers 1/1  5.2s
   run 3  baseline_k5         Q4  PASS  evidence 2/2  papers 1/1  1.4s
-  run 2  advanced            Q6  FAIL  evidence 0/2  papers 0/2  5.6s
-  run 3  baseline_k5         Q2  FAIL  evidence 0/3  papers 0/3  2.6s
-  run 3  baseline_k5         Q3  FAIL  evidence 0/2  papers 1/1  2.5s
-  run 3  baseline_k5         Q5  PASS  evidence 2/2  papers 1/1  1.6s
-  run 3  baseline_k5         Q6  FAIL  evidence 0/2  papers 0/2  2.1s
-  run 3  baseline_k8         Q1  FAIL  evidence 0/2  papers 1/1  2.1s
-  run 3  baseline_k8         Q3  FAIL  evidence 0/2  papers 1/1  1.9s
-  run 3  baseline_k8         Q2  FAIL  evidence 0/3  papers 0/3  3.9s
-  run 3  baseline_k8         Q5  PASS  evidence 2/2  papers 1/1  1.5s
-  run 3  baseline_k8         Q4  PASS  evidence 2/2  papers 1/1  1.5s
-  run 3  baseline_k8         Q6  FAIL  evidence 0/2  papers 0/2  2.6s
-  run 3  decomposition_only  Q1  FAIL  evidence 0/2  papers 1/1  3.8s
-  run 3  decomposition_only  Q2  FAIL  evidence 0/3  papers 1/3  4.3s
-  run 3  decomposition_only  Q3  PASS  evidence 2/2  papers 1/1  4.1s
-  run 3  decomposition_only  Q4  PASS  evidence 2/2  papers 1/1  3.3s
-  run 3  decomposition_only  Q5  PASS  evidence 2/2  papers 1/1  3.0s
-  run 3  graph_only          Q1  FAIL  evidence 0/2  papers 1/1  1.9s
-  run 3  graph_only          Q2  FAIL  evidence 1/3  papers 1/3  2.3s
-  run 3  decomposition_only  Q6  FAIL  evidence 0/2  papers 0/2  4.0s
-  run 3  graph_only          Q4  PASS  evidence 2/2  papers 1/1  1.1s
-  run 3  graph_only          Q3  FAIL  evidence 0/2  papers 1/1  1.8s
-  run 3  graph_only          Q5  FAIL  evidence 0/2  papers 1/1  1.6s
-  run 3  graph_only          Q6  FAIL  evidence 0/2  papers 0/2  2.8s
-  run 3  advanced            Q1  PASS  evidence 2/2  papers 1/1  3.2s
-  run 3  advanced            Q3  FAIL  evidence 2/2  papers 1/1  4.7s
-  run 3  advanced            Q2  PASS  evidence 1/3  papers 2/3  5.7s
-  run 3  advanced            Q4  PASS  evidence 2/2  papers 1/1  3.8s
-  run 3  advanced            Q5  PASS  evidence 2/2  papers 1/1  4.0s
-  run 3  advanced            Q6  FAIL  evidence 0/2  papers 0/2  6.2s
+  run 3  baseline_k5         Q3  FAIL  evidence 0/2  papers 1/1  1.8s
+  run 3  baseline_k5         Q5  PASS  evidence 2/2  papers 1/1  1.8s
+  run 2  advanced            Q6  FAIL  evidence 0/2  papers 0/2  6.1s
+  run 3  baseline_k5         Q6  FAIL  evidence 0/2  papers 0/2  1.8s
+  run 3  baseline_k8         Q1  FAIL  evidence 0/2  papers 1/1  1.6s
+  run 3  baseline_k8         Q3  FAIL  evidence 0/2  papers 1/1  1.7s
+  run 3  baseline_k8         Q2  FAIL  evidence 0/3  papers 0/3  2.0s
+  run 3  baseline_k8         Q4  PASS  evidence 2/2  papers 1/1  1.6s
+  run 3  baseline_k8         Q5  PASS  evidence 2/2  papers 1/1  1.6s
+  run 3  baseline_k8         Q6  FAIL  evidence 0/2  papers 0/2  2.9s
+  run 3  decomposition_only  Q1  FAIL  evidence 0/2  papers 1/1  3.4s
+  run 3  decomposition_only  Q2  FAIL  evidence 0/3  papers 0/3  4.0s
+  run 3  decomposition_only  Q3  PASS  evidence 2/2  papers 1/1  4.6s
+  run 3  decomposition_only  Q5  PASS  evidence 2/2  papers 1/1  3.4s
+  run 3  decomposition_only  Q4  FAIL  evidence 0/2  papers 1/1  4.6s
+  run 3  graph_only          Q1  FAIL  evidence 0/2  papers 1/1  1.6s
+  run 3  decomposition_only  Q6  FAIL  evidence 0/2  papers 0/2  3.9s
+  run 3  graph_only          Q3  FAIL  evidence 0/2  papers 1/1  1.6s
+  run 3  graph_only          Q2  FAIL  evidence 1/3  papers 1/3  2.5s
+  run 3  graph_only          Q4  PASS  evidence 2/2  papers 1/1  1.0s
+  run 3  graph_only          Q5  FAIL  evidence 0/2  papers 1/1  1.9s
+  run 3  graph_only          Q6  FAIL  evidence 0/2  papers 0/2  3.1s
+  run 3  advanced            Q1  PASS  evidence 2/2  papers 1/1  4.1s
+  run 3  advanced            Q3  PASS  evidence 2/2  papers 1/1  4.7s
+  run 3  advanced            Q2  FAIL  evidence 1/3  papers 1/3  6.4s
+  run 3  advanced            Q4  PASS  evidence 2/2  papers 1/1  3.9s
+  run 3  advanced            Q5  PASS  evidence 2/2  papers 1/1  3.7s
+  run 3  advanced            Q6  FAIL  evidence 0/2  papers 0/2  6.4s
 
 3.1 evaluation set (Q1-Q4), mean over 3 run(s):
 system               pass rate  evidence  papers  distinct  chunks LLM calls latency s
-baseline_k5           1.00/4        22%     50%       4.0     5.0       1.0       2.1
-baseline_k8           1.00/4        22%     50%       6.5     8.0       1.0       2.1
-decomposition_only    1.67/4        44%     56%       6.0     8.0       2.0       4.2
-graph_only            1.00/4        33%     67%       6.5     6.5       1.0       2.6
-advanced              2.67/4        78%     78%       8.0     8.0       2.0       5.1
+baseline_k5           1.00/4        22%     50%       4.0     5.0       1.0       2.0
+baseline_k8           1.00/4        22%     50%       6.5     8.0       1.0       1.7
+decomposition_only    0.67/4        30%     50%       6.0     8.0       2.0       4.0
+graph_only            1.00/4        33%     67%       6.5     6.5       1.0       2.8
+advanced              3.00/4        78%     72%       8.0     8.0       2.0       4.9
 
 Extended set (Q1, Q2, Q3, Q4, Q5, Q6):
 system               pass rate  evidence  papers  distinct  chunks LLM calls latency s
-baseline_k5           2.00/6        31%     44%       3.7     5.0       1.0       2.0
-baseline_k8           2.00/6        31%     44%       6.0     8.0       1.0       2.0
-decomposition_only    2.67/6        46%     48%       5.7     8.0       2.0       4.1
-graph_only            1.00/6        23%     56%       7.0     7.0       1.0       2.8
-advanced              3.67/6        69%     63%       8.0     8.0       2.0       5.2
+baseline_k5           2.00/6        31%     44%       3.7     5.0       1.0       1.9
+baseline_k8           2.00/6        31%     44%       6.0     8.0       1.0       1.8
+decomposition_only    1.67/6        36%     44%       5.8     8.0       2.0       3.9
+graph_only            1.00/6        23%     56%       7.0     7.0       1.0       2.9
+advanced              4.00/6        69%     59%       7.9     7.9       2.0       5.1
 
 Per question (passes/runs, evidence found):
                               Q1           Q2           Q3           Q4           Q5           Q6
 baseline_k5             0/3 ev0%     0/3 ev0%     0/3 ev0%   3/3 ev100%   3/3 ev100%     0/3 ev0%
 baseline_k8             0/3 ev0%     0/3 ev0%     0/3 ev0%   3/3 ev100%   3/3 ev100%     0/3 ev0%
-decomposition_only      0/3 ev0%     0/3 ev0%   2/3 ev100%   3/3 ev100%   3/3 ev100%     0/3 ev0%
+decomposition_only      0/3 ev0%     0/3 ev0%   1/3 ev100%    1/3 ev33%   3/3 ev100%     0/3 ev0%
 graph_only              0/3 ev0%    0/3 ev33%     0/3 ev0%   3/3 ev100%     0/3 ev0%     0/3 ev0%
-advanced              3/3 ev100%    1/3 ev33%   1/3 ev100%   3/3 ev100%   3/3 ev100%     0/3 ev0%
+advanced              3/3 ev100%    0/3 ev33%   3/3 ev100%   3/3 ev100%   3/3 ev100%     0/3 ev0%
 
 Framework validation (3.1 judge):
 reference answer: verdict=pass expected=pass OK

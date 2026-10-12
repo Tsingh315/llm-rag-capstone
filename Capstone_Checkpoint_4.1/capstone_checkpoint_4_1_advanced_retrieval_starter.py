@@ -20,7 +20,7 @@ judge and grading notes unchanged, so the before/after comparison measures only 
 # Checkpoint 3.1 showed it finds the right *paper* but not the *evidence* when that evidence is spread out:
 # deeper in the same paper (Q1, Q3) or across unrelated papers (Q2). This checkpoint replaces it with:
 #
-# - **Primary (Lab 4.2): graph-based multi-hop retrieval.** A paper graph (paper / file / chunk / tool nodes)
+# - **Primary (Lab 4.2): graph-based multi-hop retrieval.** A paper graph (paper / chunk / tool nodes)
 #   walked in hops: find candidate papers (by passages and by "compares_against" relations) -> search inside
 #   them -> add the best following passages, labelled PRIMARY / CONTEXT.
 # - **Supporting (Lab 4.1): query decomposition.** The LLM rewrites the question into sub-queries and plans the
@@ -166,14 +166,17 @@ def _rrf(bm25: np.ndarray, cos: np.ndarray) -> np.ndarray:
 # | Lab 4.2 (emails) | This corpus (papers) |
 # |---|---|
 # | email | **chunk** (a ~1,500-character passage) |
-# | thread + sequence number | **paper**, with chunk order as the sequence (`has_chunk`, `next_chunk`) |
-# | — | **file**: 29 papers exist twice (conference + arXiv); `version_of` merges them into one paper |
+# | thread + sequence number | **paper** (one per PDF, with its title), chunk order as the sequence (`has_chunk`, `next_chunk`) |
+# | — | 29 papers exist twice (conference + arXiv): the copy points to the published paper (`duplicate_of`) and is skipped by retrieval |
 # | person / topic (who / what) | **tool**: the system a paper `introduces` and the baselines it `compares_against`, with the baseline's technique and the limitation the paper claims stored on the edge |
 #
 # The `compares_against` relation is extracted once by the LLM from each paper's comparison sentences (the
 # same role as Lab 4.2's pre-annotated email JSON) and cached in `data/`. Authors and citations were not used:
 # the GROBID step kept neither author lists nor reference lists, and one author appears on most papers, so
-# author edges would connect almost everything.
+# author edges would connect almost everything. Shared-keyword topic edges were tried and dropped: they linked
+# unrelated papers (e.g. VeriFair to an RNA paper via "LSTM").
+#
+# Schema: nodes paper / chunk / tool; edges has_chunk, next_chunk, duplicate_of, introduces, compares_against.
 
 # %%
 class PaperGraph:
@@ -184,7 +187,8 @@ class PaperGraph:
         self.by_id = {c["chunk_id"]: c for c in chunks}
         self.G = nx.DiGraph()
 
-        # paper (work) <- file (version); one canonical file per paper: the published one, else the longest.
+        # Group PDFs by title: 29 titles have two PDFs (conference + arXiv). The published one (else the longer)
+        # is the paper retrieval uses; the other becomes a duplicate_of it.
         files_by_work: dict[str, list[str]] = defaultdict(list)
         chunks_by_file: dict[str, list[str]] = defaultdict(list)
         self.title: dict[str, str] = {}
@@ -201,17 +205,20 @@ class PaperGraph:
         self.chunks_by_file = {f: sorted(ids, key=_chunk_no) for f, ids in chunks_by_file.items()}
 
         for work, files in files_by_work.items():
-            self.G.add_node(f"paper:{work}", node_type="paper", title=self.title[work])
             for f in files:
-                self.G.add_node(f"file:{f}", node_type="file", canonical=(f == self.canonical[work]))
-                self.G.add_edge(f"file:{f}", f"paper:{work}", edge_type="version_of")
+                self.G.add_node(f"paper:{f}", node_type="paper", title=self.title[work])
+                if f != self.canonical[work]:
+                    self.G.add_edge(f"paper:{f}", f"paper:{self.canonical[work]}", edge_type="duplicate_of")
                 prev = None
                 for cid in self.chunks_by_file[f]:
                     self.G.add_node(f"chunk:{cid}", node_type="chunk", seq=_chunk_no(cid))
-                    self.G.add_edge(f"file:{f}", f"chunk:{cid}", edge_type="has_chunk")
+                    self.G.add_edge(f"paper:{f}", f"chunk:{cid}", edge_type="has_chunk")
                     if prev:
                         self.G.add_edge(f"chunk:{prev}", f"chunk:{cid}", edge_type="next_chunk")
                     prev = cid
+        # Papers with an outgoing duplicate_of edge are copies; retrieval only searches the others.
+        self.duplicates = {u.removeprefix("paper:") for u, _, d in self.G.edges(data=True)
+                           if d["edge_type"] == "duplicate_of"}
 
         self.works = sorted(files_by_work)
 
@@ -229,14 +236,14 @@ class PaperGraph:
             own = (rec.get("own_tool") or "").strip()
             if own:
                 self.G.add_node(f"tool:{own.lower()}", node_type="tool", name=own)
-                self.G.add_edge(f"paper:{work}", f"tool:{own.lower()}", edge_type="introduces")
+                self.G.add_edge(f"paper:{self.canonical[work]}", f"tool:{own.lower()}", edge_type="introduces")
             for b in rec.get("baselines") or []:
                 name = (b.get("name") or "").strip()
                 if not name or name.lower() == own.lower():
                     continue
                 technique, limitation = b.get("technique") or "", b.get("limitation") or ""
                 self.G.add_node(f"tool:{name.lower()}", node_type="tool", name=name)
-                self.G.add_edge(f"paper:{work}", f"tool:{name.lower()}", edge_type="compares_against",
+                self.G.add_edge(f"paper:{self.canonical[work]}", f"tool:{name.lower()}", edge_type="compares_against",
                                 technique=technique, limitation=limitation)
                 subject = own or self.title[work]
                 self.relations.append({
@@ -249,8 +256,7 @@ class PaperGraph:
         return self.work_of_file[self.by_id[chunk_id]["source"]]
 
     def is_canonical(self, chunk_id: str) -> bool:
-        src = self.by_id[chunk_id]["source"]
-        return self.canonical[self.work_of_file[src]] == src
+        return self.by_id[chunk_id]["source"] not in self.duplicates
 
     def canonical_chunks(self, work: str) -> list[str]:
         return self.chunks_by_file[self.canonical[work]]
@@ -533,8 +539,8 @@ class GraphMultiHopRetriever:
 def my_advanced_plan() -> dict[str, Any]:
     return {
         "technique": "both",
-        "node_types": ["paper", "file", "chunk", "tool"],
-        "edge_types": ["version_of", "has_chunk", "next_chunk", "introduces", "compares_against"],
+        "node_types": ["paper", "chunk", "tool"],
+        "edge_types": ["has_chunk", "next_chunk", "duplicate_of", "introduces", "compares_against"],
         "test_queries": [q["question"] for q in my_eval_set()[:3]],
         "rationale": (
             "The 3.1 failures were evidence spread out within a paper (answer a few chunks after the best match) "

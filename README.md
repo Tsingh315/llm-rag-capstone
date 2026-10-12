@@ -30,9 +30,9 @@ answers. So far:
 - **3.1, evaluation:** an LLM judge scores answers pass/fail against grading notes, with a
   validation step that checks the judge itself. Baseline: 1/4 pass. The system answers facts
   stated in abstracts but misses facts buried in results sections or spread across papers.
-- **4.1, advanced retrieval:** a paper graph (duplicate copies merged, reading order, paper → baseline-tool
-  relations) walked in two hops, seeded by LLM query decomposition. Same 3.1 evaluation at a matched 8-chunk
-  budget: 2.67/4 pass (mean of 3 runs) vs 1.00/4 for the baseline.
+- **4.1, advanced retrieval:** a paper graph (paper / chunk / tool nodes: reading order, duplicate copies,
+  paper → baseline-tool relations) walked in two hops, seeded by LLM query decomposition. Same 3.1 evaluation at
+  a matched 8-chunk budget: 3.00/4 pass (mean of 3 runs) vs 1.00/4 for the baseline.
 
 Later checkpoints improve retrieval and keep re-running the same evaluation to measure progress.
 
