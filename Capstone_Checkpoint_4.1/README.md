@@ -1,4 +1,4 @@
-[← Repository README](../README.md) · [← Checkpoint 3.1](../Capstone_Checkpoint_3.1/README.md)
+[← Repository README](../README.md) · [← Checkpoint 3.1](../Capstone_Checkpoint_3.1/README.md) · [Next: Checkpoint 5.1 →](../Capstone_Checkpoint_5.1/README.md)
 
 # Capstone Checkpoint 4.1 — Advanced Retrieval Implementation
 

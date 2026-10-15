@@ -1,0 +1,130 @@
+Your agent plan:
+{
+  "tools": [
+    "search",
+    "search_in_paper",
+    "read_next",
+    "find_comparisons",
+    "clarify",
+    "answer"
+  ],
+  "stop_condition": "Answer when the collected passages contain evidence for every part of the question, with each claim traceable to a named paper; or when the step limit is reached, a tool returns nothing new twice in a row, or the plan cannot be parsed. Every failure path stops and answers with what was found, saying what is missing. Clarify is a pause, not a stop: if the question still has two or more plausible readings after searching, the agent asks a question that helps it narrow down teh remaining readings, then resumes planning with the reply; in batch mode, or if the reply is still ambiguous, it answers under an explicitly stated assumption instead of asking again.",
+  "system_prompt_idea": "Act like a researcher: search to find the paper first, then search inside it or read the passages that follow to reach the exact result; for 'which papers' questions use find_comparisons; clarify only after searching, when the question still has two or more plausible readings; answer only from collected passages, quoting each claim with its paper.",
+  "test_tasks": [
+    "How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?",
+    "Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.",
+    "Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it."
+  ]
+}
+Loaded 8087 chunks from 148 papers (skipped 4 whole-volume files over 400,000 chars).
+Loading existing vector DB from /Users/tsingh/projects/llm-rag-capstone/data/chroma_db/
+Paper graph: 8693 nodes {'paper': 148, 'chunk': 8087, 'tool': 458}; 16559 edges {'has_chunk': 8087, 'compares_against': 409, 'next_chunk': 7939, 'duplicate_of': 29, 'introduces': 95}.
+Hybrid retriever ready over 8087 chunks.
+
+=== run 1 | baseline_2_1 | Q1
+    FAIL  evidence 0/2  papers 1/1  calls 1  ~2070 tok  1.9s  chunks 5
+
+=== run 1 | baseline_2_1 | Q2
+    FAIL  evidence 0/3  papers 0/3  calls 1  ~1576 tok  2.1s  chunks 5
+
+=== run 1 | baseline_2_1 | T3
+    FAIL  evidence 2/3  papers 1/2  calls 1  ~1844 tok  1.9s  chunks 5
+
+=== run 1 | advanced_4_1 | Q1
+    PASS  evidence 2/2  papers 1/1  calls 2  ~3502 tok  3.9s  chunks 8
+
+=== run 1 | advanced_4_1 | Q2
+    FAIL  evidence 1/3  papers 1/3  calls 2  ~3463 tok  7.8s  chunks 8
+
+=== run 1 | advanced_4_1 | T3
+    FAIL  evidence 1/3  papers 2/2  calls 2  ~3800 tok  7.2s  chunks 8
+
+=== run 1 | agent/v1 | Q1
+  [plan 1] search {"query": "fairness verifier deep recurrent neural network error probability 10^-10 time s  — I need to identify the specific paper and passage that reports the verification time and sample count for the 
+  [plan 2] search_in_paper {"paper": "DBLP_journals_pacmpl_Bastani0S19", "query": "10^-10 samples running time deep r  — We have identified the right paper, but the exact runtime and sample count for the deep RNN at error probabili
+  [plan 3] search_in_paper {"paper": "DBLP_journals_pacmpl_Bastani0S19", "query": "deep recurrent neural network benc  — We have identified the right paper, but we still need the exact benchmark result with the runtime and sample c
+    FAIL  evidence 0/2  papers 1/1  calls 4  ~7012 tok  5.3s  chunks 5
+
+=== run 1 | agent/v1 | Q2
+  [plan 1] find_comparisons {"technique": "SMT solver"}  — I need to identify which papers explicitly compare against an SMT-based baseline and mention scalability limit
+  [plan 2] answer {}  — The collected passages identify two papers that explicitly compare against SMT-based tools and say SMT solving
+    FAIL  evidence 0/3  papers 0/3  calls 3  ~4753 tok  5.5s  chunks 5
+
+=== run 1 | agent/v1 | T3
+  [plan 1] search {"query": "Castor Haskell synthesizer compare against SMT-based baseline Hectare SMT-based  — I need to identify the relevant papers and passages for Castor and Hectare before I can extract the baselines,
+  [plan 2] search {"query": "Castor SMT-based baseline limits compare against SMT-based baseline paper says   — I still need the Castor paper’s exact baseline name, the paper’s stated SMT limitation, and the reported resul
+  [plan 3] answer {}  — The collected passages identify Hectare’s SMT-based baseline and main result, but I still need the Castor pape
+    FAIL  evidence 2/3  papers 1/2  calls 4  ~9642 tok  6.3s  chunks 10
+
+=== run 2 | baseline_2_1 | Q1
+    FAIL  evidence 0/2  papers 1/1  calls 1  ~2081 tok  2.2s  chunks 5
+
+=== run 2 | baseline_2_1 | Q2
+    FAIL  evidence 0/3  papers 0/3  calls 1  ~1559 tok  2.0s  chunks 5
+
+=== run 2 | baseline_2_1 | T3
+    FAIL  evidence 2/3  papers 1/2  calls 1  ~1875 tok  2.1s  chunks 5
+
+=== run 2 | advanced_4_1 | Q1
+    PASS  evidence 2/2  papers 1/1  calls 2  ~3676 tok  3.4s  chunks 8
+
+=== run 2 | advanced_4_1 | Q2
+    FAIL  evidence 1/3  papers 1/3  calls 2  ~3346 tok  5.6s  chunks 8
+
+=== run 2 | advanced_4_1 | T3
+    FAIL  evidence 1/3  papers 2/2  calls 2  ~3714 tok  6.3s  chunks 8
+
+=== run 2 | agent/v1 | Q1
+  [plan 1] search {"query": "fairness verifier deep recurrent neural network error probability 10^-10 runtim  — I need to locate the paper/report that mentions the fairness verifier and extract the exact verification time 
+  [plan 2] answer {}  — unparseable plan: 'The paper says VeriFair verified the deep recurrent neural network with error probability \
+    FAIL  evidence 0/2  papers 1/1  calls 3  ~4786 tok  4.1s  chunks 5
+
+=== run 2 | agent/v1 | Q2
+  [plan 1] find_comparisons {"technique": "SMT solver"}  — Need to identify papers that explicitly compare against an SMT-based baseline and state that SMT solving limit
+  [plan 2] answer {}  — The collected passages identify only one paper explicitly arguing that an SMT-based approach limits scalabilit
+    FAIL  evidence 0/3  papers 0/3  calls 3  ~4731 tok  4.5s  chunks 5
+
+=== run 2 | agent/v1 | T3
+  [plan 1] search {"query": "Castor SMT-based baseline limits paper Hectare ECTA-based Haskell synthesizer S  — I need to identify the relevant papers and passages for Castor and Hectare before I can name their SMT-based b
+  [plan 2] answer {}  — The collected passages identify Hoogle+ for Hectare and mention Castor’s comparison is still needed from the C
+    FAIL  evidence 2/3  papers 1/2  calls 3  ~5359 tok  5.9s  chunks 5
+
+=== run 3 | baseline_2_1 | Q1
+    FAIL  evidence 0/2  papers 1/1  calls 1  ~2066 tok  1.6s  chunks 5
+
+=== run 3 | baseline_2_1 | Q2
+    FAIL  evidence 0/3  papers 0/3  calls 1  ~1501 tok  1.8s  chunks 5
+
+=== run 3 | baseline_2_1 | T3
+    FAIL  evidence 2/3  papers 1/2  calls 1  ~1842 tok  1.9s  chunks 5
+
+=== run 3 | advanced_4_1 | Q1
+    PASS  evidence 2/2  papers 1/1  calls 2  ~3643 tok  3.4s  chunks 8
+
+=== run 3 | advanced_4_1 | Q2
+    FAIL  evidence 1/3  papers 2/3  calls 2  ~3668 tok  5.6s  chunks 8
+
+=== run 3 | advanced_4_1 | T3
+    FAIL  evidence 1/3  papers 2/2  calls 2  ~4029 tok  7.3s  chunks 8
+
+=== run 3 | agent/v1 | Q1
+  [plan 1] search {"query": "fairness verifier deep recurrent neural network error probability 10^-10 time s  — I need to identify the paper and locate the exact experiment reporting the verification time and sample count 
+  [plan 2] search_in_paper {"paper": "Probabilistic Verification of Fairness Properties via Concentration", "query":   — The benchmark is identified, but the exact runtime and sample count for the 10^-10 error setting are still mis
+  [plan 3] search_in_paper {"paper": "Probabilistic Verification of Fairness Properties via Concentration", "query":   — I have the right paper, but I still need the exact runtime and sample count for the deep recurrent neural netw
+    FAIL  evidence 0/2  papers 1/1  calls 4  ~7089 tok  5.7s  chunks 5
+
+=== run 3 | agent/v1 | Q2
+  [plan 1] find_comparisons {"technique": "SMT solver"}  — Need to identify papers that explicitly compare against an SMT-based baseline and mention scalability limits, 
+  [plan 2] answer {}  — The passages identify one paper that explicitly compares against an SMT-based tool and says SMT does not scale
+    FAIL  evidence 0/3  papers 0/3  calls 3  ~4861 tok  4.6s  chunks 5
+
+=== run 3 | agent/v1 | T3
+  [plan 1] search {"query": "Castor compare against SMT-based baseline Haskell synthesizer Hectare compare a  — I need to identify the specific papers and passages that name the SMT baseline, explain the limitation, and re
+  [plan 2] clarify {"question": "Do you want me to answer only for the Haskell synthesizer Hectare and the Ca  — I have Hectare’s baseline and result, but the Castor paper has not yet been identified in the retrieved passag
+  [plan 3] answer {}  — The passages already identify both baselines and Hectare’s headline result, but I still need the Castor paper 
+    FAIL  evidence 2/3  papers 1/2  calls 4  ~8064 tok  7.5s  chunks 5
+
+system               pass  evidence  papers  calls   tokens  latency  chunks  steps   per task (passes/runs)
+baseline_2_1      0.00/3      25%     33%    1.0    1,824     1.9s     5.0    1.0   Q1 0/3  Q2 0/3  T3 0/3
+advanced_4_1      1.00/3      50%     72%    2.0    3,649     5.6s     8.0    2.0   Q1 3/3  Q2 0/3  T3 0/3
+agent_v1          0.00/3      25%     33%    3.4    6,255     5.5s     5.6    2.4   Q1 0/3  Q2 0/3  T3 0/3

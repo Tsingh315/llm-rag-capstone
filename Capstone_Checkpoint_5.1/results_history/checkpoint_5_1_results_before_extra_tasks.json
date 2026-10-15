@@ -1,0 +1,1058 @@
+[
+ {
+  "run": 1,
+  "system": "baseline_2_1",
+  "id": "Q1",
+  "verdict": "fail",
+  "llm_calls": 1,
+  "est_tokens": 2086,
+  "latency": 2.4,
+  "n_chunks": 5,
+  "evidence_found": 0,
+  "evidence_total": 2,
+  "papers_found": 1,
+  "papers_total": 1,
+  "distinct_passages": 3,
+  "trace": [
+   "fixed: one hybrid search, top 5"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_Bastani0S19::53",
+   "DBLP_journals_corr_abs-1812-02573::53",
+   "DBLP_journals_pacmpl_Bastani0S19::0",
+   "DBLP_journals_corr_abs-1812-02573::0",
+   "DBLP_journals_corr_abs-1812-02573::42"
+  ],
+  "answer": "The provided documents do not contain the specific running time or sample count for the deep recurrent neural network at error probability \\(10^{-10}\\).\n\nWhat the documents do say is that VeriFair was used on a “deep recurrent neural network (RNN)” benchmark and that it uses “adaptive concentration inequalities” and can make “the probability of error … extremely small,” but I do not see the exact time or number of samples for \\(\\delta = 10^{-10}\\) in the text provided.\n\nIf you have the figure or table that reports that result, I can extract the exact numbers."
+ },
+ {
+  "run": 1,
+  "system": "baseline_2_1",
+  "id": "Q2",
+  "verdict": "fail",
+  "llm_calls": 1,
+  "est_tokens": 1510,
+  "latency": 2.3,
+  "n_chunks": 5,
+  "evidence_found": 0,
+  "evidence_total": 3,
+  "papers_found": 0,
+  "papers_total": 3,
+  "distinct_passages": 5,
+  "trace": [
+   "fixed: one hybrid search, top 5"
+  ],
+  "chunks": [
+   "DBLP_conf_icse_JeonQFFS16::28",
+   "DBLP_journals_corr_abs-1802-04408::47",
+   "DBLP_conf_icse_JeonQFFS16::40",
+   "DBLP_conf_icse_JeonQFFS16::24",
+   "DBLP_journals_corr_abs-2206-06164::59"
+  ],
+  "answer": "Two papers in the provided documents do this:\n\n1. **ReaS: Combining Numerical Optimization with SAT Solving**  \n   - It compares against **dReal** (and also **Z3** on one benchmark).  \n   - The paper says: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**these results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.**”\n\n2. **Metric Program Synthesis**  \n   - It compares against **Regel**, described as “**a state-of-the-art regular expression synthesis tool**” that “**uses a number of SMT-based pruning strategies**.”  \n   - However, the provided excerpt does **not** explicitly say that SMT solving limits scalability in the same way as the ReaS paper does.\n\nSo, the paper that clearly matches your description is **ReaS**, with baseline **dReal**."
+ },
+ {
+  "run": 1,
+  "system": "advanced_4_1",
+  "id": "Q1",
+  "verdict": "pass",
+  "llm_calls": 2,
+  "est_tokens": 3457,
+  "latency": 4.1,
+  "n_chunks": 8,
+  "evidence_found": 2,
+  "evidence_total": 2,
+  "papers_found": 1,
+  "papers_total": 1,
+  "distinct_passages": 8,
+  "trace": [
+   "fixed: plan scope=single, hop 1 + hop 2"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_Bastani0S19::53",
+   "DBLP_journals_pacmpl_Bastani0S19::12",
+   "DBLP_journals_pacmpl_Bastani0S19::42",
+   "DBLP_journals_pacmpl_Bastani0S19::0",
+   "DBLP_journals_pacmpl_Bastani0S19::76",
+   "DBLP_journals_pacmpl_Bastani0S19::54",
+   "DBLP_journals_pacmpl_Bastani0S19::55",
+   "DBLP_journals_pacmpl_Bastani0S19::56"
+  ],
+  "answer": "For the deep recurrent neural network benchmark, the paper says that using \\(\\Delta = 10^{-10}\\), VeriFair \"terminated in **606 seconds** and uses **28,000 samples**\" ([CONTEXT passage 3](#))."
+ },
+ {
+  "run": 1,
+  "system": "advanced_4_1",
+  "id": "Q2",
+  "verdict": "fail",
+  "llm_calls": 2,
+  "est_tokens": 3551,
+  "latency": 9.9,
+  "n_chunks": 8,
+  "evidence_found": 1,
+  "evidence_total": 3,
+  "papers_found": 1,
+  "papers_total": 3,
+  "distinct_passages": 8,
+  "trace": [
+   "fixed: plan scope=multi, hop 1 + hop 2"
+  ],
+  "chunks": [
+   "DBLP_journals_fmsd_FismanSS21::2",
+   "DBLP_journals_corr_abs-1802-04408::47",
+   "DBLP_journals_pacmpl_FeserM0S20::57",
+   "DBLP_conf_icse_JeonQFFS16::49",
+   "DBLP_journals_corr_AlurFSS16a::35",
+   "DBLP_journals_corr_AlurFSS16::18",
+   "DBLP_journals_corr_abs-2206-06164::62",
+   "DBLP_conf_sat_Inala0S16::0"
+  ],
+  "answer": "The documents explicitly make that argument in at least these papers:\n\n1. **ReaS: Combining Numerical Optimization with SAT Solving**  \n   - Baseline: **dReal** (and also **Z3** for one benchmark).  \n   - Quote: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**These results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems**.”  \n   - It also says: “**even Z3 could not solve with a timeout of 60 minutes**.”\n\n2. **Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers**  \n   - Baseline: **CVC4**.  \n   - Quote: “...improve upon the basic encoding strategy used by **CVC4** (a state of the art SMT solver)...”\n\nFrom the provided documents, **ReaS** is the one that clearly argues SMT solving limits scalability. The CNF encoder paper compares against an SMT-based tool, but the supplied passage does not explicitly say SMT solving limits scalability.\n\nIf you want, I can also list the SMT-based baselines mentioned in the related/context papers (e.g., Sketch uses SMT solvers, SOSYTOAST uses an SMT solver, etc.)."
+ },
+ {
+  "run": 1,
+  "system": "agent_initial",
+  "id": "Q1",
+  "verdict": "pass",
+  "llm_calls": 3,
+  "est_tokens": 3787,
+  "latency": 5.0,
+  "n_chunks": 8,
+  "evidence_found": 2,
+  "evidence_total": 2,
+  "papers_found": 1,
+  "papers_total": 1,
+  "distinct_passages": 8,
+  "trace": [
+   "plan -> graph_retrieve (This is a question about a research result from the paper collection, so it requires retrieving the relevant paper content.)",
+   "graph_retrieve -> scope single, 8 passages from: Probabilistic Verification of Fairness Properties via Concentration",
+   "answer"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_Bastani0S19::53",
+   "DBLP_journals_pacmpl_Bastani0S19::12",
+   "DBLP_journals_pacmpl_Bastani0S19::42",
+   "DBLP_journals_pacmpl_Bastani0S19::0",
+   "DBLP_journals_pacmpl_Bastani0S19::76",
+   "DBLP_journals_pacmpl_Bastani0S19::54",
+   "DBLP_journals_pacmpl_Bastani0S19::55",
+   "DBLP_journals_pacmpl_Bastani0S19::56"
+  ],
+  "answer": "The paper says that with \\( \\Delta = 10^{-10} \\), VeriFair “**terminated in 606 seconds and uses 28,000 samples**.” It also notes elsewhere that on the deep neural network benchmark, the algorithm can require an error probability as small as \\(10^{-10}\\) and still terminate quickly."
+ },
+ {
+  "run": 1,
+  "system": "agent_initial",
+  "id": "Q2",
+  "verdict": "fail",
+  "llm_calls": 3,
+  "est_tokens": 4056,
+  "latency": 7.5,
+  "n_chunks": 8,
+  "evidence_found": 1,
+  "evidence_total": 3,
+  "papers_found": 2,
+  "papers_total": 3,
+  "distinct_passages": 8,
+  "trace": [
+   "plan -> graph_retrieve (The user asks about research papers, comparisons against an SMT-based tool, and scalability claims, which requires searching the paper collection.)",
+   "graph_retrieve -> scope multi, 8 passages from: Special Issue on Syntax-Guided Synthesis Preface; MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agents; Deductive Optimization of Relational Data Storage; ReaS: Combining",
+   "answer"
+  ],
+  "chunks": [
+   "DBLP_journals_fmsd_FismanSS21::2",
+   "DBLP_conf_icse_JeonQFFS16::49",
+   "DBLP_journals_pacmpl_FeserM0S20::67",
+   "DBLP_journals_corr_abs-1802-04408::47",
+   "DBLP_journals_corr_AlurFSS16::18",
+   "DBLP_journals_corr_AlurFSS16a::35",
+   "DBLP_conf_sat_Inala0S16::0",
+   "DBLP_journals_pacmpl_Bastani0S19::42"
+  ],
+  "answer": "The documents mention these papers comparing against an SMT-based tool and arguing that SMT solving limits scalability:\n\n1. **ReaS: Combining Numerical Optimization with SAT Solving**  \n   - Baseline: **dReal** (and also **Z3** on one benchmark).  \n   - Quote: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**even Z3 could not solve with a timeout of 60 minutes**.”  \n   - They conclude: “**traditional SMT approaches do not scale for these kinds of synthesis problems**.”\n\n2. **Deductive Optimization of Relational Data Storage**  \n   - Baseline: **Cozy**.  \n   - Quote: “**The best data structure synthesis tool-Cozy-uses an SMT solver to verify candidates, which does not scale to the TPC-H queries. Castor's use of deduction rules avoids this costly verification step.**”\n\n3. **Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers**  \n   - Baseline: **CVC4**.  \n   - Quote: they “**improve upon the basic encoding strategy used by CVC4 (a state of the art SMT solver)**” by generating tailored encoders, implying the SMT-based baseline is the scalability bottleneck.\n\n4. **Probabilistic Verification of Fairness Properties via Concentration**  \n   - Baseline: **FairSqare**.  \n   - Quote: “**VeriFair scales substantially better than FairSqare**” and “**the scalability of FairSqare depends on the complexity**” of the classifier/model, while VeriFair avoids that limitation.\n\nFrom the provided documents, these are the papers that clearly fit the pattern."
+ },
+ {
+  "run": 2,
+  "system": "baseline_2_1",
+  "id": "Q1",
+  "verdict": "fail",
+  "llm_calls": 1,
+  "est_tokens": 2068,
+  "latency": 2.9,
+  "n_chunks": 5,
+  "evidence_found": 0,
+  "evidence_total": 2,
+  "papers_found": 1,
+  "papers_total": 1,
+  "distinct_passages": 3,
+  "trace": [
+   "fixed: one hybrid search, top 5"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_Bastani0S19::53",
+   "DBLP_journals_corr_abs-1812-02573::53",
+   "DBLP_journals_pacmpl_Bastani0S19::0",
+   "DBLP_journals_corr_abs-1812-02573::0",
+   "DBLP_journals_corr_abs-1812-02573::42"
+  ],
+  "answer": "The provided documents do **not** give the exact verification time or the number of samples for the deep recurrent neural network at error probability \\(10^{-10}\\).\n\nWhat the documents do say is that VeriFair was evaluated on this benchmark and that it can choose “the probability of error to be extremely small,” and they mention a setting of “\\(\\Delta = 10^{-10}\\)” in the discussion of the benchmark, but the specific runtime and sample count you ask for are not stated in the provided text."
+ },
+ {
+  "run": 2,
+  "system": "baseline_2_1",
+  "id": "Q2",
+  "verdict": "fail",
+  "llm_calls": 1,
+  "est_tokens": 1572,
+  "latency": 2.5,
+  "n_chunks": 5,
+  "evidence_found": 0,
+  "evidence_total": 3,
+  "papers_found": 0,
+  "papers_total": 3,
+  "distinct_passages": 5,
+  "trace": [
+   "fixed: one hybrid search, top 5"
+  ],
+  "chunks": [
+   "DBLP_conf_icse_JeonQFFS16::28",
+   "DBLP_journals_corr_abs-1802-04408::47",
+   "DBLP_conf_icse_JeonQFFS16::40",
+   "DBLP_conf_icse_JeonQFFS16::24",
+   "DBLP_journals_corr_abs-2206-06164::59"
+  ],
+  "answer": "Two papers in the provided documents do this:\n\n1. **ReaS: Combining Numerical Optimization with SAT Solving**  \n   - It compares against **dReal** and also **Z3**.  \n   - The paper says: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**even Z3 could not solve with a timeout of 60 minutes**,” concluding that “**traditional SMT approaches do not scale for these kinds of synthesis problems**.”\n\n2. **Metric Program Synthesis**  \n   - It compares against **Regel**, described as “**a state-of-the-art regular expression synthesis tool**” that “**uses a number of SMT-based pruning strategies**.”  \n   - However, the provided excerpt does **not** explicitly say SMT solving limits scalability in the same way as ReaS does.\n\nSo the clear match for “compare their approach against an SMT-based tool and argue that SMT solving limits scalability” is:\n\n- **ReaS** — baseline: **dReal** (and also **Z3** in one benchmark)\n\nIf you want, I can also list any other papers in the documents that mention SMT, even if they do not make the scalability argument explicitly."
+ },
+ {
+  "run": 2,
+  "system": "advanced_4_1",
+  "id": "Q1",
+  "verdict": "pass",
+  "llm_calls": 2,
+  "est_tokens": 3488,
+  "latency": 5.4,
+  "n_chunks": 8,
+  "evidence_found": 2,
+  "evidence_total": 2,
+  "papers_found": 1,
+  "papers_total": 1,
+  "distinct_passages": 8,
+  "trace": [
+   "fixed: plan scope=single, hop 1 + hop 2"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_Bastani0S19::53",
+   "DBLP_journals_pacmpl_Bastani0S19::42",
+   "DBLP_journals_pacmpl_Bastani0S19::12",
+   "DBLP_journals_pacmpl_Bastani0S19::76",
+   "DBLP_journals_pacmpl_Bastani0S19::0",
+   "DBLP_journals_pacmpl_Bastani0S19::54",
+   "DBLP_journals_pacmpl_Bastani0S19::55",
+   "DBLP_journals_pacmpl_Bastani0S19::56"
+  ],
+  "answer": "The verifier terminated in **606 seconds** and used **28,000 samples** when run with error probability **\\(10^{-10}\\)**.\n\nThis is stated in the CONTEXT passage: “**using ∆ = 10 -10 , VeriFair terminated in 606 seconds and uses 28,000 samples**.”"
+ },
+ {
+  "run": 2,
+  "system": "advanced_4_1",
+  "id": "Q2",
+  "verdict": "fail",
+  "llm_calls": 2,
+  "est_tokens": 3496,
+  "latency": 5.4,
+  "n_chunks": 8,
+  "evidence_found": 1,
+  "evidence_total": 3,
+  "papers_found": 1,
+  "papers_total": 3,
+  "distinct_passages": 8,
+  "trace": [
+   "fixed: plan scope=multi, hop 1 + hop 2"
+  ],
+  "chunks": [
+   "DBLP_journals_fmsd_FismanSS21::2",
+   "DBLP_conf_icse_JeonQFFS16::49",
+   "DBLP_journals_pacmpl_FeserM0S20::57",
+   "DBLP_journals_corr_abs-1802-04408::47",
+   "DBLP_journals_corr_AlurFSS16a::35",
+   "DBLP_journals_corr_AlurFSS16::18",
+   "DBLP_journals_corr_abs-2206-06164::62",
+   "DBLP_conf_sat_Inala0S16::0"
+  ],
+  "answer": "The documents explicitly mention two papers that compare against an SMT-based tool and argue that SMT solving limits scalability:\n\n1. **ReaS: Combining Numerical Optimization with SAT Solving**  \n   - Baseline: **dReal**  \n   - The paper says: “We compared ReaS with **dReal**, a state-of-the-art SMT solver for reals… dReal could not solve any of our benchmarks with a timeout of 60 minutes… These results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.”\n\n2. **Results and Analysis of SyGuS-Comp'15** (context document)  \n   - Baseline: **Sketch**  \n   - It says: “The Sketch solver follows a symbolic approach to CEGIS and uses an SMT solvers to choose the next candidate expression.”\n\nA more direct “SMT-based tool limits scalability” claim is clearly made only in **ReaS**. The provided documents do not explicitly say in the SyGuS-Comp'15 excerpt that SMT solving limits scalability; they only describe Sketch as SMT-based."
+ },
+ {
+  "run": 2,
+  "system": "agent_initial",
+  "id": "Q1",
+  "verdict": "pass",
+  "llm_calls": 3,
+  "est_tokens": 3760,
+  "latency": 4.8,
+  "n_chunks": 8,
+  "evidence_found": 2,
+  "evidence_total": 2,
+  "papers_found": 1,
+  "papers_total": 1,
+  "distinct_passages": 8,
+  "trace": [
+   "plan -> graph_retrieve (The question asks for a specific result from the paper collection about a fairness verifier’s runtime and sample count, so retrieval is needed.)",
+   "graph_retrieve -> scope single, 8 passages from: Probabilistic Verification of Fairness Properties via Concentration",
+   "answer"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_Bastani0S19::53",
+   "DBLP_journals_pacmpl_Bastani0S19::12",
+   "DBLP_journals_pacmpl_Bastani0S19::42",
+   "DBLP_journals_pacmpl_Bastani0S19::76",
+   "DBLP_journals_pacmpl_Bastani0S19::0",
+   "DBLP_journals_pacmpl_Bastani0S19::54",
+   "DBLP_journals_pacmpl_Bastani0S19::55",
+   "DBLP_journals_pacmpl_Bastani0S19::56"
+  ],
+  "answer": "For the deep recurrent neural network benchmark, VeriFair “terminated in **606 seconds** and uses **28,000 samples**” when \\(\\Delta = 10^{-10}\\) (error probability \\(10^{-10}\\))."
+ },
+ {
+  "run": 2,
+  "system": "agent_initial",
+  "id": "Q2",
+  "verdict": "fail",
+  "llm_calls": 3,
+  "est_tokens": 3510,
+  "latency": 6.8,
+  "n_chunks": 8,
+  "evidence_found": 2,
+  "evidence_total": 3,
+  "papers_found": 2,
+  "papers_total": 3,
+  "distinct_passages": 8,
+  "trace": [
+   "plan -> graph_retrieve (This asks about research papers, comparisons against SMT-based tools, and scalability arguments, so it requires searching the paper collection.)",
+   "graph_retrieve -> scope multi, 8 passages from: Deductive Optimization of Relational Data Storage; MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agents; Special Issue on Syntax-Guided Synthesis Preface; ReaS: Combining",
+   "answer"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_FeserM0S20::67",
+   "DBLP_conf_icse_JeonQFFS16::24",
+   "DBLP_journals_fmsd_FismanSS21::2",
+   "DBLP_journals_corr_abs-1802-04408::47",
+   "DBLP_journals_corr_AlurFSS16a::35",
+   "DBLP_journals_corr_AlurFSS16::21",
+   "DBLP_conf_sat_Inala0S16::34",
+   "DBLP_journals_pacmpl_KoppelGVSP22::71"
+  ],
+  "answer": "The documents explicitly make this argument in several papers:\n\n1. **Deductive Optimization of Relational Data Storage**  \n   - Baseline/tool mentioned: **Cozy**  \n   - Quote: “**The best data structure synthesis tool-Cozy-uses an SMT solver to verify candidates, which does not scale to the TPC-H queries. Castor's use of deduction rules avoids this costly verification step.**”\n\n2. **ReaS: Combining Numerical Optimization with SAT Solving**  \n   - Baseline/tool mentioned: **dReal** (and also **Z3** on one benchmark)  \n   - Quote: “**we wrote a script to translate the benchmarks written in ReaS into the SMT-lib format and fed them to the dReal solver. However, dReal could not solve any of our benchmarks with a timeout of 60 minutes.**”  \n   - Also: “**even Z3 could not solve with a timeout of 60 minutes**” for the thermostat benchmark.  \n   - The paper concludes: “**these results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.**”\n\n3. **Searching Entangled Program Spaces**  \n   - Baseline/tool mentioned: **Hoogle+**  \n   - Quote: “**compare it with the state-of-the-art synthesizer Hoogle+, based on an SMT encoding of Petri-net reachability**”  \n   - However, this passage does **not** explicitly say SMT solving limits scalability; it mainly says Hoogle+ is SMT-based.\n\nIf you want only the papers that **explicitly argue SMT solving limits scalability**, the clearest matches in the provided documents are **Deductive Optimization of Relational Data Storage** (baseline: Cozy) and **ReaS: Combining Numerical Optimization with SAT Solving** (baseline: dReal / Z3)."
+ },
+ {
+  "run": 3,
+  "system": "baseline_2_1",
+  "id": "Q1",
+  "verdict": "fail",
+  "llm_calls": 1,
+  "est_tokens": 2048,
+  "latency": 1.8,
+  "n_chunks": 5,
+  "evidence_found": 0,
+  "evidence_total": 2,
+  "papers_found": 1,
+  "papers_total": 1,
+  "distinct_passages": 3,
+  "trace": [
+   "fixed: one hybrid search, top 5"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_Bastani0S19::53",
+   "DBLP_journals_corr_abs-1812-02573::53",
+   "DBLP_journals_pacmpl_Bastani0S19::0",
+   "DBLP_journals_corr_abs-1812-02573::0",
+   "DBLP_journals_corr_abs-1812-02573::42"
+  ],
+  "answer": "The provided documents do **not** contain the exact runtime or sample count for verifying the deep recurrent neural network at error probability \\(10^{-10}\\).\n\nWhat the documents do say is that the benchmark used a deep RNN and that VeriFair “can choose the probability of error to be extremely small,” but I do not see the specific figure or numeric result for “how long” or “how many samples” in the text provided."
+ },
+ {
+  "run": 3,
+  "system": "baseline_2_1",
+  "id": "Q2",
+  "verdict": "fail",
+  "llm_calls": 1,
+  "est_tokens": 1498,
+  "latency": 2.1,
+  "n_chunks": 5,
+  "evidence_found": 0,
+  "evidence_total": 3,
+  "papers_found": 0,
+  "papers_total": 3,
+  "distinct_passages": 5,
+  "trace": [
+   "fixed: one hybrid search, top 5"
+  ],
+  "chunks": [
+   "DBLP_conf_icse_JeonQFFS16::28",
+   "DBLP_journals_corr_abs-1802-04408::47",
+   "DBLP_conf_icse_JeonQFFS16::40",
+   "DBLP_conf_icse_JeonQFFS16::24",
+   "DBLP_journals_corr_abs-2206-06164::59"
+  ],
+  "answer": "Two papers in the provided documents do this:\n\n1. **ReaS: Combining Numerical Optimization with SAT Solving**  \n   - It compares against **dReal** (“a state-of-the-art SMT solver for reals”) and also runs **Z3**.  \n   - The paper concludes: “**traditional SMT approaches do not scale for these kinds of synthesis problems**.”\n\n2. **Metric Program Synthesis**  \n   - It compares against **Regel**, which is described as “**a state-of-the-art regular expression synthesis tool**” that “**uses a number of SMT-based pruning strategies**.”  \n   - However, the provided excerpt does **not** say that SMT solving itself limits scalability, only that Regel uses SMT-based pruning.\n\nSo the paper that clearly matches your description is **ReaS**, with baseline **dReal** (and also **Z3** in one benchmark)."
+ },
+ {
+  "run": 3,
+  "system": "advanced_4_1",
+  "id": "Q1",
+  "verdict": "pass",
+  "llm_calls": 2,
+  "est_tokens": 3460,
+  "latency": 3.8,
+  "n_chunks": 8,
+  "evidence_found": 2,
+  "evidence_total": 2,
+  "papers_found": 1,
+  "papers_total": 1,
+  "distinct_passages": 8,
+  "trace": [
+   "fixed: plan scope=single, hop 1 + hop 2"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_Bastani0S19::53",
+   "DBLP_journals_pacmpl_Bastani0S19::42",
+   "DBLP_journals_pacmpl_Bastani0S19::12",
+   "DBLP_journals_pacmpl_Bastani0S19::0",
+   "DBLP_journals_pacmpl_Bastani0S19::76",
+   "DBLP_journals_pacmpl_Bastani0S19::54",
+   "DBLP_journals_pacmpl_Bastani0S19::55",
+   "DBLP_journals_pacmpl_Bastani0S19::56"
+  ],
+  "answer": "The verifier took **606 seconds** and used **28,000 samples** to verify the deep recurrent neural network with error probability **10⁻¹⁰**.\n\nThis is stated in the context passage: “using ∆ = 10 -10 , VeriFair terminated in **606 seconds** and uses **28,000 samples**.”"
+ },
+ {
+  "run": 3,
+  "system": "advanced_4_1",
+  "id": "Q2",
+  "verdict": "fail",
+  "llm_calls": 2,
+  "est_tokens": 3698,
+  "latency": 6.6,
+  "n_chunks": 8,
+  "evidence_found": 1,
+  "evidence_total": 3,
+  "papers_found": 1,
+  "papers_total": 3,
+  "distinct_passages": 8,
+  "trace": [
+   "fixed: plan scope=multi, hop 1 + hop 2"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_FeserM0S20::67",
+   "DBLP_conf_icse_JeonQFFS16::49",
+   "DBLP_journals_fmsd_FismanSS21::2",
+   "DBLP_journals_corr_abs-1802-04408::47",
+   "DBLP_journals_corr_AlurFSS16a::35",
+   "DBLP_journals_corr_abs-2206-06164::62",
+   "DBLP_journals_corr_AlurFSS16::18",
+   "DBLP_conf_sat_Inala0S16::0"
+  ],
+  "answer": "The documents explicitly mention a few papers that compare against an SMT-based tool and argue that SMT solving does not scale well:\n\n1. **Deductive Optimization of Relational Data Storage**  \n   - It says: “The best data structure synthesis tool—Cozy—uses an SMT solver to verify candidates, which does not scale to the TPC-H queries.”  \n   - **Baseline:** **Cozy** (which uses an SMT solver to verify candidates).\n\n2. **ReaS: Combining Numerical Optimization with SAT Solving**  \n   - It says: “We compared ReaS with dReal, a state-of-the-art SMT solver for reals… dReal could not solve any of our benchmarks with a timeout of 60 minutes… even Z3 could not solve with a timeout of 60 minutes. These results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.”  \n   - **Baseline:** **dReal**; additionally they also report **Z3** on one benchmark.\n\n3. **Results and Analysis of SyGuS-Comp’15**  \n   - It describes **Sketch** as “a symbolic approach to CEGIS and uses an SMT solvers to choose the next candidate expression,” and compares solvers in the competition, but the excerpt does not itself state a specific “does not scale” claim. So I would not count it as clearly answering your question from the provided text.\n\n4. **Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers**  \n   - The abstract says they improve upon “the basic encoding strategy used by CVC4 (a state of the art SMT solver),” but the provided excerpt does **not** explicitly say SMT solving limits scalability.\n\nSo the clearest matches are:\n- **Deductive Optimization of Relational Data Storage** — baseline **Cozy**\n- **ReaS: Combining Numerical Optimization with SAT Solving** — baseline **dReal** (and also **Z3** in a reported test)"
+ },
+ {
+  "run": 3,
+  "system": "agent_initial",
+  "id": "Q1",
+  "verdict": "pass",
+  "llm_calls": 3,
+  "est_tokens": 3808,
+  "latency": 5.0,
+  "n_chunks": 8,
+  "evidence_found": 2,
+  "evidence_total": 2,
+  "papers_found": 1,
+  "papers_total": 1,
+  "distinct_passages": 8,
+  "trace": [
+   "plan -> graph_retrieve (The question asks about a specific research result from the paper collection, so it requires retrieving the relevant paper rather than clarifying or answering from general knowledge.)",
+   "graph_retrieve -> scope single, 8 passages from: Probabilistic Verification of Fairness Properties via Concentration",
+   "answer"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_Bastani0S19::53",
+   "DBLP_journals_pacmpl_Bastani0S19::12",
+   "DBLP_journals_pacmpl_Bastani0S19::42",
+   "DBLP_journals_pacmpl_Bastani0S19::0",
+   "DBLP_journals_pacmpl_Bastani0S19::76",
+   "DBLP_journals_pacmpl_Bastani0S19::54",
+   "DBLP_journals_pacmpl_Bastani0S19::55",
+   "DBLP_journals_pacmpl_Bastani0S19::56"
+  ],
+  "answer": "For the deep recurrent neural network benchmark, VeriFair with error probability \\(10^{-10}\\) **terminated in 606 seconds** and **used 28,000 samples**.\n\nThis is stated in the context passage: “using \\(\\Delta = 10^{-10}\\), VeriFair terminated in 606 seconds and uses 28,000 samples.”"
+ },
+ {
+  "run": 3,
+  "system": "agent_initial",
+  "id": "Q2",
+  "verdict": "fail",
+  "llm_calls": 3,
+  "est_tokens": 3319,
+  "latency": 6.1,
+  "n_chunks": 8,
+  "evidence_found": 1,
+  "evidence_total": 3,
+  "papers_found": 1,
+  "papers_total": 3,
+  "distinct_passages": 8,
+  "trace": [
+   "plan -> graph_retrieve (The user is asking about content in the paper collection, specifically papers that compare against SMT-based tools and discuss scalability limits, so retrieval is needed.)",
+   "graph_retrieve -> scope multi, 8 passages from: Special Issue on Syntax-Guided Synthesis Preface; ReaS: Combining Numerical Optimization with SAT Solving; Deductive Optimization of Relational Data Storage; MANTRA: Synthesizing SMT-Validated Complia",
+   "answer"
+  ],
+  "chunks": [
+   "DBLP_journals_fmsd_FismanSS21::2",
+   "DBLP_journals_corr_abs-1802-04408::47",
+   "DBLP_journals_pacmpl_FeserM0S20::57",
+   "DBLP_conf_icse_JeonQFFS16::24",
+   "DBLP_journals_corr_AlurFSS16a::35",
+   "DBLP_journals_corr_AlurFSS16::21",
+   "DBLP_conf_sat_Inala0S16::30",
+   "DBLP_journals_corr_abs-2206-06164::62"
+  ],
+  "answer": "The documents explicitly support one paper making that argument:\n\n- **ReaS: Combining Numerical Optimization with SAT Solving** compares against **dReal** (and also **Z3** on one benchmark) and says:  \n  > “dReal could not solve any of our benchmarks with a timeout of 60 minutes… These results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.”\n\nI do **not** see any other PRIMARY document here that both:\n1. compares against an SMT-based tool, and  \n2. explicitly argues that SMT solving limits scalability.\n\nSo, from the provided documents, the answer is just **ReaS vs. dReal** (with **Z3** also mentioned as unable to solve the thermostat benchmark)."
+ },
+ {
+  "run": 1,
+  "system": "agent_refined",
+  "id": "Q1",
+  "verdict": "pass",
+  "llm_calls": 3,
+  "est_tokens": 3849,
+  "latency": 5.7,
+  "n_chunks": 8,
+  "evidence_found": 2,
+  "evidence_total": 2,
+  "papers_found": 1,
+  "papers_total": 1,
+  "distinct_passages": 8,
+  "trace": [
+   "plan -> graph_retrieve focus=[] (This asks about a specific research result (verification time and sample count), so I should retrieve from the paper collection rather than answer from general knowledge.)",
+   "graph_retrieve -> scope single, 8 passages from: Probabilistic Verification of Fairness Properties via Concentration",
+   "answer"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_Bastani0S19::53",
+   "DBLP_journals_pacmpl_Bastani0S19::42",
+   "DBLP_journals_pacmpl_Bastani0S19::76",
+   "DBLP_journals_pacmpl_Bastani0S19::12",
+   "DBLP_journals_pacmpl_Bastani0S19::0",
+   "DBLP_journals_pacmpl_Bastani0S19::54",
+   "DBLP_journals_pacmpl_Bastani0S19::55",
+   "DBLP_journals_pacmpl_Bastani0S19::56"
+  ],
+  "answer": "The verifier took **606 seconds** and needed **28,000 samples** for error probability **10⁻¹⁰**.\n\nThis is stated in the context passage: “using ∆ = 10 -10 , VeriFair terminated in **606 seconds** and uses **28,000 samples**.”"
+ },
+ {
+  "run": 1,
+  "system": "agent_refined",
+  "id": "Q2",
+  "verdict": "fail",
+  "llm_calls": 3,
+  "est_tokens": 3782,
+  "latency": 9.8,
+  "n_chunks": 8,
+  "evidence_found": 1,
+  "evidence_total": 3,
+  "papers_found": 1,
+  "papers_total": 3,
+  "distinct_passages": 8,
+  "trace": [
+   "plan -> graph_retrieve focus=[] (The user is asking about comparisons and scalability arguments across the paper collection, which requires searching the papers; the question is unambiguous.)",
+   "graph_retrieve -> scope multi, 8 passages from: Special Issue on Syntax-Guided Synthesis Preface; MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agents; Deductive Optimization of Relational Data Storage; ReaS: Combining",
+   "answer"
+  ],
+  "chunks": [
+   "DBLP_journals_fmsd_FismanSS21::2",
+   "DBLP_conf_icse_JeonQFFS16::49",
+   "DBLP_journals_pacmpl_FeserM0S20::57",
+   "DBLP_journals_corr_abs-1802-04408::47",
+   "DBLP_journals_corr_AlurFSS16a::35",
+   "DBLP_journals_corr_abs-2206-06164::62",
+   "DBLP_journals_corr_AlurFSS16::21",
+   "DBLP_conf_sat_Inala0S16::30"
+  ],
+  "answer": "The documents explicitly show at least two papers making this kind of comparison:\n\n1. **ReaS: Combining Numerical Optimization with SAT Solving**  \n   - Baseline SMT tool: **dReal**  \n   - The paper says: “*We compared ReaS with dReal, a state-of-the-art SMT solver for reals*” and reports that “*dReal could not solve any of our benchmarks with a timeout of 60 minutes*.” It concludes that “*the traditional SMT approaches do not scale for these kinds of synthesis problems*.”\n\n2. **Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers**  \n   - Baseline SMT-based tool: **CVC4**  \n   - The context says OptCNF samples benchmarks and runs “*CVC4 to collect all the formulas just before they are encoded to SAT*,” and then augments “*CVC4 code with the generated encoders*.” This indicates the comparison baseline is CVC4, an SMT solver.\n\nThe provided documents do **not** explicitly state the scalability-limiting argument for OptCNF in the same way as ReaS; the clearest explicit “SMT limits scalability” claim in the PRIMARY documents is from **ReaS vs. dReal**."
+ },
+ {
+  "run": 2,
+  "system": "agent_refined",
+  "id": "Q1",
+  "verdict": "pass",
+  "llm_calls": 3,
+  "est_tokens": 3986,
+  "latency": 5.7,
+  "n_chunks": 8,
+  "evidence_found": 2,
+  "evidence_total": 2,
+  "papers_found": 1,
+  "papers_total": 1,
+  "distinct_passages": 8,
+  "trace": [
+   "plan -> graph_retrieve focus=[] (The question asks for specific experimental results from a research paper, so it requires retrieval from the paper collection.)",
+   "graph_retrieve -> scope single, 8 passages from: Probabilistic Verification of Fairness Properties via Concentration",
+   "answer"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_Bastani0S19::53",
+   "DBLP_journals_pacmpl_Bastani0S19::42",
+   "DBLP_journals_pacmpl_Bastani0S19::0",
+   "DBLP_journals_pacmpl_Bastani0S19::76",
+   "DBLP_journals_pacmpl_Bastani0S19::5",
+   "DBLP_journals_pacmpl_Bastani0S19::54",
+   "DBLP_journals_pacmpl_Bastani0S19::55",
+   "DBLP_journals_pacmpl_Bastani0S19::56"
+  ],
+  "answer": "For the deep recurrent neural network benchmark, VeriFair “terminated in **606 seconds** and uses **28,000 samples**” when the error probability was \\(10^{-10}\\)."
+ },
+ {
+  "run": 2,
+  "system": "agent_refined",
+  "id": "Q2",
+  "verdict": "fail",
+  "llm_calls": 3,
+  "est_tokens": 3682,
+  "latency": 6.2,
+  "n_chunks": 8,
+  "evidence_found": 1,
+  "evidence_total": 3,
+  "papers_found": 1,
+  "papers_total": 3,
+  "distinct_passages": 8,
+  "trace": [
+   "plan -> graph_retrieve focus=[] (The user is asking about comparisons and scalability arguments across the paper collection, which requires searching the papers rather than answering from general knowledge.)",
+   "graph_retrieve -> scope multi, 8 passages from: Special Issue on Syntax-Guided Synthesis Preface; MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agents; Deductive Optimization of Relational Data Storage; ReaS: Combining",
+   "answer"
+  ],
+  "chunks": [
+   "DBLP_journals_fmsd_FismanSS21::2",
+   "DBLP_conf_icse_JeonQFFS16::28",
+   "DBLP_journals_pacmpl_FeserM0S20::67",
+   "DBLP_journals_corr_abs-1802-04408::47",
+   "DBLP_journals_corr_AlurFSS16a::35",
+   "DBLP_journals_corr_abs-2206-06164::62",
+   "DBLP_conf_cav_JeonQSF15::43",
+   "DBLP_conf_sat_Inala0S16::0"
+  ],
+  "answer": "The documents support **two papers** that explicitly compare against an SMT-based tool and say SMT solving does not scale well:\n\n1. **ReaS: Combining Numerical Optimization with SAT Solving**  \n   - Baseline SMT tools: **dReal** and **Z3**  \n   - The paper says: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**even Z3 could not solve with a timeout of 60 minutes**.” It concludes: “**the traditional SMT approaches do not scale for these kinds of synthesis problems**.”\n\n2. **Deductive Optimization of Relational Data Storage**  \n   - Baseline SMT-based tool: **Cozy**  \n   - The paper says: “**The best data structure synthesis tool-Cozy-uses an SMT solver to verify candidates, which does not scale to the TPC-H queries**.”\n\nA third relevant paper in the provided documents is **Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers**, which compares against **CVC4**, but the excerpt provided says it “improve[s] upon” CVC4’s encoding; it does **not** explicitly argue that SMT solving limits scalability.\n\n"
+ },
+ {
+  "run": 3,
+  "system": "agent_refined",
+  "id": "Q1",
+  "verdict": "pass",
+  "llm_calls": 3,
+  "est_tokens": 3834,
+  "latency": 4.2,
+  "n_chunks": 8,
+  "evidence_found": 2,
+  "evidence_total": 2,
+  "papers_found": 1,
+  "papers_total": 1,
+  "distinct_passages": 8,
+  "trace": [
+   "plan -> graph_retrieve focus=[] (The question asks for specific experimental results from the paper collection, so retrieval is needed; the named paper/tool is not explicit in the question.)",
+   "graph_retrieve -> scope single, 8 passages from: Probabilistic Verification of Fairness Properties via Concentration",
+   "answer"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_Bastani0S19::53",
+   "DBLP_journals_pacmpl_Bastani0S19::12",
+   "DBLP_journals_pacmpl_Bastani0S19::42",
+   "DBLP_journals_pacmpl_Bastani0S19::0",
+   "DBLP_journals_pacmpl_Bastani0S19::76",
+   "DBLP_journals_pacmpl_Bastani0S19::54",
+   "DBLP_journals_pacmpl_Bastani0S19::55",
+   "DBLP_journals_pacmpl_Bastani0S19::56"
+  ],
+  "answer": "For the deep recurrent neural network benchmark, VeriFair with error probability \\(10^{-10}\\) **terminated in 606 seconds** and **used 28,000 samples**.\n\nQuoted from the document: “**using \\(\\Delta = 10^{-10}\\), VeriFair terminated in 606 seconds and uses 28,000 samples**.”"
+ },
+ {
+  "run": 3,
+  "system": "agent_refined",
+  "id": "Q2",
+  "verdict": "fail",
+  "llm_calls": 3,
+  "est_tokens": 4106,
+  "latency": 7.0,
+  "n_chunks": 8,
+  "evidence_found": 1,
+  "evidence_total": 3,
+  "papers_found": 2,
+  "papers_total": 3,
+  "distinct_passages": 8,
+  "trace": [
+   "plan -> graph_retrieve focus=[] (The user is asking about comparative research claims across papers, so this requires searching the paper collection; the question is unambiguous.)",
+   "graph_retrieve -> scope multi, 8 passages from: Special Issue on Syntax-Guided Synthesis Preface; MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agents; Deductive Optimization of Relational Data Storage; ReaS: Combining",
+   "answer"
+  ],
+  "chunks": [
+   "DBLP_journals_fmsd_FismanSS21::2",
+   "DBLP_conf_icse_JeonQFFS16::49",
+   "DBLP_journals_pacmpl_FeserM0S20::57",
+   "DBLP_journals_corr_abs-1802-04408::47",
+   "DBLP_journals_corr_AlurFSS16a::35",
+   "DBLP_journals_corr_AlurFSS16::18",
+   "DBLP_conf_sat_Inala0S16::0",
+   "DBLP_journals_pacmpl_Bastani0S19::42"
+  ],
+  "answer": "The documents mention several papers that compare against an SMT-based tool and argue that SMT solving limits scalability:\n\n- **ReaS: Combining Numerical Optimization with SAT Solving** — baseline: **dReal** (also **Z3** on one benchmark). The paper says: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**even Z3 could not solve with a timeout of 60 minutes**,” supporting the claim that “**traditional SMT approaches do not scale**.”\n\n- **Results and Analysis of SyGuS-Comp’15** — baseline: **Sketch**. The context says “**The Sketch solver follows a symbolic approach ... and uses an SMT solvers**,” and it is discussed as part of the SMT-based solver comparison in the SyGuS competition results, including **Sketch Adaptive-Concretization**.\n\n- **Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers** — baseline: **CVC4**. It says the method can “**improve upon the basic encoding strategy used by CVC4 (a state of the art SMT solver)**.”\n\n- **Probabilistic Verification of Fairness Properties via Concentration** — baseline: **FairSqare**. The context says VeriFair “**scales substantially better than FairSqare**” and that “**the scalability of FairSqare depends on the complexity**” of the classifier and population model.\n\nIf you want, I can narrow this to only the papers that **explicitly blame SMT solving for the scalability limit** rather than just comparing to an SMT-based baseline."
+ },
+ {
+  "run": 1,
+  "system": "baseline_2_1",
+  "id": "T3",
+  "verdict": "fail",
+  "llm_calls": 1,
+  "est_tokens": 2129,
+  "latency": 3.3,
+  "n_chunks": 5,
+  "evidence_found": 1,
+  "evidence_total": 3,
+  "papers_found": 2,
+  "papers_total": 2,
+  "distinct_passages": 3,
+  "trace": [
+   "fixed: one hybrid search, top 5"
+  ],
+  "chunks": [
+   "DBLP_journals_corr_abs-1903-03229::57",
+   "DBLP_journals_pacmpl_FeserM0S20::57",
+   "DBLP_journals_corr_abs-2206-07828::71",
+   "DBLP_journals_pacmpl_KoppelGVSP22::71",
+   "DBLP_journals_corr_abs-2206-06164::50"
+  ],
+  "answer": "From the provided documents, I can answer the first part, but not the “how much better did each do” part, because the excerpts do not include any results or numerical performance comparisons.\n\n### Castor\nCastor was compared with:\n- **Hyper**\n- **Cozy**\n- **Chestnut**\n\nThe document says:\n\n- “We compare Castor with three other systems: Hyper [25], Cozy [23], and Chestnut [38]”\n- “We compare against vanilla Hyper to show that **layout specialization is a powerful optimization** that can compensate for the many low-level compiler optimizations in Hyper.”\n- “We compare against Hyper with transformed data to show that the **specialization techniques that Castor uses are beneficial in other systems**.”\n- For Castor’s own results: “the Castor results are split into two categories: **expert generated queries and optimizer generated queries**.”\n\nIt also says about the optimizer: “In some cases, the optimizer fails to find a serializable candidate.”\n\nThe excerpt does **not** say how much better Castor did.\n\n### Hectare\nHectare was compared against:\n- **Hoogle+**\n\nThe document says:\n\n- “we evaluate the performance of Hectare and compare it with the state-of-the-art synthesizer Hoogle+”\n- Hoogle+ is described as “based on an SMT encoding of Petri-net reachability”\n- The authors add that “the Hoogle+ implementation ... contains a whopping **4000 LOC**, while Hectare only contains **400**,” suggesting Hectare is much simpler to implement.\n\nThe excerpt does **not** say that Hoogle+ “falls short” in performance, nor does it give a numeric improvement for Hectare. It only says the evaluation asks “How does Hectare compare against Hoogle+ on existing and new benchmarks?”\n\n### Bottom line\nThe documents show:\n- **Castor vs. Hyper, Cozy, Chestnut**\n- **Hectare vs. Hoogle+**\n\nBut they do **not** provide the actual “how much better” numbers in the supplied text, so I can’t state those without guessing."
+ },
+ {
+  "run": 1,
+  "system": "advanced_4_1",
+  "id": "T3",
+  "verdict": "fail",
+  "llm_calls": 2,
+  "est_tokens": 3292,
+  "latency": 5.8,
+  "n_chunks": 8,
+  "evidence_found": 1,
+  "evidence_total": 3,
+  "papers_found": 1,
+  "papers_total": 2,
+  "distinct_passages": 8,
+  "trace": [
+   "fixed: plan scope=single, hop 1 + hop 2"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_FeserM0S20::57",
+   "DBLP_journals_pacmpl_FeserM0S20::9",
+   "DBLP_journals_pacmpl_FeserM0S20::60",
+   "DBLP_journals_pacmpl_FeserM0S20::67",
+   "DBLP_journals_pacmpl_FeserM0S20::3",
+   "DBLP_journals_pacmpl_FeserM0S20::58",
+   "DBLP_journals_pacmpl_FeserM0S20::59",
+   "DBLP_journals_pacmpl_FeserM0S20::10"
+  ],
+  "answer": "The provided documents do **not** mention **Hectare**, so I can’t answer that part from the sources.\n\nWhat the documents do say is that Castor was compared against:\n\n- **Hyper**: “We compare Castor with three other systems: **Hyper**, Cozy, and Chestnut.”\n- **Cozy**: “a state-of-the-art program synthesis tool”\n- **Chestnut**: “a tool for synthesizing specialized data structures for object queries”\n\nWhy those tools fall short, according to the paper:\n\n- **Hyper** is a strong in-memory column-store with “state-of-the art query compiler” and low-level optimizations like “vectorization,” but the authors argue that “layout specialization is a powerful optimization that can compensate for the many lowlevel compiler optimizations in Hyper.”\n- **Cozy** is limited because “the best data structure synthesis tool—Cozy—uses an SMT solver to verify candidates, which does not scale to the TPC-H queries.”\n- **Chestnut** is mentioned as another synthesis tool for specialized data structures, but the provided passages do not give a specific weakness beyond being part of the comparison set.\n\nHow much better did each do?\n\n- The documents say only that Castor was “**competitive with the state of the art in-memory compiled database system Hyper** while using **significantly less memory**.”\n- They also say Castor “**scales to larger queries than**” Cozy.\n- No exact “how much better” numbers for Castor vs. Hyper, Cozy, or Chestnut are included in the provided passages.\n\nIf you want, I can also summarize the comparison section more generally from the excerpts we have."
+ },
+ {
+  "run": 1,
+  "system": "agent_initial",
+  "id": "T3",
+  "verdict": "fail",
+  "llm_calls": 3,
+  "est_tokens": 3739,
+  "latency": 6.4,
+  "n_chunks": 8,
+  "evidence_found": 0,
+  "evidence_total": 3,
+  "papers_found": 1,
+  "papers_total": 2,
+  "distinct_passages": 8,
+  "trace": [
+   "plan -> graph_retrieve focus=[] (The user is asking about specific research papers/tools and their comparisons and results, which requires retrieving information from the paper collection.)",
+   "graph_retrieve -> scope single, 8 passages from: Deductive Optimization of Relational Data Storage",
+   "answer"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_FeserM0S20::57",
+   "DBLP_journals_pacmpl_FeserM0S20::62",
+   "DBLP_journals_pacmpl_FeserM0S20::9",
+   "DBLP_journals_pacmpl_FeserM0S20::64",
+   "DBLP_journals_pacmpl_FeserM0S20::3",
+   "DBLP_journals_pacmpl_FeserM0S20::58",
+   "DBLP_journals_pacmpl_FeserM0S20::59",
+   "DBLP_journals_pacmpl_FeserM0S20::60"
+  ],
+  "answer": "The provided documents only discuss **Castor** in detail; they do **not mention Hectare**, so I can’t answer the Hectare part from these sources.\n\nFor **Castor**, the paper says it compares against:\n\n- **Hyper**: “We compare Castor with three other systems: Hyper [25], Cozy [23], and Chestnut [38].”\n- **Cozy**: “a state-of-the-art program synthesis tool that generates specialized data structures from relational queries.”\n- **Chestnut**: “a tool for synthesizing specialized data structures for object queries.”\n\nWhy those tools “fall short,” according to the paper:\n\n- **Hyper**: Castor is compared against both vanilla Hyper and Hyper with transformed data to show that “layout specialization is a powerful optimization” and that Castor’s specialization techniques help beyond Hyper’s compiler optimizations.\n- **Cozy**: “Cozy was unable to make significant improvements on all but two of the TPC-H queries.”\n- **Chestnut**: the excerpt only says it is included in the comparison; it does not explain detailed shortcomings in the provided text.\n\nHow much better Castor did:\n\n- Against **Hyper**, the paper says: “the layouts and query code generated by Castor from expert queries are faster or significantly faster than Hyper for **15 out of 18 queries**.” Also, “In the cases where Castor is slower than Hyper, no query is more than **2x slower**.”\n- If Hyper is given specialized views and indexes, “its performance is on par with Castor.”\n- For memory/layout size, Castor’s layouts are “much smaller than Hyper’s,” often **less than 10Mb for 10 out of 18 queries** and **less than 100Mb for all but one query**, versus the original data at **1.1Gb**.\n- Compared to **Cozy**, the paper says Cozy improved only **2** TPC-H queries (Q4 and Q17), while Castor was more broadly effective, but the excerpt does **not** give a single overall speedup number for Castor over Cozy.\n\nIf you want, I can also pull together a tighter comparison table from the excerpts you provided."
+ },
+ {
+  "run": 2,
+  "system": "baseline_2_1",
+  "id": "T3",
+  "verdict": "fail",
+  "llm_calls": 1,
+  "est_tokens": 2234,
+  "latency": 3.5,
+  "n_chunks": 5,
+  "evidence_found": 1,
+  "evidence_total": 3,
+  "papers_found": 2,
+  "papers_total": 2,
+  "distinct_passages": 3,
+  "trace": [
+   "fixed: one hybrid search, top 5"
+  ],
+  "chunks": [
+   "DBLP_journals_corr_abs-1903-03229::57",
+   "DBLP_journals_pacmpl_FeserM0S20::57",
+   "DBLP_journals_corr_abs-2206-07828::71",
+   "DBLP_journals_pacmpl_KoppelGVSP22::71",
+   "DBLP_journals_corr_abs-2206-06164::50"
+  ],
+  "answer": "From the provided documents, I can answer the comparison targets and the authors’ stated reasons, but **not “how much better” each did**, because the excerpts do not include any quantitative results.\n\n### Castor\nCastor was compared against **three other systems**:\n\n- **Hyper**\n- **Cozy**\n- **Chestnut**\n\nThe paper says about **Hyper**:\n\n- “**Hyper is an in-memory column-store which has a state-of-the-art query compiler. It implements compilation techniques (e.g. vectorization) that are well outside the scope of this paper.**”\n- They compare against vanilla Hyper “**to show that layout specialization is a powerful optimization that can compensate for the many lowlevel compiler optimizations in Hyper.**”\n- They also compare against Hyper with transformed data “**to show that the specialization techniques that Castor uses are beneficial in other systems.**”\n\nSo the authors’ point is that Hyper is very strong already, but Castor aims to show that **layout specialization** can still help.\n\nAbout **Cozy**, the excerpt only says:\n\n- “**Cozy is a state-of-the-art program synthesis tool that generates specialized data structures from relational** ...”\n\nThe text is cut off there, so the document excerpt does **not** give the full explanation for why Cozy or Chestnut fall short.\n\n### Hectare\nHectare was compared against **Hoogle+**:\n\n- “**we used the ecta library to implement Hectare, a type-driven componentbased synthesizer for Haskell. In this section, we evaluate the performance of Hectare and compare it with the state-of-the-art synthesizer Hoogle+, based on an SMT encoding of Petri-net reachability**”\n- It also notes: “**the Hoogle+ implementation (excluding tests and parsing) contains a whopping 4000 LOC, while Hectare only contains 400.**”\n- The authors suggest this means ecta “**has the potential to significantly simplify the development of program synthesizers.**”\n\nSo Hoogle+ is presented as the more established/state-of-the-art baseline, and Hectare is evaluated as a simpler alternative, but the excerpt does **not** say exactly how much better Hectare performed.\n\n### How much better?\nThe provided documents **do not contain the numerical results**, so I can’t say “how much better” Castor or Hectare did without guessing.\n\nIf you want, I can also extract the comparison baselines into a clean table."
+ },
+ {
+  "run": 2,
+  "system": "advanced_4_1",
+  "id": "T3",
+  "verdict": "fail",
+  "llm_calls": 2,
+  "est_tokens": 3466,
+  "latency": 5.0,
+  "n_chunks": 8,
+  "evidence_found": 0,
+  "evidence_total": 3,
+  "papers_found": 1,
+  "papers_total": 2,
+  "distinct_passages": 8,
+  "trace": [
+   "fixed: plan scope=single, hop 1 + hop 2"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_FeserM0S20::57",
+   "DBLP_journals_pacmpl_FeserM0S20::62",
+   "DBLP_journals_pacmpl_FeserM0S20::9",
+   "DBLP_journals_pacmpl_FeserM0S20::64",
+   "DBLP_journals_pacmpl_FeserM0S20::3",
+   "DBLP_journals_pacmpl_FeserM0S20::58",
+   "DBLP_journals_pacmpl_FeserM0S20::59",
+   "DBLP_journals_pacmpl_FeserM0S20::60"
+  ],
+  "answer": "The provided documents only cover **Castor** and its comparisons against **Hyper, Cozy, and Chestnut**. They do **not** mention **Hectare**, so I can’t answer the Hectare part from the documents alone.\n\nFrom the PRIMARY/CONTEXT passages, Castor compared itself against:\n\n- **Hyper** — “*We compare Castor with three other systems: Hyper [25], Cozy [23], and Chestnut [38]*.”\n- **Cozy** — “*a state-of-the-art program synthesis tool that generates specialized data structures from relational queries*.”\n- **Chestnut** — “*a tool for synthesizing specialized data structures for object queries*.”\n\nWhy the authors say those tools fall short:\n- For **Hyper**, the authors say layout specialization can compensate for Hyper’s compiler optimizations, and that Hyper with specialized views/indexes can match Castor, but “*constructing and maintaining these views takes effort, and Hyper cannot assist the user in creating a collection of views which maintains the semantics of the original query.*”\n- For **Cozy**, the paper says it was “*unable to make significant improvements on all but two of the TPC-H queries*.”\n- Castor is presented as being able to “*produce compact layouts for the data that remains*” and to “*aggressively specialize the compiled query by including information about the layout*.”\n\nHow much better Castor did:\n- Against **Hyper**, the paper says Castor-generated layouts and code from expert queries were “*faster or significantly faster than Hyper for 15 out of 18 queries*,” and when slower, “*no query is more than 2x slower*.”\n- For memory/layout size, “*Castor's specialized layouts are much smaller than Hyper's*,” generally “*less than 10Mb for 10 out of 18 queries and less than 100Mb for all but one query*.”\n- Against **Cozy**, Cozy improved only two queries: “*In Q4, Cozy precomputed one of the joins and a filter. In Q17, Cozy added an index.*” The excerpt cuts off before giving the full numeric comparison for those two.\n\nIf you want, I can also summarize the comparison specifically among **Castor, Hyper, Cozy, and Chestnut** in a table—but I’d still need a document mentioning **Hectare** to answer that part."
+ },
+ {
+  "run": 2,
+  "system": "agent_initial",
+  "id": "T3",
+  "verdict": "fail",
+  "llm_calls": 3,
+  "est_tokens": 3112,
+  "latency": 5.0,
+  "n_chunks": 8,
+  "evidence_found": 0,
+  "evidence_total": 3,
+  "papers_found": 1,
+  "papers_total": 2,
+  "distinct_passages": 8,
+  "trace": [
+   "plan -> graph_retrieve focus=[] (The user asks about specific research tools and comparative results from the paper collection, which requires retrieving the relevant paper(s) rather than answering from general knowledge.)",
+   "graph_retrieve -> scope single, 8 passages from: Deductive Optimization of Relational Data Storage",
+   "answer"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_FeserM0S20::57",
+   "DBLP_journals_pacmpl_FeserM0S20::62",
+   "DBLP_journals_pacmpl_FeserM0S20::9",
+   "DBLP_journals_pacmpl_FeserM0S20::60",
+   "DBLP_journals_pacmpl_FeserM0S20::3",
+   "DBLP_journals_pacmpl_FeserM0S20::58",
+   "DBLP_journals_pacmpl_FeserM0S20::59",
+   "DBLP_journals_pacmpl_FeserM0S20::63"
+  ],
+  "answer": "The provided documents do not mention **Hectare**, so I can’t answer the part of the question about what Castor and Hectare compared themselves against, why those tools fall short, or how much better each did.\n\nWhat the documents do say is that Castor compared against:\n\n- **Hyper**, “an in-memory column-store which has a state-of-the art query compiler”\n- **Cozy**, “a state-of-the-art program synthesis tool that generates specialized data structures from relational queries”\n- **Chestnut**, “a tool for synthesizing specialized data structures for object queries”\n\nThe paper says Castor was:\n\n- “**faster or significantly faster than Hyper for 15 out of 18 queries**”\n- and “**If Hyper is given specialized views and indexes, then its performance is on par with Castor**”\n\nIt also says Castor is competitive with Hyper “**while using significantly less memory**.”\n\nIf you want, I can also quote the exact passages about Castor’s comparison with Hyper, Cozy, and Chestnut."
+ },
+ {
+  "run": 3,
+  "system": "baseline_2_1",
+  "id": "T3",
+  "verdict": "fail",
+  "llm_calls": 1,
+  "est_tokens": 2285,
+  "latency": 4.6,
+  "n_chunks": 5,
+  "evidence_found": 1,
+  "evidence_total": 3,
+  "papers_found": 2,
+  "papers_total": 2,
+  "distinct_passages": 3,
+  "trace": [
+   "fixed: one hybrid search, top 5"
+  ],
+  "chunks": [
+   "DBLP_journals_corr_abs-1903-03229::57",
+   "DBLP_journals_pacmpl_FeserM0S20::57",
+   "DBLP_journals_corr_abs-2206-07828::71",
+   "DBLP_journals_pacmpl_KoppelGVSP22::71",
+   "DBLP_journals_corr_abs-2206-06164::50"
+  ],
+  "answer": "From the provided documents:\n\n### Castor compared itself against\nCastor compared itself with **Hyper, Cozy, and Chestnut**:\n\n> “We compare Castor with three other systems: **Hyper [25], Cozy [23], and Chestnut [38]**...”\n\nIt also compares against Hyper in two modes:\n\n> “We compare against **vanilla Hyper** to show that layout specialization is a powerful optimization... We compare against **Hyper with transformed data** to show that the specialization techniques that Castor uses are beneficial in other systems.”\n\n### Why the authors say those tools fall short\nThe document does **not** say these tools “fall short” in a numerical sense in the excerpt provided, but it does explain the motivation for comparison:\n\n- **Hyper**: Castor’s layout specialization can “compensate for the many low-level compiler optimizations in Hyper.”\n- **Cozy**: only the beginning is shown in the excerpt:  \n  > “Cozy is a state-of-the-art program synthesis tool that generates specialized data structures from relational...”\n- **Chestnut** is named but no explanation is included in the provided excerpt.\n\nSo, based only on the excerpt, the explicit shortcoming discussed is that **Hyper’s compiler optimizations are not enough to obviate the benefit of Castor’s layout specialization**.\n\n### How much better did Castor do?\nThe provided text does **not** include any performance numbers or results, so I can’t say how much better Castor did from these documents.\n\n---\n\n### Hectare compared itself against\nHectare compared itself against **Hoogle+**:\n\n> “we used the ecta library to implement Hectare... and compare it with the state-of-the-art synthesizer **Hoogle+**”\n\n### Why the authors say Hoogle+ falls short\nThe excerpt does **not** explicitly say Hoogle+ falls short on performance; it only says it is “state-of-the-art” and notes a development-effort comparison:\n\n> “the Hoogle+ implementation ... contains a whopping **4000 LOC**, while Hectare only contains **400**.”\n\nThe authors suggest ecta simplifies development:\n\n> “these numbers suggest that the ecta library has the potential to significantly simplify the development of program synthesizers.”\n\nSo the only shortcoming explicitly stated in the provided text is **much larger implementation size**, not benchmark performance.\n\n### How much better did Hectare do?\nThe provided excerpt does **not** give any benchmark results or speedup numbers, so I can’t determine how much better Hectare did from these documents.\n\nIf you want, I can also turn this into a compact comparison table."
+ },
+ {
+  "run": 3,
+  "system": "advanced_4_1",
+  "id": "T3",
+  "verdict": "fail",
+  "llm_calls": 2,
+  "est_tokens": 3098,
+  "latency": 7.7,
+  "n_chunks": 8,
+  "evidence_found": 0,
+  "evidence_total": 3,
+  "papers_found": 1,
+  "papers_total": 2,
+  "distinct_passages": 8,
+  "trace": [
+   "fixed: plan scope=single, hop 1 + hop 2"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_FeserM0S20::57",
+   "DBLP_journals_pacmpl_FeserM0S20::9",
+   "DBLP_journals_pacmpl_FeserM0S20::65",
+   "DBLP_journals_pacmpl_FeserM0S20::62",
+   "DBLP_journals_pacmpl_FeserM0S20::3",
+   "DBLP_journals_pacmpl_FeserM0S20::58",
+   "DBLP_journals_pacmpl_FeserM0S20::59",
+   "DBLP_journals_pacmpl_FeserM0S20::60"
+  ],
+  "answer": "From the provided documents, I can answer only the Castor part clearly; I do **not** have any mention of **Hectare** in the documents, so I can’t say what Hectare compared itself against or how much better it did.\n\nFor **Castor**, the paper says it compared itself against:\n\n- **Hyper**\n- **Cozy**\n- **Chestnut**\n\nand specifically notes that for Hyper, they compared in two modes: “with the original TPC-H data and with a transformed version of the data and query that mimics the layout used by Castor.”\n\n### Why the authors say the other tools fall short\n- **Hyper**: Castor is competitive while using less memory, and the paper argues that although Hyper can match Castor if given specialized views and indexes, “constructing and maintaining these views takes effort,” and “Hyper cannot assist the user in creating a collection of views which maintains the semantics of the original query.”\n- **Cozy**: the paper says Cozy is effective on small specifications, but “the size of the TPC-H queries causes a significant slowdown in its solver-based verification step.”\n- **Chestnut**: mentioned as another synthesis tool, but the provided passages do not include a detailed comparison result.\n\n### How much better Castor did\nThe paper says:\n\n- Castor-generated layouts and query code were “**faster or significantly faster than Hyper for 15 out of 18 queries**.”\n- “In the cases where Castor is slower than Hyper, **no query is more than 2x slower**.”\n- Castor also “uses **significantly less memory**.”\n- Against Cozy, Castor “**scales to larger queries**,” while Cozy struggled on TPC-H-size queries; for example, “Q4 was slower than baseline Hyper at **5.4s**” and “Q17 was too slow to run on the entire TPC-H dataset.”\n\nIf you want, I can also extract the exact comparison wording into a compact table."
+ },
+ {
+  "run": 3,
+  "system": "agent_initial",
+  "id": "T3",
+  "verdict": "fail",
+  "llm_calls": 3,
+  "est_tokens": 3314,
+  "latency": 6.4,
+  "n_chunks": 8,
+  "evidence_found": 0,
+  "evidence_total": 3,
+  "papers_found": 1,
+  "papers_total": 2,
+  "distinct_passages": 8,
+  "trace": [
+   "plan -> graph_retrieve focus=[] (This asks about specific research tools, their comparisons, shortcomings, and quantitative results, which requires searching the paper collection.)",
+   "graph_retrieve -> scope single, 8 passages from: Deductive Optimization of Relational Data Storage",
+   "answer"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_FeserM0S20::57",
+   "DBLP_journals_pacmpl_FeserM0S20::62",
+   "DBLP_journals_pacmpl_FeserM0S20::60",
+   "DBLP_journals_pacmpl_FeserM0S20::9",
+   "DBLP_journals_pacmpl_FeserM0S20::3",
+   "DBLP_journals_pacmpl_FeserM0S20::58",
+   "DBLP_journals_pacmpl_FeserM0S20::59",
+   "DBLP_journals_pacmpl_FeserM0S20::63"
+  ],
+  "answer": "The provided documents do **not** mention **Hectare**, so I can’t say what Castor and Hectare compared themselves against or how Hectare performed from these passages alone.\n\nWhat the documents do say is that **Castor** was compared against:\n\n- **Hyper**, described as “**an in-memory column-store which has a state-of-the art query compiler**”\n- **Cozy**, “**a state-of-the-art program synthesis tool that generates specialized data structures from relational queries**”\n- **Chestnut**, “**a tool for synthesizing specialized data structures for object queries**”\n\nThe authors’ explanation of why the alternatives fall short is that they require more manual effort or do not preserve the original query semantics automatically:\n\n- For Hyper with specialized views and indexes: “**its performance is on par with Castor. However, constructing and maintaining these views takes effort, and Hyper cannot assist the user in creating a collection of views which maintains the semantics of the original query.**”\n- More generally, Castor is presented as combining specialization with code generation so users can “**trade off memory usage against query performance without the risk of introducing bugs**.”\n\nHow much better did Castor do?\n\n- “**the layouts and query code generated by Castor from expert queries are faster or significantly faster than Hyper for 15 out of 18 queries**”\n- “**In the cases where Castor is slower than Hyper, no query is more than 2x slower**”\n- “**If Hyper is given specialized views and indexes, then its performance is on par with Castor**”\n\nIf you want, I can also try to answer this in the context of the specific paper section you’re referring to, but I’d need a document that mentions Hectare."
+ },
+ {
+  "run": 1,
+  "system": "agent_refined",
+  "id": "T3",
+  "verdict": "fail",
+  "llm_calls": 3,
+  "est_tokens": 4278,
+  "latency": 7.8,
+  "n_chunks": 8,
+  "evidence_found": 2,
+  "evidence_total": 3,
+  "papers_found": 2,
+  "papers_total": 2,
+  "distinct_passages": 8,
+  "trace": [
+   "plan -> graph_retrieve focus=['Castor', 'Hectare'] (The question asks about research content and explicitly names two papers/tools, so we should retrieve those papers to answer the comparison and results questions.)",
+   "focus resolved: ['Castor -> Deductive Optimization of Relational Data Storage', 'Hectare -> Searching Entangled Program Spaces']",
+   "graph_retrieve -> scope focus(single), 8 passages from: Deductive Optimization of Relational Data Storage; Searching Entangled Program Spaces",
+   "answer"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_FeserM0S20::57",
+   "DBLP_journals_pacmpl_KoppelGVSP22::79",
+   "DBLP_journals_pacmpl_FeserM0S20::9",
+   "DBLP_journals_pacmpl_KoppelGVSP22::71",
+   "DBLP_journals_pacmpl_FeserM0S20::62",
+   "DBLP_journals_pacmpl_KoppelGVSP22::80",
+   "DBLP_journals_pacmpl_FeserM0S20::64",
+   "DBLP_journals_pacmpl_KoppelGVSP22::73"
+  ],
+  "answer": "Castor and Hectare each compared themselves against different state-of-the-art tools:\n\n- **Castor** compared itself against **Hyper** and **Cozy**. The paper says Castor is “competitive with the state of the art in-memory compiled database system Hyper” while using “significantly less memory,” and that it “scales to larger queries than the leading data-structure synthesis tool Cozy.” It also notes that Hyper can match Castor only if given specialized views and indexes, but “constructing and maintaining these views takes effort,” and Hyper “cannot assist the user in creating a collection of views which maintains the semantics of the original query.”\n  - **How much better?** Castor’s expert-generated layouts and code were “faster or significantly faster than Hyper for 15 out of 18 queries,” and when slower, “no query is more than 2x slower.” Its layouts were also “much smaller than Hyper’s,” often “less than 10Mb for 10 out of 18 queries” and “less than 100Mb for all but one query.”\n\n- **Hectare** compared itself against **Hoogle+**. The authors say Hoogle+ falls short because Hectare’s evaluation focuses on reducing the problems that make synthesis hard: without those reductions, naïve enumeration “cannot solve any benchmarks” because it gets stuck “constructing infinitely many spurious terms” and “blindly going through all possible instantiations of every polymorphic component.”\n  - **How much better?** Hectare “solves 43 out of 45” benchmarks within the timeout, while the variants without both reductions solve only **34** and **36**, and the naïve variant solves **none**. The text also says Hectare “outperforms these variants drastically,” especially on larger benchmarks.\n\nIf you want, I can also separate the answer into a Castor-only and Hectare-only comparison table."
+ },
+ {
+  "run": 2,
+  "system": "agent_refined",
+  "id": "T3",
+  "verdict": "fail",
+  "llm_calls": 3,
+  "est_tokens": 3998,
+  "latency": 5.5,
+  "n_chunks": 8,
+  "evidence_found": 2,
+  "evidence_total": 3,
+  "papers_found": 2,
+  "papers_total": 2,
+  "distinct_passages": 8,
+  "trace": [
+   "plan -> graph_retrieve focus=['Castor', 'Hectare'] (The question asks about comparative results and authors’ claims for named research tools, which requires retrieving the relevant papers.)",
+   "focus resolved: ['Castor -> Deductive Optimization of Relational Data Storage', 'Hectare -> Searching Entangled Program Spaces']",
+   "graph_retrieve -> scope focus(single), 8 passages from: Deductive Optimization of Relational Data Storage; Searching Entangled Program Spaces",
+   "answer"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_FeserM0S20::62",
+   "DBLP_journals_pacmpl_KoppelGVSP22::71",
+   "DBLP_journals_pacmpl_FeserM0S20::9",
+   "DBLP_journals_pacmpl_KoppelGVSP22::74",
+   "DBLP_journals_pacmpl_FeserM0S20::3",
+   "DBLP_journals_pacmpl_KoppelGVSP22::75",
+   "DBLP_journals_pacmpl_FeserM0S20::2",
+   "DBLP_journals_pacmpl_KoppelGVSP22::73"
+  ],
+  "answer": "Castor and Hectare each compare against a different state-of-the-art tool:\n\n- **Castor** compares against **Hyper**. The paper says Castor is “competitive with the state of the art in-memory compiled database system Hyper” and that its layouts and query code are “faster or significantly faster than Hyper for 15 out of 18 queries.” When Hyper is given specialized views and indexes, “its performance is on par with Castor,” but the authors note that “constructing and maintaining these views takes effort, and Hyper cannot assist the user in creating a collection of views which maintains the semantics of the original query.”\n- **Hectare** compares against **Hoogle+**. The paper says Hoogle+’s performance is worse because its “abstraction-refinement loop … is brittle” for polymorphic components, and it can “end up wasting a lot of time enumerating ill-typed terms.” In contrast, Hectare “natively supports polymorphic components via recursive nodes,” which “leads to more predictable performance.”\n\nHow much better:\n\n- **Castor**: faster or significantly faster on **15 of 18** TPC-H queries; when slower, it was “no query is more than 2x slower.”  \n- **Hectare**: solved **43 of 45** benchmarks vs **39** for Hoogle+, and had an average speedup of **7×** on commonly solved benchmarks; it also solved **84%** of benchmarks within 7 seconds and “outperforms a state-of-the-art tool on 89% of their benchmarks.”\n\n"
+ },
+ {
+  "run": 3,
+  "system": "agent_refined",
+  "id": "T3",
+  "verdict": "fail",
+  "llm_calls": 3,
+  "est_tokens": 4310,
+  "latency": 5.7,
+  "n_chunks": 8,
+  "evidence_found": 2,
+  "evidence_total": 3,
+  "papers_found": 2,
+  "papers_total": 2,
+  "distinct_passages": 8,
+  "trace": [
+   "plan -> graph_retrieve focus=['Castor', 'Hectare'] (The user is asking about specific research papers/tools and their comparison baselines and results, which requires retrieving the relevant papers.)",
+   "focus resolved: ['Castor -> Deductive Optimization of Relational Data Storage', 'Hectare -> Searching Entangled Program Spaces']",
+   "graph_retrieve -> scope focus(single), 8 passages from: Deductive Optimization of Relational Data Storage; Searching Entangled Program Spaces",
+   "answer"
+  ],
+  "chunks": [
+   "DBLP_journals_pacmpl_FeserM0S20::9",
+   "DBLP_journals_pacmpl_KoppelGVSP22::80",
+   "DBLP_journals_pacmpl_FeserM0S20::64",
+   "DBLP_journals_pacmpl_KoppelGVSP22::71",
+   "DBLP_journals_pacmpl_FeserM0S20::60",
+   "DBLP_journals_pacmpl_KoppelGVSP22::73",
+   "DBLP_journals_pacmpl_FeserM0S20::69",
+   "DBLP_journals_pacmpl_KoppelGVSP22::76"
+  ],
+  "answer": "The documents say:\n\n- **Castor** compared itself against **Hyper** and **Cozy**.\n- **Hectare** compared itself against **Hoogle+**.\n\n### Castor vs. Hyper and Cozy\nCastor says it is:\n\n- “**competitive with the state of the art in-memory compiled database system Hyper** while using significantly less memory”\n- and it “**scales to larger queries than the leading data-structure synthesis tool Cozy**.”\n\nWhy the others fall short:\n- **Hyper**: Castor’s layouts are “**much smaller than Hyper’s**,” and Castor’s “**peak memory use is significantly lower than Hyper for all expert queries**.”\n- **Cozy**: “**Cozy was unable to make significant improvements on all but two of the TPC-H queries**.”\n\nHow much better:\n- The documents do not give one single overall numeric “better by X” summary for Hyper, but they do say Castor uses “**significantly less memory**” and has much smaller layouts.\n- For Cozy, it improved only **2 of the TPC-H queries**.\n\n### Hectare vs. Hoogle+\nHectare compared itself against **Hoogle+**:\n\n- “**we compare the two synthesizers on the benchmark suite from the latest Hoogle+ publication**”\n- and the paper says Hoogle+ is based on “**an SMT encoding of Petri-net reachability**.”\n\nWhy Hoogle+ falls short:\n- The paper emphasizes Hoogle+’s “**restricted support for higher-order functions**.”\n- It also says Hoogle+ is much larger in implementation size: “**Hoogle+ implementation ... contains a whopping 4000 LOC, while Hectare only contains 400**.”\n\nHow much better:\n- “**Within the timeout, Hectare solves 43 out of 45**” benchmarks.\n\nIf you want, I can also pull together the exact comparison sentences into a compact quote table."
+ }
+]

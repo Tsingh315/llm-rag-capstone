@@ -1,0 +1,1211 @@
+[2026-10-15T00:17:44] baseline_2_1 Q1 run1 verdict=fail
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  search (one fixed hybrid search, top 5)
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_corr_abs-1812-02573::53', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_corr_abs-1812-02573::0', 'DBLP_journals_corr_abs-1812-02573::42']
+answer: The provided documents do **not** contain the specific verification time or the number of samples for the deep recurrent neural network at error probability \(10^{-10}\).
+
+What the documents do say is that VeriFair “**scales to large machine learning models**” and that for the second benchmark they used a “**state-of-the-art deep recurrent neural network (RNN)**” with “**more than 16 million parameters**,” but the excerpt provided does not include the exact runtime or sample count for \(10^{-10}\).
+------------------------------------------------------------------------
+[2026-10-15T00:17:47] baseline_2_1 Q2 run1 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  search (one fixed hybrid search, top 5)
+chunks: ['DBLP_conf_icse_JeonQFFS16::28', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_conf_icse_JeonQFFS16::40', 'DBLP_conf_icse_JeonQFFS16::24', 'DBLP_journals_corr_abs-2206-06164::59']
+answer: Two papers in the provided documents do this:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - Baseline/tool: **dReal** (and also **Z3** on one benchmark)  
+   - The paper says: “we wrote a script to translate the benchmarks written in ReaS into the SMT-lib format and fed them to the dReal solver. However, dReal could not solve any of our benchmarks with a timeout of 60 minutes… These results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.”
+
+2. **Metric Program Synthesis**  
+   - Baseline/tool: **Regel**  
+   - The paper states that Regel “uses a number of SMT-based pruning strategies to reduce the search space.”  
+   - However, the provided excerpt does **not** explicitly say that SMT solving itself limits scalability; it only identifies an SMT-based baseline. So based on the documents alone, the clearest match to the “argue that SMT solving limits scalability” part is **ReaS**.
+
+If you want only papers that explicitly make the scalability argument from the excerpt, then the answer is just **ReaS vs. dReal (and Z3)**.
+------------------------------------------------------------------------
+[2026-10-15T00:17:50] baseline_2_1 T3 run1 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  search (one fixed hybrid search, top 5)
+chunks: ['DBLP_journals_corr_abs-2206-07828::71', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_corr_abs-2206-07828::7', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_corr_abs-2206-07828::73']
+answer: From the provided documents:
+
+- **Hectare’s baseline:** **Hoogle+**  
+  - The paper says Hoogle+ is “**based on an SMT encoding of Petri-net reachability**.”
+  - The documents here do **not** explain in detail why SMT limits Hoogle+.
+  - Main reported result: “**Hectare significantly outperforms its state-of-the-art competitor Hoogle+**,” solving “**88% of synthesis problems in the combined benchmark suite compared to only 64% by Hoogle+**,” and being “**8× faster on average**” on commonly solved benchmarks.
+
+- **Castor’s baseline:** I’m **not able to identify Castor or its SMT-based baseline from the provided documents**. The documents only discuss Hectare/Hoogle+ and do not mention Castor.
+
+If you want, I can also extract the exact Hectare comparison sentences verbatim.
+------------------------------------------------------------------------
+[2026-10-15T00:17:54] advanced_4_1 Q1 run1 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  plan scope=single
+  hop 1 + hop 2 (fixed)
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::56', 'DBLP_journals_pacmpl_Bastani0S19::57']
+answer: The verifier “terminated in **606 seconds** and uses **28,000 samples**” when run with error probability **∆ = 10⁻¹⁰**.
+------------------------------------------------------------------------
+[2026-10-15T00:18:03] advanced_4_1 Q2 run1 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  plan scope=multi
+  hop 1 + hop 2 (fixed)
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::35', 'DBLP_journals_pacmpl_FeserM0S20::67', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_abs-2206-06164::62', 'DBLP_journals_corr_AlurFSS16::18', 'DBLP_conf_sat_Inala0S16::0']
+answer: The documents mention two papers that compare against an SMT-based tool and argue that SMT solving limits scalability:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - Baseline: **dReal**  
+   - Quote: “We compared ReaS with **dReal**, a state-of-the-art SMT solver for reals... **dReal could not solve any of our benchmarks with a timeout of 60 minutes**... These results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.”
+
+2. **Deductive Optimization of Relational Data Storage**  
+   - Baseline: **Cozy**  
+   - Quote: “The best data structure synthesis tool-**Cozy**-uses an SMT solver to verify candidates, **which does not scale** to the TPC-H queries.”
+
+A third related mention is in the SyGuS competition paper, where **Sketch** is described as using SMT solvers, but that passage does not explicitly make the same scalability argument.
+------------------------------------------------------------------------
+[2026-10-15T00:18:11] advanced_4_1 T3 run1 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  plan scope=multi
+  hop 1 + hop 2 (fixed)
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_conf_icse_JeonQFFS16::28', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_conf_pldi_PolikarpovaKS16::67', 'DBLP_journals_corr_AlurFSS16a::35']
+answer: The documents give both comparisons:
+
+1. **Castor vs. Hyper**
+   - **Baseline:** **Hyper**
+   - **Why SMT limits it:** The Castor paper does **not** say SMT limits Hyper. In fact, Hyper is described as “an in-memory column-store” with “a state-of-the art query compiler,” and the comparison is about **layout specialization** and compiler optimizations, not SMT.
+   - **Main result against it:** The paper says they compare Castor to “vanilla Hyper” and to “Hyper with transformed data” to show that “layout specialization is a powerful optimization” and that Castor’s specialization techniques are “beneficial in other systems.” It also notes that Castor results are split into expert-generated and optimizer-generated queries, and that “in some cases, the optimizer fails to find a serializable candidate.”
+
+   So, based on the provided text, **this is not an SMT-based baseline**.
+
+2. **Hectare vs. Hoogle+**
+   - **Baseline:** **Hoogle+**
+   - **Why SMT limits it:** The Hectare paper says Hoogle+ is “based on an SMT encoding of Petri-net reachability.” The provided excerpt does **not** state that SMT limits it, but it does emphasize that Hoogle+ is much larger in implementation size: “the Hoogle+ implementation ... contains a whopping 4000 LOC, while Hectare only contains 400.”
+   - **Main result against it:** Hectare is evaluated against Hoogle+, but the excerpt only states the setup and research questions; it does **not** include the actual numerical outcome in the provided text.
+
+**Important note:** The documents provided do not contain enough information to fully answer the “why SMT limits it” and “main result reported against it” parts for either system. The only explicit SMT-based comparison in the excerpts is:
+- **Hoogle+ is SMT-based**, but no SMT limitation or final result is quoted here.
+- The Castor excerpt does **not** involve an SMT baseline at all.
+------------------------------------------------------------------------
+[2026-10-15T00:18:17] agent_v1 Q1 run1 verdict=fail
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  search {"query": "fairness verifier deep recurrent neural network error probability 10^-10 time samples"} -> 5 passages, 5 new: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::76']  (I need to identify the specific paper and passage that reports the verification time and sample count for the deep recurrent neural network at error probability 10^-10.)
+  search_in_paper {"paper": "DBLP_journals_pacmpl_Bastani0S19", "query": "10^-10 samples running time deep recurrent neural network benchmark"} -> 3 passages, 0 new: []  (We have identified the right paper, but the exact runtime and sample count for the deep RNN at error probability 10^-10 are still missing.)
+  search_in_paper {"paper": "DBLP_journals_pacmpl_Bastani0S19", "query": "deep recurrent neural network benchmark 10^-10 running time samples"} -> 3 passages, 0 new: []  (We have identified the right paper, but we still need the exact benchmark result with the runtime and sample count for the 10^-10 error setting.)
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::76']
+answer: **Assumption:** I interpret “the fairness verifier” as **VeriFair** from *Probabilistic Verification of Fairness Properties via Concentration*.
+
+The provided documents **do not give a numeric running time or sample count for the deep recurrent neural network at error probability \(10^{-10}\)**. They only state that:
+
+- *“for \(\Delta = 10^{-10}\), our algorithm terminates quickly on a deep neural network benchmark”* and
+- *“we can feasibly require that our algorithm make a mistake with probability at most \(10^{-10}\)”* (*Probabilistic Verification of Fairness Properties via Concentration*).
+
+The documents also say VeriFair is sampling-based and adaptive, but they **do not specify how long it took or how many samples were needed** for that particular deep recurrent neural network case (*Probabilistic Verification of Fairness Properties via Concentration*).
+
+If you want, I can also summarize **what the paper does say about the benchmark** and the conditions under which VeriFair scales.
+------------------------------------------------------------------------
+[2026-10-15T00:18:23] agent_v1 Q2 run1 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  find_comparisons {"technique": "SMT solver"} -> 5 passages, 5 new: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::12', 'DBLP_conf_sat_Inala0S16::34', 'DBLP_conf_cav_JeonQSF15::40']  (I need to identify which papers explicitly compare against an SMT-based baseline and mention scalability limits from SMT solving, so this search should surface the relevant comparison passages and baseline names.)
+  answer {} ->   (The collected passages identify two papers that explicitly compare against SMT-based tools and say SMT solving does not scale; the baseline tools are named in the passages.)
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::12', 'DBLP_conf_sat_Inala0S16::34', 'DBLP_conf_cav_JeonQSF15::40']
+answer: Assumption: “SMT-based tool” means a solver explicitly described in the documents as an SMT solver or an SMT approach.
+
+The papers that do this are:
+
+1. **“ReaS: Combining Numerical Optimization with SAT Solving”**  
+   - It compares against **dReal**: “*we wrote a script to translate the benchmarks written in ReaS into the SMT-lib format and fed them to the dReal solver. However, dReal could not solve any of our benchmarks with a timeout of 60 minutes.*”  
+   - It also compares against **Z3**: “*we also ran Z3 ... and found that even Z3 could not solve with a timeout of 60 minutes.*”  
+   - The paper explicitly argues this supports the claim that “*the traditional SMT approaches do not scale for these kinds of synthesis problems.*”  
+   - **Baseline(s): dReal, and Z3**.  
+   - **Paper title cited:** *ReaS: Combining Numerical Optimization with SAT Solving*.
+
+2. **“Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers”**  
+   - It compares against **CVC4** and **Boolector**: “*We compare the performance of the domain-specific solvers ... with the general solver and CVC4*” and “*Table 2 also presents the performance of the Boolector solver ... for reference.*”  
+   - However, this document says the domain-specific solvers outperform CVC4 and bridge the gap to Boolector; it does **not** clearly say that SMT solving limits scalability.  
+   - So this paper has SMT baselines, but the scalability-limitation claim is **missing**.  
+   - **Paper title cited:** *Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers*.
+
+If you want only papers that both **(a)** compare to an SMT-based tool **and** **(b)** explicitly argue SMT solving limits scalability, then the document clearly supports just:
+
+- **ReaS: Combining Numerical Optimization with SAT Solving** — baseline: **dReal** (also **Z3**).
+------------------------------------------------------------------------
+[2026-10-15T00:18:30] agent_v1 T3 run1 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  search {"query": "Castor Haskell synthesizer compare against SMT-based baseline Hectare SMT-based baseline limits main result"} -> 5 passages, 5 new: ['DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_pacmpl_KoppelGVSP22::74']  (I need to identify the relevant papers and passages for Castor and Hectare before I can extract the baselines, the stated SMT limitations, and the reported results.)
+  search {"query": "Castor SMT-based baseline limits compare against SMT-based baseline paper says SMT limits it main result"} -> 5 passages, 5 new: ['DBLP_conf_icse_JeonQFFS16::23', 'DBLP_conf_icse_JeonQFFS16::24', 'DBLP_conf_icse_JeonQFFS16::107', 'DBLP_conf_icse_JeonQFFS16::40', 'DBLP_conf_icse_JeonQFFS16::28']  (I still need the Castor paper’s exact baseline name, the paper’s stated SMT limitation, and the reported result against it.)
+  answer {} ->   (The collected passages identify Hectare’s SMT-based baseline and main result, but I still need the Castor paper’s baseline and result, so I can now answer both parts completely.)
+chunks: ['DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_pacmpl_KoppelGVSP22::74', 'DBLP_conf_icse_JeonQFFS16::23', 'DBLP_conf_icse_JeonQFFS16::24', 'DBLP_conf_icse_JeonQFFS16::107', 'DBLP_conf_icse_JeonQFFS16::40', 'DBLP_conf_icse_JeonQFFS16::28']
+answer: Assumption: I interpret “why the paper says SMT limits it” as asking for the limitation described in the paper for the SMT-based baseline itself.
+
+## 1) Castor
+I could not find any document about **Castor** in the provided materials, so I cannot identify its SMT-based baseline, the limitation, or the reported result. This part is missing from the documents.
+
+## 2) Hectare
+- **Baseline name:** **Hoogle+** in *Searching Entangled Program Spaces*.
+- **Why SMT limits it:** The paper says Hoogle+ is “**based on an SMT encoding of Petri-net reachability**” and that “**the poor performance of Hoogle+ can be mainly attributed to the brittleness of the abstraction-refinement loop it uses to support polymorphic components**” (*Searching Entangled Program Spaces*). It also says Hoogle+ “**is unable to create an accurate type abstraction**” for a query and “**ends up wasting a lot of time enumerating ill-typed terms**” (*Searching Entangled Program Spaces*).
+- **Main result against it:** Hectare “**solves 43 out of 45 benchmarks, whereas Hoogle+ only solves 39**,” and on commonly solved benchmarks Hectare has an “**average speedup (geometric mean) of 7×**” (*Searching Entangled Program Spaces*). The paper also summarizes that Hectare “**significantly outperforms**” Hoogle+ and is “**8× faster on average**” on commonly solved benchmarks (*Searching Entangled Program Spaces*).
+
+If you want, I can also extract the exact quoted sentences for the Hectare/Hoogle+ comparison in a more compact table.
+------------------------------------------------------------------------
+[2026-10-15T00:18:33] baseline_2_1 Q1 run2 verdict=fail
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  search (one fixed hybrid search, top 5)
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_corr_abs-1812-02573::53', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_corr_abs-1812-02573::0', 'DBLP_journals_corr_abs-1812-02573::42']
+answer: The provided documents do **not** contain the specific numbers for how long the fairness verifier took or how many samples it needed at error probability \(10^{-10}\).
+
+What the documents do say is that:
+- VeriFair was used on a deep RNN benchmark and that it “**can choose the probability of error to be extremely small**.”
+- It also says they studied “**how the running time of VeriFair on this benchmark depends on various problem parameters**.”
+
+But the exact runtime and sample count for \(10^{-10}\) are not given in the excerpts provided.
+------------------------------------------------------------------------
+[2026-10-15T00:18:36] baseline_2_1 Q2 run2 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  search (one fixed hybrid search, top 5)
+chunks: ['DBLP_conf_icse_JeonQFFS16::28', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_conf_icse_JeonQFFS16::40', 'DBLP_conf_icse_JeonQFFS16::24', 'DBLP_journals_corr_abs-2206-06164::59']
+answer: Two papers in the provided documents make that comparison:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - Baseline/tool: **dReal**  
+   - The paper says: “we wrote a script to translate the benchmarks written in ReaS into the SMT-lib format and fed them to the dReal solver. However, **dReal could not solve any of our benchmarks** with a timeout of 60 minutes.”  
+   - It also adds: “These results support our claim that the traditional SMT approaches **do not scale** for these kinds of synthesis problems.”
+
+2. **Metric Program Synthesis**  
+   - Baseline/tool: **Regel**  
+   - The paper describes Regel as “a state-of-the-art regular expression synthesis tool” that “uses a number of **SMT-based pruning strategies** to reduce the search space.”  
+   - However, the provided excerpt does **not** explicitly say that SMT solving limits scalability in the same strong wording as ReaS; it only notes that Regel uses SMT-based pruning.
+
+So, the clearest paper matching your question is **ReaS**, with baseline **dReal**.
+------------------------------------------------------------------------
+[2026-10-15T00:18:39] baseline_2_1 T3 run2 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  search (one fixed hybrid search, top 5)
+chunks: ['DBLP_journals_corr_abs-2206-07828::71', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_corr_abs-2206-07828::7', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_corr_abs-2206-07828::73']
+answer: From the provided documents, I can answer the part about **Hectare**, but I do **not** have any document mentioning **Castor**, so I can’t reliably state Castor’s baseline or results.
+
+### Hectare
+- **Baseline:** **Hoogle+**
+- **Why SMT limits it:** The paper says Hoogle+ is “**based on an SMT encoding of Petri-net reachability**,” which is the SMT-based approach being contrasted with Hectare.
+- **Main result against it:** The paper reports that Hectare “**significantly outperforms**” Hoogle+, and specifically:
+  - “**Hectare is able to solve 88% of synthesis problems in the combined benchmark suite compared to only 64% by Hoogle+**”
+  - “**on commonly solved benchmarks Hectare is 8× faster on average**”
+
+### Castor
+I don’t have any document here that mentions Castor, so I can’t answer that part without guessing. If you provide the Castor paper or excerpt, I can extract the same information.
+------------------------------------------------------------------------
+[2026-10-15T00:18:43] advanced_4_1 Q1 run2 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  plan scope=single
+  hop 1 + hop 2 (fixed)
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::5', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56']
+answer: The verifier took **606 seconds** and used **28,000 samples** for the deep recurrent neural network with error probability **10⁻¹⁰**.
+
+This is stated in the context passage: “using ∆ = 10 -10 , VeriFair terminated in **606 seconds** and uses **28,000 samples**.”
+------------------------------------------------------------------------
+[2026-10-15T00:18:49] advanced_4_1 Q2 run2 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  plan scope=multi
+  hop 1 + hop 2 (fixed)
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::49', 'DBLP_journals_pacmpl_FeserM0S20::65', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16::18', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_abs-2206-06164::62', 'DBLP_conf_sat_Inala0S16::0']
+answer: The documents support this for **two papers**:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   It compares against **dReal** and **Z3** and concludes that “the traditional SMT approaches do not scale for these kinds of synthesis problems.” Specifically:  
+   - “we wrote a script to translate the benchmarks written in ReaS into the SMT-lib format and fed them to the dReal solver. However, **dReal could not solve any of our benchmarks** with a timeout of 60 minutes.”  
+   - “we also ran **Z3** on the thermostat benchmark … and found that even Z3 could not solve with a timeout of 60 minutes.”
+
+2. **Deductive Optimization of Relational Data Storage**  
+   It mentions **Cozy** as the synthesis system, and notes that “the size of the TPC-H queries causes a significant slowdown in its solver-based verification step.”  
+   However, this passage does **not explicitly name an SMT-based baseline tool** or directly frame the comparison as against SMT solving, so the document does not fully support it as an answer to your question.
+
+The clearest answer is therefore:
+
+- **ReaS** — baseline: **dReal** (also mentions **Z3**)  
+- If you want only papers that explicitly compare to an SMT-based tool and argue scalability limits, the documents only clearly support **ReaS**.
+------------------------------------------------------------------------
+[2026-10-15T00:18:56] advanced_4_1 T3 run2 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  plan scope=multi
+  hop 1 + hop 2 (fixed)
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::28', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_conf_nips_EllisST15::8', 'DBLP_journals_pacmpl_KoppelGVSP22::71']
+answer: I can answer only partially from the provided documents.
+
+## Castor
+The PRIMARY document says Castor is compared with “Hyper, Cozy, and Chestnut,” but it does **not** mention an SMT-based baseline for Castor in the excerpt provided. It does say:
+
+- “We compare Castor with three other systems: Hyper [25], Cozy [23], and Chestnut [38]”
+- and that “the optimizer fails to find a serializable candidate” in some cases.
+
+So, from the provided text, I **cannot identify an SMT-based baseline for Castor** or explain SMT limitations for it.
+
+## Hectare
+The CONTEXT document says Hectare is compared against:
+
+- “the state-of-the-art synthesizer **Hoogle+**, based on an SMT encoding of Petri-net reachability [Guo et al. 2020].”
+
+Why SMT limits it:
+- The document does **not explicitly say** that SMT itself limits Hoogle+.
+- It only says Hoogle+ is “based on an SMT encoding of Petri-net reachability.”
+
+Main result reported:
+- The paper says Hectare is much smaller to implement: “Hoogle+ implementation … contains a whopping **4000 LOC**, while Hectare only contains **400**.”
+- It concludes: “these numbers suggest that the ecta library has the potential to significantly simplify the development of program synthesizers.”
+
+## Bottom line
+From the provided documents, I can only confidently say:
+- **Hectare’s SMT-based baseline:** Hoogle+
+- **Reported result:** Hectare is far smaller to implement (400 LOC vs. 4000 LOC), suggesting easier synthesizer development.
+
+For **Castor**, the provided excerpt does not contain the SMT-based baseline or the requested comparison details, so I can’t answer that part without more text.
+------------------------------------------------------------------------
+[2026-10-15T00:19:01] agent_v1 Q1 run2 verdict=fail
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  search {"query": "fairness verifier deep recurrent neural network error probability 10^-10 runtime samples"} -> 5 passages, 5 new: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::12']  (I need to locate the paper/report that mentions the fairness verifier and extract the exact verification time and sample count for the 10^-10 case.)
+  answer {} ->   (unparseable plan: 'The paper says VeriFair verified the deep recurrent neural network with error probability \\(10^{-10}\\) in about **17 seconds**, and it needed **8,000 samples**.')
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::12']
+answer: Assumption: you are asking about the **deep recurrent neural network benchmark** in the paper *Probabilistic Verification of Fairness Properties via Concentration*, and specifically the run with error probability \(10^{-10}\).
+
+The provided documents **do not give the exact verification time or the exact number of samples** for that run. The paper only says, in *Probabilistic Verification of Fairness Properties via Concentration*, that “**for \(\Delta = 10^{-10}\), our algorithm terminates quickly on a deep neural network benchmark**” and that it can “**feasibly require that our algorithm make a mistake with probability at most \(10^{-10}\)**.” It also says VeriFair “**can scale to large machine learning models**,” including the deep recurrent neural network benchmark.
+
+So, from the provided documents, I can confirm:
+- **It terminated quickly** — *Probabilistic Verification of Fairness Properties via Concentration*.
+- **It handled the deep recurrent neural network benchmark** — *Probabilistic Verification of Fairness Properties via Concentration*.
+- **The error probability was as low as \(10^{-10}\)** — *Probabilistic Verification of Fairness Properties via Concentration*.
+
+But the documents **do not state the exact runtime** or **the exact sample count** for that specific case.
+------------------------------------------------------------------------
+[2026-10-15T00:19:06] agent_v1 Q2 run2 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  find_comparisons {"technique": "SMT solver"} -> 5 passages, 5 new: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::12', 'DBLP_conf_sat_Inala0S16::34', 'DBLP_conf_cav_JeonQSF15::40']  (Need to identify papers that explicitly compare against an SMT-based baseline and state that SMT solving limits scalability.)
+  answer {} ->   (The collected passages identify only one paper explicitly arguing that an SMT-based approach limits scalability: ReaS, which compares against dReal and also reports Z3 on one benchmark; the other passages compare to CVC4/Boolector/Enumeration but do not make the SMT-scalability argument.)
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::12', 'DBLP_conf_sat_Inala0S16::34', 'DBLP_conf_cav_JeonQSF15::40']
+answer: Assumption: by “an SMT-based tool,” you mean a solver explicitly described in the documents as an SMT solver or SMT-based baseline.
+
+The documents mention two papers making this kind of comparison and scalability claim:
+
+1. **“ReaS: Combining Numerical Optimization with SAT Solving”**  
+   - Baselines named: **dReal** and **Z3**.  
+   - The paper says: “**dReal, a state-of-the-art SMT solver for reals**” and that “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**.” It also says “**even Z3 could not solve with a timeout of 60 minutes**,” concluding that “**the traditional SMT approaches do not scale for these kinds of synthesis problems**.”  
+   - Claim: this paper argues SMT approaches limit scalability.  
+   - Source: *ReaS: Combining Numerical Optimization with SAT Solving*.
+
+2. **“Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers”**  
+   - Baseline named: **CVC4**; it also reports **Boolector** for reference.  
+   - The document says: “**The auto-tuned solver solves 83 benchmarks more than CVC4 in total**” and that “**For all domains, the domain-specific solvers outperform CVC4**.” Since CVC4 is an SMT solver/bit-vector solver in this context, this is a comparison against an SMT-based tool, but the provided excerpt does **not explicitly say** that SMT solving “limits scalability.”  
+   - What is covered: comparison against an SMT-based tool, baseline **CVC4**.  
+   - What is missing: an explicit scalability-limit claim in the excerpt.  
+   - Source: *Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers*.
+
+The clearest match to “argue that SMT solving limits scalability” is **ReaS: Combining Numerical Optimization with SAT Solving**.
+------------------------------------------------------------------------
+[2026-10-15T00:19:13] agent_v1 T3 run2 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  search {"query": "Castor SMT-based baseline limits paper Hectare ECTA-based Haskell synthesizer SMT-based baseline limits compare against baseline main result"} -> 5 passages, 5 new: ['DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_corr_abs-2206-06164::55']  (I need to identify the relevant papers and passages for Castor and Hectare before I can name their SMT-based baselines, explain the stated SMT limitations, and report the results.)
+  answer {} ->   (The collected passages identify Hoogle+ for Hectare and mention Castor’s comparison is still needed from the Castor paper, but the specific Castor baseline, the paper’s stated SMT limitation, and its result are not yet captured.)
+chunks: ['DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_corr_abs-2206-06164::55']
+answer: Assumption: by “SMT-based baseline,” you mean the baseline in each paper that uses an SMT encoding or SMT-style reasoning.
+
+I can answer Hectare, but the documents provided do **not** include enough information to answer the part about **Castor**. The missing part is the Castor paper title and its comparison section, so I cannot identify its SMT-based baseline or its reported result from the provided documents.
+
+## Hectare
+- **Baseline name:** **Hoogle+**. The paper title is **“Searching Entangled Program Spaces.”**
+- **Why SMT limits it:** The paper says Hoogle+ is “**based on an SMT encoding of Petri-net reachability**” and contrasts it with Hectare’s approach. The documents provided do **not** explicitly say why SMT limits Hoogle+ beyond identifying it as the SMT-based approach. So this part is **partially missing**.
+- **Main result reported against it:** In **“Searching Entangled Program Spaces,”** the paper says Hectare “**significantly outperforms**” Hoogle+, specifically:
+  - “**Hectare is able to solve 88% of synthesis problems in the combined benchmark suite compared to only 64% by Hoogle+**”
+  - and “**on commonly solved benchmarks Hectare is 8× faster on average**.”
+  - It also reports that within the timeout, “**Hectare solves 43 out of 45**” benchmarks on the Hoogle+ benchmark suite.
+
+## Castor
+- **Baseline name:** **not provided in the documents**
+- **Why SMT limits it:** **not provided in the documents**
+- **Main result reported against it:** **not provided in the documents**
+
+If you provide the Castor paper excerpt or title, I can complete the comparison in the same format.
+------------------------------------------------------------------------
+[2026-10-15T00:19:16] baseline_2_1 Q1 run3 verdict=fail
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  search (one fixed hybrid search, top 5)
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_corr_abs-1812-02573::53', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_corr_abs-1812-02573::0', 'DBLP_journals_corr_abs-1812-02573::42']
+answer: The provided documents do **not** contain the specific runtime or sample count for verifying the deep recurrent neural network at error probability \(10^{-10}\).
+
+They do say that VeriFair was used on this benchmark and that it can choose “the probability of error to be extremely small,” but I don’t see the exact numbers for:
+- how long the verifier took, or
+- how many samples it needed.
+
+If you want, I can help extract any nearby figure/table text if you provide more of the paper.
+------------------------------------------------------------------------
+[2026-10-15T00:19:18] baseline_2_1 Q2 run3 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  search (one fixed hybrid search, top 5)
+chunks: ['DBLP_conf_icse_JeonQFFS16::28', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_conf_icse_JeonQFFS16::40', 'DBLP_conf_icse_JeonQFFS16::24', 'DBLP_journals_corr_abs-2206-06164::59']
+answer: Two papers in the provided documents make that point:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - Baseline: **dReal** (and they also ran **Z3** on one benchmark).  
+   - They say: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**even Z3 could not solve with a timeout of 60 minutes**,” concluding that “**traditional SMT approaches do not scale for these kinds of synthesis problems**.”
+
+2. **Metric Program Synthesis**  
+   - Baseline: **Regel**  
+   - The paper says Regel “**uses a number of SMT-based pruning strategies to reduce the search space**.” However, in the excerpt provided, it does **not** explicitly say that SMT solving limits scalability in the same way as ReaS does.
+
+So, the clear match to your question is **ReaS vs. dReal/Z3**.
+------------------------------------------------------------------------
+[2026-10-15T00:19:20] baseline_2_1 T3 run3 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  search (one fixed hybrid search, top 5)
+chunks: ['DBLP_journals_corr_abs-2206-07828::71', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_corr_abs-2206-07828::7', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_corr_abs-2206-07828::73']
+answer: For **Hectare**, the SMT-based baseline is **Hoogle+**. The paper says Hoogle+ is “**based on an SMT encoding of Petri-net reachability**.” It reports that this SMT-based approach is outperformed by Hectare: “**Hectare significantly outperforms its state-of-the-art competitor Hoogle+**,” solving “**88% of synthesis problems in the combined benchmark suite compared to only 64% by Hoogle+**,” and being “**8× faster on average**” on commonly solved benchmarks. The paper also notes Hoogle+ has a much larger implementation: “**4000 LOC, while Hectare only contains 400**.”
+
+For **Castor**, I don’t see any document here that mentions Castor, its SMT-based baseline, or the paper’s explanation of why SMT limits it. So I can’t answer that part from the provided documents.
+------------------------------------------------------------------------
+[2026-10-15T00:19:24] advanced_4_1 Q1 run3 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  plan scope=single
+  hop 1 + hop 2 (fixed)
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::5', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56']
+answer: According to the document, with error probability \( \Delta = 10^{-10} \), VeriFair “terminated in **606 seconds** and uses **28,000 samples**.”
+------------------------------------------------------------------------
+[2026-10-15T00:19:31] advanced_4_1 Q2 run3 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  plan scope=multi
+  hop 1 + hop 2 (fixed)
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::49', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_abs-2206-06164::62', 'DBLP_journals_corr_AlurFSS16::18', 'DBLP_journals_pacmpl_Bastani0S19::42']
+answer: From the provided documents, I can identify these papers that compare against an SMT-based tool and say SMT solving limits scalability:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - Baseline: **dReal** (and also **Z3** on one benchmark).  
+   - The paper says: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**These results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.**”
+
+2. **Probabilistic Verification of Fairness Properties via Concentration**  
+   - Baseline: **FairSqare**.  
+   - The paper says VeriFair “**scales substantially better than FairSqare**” and notes that “**FairSqare ... causes FairSqare to time out**,” with scalability depending on the classifier/model structure.
+
+3. **Results and Analysis of SyGuS-Comp’15**  
+   - Baseline/tool mentioned: **Sketch** / **Sketch Adaptive-Concretization**, which “**uses an SMT solvers to choose the next candidate expression**.”  
+   - However, this document does **not** explicitly argue that SMT solving limits scalability in the same direct way as ReaS.
+
+So, the clearest matches are **ReaS vs. dReal (and Z3)** and **VeriFair vs. FairSqare**.
+------------------------------------------------------------------------
+[2026-10-15T00:19:39] advanced_4_1 T3 run3 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  plan scope=multi
+  hop 1 + hop 2 (fixed)
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::49', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16::18', 'DBLP_journals_pacmpl_KoppelGVSP22::71']
+answer: I can answer this only partially from the provided documents.
+
+## Castor
+The PRIMARY Castor document says Castor is compared with **Hyper**, **Cozy**, and **Chestnut**. It does **not** mention an SMT-based baseline for Castor in the excerpt provided, so I can’t identify an SMT baseline or report an SMT-limitation claim from the supplied text.
+
+What the document does say about Hyper is:
+
+- “**Hyper is an in-memory column-store which has a state-of-the art query compiler. It implements compilation techniques (e.g. vectorization) that are well outside the scope of this paper.**”
+- Castor is compared against “**vanilla Hyper**” and “**Hyper with transformed data**.”
+
+Main result against Hyper in the excerpt:
+- Castor uses both “**expert generated queries**” and “**optimizer generated queries**,” and the optimizer “**searches over the space of transformation sequences**.”
+- The excerpt does not include the actual quantitative outcome.
+
+## Hectare
+The Hectare document in the provided context says it compares against:
+
+- “**the state-of-the-art synthesizer Hoogle+, based on an SMT encoding of Petri-net reachability**”
+
+Why SMT limits it, per the document:
+- The document says Hoogle+ is “**based on an SMT encoding of Petri-net reachability**,” but it does **not** explicitly say in the provided excerpt that SMT limits Hoogle+. So I can’t quote a claim about SMT limitations from the available text.
+
+Main result reported against it:
+- The document says Hectare is evaluated against Hoogle+, and notes that “**the Hoogle+ implementation ... contains a whopping 4000 LOC, while Hectare only contains 400**,” suggesting Hectare is much smaller/easier to implement.
+- However, the excerpt does **not** give the actual performance result against Hoogle+.
+
+## Bottom line
+From the provided text, I can identify Hectare’s SMT-based baseline as **Hoogle+**, but I cannot find:
+1. an SMT-based baseline for **Castor**, or
+2. explicit statements in the provided excerpts explaining **why SMT limits either baseline**, or
+3. the **main comparative result** against either baseline beyond the code-size observation for Hectare.
+
+If you want, I can still extract the exact comparison language present in the Hectare excerpt and separate what is explicitly stated from what is not.
+------------------------------------------------------------------------
+[2026-10-15T00:19:45] agent_v1 Q1 run3 verdict=fail
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  search {"query": "fairness verifier deep recurrent neural network error probability 10^-10 time samples"} -> 5 passages, 5 new: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::76']  (I need to identify the paper and locate the exact experiment reporting the verification time and sample count for the deep recurrent neural network at error probability 10^-10.)
+  search_in_paper {"paper": "Probabilistic Verification of Fairness Properties via Concentration", "query": "deep recurrent neural network error probability 10^-10 samples running time"} -> 3 passages, 0 new: []  (The benchmark is identified, but the exact runtime and sample count for the 10^-10 error setting are still missing and likely appear later in the paper's evaluation section.)
+  search_in_paper {"paper": "Probabilistic Verification of Fairness Properties via Concentration", "query": "deep recurrent neural network 10^-10 running time samples table"} -> 3 passages, 0 new: []  (I have the right paper, but I still need the exact runtime and sample count for the deep recurrent neural network at error probability 10^-10.)
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::76']
+answer: Assumption: the question refers to the **deep recurrent neural network benchmark** in **“Probabilistic Verification of Fairness Properties via Concentration”** and to the case where the verifier’s error probability is set to **10⁻¹⁰**.
+
+The documents **do not state the exact running time or the exact number of samples** needed for that specific setting. What they do say is:
+
+- **“in our evaluation, we show that even for ∆ = 10^-10, our algorithm terminates quickly on a deep neural network benchmark”** (*Probabilistic Verification of Fairness Properties via Concentration*).
+- The algorithm **“terminates once γ ≤ ∆”** and uses **“adaptive concentration inequalities”** to **“adaptively take samples until it has enough data to make a decision”** (*Probabilistic Verification of Fairness Properties via Concentration*).
+
+So, the missing parts are:
+- the **exact time** it took, and
+- the **exact number of samples** used for the deep recurrent neural network at error probability **10⁻¹⁰**.
+
+The provided documents only support a qualitative answer: it **terminated quickly** for that setting, but they do not give the precise numeric values.
+------------------------------------------------------------------------
+[2026-10-15T00:19:50] agent_v1 Q2 run3 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  find_comparisons {"technique": "SMT solver"} -> 5 passages, 5 new: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::12', 'DBLP_conf_sat_Inala0S16::34', 'DBLP_conf_cav_JeonQSF15::40']  (Need to identify papers that explicitly compare against an SMT-based baseline and mention scalability limits, then extract the baseline names from those comparison passages.)
+  answer {} ->   (The passages identify one paper that explicitly compares against an SMT-based tool and says SMT does not scale, but the question asks for all such papers and their baselines, so I can answer from the collected evidence only for the confirmed case.)
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::12', 'DBLP_conf_sat_Inala0S16::34', 'DBLP_conf_cav_JeonQSF15::40']
+answer: Assumption: “SMT-based tool” means a solver/tool explicitly described in the documents as an SMT solver or SMT approach.
+
+The papers that make this comparison and argue that SMT solving limits scalability are:
+
+1. **“ReaS: Combining Numerical Optimization with SAT Solving”** — it compares against **dReal** and also **Z3**. The paper says: “we compared ReaS with **dReal, a state-of-the-art SMT solver for reals**” and reports that “**dReal could not solve any of our benchmarks**” and that “**even Z3 could not solve**” one benchmark within 60 minutes; it concludes that “**the traditional SMT approaches do not scale for these kinds of synthesis problems**.”  
+   **Baseline(s): dReal; Z3**.  
+   - Citation: *ReaS: Combining Numerical Optimization with SAT Solving*
+
+2. **“Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers”** — it compares against **CVC4** and **Boolector**. The document says “**the auto-tuned solver solves 83 benchmarks more than CVC4 in total**” and “**for all domains, the domain-specific solvers outperform CVC4**,” while also comparing to “**the Boolector solver (the best bit-vector solver in SMT-COMP'15)**.” However, this document does **not** explicitly say that SMT solving “limits scalability”; it only shows performance comparison.  
+   **Baseline(s): CVC4; Boolector**.  
+   - Citation: *Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers*
+
+3. **“Adaptive Concretization for Parallel Program Synthesis”** — it compares against the **Enumerative CEGIS Solver** from SyGuS’14, but this solver is not identified in the document as an SMT-based tool. The paper says “**the Enumerative Solver does not accept problems in Sketch format**” and “**Adaptive concretization is faster for 6 of 9 benchmarks**,” but it does not argue that SMT solving limits scalability.  
+   **Baseline: Enumerative Solver**.  
+   - Citation: *Adaptive Concretization for Parallel Program Synthesis*
+
+So, based strictly on the documents, the clear match to your question is **ReaS: Combining Numerical Optimization with SAT Solving**, with baselines **dReal** and **Z3**. The documents do not provide enough support to say that the other papers explicitly argue SMT solving limits scalability.
+------------------------------------------------------------------------
+[2026-10-15T00:19:59] agent_v1 T3 run3 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  search {"query": "Castor compare against SMT-based baseline Haskell synthesizer Hectare compare against SMT-based baseline limits SMT main result"} -> 5 passages, 5 new: ['DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_corr_abs-2206-06164::59']  (I need to identify the specific papers and passages that name the SMT baseline, explain the limitation, and report the comparative result.)
+  clarify {"question": "Do you want me to answer only for the Haskell synthesizer Hectare and the Castor paper\u2019s SMT baseline, or do you also want the exact comparative result for Castor from the specific benchmark section?", "assumption": "I\u2019ll assume you want one baseline name, one SMT-limits explanation, and one headline result for each paper."} -> Clarification not possible (batch mode) — assuming: I’ll assume you want one baseline name, one SMT-limits explanation, and one headline result for each paper.  (I have Hectare’s baseline and result, but the Castor paper has not yet been identified in the retrieved passages, so I need a narrowing step or another search to avoid guessing.)
+  answer {} ->   (The passages already identify both baselines and Hectare’s headline result, but I still need the Castor paper passage that states its SMT baseline, why SMT is limiting there, and the specific comparative outcome before I can answer both parts accurately.)
+chunks: ['DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_corr_abs-2206-06164::59']
+answer: Assuming you want one baseline name, one SMT-limits explanation, and one headline result for each paper.
+
+## 1) Castor
+I can’t answer this part from the provided documents: none of the documents mention **Castor**, nor do they describe its SMT-based baseline, why SMT limits it, or any result for Castor. The missing parts are:
+- the **baseline name**
+- the **paper’s explanation of SMT limits**
+- the **headline result against that baseline**
+
+## 2) Hectare / *Searching Entangled Program Spaces*
+- **Baseline name:** **Hoogle+**. The paper says it is “**based on an SMT encoding of Petri-net reachability**” (*Searching Entangled Program Spaces*).
+- **Why SMT limits it:** The documents do **not** explicitly explain why SMT limits Hoogle+ beyond that it uses “an SMT encoding of Petri-net reachability.” So the precise limitation is **not covered** in the provided text (*Searching Entangled Program Spaces*).
+- **Main result:** The paper reports that Hectare “**significantly outperforms**” Hoogle+ and gives the headline numbers: “**Hectare is able to solve 88% of synthesis problems in the combined benchmark suite compared to only 64% by Hoogle+, and on commonly solved benchmarks Hectare is 8× faster on average**” (*Searching Entangled Program Spaces*). It also says Hectare solved “**43 out of 45**” Hoogle+ benchmarks within the timeout (*Searching Entangled Program Spaces*).
+
+If you want, I can also format this as a two-column table, but I still can’t fill in the Castor row from these documents.
+------------------------------------------------------------------------
+[2026-10-15T00:19:59] SUMMARY
+system               pass  evidence  papers  calls   tokens  latency  chunks  steps   per task (passes/runs)
+baseline_2_1      0.00/3      25%     33%    1.0    1,824     1.9s     5.0    1.0   Q1 0/3  Q2 0/3  T3 0/3
+advanced_4_1      1.00/3      50%     72%    2.0    3,649     5.6s     8.0    2.0   Q1 3/3  Q2 0/3  T3 0/3
+agent_v1          0.00/3      25%     33%    3.4    6,255     5.5s     5.6    2.4   Q1 0/3  Q2 0/3  T3 0/3
+------------------------------------------------------------------------
+[2026-10-15T00:27:43] agent_v2 Q1 run1 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  search {"query": "fairness verifier deep recurrent neural network error probability 10^-10 time samples"} -> 5 passages, 5 new: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::76']  (We need to identify the paper containing the specific experiment before we can extract the time and sample count. | missing: ['the paper/result that reports the fairness verifier runtime and sample count for the deep recurrent neural network at error probability 10^-10'])
+  read_next {"chunk_id": "DBLP_journals_pacmpl_Bastani0S19::53"} -> 2 passages, 2 new: ['DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55']  (The benchmark passage introduces the experiment but does not yet contain the time or sample count, so the next chunk should contain the missing numerical results. | missing: ['the exact running time for the deep recurrent neural network benchmark at error probability 10^-10', 'the number of samples used for that verification'])
+  read_next {"chunk_id": "DBLP_journals_pacmpl_Bastani0S19::55"} -> 2 passages, 2 new: ['DBLP_journals_pacmpl_Bastani0S19::56', 'DBLP_journals_pacmpl_Bastani0S19::57']  (The passage cuts off exactly at the 10^-10 result, so I need the following chunk to extract the time and sample count. | missing: ['the full result for Δ = 10^-10: runtime and sample count'])
+  answer {} ->   (The passages explicitly state that for ∆ = 10^-10 VeriFair terminated in 606 seconds and used 28,000 samples. | missing: [])
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56', 'DBLP_journals_pacmpl_Bastani0S19::57']
+answer: **Assumption:** You are asking about the Quick Draw deep recurrent neural network benchmark and the case with error probability \( \Delta = 10^{-10} \).
+
+According to **“Probabilistic Verification of Fairness Properties via Concentration,”** VeriFair “terminated in **606 seconds** and uses **28,000 samples**” for \( \Delta = 10^{-10} \). This is stated in the paper’s benchmark results for the deep RNN/VAE setup.
+------------------------------------------------------------------------
+[2026-10-15T00:27:51] agent_v2 Q2 run1 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  find_comparisons {"technique": "SMT-based tool"} -> 5 passages, 5 new: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_conf_sigsoft_JeonQFS15::0', 'DBLP_journals_fmsd_JeonQSF17::25', 'DBLP_journals_pacmpl_FeserM0S20::58']  (We need papers that explicitly compare against an SMT-based baseline and mention scalability limits, so finding comparison passages is the best first step. | missing: ['papers that compare against an SMT-based tool', 'baseline name in each', 'passages arguing SMT solving limits scalability'])
+  answer {} ->   (The collected passages already identify the papers that compare against SMT-based tools and state that SMT approaches do not scale, along with the named baselines. | missing: [])
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_conf_sigsoft_JeonQFS15::0', 'DBLP_journals_fmsd_JeonQSF17::25', 'DBLP_journals_pacmpl_FeserM0S20::58']
+answer: The documents support only one paper making this comparison and scalability claim.
+
+- **ReaS: Combining Numerical Optimization with SAT Solving** — it compares against **dReal** and also against **Z3** on one benchmark. The paper says: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**even Z3 could not solve with a timeout of 60 minutes**,” concluding that “**traditional SMT approaches do not scale for these kinds of synthesis problems**.”  
+  - **Baseline(s):** dReal; Z3.  
+  - **Claim:** SMT-solving “do not scale” for these synthesis problems.
+
+The other provided papers do **not** explicitly compare against an SMT-based tool while making that scalability argument, based on the documents here. For example, **An empirical study of adaptive concretization for parallel program synthesis** says the benchmarks were “initially intractable with Sketch,” but Sketch is not an SMT solver in the provided text.
+
+If you want, I can also list every paper in the documents that mentions comparison baselines, but only **ReaS: Combining Numerical Optimization with SAT Solving** answers the SMT-based part of your question.
+------------------------------------------------------------------------
+[2026-10-15T00:28:01] agent_v2 T3 run1 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  search {"query": "Castor SMT-based baseline Haskell synthesizer Hectare baseline SMT limits main result compared against baseline"} -> 5 passages, 5 new: ['DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_corr_abs-2206-06164::55']  (We need identify the relevant papers and passages for both Castor and Hectare before extracting the baseline, limitation, and result. | missing: ['baseline names for Castor and Hectare', 'why SMT limits each baseline per paper', 'main result reported against each baseline', "passages from 'Deductive Optimization of Relational Data Storage', the paper that introduces castor (use search_in_paper with paper='castor')"])
+  search_in_paper {"paper": "Searching Entangled Program Spaces", "query": "Castor SMT baseline limits result"} -> 3 passages, 2 new: ['DBLP_journals_pacmpl_KoppelGVSP22::76', 'DBLP_journals_pacmpl_KoppelGVSP22::34']  (We have Hectare’s baseline, but the Castor paper evidence has not yet been identified, so I should search within the Castor paper for its SMT-based comparison and result. | missing: ["Castor's SMT-based baseline name", 'why SMT limits Castor according to the paper', "main result reported against Castor's baseline", "passages from 'Deductive Optimization of Relational Data Storage', the paper that introduces castor (use search_in_paper with paper='castor')"])
+  search_in_paper {"paper": "castor", "query": "SMT baseline why limit main result"} -> 3 passages, 3 new: ['DBLP_journals_pacmpl_FeserM0S20::60', 'DBLP_journals_pacmpl_FeserM0S20::61', 'DBLP_journals_pacmpl_FeserM0S20::62']  (We need the Castor paper passages that name its SMT-based baseline and report the comparison result, and searching within the paper is the most direct way to find them. | missing: ['Castor baseline name', 'why SMT limits Castor', 'main result against baseline'])
+  answer {} ->   (The collected passages identify both baselines, explain the SMT-related limitation for Hoogle+, and provide the main reported result for each comparison. | missing: [])
+chunks: ['DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_corr_abs-2206-06164::55', 'DBLP_journals_pacmpl_KoppelGVSP22::76', 'DBLP_journals_pacmpl_KoppelGVSP22::34', 'DBLP_journals_pacmpl_FeserM0S20::60', 'DBLP_journals_pacmpl_FeserM0S20::61', 'DBLP_journals_pacmpl_FeserM0S20::62']
+answer: Assumption: you are asking about the **SMT-based baseline** used in each paper’s comparison.
+
+### Hectare
+- **Baseline name:** **Hoogle+**.  
+  The paper says Hectare is compared “with the state-of-the-art synthesizer **Hoogle+**, based on an **SMT encoding of Petri-net reachability**” (*Searching Entangled Program Spaces*).
+- **Why SMT limits it:** The provided documents do **not** give a detailed explanation of the SMT limitation beyond saying Hoogle+ is “based on an SMT encoding of Petri-net reachability” and that it has “restricted support for higher-order functions” (*Searching Entangled Program Spaces*). So the specific SMT-related limitation is **not fully explained in the documents**.
+- **Main result against it:** Hectare “**significantly outperforms**” Hoogle+; specifically, it “**solve[s] 88% of synthesis problems** in the combined benchmark suite compared to only **64%** by Hoogle+,” and on commonly solved benchmarks Hectare is “**8× faster on average**” (*Searching Entangled Program Spaces*).
+
+### Castor
+- **Baseline name:** The provided Castor documents do **not** mention an SMT-based baseline by name. They say Castor is compared against “**baseline Hyper**” (*Deductive Optimization of Relational Data Storage*).
+- **Why SMT limits it:** This is **missing from the provided Castor documents**. The excerpt discusses TPC-H queries and Castor’s unsupported SQL primitives, but it does **not** say that an SMT baseline is involved or explain any SMT limitation (*Deductive Optimization of Relational Data Storage*).
+- **Main result against it:** Castor’s generated layouts and query code are “**faster or significantly faster than Hyper for 15 out of 18 queries**,” and when slower, “**no query is more than 2x slower**” (*Deductive Optimization of Relational Data Storage*).
+
+### What is missing
+- For **Castor**, the part “each compare against an SMT-based baseline” is **not covered** by the provided documents.
+- For **Hectare**, the documents do not fully explain **why SMT limits Hoogle+** beyond its Petri-net-SMT basis and restricted higher-order support.
+------------------------------------------------------------------------
+[2026-10-15T00:28:10] agent_v2 Q1 run2 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  search {"query": "fairness verifier deep recurrent neural network error probability 10^-10 samples runtime"} -> 5 passages, 5 new: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::12']  (Need to identify the paper and locate the specific experiment reporting both runtime and sample count. | missing: ['the paper/result containing the fairness verifier experiment', 'the verification time for error probability 10^-10', 'the number of samples used'])
+  read_next {"chunk_id": "DBLP_journals_pacmpl_Bastani0S19::53"} -> 2 passages, 2 new: ['DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55']  (The benchmark passage introduces the deep RNN experiment but stops before the actual runtime and sample count, so I need the following chunk to get the numbers. | missing: ['the runtime for the deep recurrent neural network benchmark', 'the number of samples used for error probability 10^-10'])
+  read_next {"chunk_id": "DBLP_journals_pacmpl_Bastani0S19::55"} -> 2 passages, 2 new: ['DBLP_journals_pacmpl_Bastani0S19::56', 'DBLP_journals_pacmpl_Bastani0S19::57']  (The relevant passage is cut off right before the requested ∆ = 10^-10 numbers, so I need the next chunk to extract the exact runtime and sample count. | missing: ['the full runtime for ∆ = 10^-10', 'the sample count for ∆ = 10^-10'])
+  answer {} ->   (The collected passages state that for ∆ = 10^-10, VeriFair terminated in 606 seconds and used 28,000 samples. | missing: [])
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56', 'DBLP_journals_pacmpl_Bastani0S19::57']
+answer: Assumption: you are asking about the **Quick Draw deep recurrent neural network benchmark** in **“Probabilistic Verification of Fairness Properties via Concentration.”**
+
+The paper says that with error probability \( \Delta = 10^{-10} \), “**VeriFair terminated in 606 seconds and uses 28,000 samples**.”  
+So the verifier took **606 seconds** and needed **28,000 samples**. (**“Probabilistic Verification of Fairness Properties via Concentration”**)
+------------------------------------------------------------------------
+[2026-10-15T00:28:15] agent_v2 Q2 run2 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  find_comparisons {"technique": "SMT-based tool"} -> 5 passages, 5 new: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_conf_sigsoft_JeonQFS15::0', 'DBLP_journals_fmsd_JeonQSF17::25', 'DBLP_journals_pacmpl_FeserM0S20::58']  (The question asks for papers that compare against an SMT-based tool and make a scalability argument, so the right first step is to find comparison passages naming SMT baselines. | missing: ['papers that compare against an SMT-based tool', 'the baseline name in each paper', 'evidence that they argue SMT solving limits scalability'])
+  answer {} ->   (The collected passages already identify the relevant papers and the SMT-based baselines they compare against, and one passage explicitly states SMT limits scalability. | missing: [])
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_conf_sigsoft_JeonQFS15::0', 'DBLP_journals_fmsd_JeonQSF17::25', 'DBLP_journals_pacmpl_FeserM0S20::58']
+answer: Assumption: by “SMT-based tool” you mean papers that explicitly compare against an SMT solver or an SMT-based synthesis tool and then say the SMT approach does not scale.
+
+The documents contain **one clear match**:
+
+- **“ReaS: Combining Numerical Optimization with SAT Solving”** compares against **dReal** and also **Z3**. The paper says: “we wrote a script to translate the benchmarks written in ReaS into the SMT-lib format and fed them to the dReal solver. However, dReal could not solve any of our benchmarks with a timeout of 60 minutes. We also ran Z3 on the thermostat benchmark … and found that even Z3 could not solve with a timeout of 60 minutes. These results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.”  
+  - **Baseline(s):** dReal; Z3.  
+  - **Paper title cited:** *ReaS: Combining Numerical Optimization with SAT Solving*.
+
+The other provided documents do **not** clearly match the full request:
+- **“Special Issue on Syntax-Guided Synthesis Preface”** mentions “SMT solvers as a black-box,” but does not give a specific comparison baseline or a scalability argument in the same way.
+- **“JSKETCH: Sketching for Java”**, **“An empirical study of adaptive concretization for parallel program synthesis”**, and **“Deductive Optimization of Relational Data Storage”** do not, in the provided text, state that they compare against an SMT-based tool and argue SMT limits scalability.
+
+If you want, I can also extract any **indirect** SMT-related mentions from the remaining papers, but the explicit answer in the documents is just the ReaS paper.
+------------------------------------------------------------------------
+[2026-10-15T00:28:24] agent_v2 T3 run2 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  search {"query": "Castor Haskell synthesizer Hectare SMT-based baseline limits main result compared against baseline"} -> 5 passages, 5 new: ['DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_pacmpl_KoppelGVSP22::74']  (Need to identify the relevant papers and comparison passages before extracting the baseline names, limitations, and results. | missing: ['baseline names for Castor and Hectare', 'why SMT limits each baseline', 'main reported result against each baseline', "passages from 'Deductive Optimization of Relational Data Storage', the paper that introduces castor (use search_in_paper with paper='castor')"])
+  search_in_paper {"paper": "castor", "query": "SMT baseline compare limit result"} -> 3 passages, 3 new: ['DBLP_journals_pacmpl_FeserM0S20::60', 'DBLP_journals_pacmpl_FeserM0S20::62', 'DBLP_journals_pacmpl_FeserM0S20::65']  (I have Hectare evidence, but Castor’s baseline and evaluation details are still missing and should be in the Castor paper. | missing: ['Castor baseline name', 'why SMT limits Castor', 'main result against baseline'])
+  answer {} ->   (The passages contain the baseline names, the stated SMT limitations, and the reported main results for both Castor and Hectare. | missing: [])
+chunks: ['DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_pacmpl_KoppelGVSP22::74', 'DBLP_journals_pacmpl_FeserM0S20::60', 'DBLP_journals_pacmpl_FeserM0S20::62', 'DBLP_journals_pacmpl_FeserM0S20::65']
+answer: **Assumption:** “SMT-based baseline” means the baseline system that the paper explicitly says is based on an SMT encoding.
+
+- **Castor**: the baseline is **Hyper**.  
+  - **Why SMT limits it:** the provided Castor document does **not** say Hyper is SMT-based, and it does **not** explain any SMT limitation for Hyper. It only says, “**the layouts and query code generated by Castor from expert queries are faster or significantly faster than Hyper**” and that “**If Hyper is given specialized views and indexes, then its performance is on par with Castor**.” So the part asking why SMT limits it is **missing for Castor** in the documents. (*Deductive Optimization of Relational Data Storage*)  
+  - **Main result:** “**the layouts and query code generated by Castor from expert queries are faster or significantly faster than Hyper for 15 out of 18 queries**,” and “**in the cases where Castor is slower than Hyper, no query is more than 2x slower**.” (*Deductive Optimization of Relational Data Storage*)
+
+- **Hectare**: the baseline is **Hoogle+**.  
+  - **Why SMT limits it:** the paper says Hoogle+ is “**based on an SMT encoding of Petri-net reachability**” and that “**the poor performance of Hoogle+ can be mainly attributed to the brittleness of the abstraction-refinement loop it uses to support polymorphic components**,” where it “**ends up wasting a lot of time enumerating ill-typed terms**.” The documents do **not** explicitly say that SMT itself limits it; they say the **abstraction-refinement loop used to support polymorphism** is the problem. (*Searching Entangled Program Spaces*)  
+  - **Main result:** “**Within the timeout, Hectare solves 43 out of 45 benchmarks, whereas Hoogle+ only solves 39**,” and “**on commonly solved benchmarks Hectare is significantly faster: it achieves an average speedup (geometric mean) of 7× on this suite**.” (*Searching Entangled Program Spaces*)
+
+If you want, I can also restate this as a two-column comparison table.
+------------------------------------------------------------------------
+[2026-10-15T00:28:32] agent_v2 Q1 run3 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  search {"query": "fairness verifier deep recurrent neural network error probability 10^-10 samples time"} -> 5 passages, 5 new: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::12']  (Need to identify the paper and passage reporting the fairness verifier result before extracting the time and sample count. | missing: ['time taken to verify the deep recurrent neural network at error probability 10^-10', 'number of samples needed'])
+  read_next {"chunk_id": "DBLP_journals_pacmpl_Bastani0S19::53"} -> 2 passages, 2 new: ['DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55']  (Chunk 53 introduces the benchmark and says the results follow, so we need the next passages to get the specific time and sample count. | missing: ['the running time for the deep recurrent neural network benchmark at error probability 10^-10', 'the number of samples used in that benchmark'])
+  read_next {"chunk_id": "DBLP_journals_pacmpl_Bastani0S19::55"} -> 2 passages, 2 new: ['DBLP_journals_pacmpl_Bastani0S19::56', 'DBLP_journals_pacmpl_Bastani0S19::57']  (The relevant passage is cut off right before the exact time/sample numbers, so we should read the next chunk to obtain the missing result. | missing: ['the completion of the runtime and sample count for the deep recurrent neural network at error probability 10^-10'])
+  answer {} ->   (The collected passages explicitly state the ∆ = 10^-10 result for the deep RNN benchmark: VeriFair terminated in 606 seconds and used 28,000 samples. | missing: [])
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56', 'DBLP_journals_pacmpl_Bastani0S19::57']
+answer: Assumption: by “fairness verifier” you mean **VeriFair**.
+
+According to **“Probabilistic Verification of Fairness Properties via Concentration”**, on the Quick Draw benchmark, “using \( \Delta = 10^{-10} \), VeriFair terminated in **606 seconds** and uses **28,000 samples**” (the quoted passage gives the exact runtime and sample count).
+
+The documents do not explicitly state this figure for the **deep recurrent neural network benchmark** in the same sentence, but they do state that VeriFair scales to a deep recurrent neural network benchmark and that with \( \Delta = 10^{-10} \) it “terminated in 606 seconds and uses 28,000 samples” on the benchmark described nearby. So the answer supported by the provided documents is:
+
+- **Time:** 606 seconds  
+- **Samples:** 28,000
+
+Cited paper title: **Probabilistic Verification of Fairness Properties via Concentration**
+------------------------------------------------------------------------
+[2026-10-15T00:28:36] agent_v2 Q2 run3 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  find_comparisons {"technique": "SMT-based tool"} -> 5 passages, 5 new: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_conf_sigsoft_JeonQFS15::0', 'DBLP_journals_fmsd_JeonQSF17::25', 'DBLP_journals_pacmpl_FeserM0S20::58']  (The question asks for papers that explicitly compare against SMT-based tools, so the comparison-finding tool is the most direct first step. | missing: ['papers comparing against an SMT-based tool', 'baseline names', 'evidence that they argue SMT solving limits scalability'])
+  answer {} ->   (The collected passages identify the papers that explicitly compare against SMT-based tools and state that SMT solving does not scale, along with the baseline names. | missing: [])
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_conf_sigsoft_JeonQFS15::0', 'DBLP_journals_fmsd_JeonQSF17::25', 'DBLP_journals_pacmpl_FeserM0S20::58']
+answer: One paper in the provided documents clearly does this:
+
+- **“ReaS: Combining Numerical Optimization with SAT Solving”** compares against **dReal** and also **Z3**, and argues that “**traditional SMT approaches do not scale for these kinds of synthesis problems**.” The paper says: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**even Z3 could not solve with a timeout of 60 minutes**.”  
+  - **Baseline(s):** **dReal**; also **Z3**.  
+  - **Claim:** SMT solving limits scalability for these synthesis problems.  
+  - **Paper title:** *ReaS: Combining Numerical Optimization with SAT Solving*
+
+A second paper in the provided documents does **not** explicitly mention an SMT-based baseline or a scalability argument against SMT solving, so I cannot confirm another one from these documents.
+
+If you want, I can also list which documents compare against synthesis tools that are **not** SMT-based.
+------------------------------------------------------------------------
+[2026-10-15T00:28:45] agent_v2 T3 run3 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  search {"query": "Castor SMT-based baseline Haskell synthesizer Hectare compare against SMT baseline limitations main result"} -> 5 passages, 5 new: ['DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_pacmpl_KoppelGVSP22::0']  (We need identify the relevant papers and passages for both Castor and Hectare before extracting the baseline names, SMT limitations, and reported results. | missing: ['baseline names for Castor and Hectare', 'why SMT limits each baseline', 'main result reported against each baseline', "passages from 'Deductive Optimization of Relational Data Storage', the paper that introduces castor (use search_in_paper with paper='castor')"])
+  search_in_paper {"paper": "castor", "query": "Castor SMT-based baseline limitation main result compared against"} -> 3 passages, 3 new: ['DBLP_journals_pacmpl_FeserM0S20::62', 'DBLP_journals_pacmpl_FeserM0S20::9', 'DBLP_journals_pacmpl_FeserM0S20::57']  (We already have Hectare evidence; the missing Castor-specific baseline and result are most likely in the Castor paper itself, so search within that paper should locate the relevant passages. | missing: ['Castor baseline name', 'why SMT limits Castor', 'main result reported against baseline'])
+  answer {} ->   (The collected passages already identify both baselines, the SMT-related limitation for Hoogle+, and the main reported results for Castor and Hectare. | missing: [])
+chunks: ['DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_pacmpl_KoppelGVSP22::0', 'DBLP_journals_pacmpl_FeserM0S20::62', 'DBLP_journals_pacmpl_FeserM0S20::9', 'DBLP_journals_pacmpl_FeserM0S20::57']
+answer: Assumption: you mean the **SMT-based baseline compared with Castor** and the **SMT-based baseline compared with Hectare**.
+
+- **Hectare baseline: Hoogle+**  
+  The paper *Searching Entangled Program Spaces* says Hectare is compared with “the state-of-the-art synthesizer **Hoogle+**, based on an SMT encoding of Petri-net reachability.” It also says Hectare “significantly outperforms” Hoogle+, with “an average speedup of **8×**,” and specifically “Hectare is able to solve **88%** of synthesis problems in the combined benchmark suite compared to only **64%** by Hoogle+.” (*Searching Entangled Program Spaces*)  
+  Why SMT limits it: the provided document does **not** explain in detail why the SMT encoding limits Hoogle+; it only states that Hoogle+ is “based on an SMT encoding of Petri-net reachability.” (*Searching Entangled Program Spaces*)
+
+- **Castor baseline: Hyper**  
+  The provided Castor excerpts do **not** mention an SMT-based baseline. They compare Castor against “Hyper, Cozy, and Chestnut,” and say Hyper is “an in-memory column-store which has a state-of-the art query compiler.” No explanation is given in the provided documents about SMT limiting Hyper, and no SMT-based baseline for Castor is named here. (*Deductive Optimization of Relational Data Storage*)  
+  Main result against Hyper: “the layouts and query code generated by Castor from expert queries are faster or significantly faster than Hyper for **15 out of 18 queries**,” and “in the cases where Castor is slower than Hyper, no query is more than **2x slower**.” Also, “If Hyper is given specialized views and indexes, then its performance is on par with Castor.” (*Deductive Optimization of Relational Data Storage*)
+
+So, from the provided documents, the only clear SMT-based baseline is **Hoogle+** for Hectare; the Castor excerpt does not contain an SMT-based baseline or an SMT-limit explanation.
+------------------------------------------------------------------------
+[2026-10-15T00:28:45] SUMMARY
+system               pass  evidence  papers  calls   tokens  latency  chunks  steps   per task (passes/runs)
+agent_v2          1.00/3      62%     67%    4.4   11,090     7.0s     7.6    3.1   Q1 3/3  Q2 0/3  T3 0/3
+------------------------------------------------------------------------
+[2026-10-15T07:16:39] agent_v3_first Q1 run1 verdict=fail
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  find_papers {"query": "fairness verifier deep recurrent neural network error probability 10^-10 runtime samples"} -> 3 passages, 3 new: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_conf_nips_ZhangSS18::26', 'DBLP_conf_nips_EllisRST18::19']  (I need to identify the relevant paper and passage before looking up the exact runtime and sample count. | missing: ['the paper/tool that reports the fairness verifier result', 'the verification time for error probability 10^-10', 'the number of samples needed'])
+  read_next {"chunk_id": "DBLP_journals_pacmpl_Bastani0S19::42"} -> 2 passages, 2 new: ['DBLP_journals_pacmpl_Bastani0S19::43', 'DBLP_journals_pacmpl_Bastani0S19::44']  (The collected passage introduces the deep RNN benchmark but stops before giving the specific runtime and sample count, so we need the following chunk. | missing: ['the runtime to verify the deep recurrent neural network at error probability 10^-10', 'the number of samples needed by the fairness verifier'])
+  search_in_paper {"paper": "Probabilistic Verification of Fairness Properties via Concentration", "query": "error probability 10^-10 runtime samples deep recurrent neural network VeriFair"} -> 3 passages, 2 new: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::0']  (The collected passage identifies the right paper and benchmark but not the numeric runtime or sample count, so I need to search within the paper for the specific experiment results. | missing: ['the exact verification time for the deep recurrent neural network at error probability 10^-10', 'the exact number of samples used for that verification'])
+  search_in_paper {"paper": "Probabilistic Verification of Fairness Properties via Concentration", "query": "10^-10 2,000 samples running time deep recurrent neural network fairness verifier"} -> 3 passages, 1 new: ['DBLP_journals_pacmpl_Bastani0S19::55']  (We have the relevant paper and benchmark, but not yet the exact runtime and sample count for the 10^-10 error probability case. | missing: ['the runtime for error probability 10^-10', 'the number of samples used for that setting'])
+  answer {} ->   (The collected passages contain the exact runtime and sample count for the deep recurrent neural network at error probability 10^-10. | missing: [])
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_conf_nips_ZhangSS18::26', 'DBLP_conf_nips_EllisRST18::19', 'DBLP_journals_pacmpl_Bastani0S19::43', 'DBLP_journals_pacmpl_Bastani0S19::44', 'DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::55']
+answer: Assumption: by “the fairness verifier” you mean **VeriFair** in the **“Probabilistic Verification of Fairness Properties via Concentration”** benchmark on the deep recurrent neural network.
+
+According to **“Probabilistic Verification of Fairness Properties via Concentration”**, “using ∆ = 10 -10 , VeriFair terminated in **606** …” and the preceding sentence gives the other run: “using ∆ = 10 -5 , VeriFair terminates in **301 seconds and uses 14,000 samples**” ([Probabilistic Verification of Fairness Properties via Concentration]).  
+
+However, the provided document excerpt is cut off right after “VeriFair terminated in 606”, so the **full termination time and the number of samples for ∆ = 10⁻¹⁰ are missing** from the documents. I can only confirm that the answer is not fully contained in the provided text ([Probabilistic Verification of Fairness Properties via Concentration]).
+------------------------------------------------------------------------
+[2026-10-15T07:16:47] agent_v3_first Q2 run1 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  find_papers {"query": "papers that compare their approach against an SMT-based tool and argue that SMT solving limits scalability; identify the baseline tool name in each paper"} -> 4 passages, 4 new: ['DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_abs-2206-06164::62', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_pacmpl_FeserM0S20::57']  (Need to identify candidate papers first, then confirm the baseline names and the scalability claim inside each paper. | missing: ['which papers make the scalability argument', 'the SMT-based baseline tool name in each paper'])
+  answer {} ->   (The collected passages already identify the papers, the SMT-based baselines, and the scalability arguments. | missing: [])
+chunks: ['DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_abs-2206-06164::62', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_pacmpl_FeserM0S20::57']
+answer: Assumption: “SMT-based tool” means the paper explicitly compares against an SMT solver and uses that comparison to argue scalability limits.
+
+- **ReaS: Combining Numerical Optimization with SAT Solving** compares against **dReal** and also reports running **Z3**. It says, “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**,” and “**even Z3 could not solve with a timeout of 60 minutes**,” concluding that “**traditional SMT approaches do not scale for these kinds of synthesis problems**.”  
+  - Baselines: **dReal**; also **Z3** on the thermostat benchmark.  
+  - Claim: SMT solving limits scalability.
+
+- **Special Issue on Syntax-Guided Synthesis Preface** mentions prior work that “**used SMT solvers as a black-box**” and that another work “**shows the benefits one can gain by accessing the inners of an SMT solver**,” but it does **not** provide a specific comparison result about scalability limits in the excerpt shown. So this does **not** answer the question fully from the provided text.
+
+No other provided paper excerpt explicitly compares against an SMT-based tool and argues that SMT solving limits scalability.
+------------------------------------------------------------------------
+[2026-10-15T07:16:56] agent_v3_first T3 run1 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  find_papers {"query": "Castor compare against SMT-based baseline why SMT limits it main result; Hectare compare against SMT-based baseline why SMT limits it main result"} -> 3 passages, 3 new: ['DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-1802-04408::47']  (Need to identify the relevant papers and the exact comparison passages for both systems before answering. | missing: ['Castor baseline name, SMT limitation, and main result', 'Hectare baseline name, SMT limitation, and main result', "passages from 'Deductive Optimization of Relational Data Storage', the paper that introduces castor (use search_in_paper with paper='castor')"])
+  search_in_paper {"paper": "Searching Entangled Program Spaces", "query": "SMT baseline Hectare compares against, why SMT limits it, main result"} -> 3 passages, 2 new: ['DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_pacmpl_KoppelGVSP22::80']  (We have the Hectare paper passage but it only names the SMT-based baseline; we still need the specific result and the paper's explanation for SMT limits, and Castor needs separate paper lookup. | missing: ["Castor's baseline name, why SMT limits it, and main result", "Hectare's baseline name, why SMT limits it, and main result"])
+  answer {} ->   (The collected passages already support both comparisons, the SMT-related limitations, and the reported results. | missing: [])
+chunks: ['DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_pacmpl_KoppelGVSP22::80']
+answer: Assumption: you want the SMT-based baseline for each system and the comparison result reported in the papers.
+
+- **Castor** compares against **Hyper**. The paper says Hyper is “an in-memory column-store which has a state-of-the art query compiler” and that it “implements compilation techniques (e.g. vectorization) that are well outside the scope of this paper.” It uses Hyper “to show that layout specialization is a powerful optimization that can compensate for the many low-level compiler optimizations in Hyper.” The main reported result is that Castor is compared both on original TPC-H data and on transformed data, and that the optimized queries sometimes fail to produce a serializable candidate: “in some cases, the optimizer fails to find a serializable candidate, so there is no bar in the plot.” The document does **not** state a single headline win/loss number in the excerpt.  
+  **Source:** *Deductive Optimization of Relational Data Storage*
+
+- **Hectare** compares against **Hoogle+**. The paper says Hoogle+ is “based on an SMT encoding of Petri-net reachability,” and Hectare is evaluated “against the state-of-the-art synthesizer Hoogle+.” The paper’s SMT-related limitation is indirect: Hoogle+ is the SMT-based baseline, and Hectare is designed to improve synthesis performance relative to it. The main reported result in the excerpt is: “Within the timeout, Hectare solves 43 out of 45” benchmarks on the Hoogle+ suite.  
+  **Source:** *Searching Entangled Program Spaces*
+
+What is missing: for **Castor**, this excerpt does not give a clear “SMT limits it” statement or a single numerical outcome against the baseline; it only describes the comparison setup and some qualitative notes.
+------------------------------------------------------------------------
+[2026-10-15T07:17:11] agent_v3_first Q1 run2 verdict=fail
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  find_papers {"query": "fairness verifier deep recurrent neural network error probability 10^-10 time samples"} -> 3 passages, 3 new: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_conf_nips_BastaniPS18::27', 'DBLP_conf_nips_ZhangSS18::26']  (Need to identify the relevant paper first, then extract the exact runtime and sample count from its results. | missing: ['exact verification time for the deep recurrent neural network at error probability 10^-10', 'number of samples needed'])
+  search_in_paper {"paper": "Probabilistic Verification of Fairness Properties via Concentration", "query": "deep recurrent neural network error probability 10^-10 time samples"} -> 3 passages, 2 new: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::0']  (The relevant paper has been identified, but the exact time and sample count are likely in a later passage of the same paper. | missing: ['the verification time for the deep recurrent neural network at error probability 10^-10', 'the number of samples needed'])
+  search_in_paper {"paper": "Probabilistic Verification of Fairness Properties via Concentration", "query": "error probability 10^-10 how long samples deep recurrent neural network VeriFair"} -> 3 passages, 0 new: []  (The collected passages identify the benchmark but not the specific time and sample count, so I need a more targeted search within the paper. | missing: ['the exact running time for the deep recurrent neural network case at error probability 10^-10', 'the exact number of samples used in that case'])
+  search_in_paper {"paper": "Probabilistic Verification of Fairness Properties via Concentration", "query": "how long did VeriFair take for error probability 10^-10 and how many samples did it need on the deep recurrent neural network benchmark"} -> 3 passages, 1 new: ['DBLP_journals_pacmpl_Bastani0S19::43']  (The current passages identify the benchmark and that VeriFair studied running time versus problem parameters, but they do not yet contain the specific time and sample count for ε=10^-10. | missing: ['the exact running time for error probability 10^-10', 'the exact number of samples used at error probability 10^-10'])
+  search_in_paper {"paper": "Probabilistic Verification of Fairness Properties via Concentration", "query": "error probability 10^-10 running time number of samples deep recurrent neural network benchmark"} -> 3 passages, 1 new: ['DBLP_journals_pacmpl_Bastani0S19::76']  (We have the benchmark identified, but need the specific experiment passage with the 10^-10 setting and its reported runtime/sample count. | missing: ['the exact running time for error probability 10^-10 on the deep recurrent neural network benchmark', 'the exact number of samples used at error probability 10^-10'])
+  search_in_paper {"paper": "Probabilistic Verification of Fairness Properties via Concentration", "query": "10^-10 deep recurrent neural network how long samples runtime reported"} -> 3 passages, 0 new: []  (The collected passages identify the benchmark but do not yet contain the exact runtime and sample count for the 10^-10 setting. | missing: ['the specific running time for error probability 10^-10', 'the number of samples used for error probability 10^-10'])
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_conf_nips_BastaniPS18::27', 'DBLP_conf_nips_ZhangSS18::26', 'DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::43', 'DBLP_journals_pacmpl_Bastani0S19::76']
+answer: Assumption: by “the fairness verifier” you mean **VeriFair** from **“Probabilistic Verification of Fairness Properties via Concentration.”**
+
+The documents **do not state** how long VeriFair took to verify the deep recurrent neural network **for error probability \(10^{-10}\)**, and they also **do not state the number of samples needed** for that specific setting.
+
+What the documents do say is:
+- **“We implement our algorithm a tool called VeriFair”** and it **“scales to large machine learning models”** (**Probabilistic Verification of Fairness Properties via Concentration**).
+- The benchmark uses a deep RNN and deep VAE population model, and **“we show that VeriFair scales to this benchmark”** (**Probabilistic Verification of Fairness Properties via Concentration**).
+- It also says **“we can choose the probability of error to be extremely small”** (**Probabilistic Verification of Fairness Properties via Concentration**).
+
+But the provided excerpts **do not include the runtime or sample count for error probability \(10^{-10}\)**, so that part is missing.
+------------------------------------------------------------------------
+[2026-10-15T07:17:18] agent_v3_first Q2 run2 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  find_papers {"query": "papers that compare their approach against an SMT-based tool and argue that SMT solving limits scalability; baseline name in each"} -> 3 passages, 3 new: ['DBLP_journals_corr_abs-1802-04408::2', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_AlurFSS16a::35']  (Need to identify candidate papers first, then inspect their passages for the specific comparison and scalability claim. | missing: ['which papers make the SMT-based scalability argument', 'the baseline tool name for each paper'])
+  answer {} ->   (The collected passages already identify the relevant papers and their SMT-based baselines, and they explicitly state that SMT-style separation/black-box solving limits synthesis scalability. | missing: [])
+chunks: ['DBLP_journals_corr_abs-1802-04408::2', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_AlurFSS16a::35']
+answer: Assumption: by “SMT-based tool,” you mean a solver used as the comparison baseline in the paper.
+
+The documents mention **one paper** that explicitly compares against an SMT-based approach and argues that the SMT-style separation of discrete and continuous reasoning is a scalability problem:
+
+- **“ReaS: Combining Numerical Optimization with SAT Solving”** — it says the method uses “a combination of SAT and gradient-based numerical optimization” and contrasts it with SMT solvers such as “Z3,” “dReal,” and “SMC,” arguing that “the approach followed by SMT solvers… is sub-optimal for program synthesis problems” because “the way in which they separate the discrete and the continuous parts” is the key problem.  
+  - **Baseline named in the document:** **Z3, dReal, and SMC** are the SMT-based solvers explicitly mentioned as the prior approach.  
+  - **Claim about scalability:** the document says this SMT-based approach is “sub-optimal for program synthesis problems” due to its separation of discrete and continuous parts.  
+  - **Paper title citation:** *ReaS: Combining Numerical Optimization with SAT Solving*
+
+A second document mentions SMT-based techniques in general, but **does not say** they limit scalability or identify a specific baseline comparison:
+
+- **“SyGuS-Comp 2016: Results and Analysis”** — it says some 2016 solvers used “SMT-based quantifier instantiation,” but it does **not** argue that SMT solving limits scalability, nor does it name a baseline tool for that claim.  
+  - **Paper title citation:** *SyGuS-Comp 2016: Results and Analysis*
+
+So, based on the provided documents, the answer is:
+- **ReaS: Combining Numerical Optimization with SAT Solving** — baseline: **Z3 / dReal / SMC**.
+------------------------------------------------------------------------
+[2026-10-15T07:17:27] agent_v3_first T3 run2 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  find_papers {"query": "Castor ECTA-based Haskell synthesizer Hectare compare against SMT-based baseline baseline name why SMT limits it main result reported against it"} -> 3 passages, 3 new: ['DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-1802-04408::47']  (Need identify the relevant papers and the comparison baselines before extracting exact reasons and results. | missing: ['baseline name for Castor', "why SMT limits Castor's baseline", 'main result for Castor against baseline', 'baseline name for Hectare', "why SMT limits Hectare's baseline", 'main result for Hectare against baseline', "passages from 'Deductive Optimization of Relational Data Storage', the paper that introduces castor (use search_in_paper with paper='castor')"])
+  search_in_paper {"paper": "DBLP_journals_pacmpl_KoppelGVSP22::71", "query": "Hoogle+ SMT encoding Petri-net reachability why SMT limits it main result compared against Hoogle+"} -> 3 passages, 3 new: ['DBLP_journals_pacmpl_KoppelGVSP22::62', 'DBLP_journals_pacmpl_KoppelGVSP22::76', 'DBLP_journals_pacmpl_KoppelGVSP22::77']  (We have the Hectare paper passage, but it only names the baseline and gives context; we still need the exact reason SMT is limiting and the reported result, and Castor still needs to be found. | missing: ["Castor's baseline name", "Castor's reason SMT limits the baseline", "Castor's main result against the baseline", "Hectare's main result against Hoogle+"])
+  answer {} ->   (The collected passages support both baseline names, the SMT-based limitations, and the main comparative results for Castor and Hectare. | missing: [])
+chunks: ['DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_pacmpl_KoppelGVSP22::62', 'DBLP_journals_pacmpl_KoppelGVSP22::76', 'DBLP_journals_pacmpl_KoppelGVSP22::77']
+answer: Assumption: you are asking about the two paper-specific systems mentioned in the documents, Castor and Hectare.
+
+- **Castor** — the baseline is **Hyper**. In *“Deductive Optimization of Relational Data Storage”*, the paper says Hyper is “an in-memory column-store” with a state-of-the-art query compiler, and Castor is compared against “vanilla Hyper” to show that “layout specialization is a powerful optimization” and also against Hyper with transformed data. The document does **not** describe this as an SMT-based baseline or explain SMT limits for Castor. The main reported point in the provided text is that Castor is compared in two modes, “expert generated queries and optimizer generated queries,” and that “in some cases, the optimizer fails to find a serializable candidate” (*Deductive Optimization of Relational Data Storage*).
+
+- **Hectare** — the baseline is **Hoogle+**, which the paper describes as “based on an SMT encoding of Petri-net reachability” (*Searching Entangled Program Spaces*). The paper says SMT-style Petri-net encoding limits Hoogle+ because it has “No native support for polymorphic components” and “No native support for higher-order components,” requiring abstraction-refinement for polymorphism and nullary duplicate components for higher-order use (*Searching Entangled Program Spaces*). The main reported result is that on the added higher-order benchmark suite, “the original Hoogle+ cannot solve any of the new benchmarks,” while Hectare “solve[s] 13 out of 19 tasks” and achieves “40× speedup on the three commonly solved benchmarks” (*Searching Entangled Program Spaces*).
+
+What is missing from the documents for your exact question:
+- For **Castor**, the provided text does **not** identify an SMT-based baseline or explain SMT limitations.
+- For **Hectare**, the SMT-based baseline and its limitations are covered.
+------------------------------------------------------------------------
+[2026-10-15T07:17:40] agent_v3_first Q1 run3 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  find_papers {"query": "fairness verifier deep recurrent neural network error probability 10^-10 time samples"} -> 3 passages, 3 new: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_conf_nips_BastaniPS18::27', 'DBLP_conf_nips_ZhangSS18::26']  (Need to identify the relevant paper and passage that reports the verifier's runtime and sample count. | missing: ['the verification time for the deep recurrent neural network at error probability 10^-10', 'the number of samples needed'])
+  search_in_paper {"paper": "DBLP_journals_pacmpl_Bastani0S19::42", "query": "error probability 10^-10 runtime samples deep recurrent neural network sketch benchmark"} -> 3 passages, 2 new: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::43']  (The relevant paper is VeriFair, and the next step is to search within it for the specific benchmark result with Δ=10^-10. | missing: ['the time taken to verify the deep recurrent neural network with error probability 10^-10', 'the number of samples needed'])
+  search_in_paper {"paper": "DBLP_journals_pacmpl_Bastani0S19::53", "query": "verification time samples for error probability 10^-10 on deep recurrent neural network benchmark"} -> 3 passages, 1 new: ['DBLP_journals_pacmpl_Bastani0S19::0']  (The collected passage identifies the benchmark but not the specific time and sample count, so I need the exact result passage inside the same paper. | missing: ['the exact verification time for the deep recurrent neural network at error probability 10^-10', 'the number of samples needed for that verification'])
+  search_in_paper {"paper": "Probabilistic Verification of Fairness Properties via Concentration", "query": "error probability 10^-10 exact runtime and number of samples on deep recurrent neural network benchmark"} -> 3 passages, 1 new: ['DBLP_journals_pacmpl_Bastani0S19::12']  (We have identified the correct paper, but the collected passages do not yet include the exact time and sample count for the requested error probability, so I need to search within the paper for that result. | missing: ['the specific verification time for error probability 10^-10', 'the number of samples used for error probability 10^-10'])
+  search_in_paper {"paper": "Probabilistic Verification of Fairness Properties via Concentration", "query": "exact runtime and number of samples for delta = 10^-10 on the deep recurrent neural network benchmark, including the plotted figure or table values"} -> 3 passages, 1 new: ['DBLP_journals_pacmpl_Bastani0S19::55']  (The collected passages mention the benchmark and the error bound but do not yet provide the exact runtime or sample count, so I need the specific result passage. | missing: ['the verification time', 'the number of samples', 'the exact benchmark result for error probability 10^-10'])
+  read_next {"chunk_id": "DBLP_journals_pacmpl_Bastani0S19::55"} -> 2 passages, 2 new: ['DBLP_journals_pacmpl_Bastani0S19::56', 'DBLP_journals_pacmpl_Bastani0S19::57']  (The collected passage already gives the setup and begins the result for Δ = 10^-10, but it is truncated before the exact runtime and sample count are complete. | missing: ['the completion of the runtime sentence and/or the exact sample count for delta = 10^-10 on the deep recurrent neural network benchmark'])
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_conf_nips_BastaniPS18::27', 'DBLP_conf_nips_ZhangSS18::26', 'DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::43', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56', 'DBLP_journals_pacmpl_Bastani0S19::57']
+answer: **Assumption:** “the fairness verifier” refers to **VeriFair** in *Probabilistic Verification of Fairness Properties via Concentration*.
+
+According to *Probabilistic Verification of Fairness Properties via Concentration*, **“using ∆ = 10^-10, VeriFair terminated in 606 seconds and uses 28,000 samples.”** So the verifier took **606 seconds** and needed **28,000 samples**.
+------------------------------------------------------------------------
+[2026-10-15T07:17:47] agent_v3_first Q2 run3 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  find_papers {"query": "papers that compare their approach against an SMT-based tool and argue that SMT solving limits scalability; identify the baseline tool in each"} -> 3 passages, 3 new: ['DBLP_journals_corr_abs-1802-04408::2', 'DBLP_journals_corr_abs-2206-06164::62', 'DBLP_journals_fmsd_FismanSS21::2']  (We need to identify relevant papers first, then extract the specific SMT-based baselines and scalability claims. | missing: ['which papers make the scalability argument', 'the SMT-based baseline name for each paper'])
+  answer {} ->   (The collected passages already identify the relevant papers and their SMT-based baselines, and they support the scalability argument for each. | missing: [])
+chunks: ['DBLP_journals_corr_abs-1802-04408::2', 'DBLP_journals_corr_abs-2206-06164::62', 'DBLP_journals_fmsd_FismanSS21::2']
+answer: Assumption: by “SMT-based tool” I take the question to mean a synthesis approach that uses SMT/SAT-style solving as the baseline.
+
+From the provided documents, I can identify **one paper that clearly compares against an SMT-based tool and argues that the SMT-style separation limits scalability**:
+
+- **“ReaS: Combining Numerical Optimization with SAT Solving”**  
+  It says that prior SMT-style approaches such as “SMT solvers such as Z3 [9], dReal [13] …” use the DPLL(T) framework, but “**the approach followed by SMT solvers, while effective for many applications, is sub-optimal for program synthesis problems**,” and “**The key problem with prior approaches is the way in which they separate the discrete and the continuous parts**.”  
+  - **Baseline named in the document:** **Z3** and **dReal** are explicitly mentioned as SMT solvers; the paper also mentions **SMC**.  
+  - **Paper title citation:** *ReaS: Combining Numerical Optimization with SAT Solving*.
+
+I do **not** see enough evidence in the provided documents to name any other paper as making the same specific claim that “SMT solving limits scalability.” The other documents do not explicitly say this:
+- *Metric Program Synthesis* compares against tools like **Regel**, **FTA**, and **AFTA**, but the excerpt does not frame them as SMT-based tools nor claim SMT limits scalability.
+- *Special Issue on Syntax-Guided Synthesis Preface* mentions that some work “used SMT solvers as a black-box” and that another paper benefits from “accessing the inners of an SMT solver,” but it does not identify a paper comparing against an SMT-based baseline while arguing SMT limits scalability.
+
+So, based only on the provided documents, the answer is:
+1. **ReaS: Combining Numerical Optimization with SAT Solving** — baseline: **Z3 / dReal / SMC** (SMT solvers).
+------------------------------------------------------------------------
+[2026-10-15T07:17:54] agent_v3_first T3 run3 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  find_papers {"query": "Castor compare against SMT-based baseline and Hectare compare against SMT-based baseline; baseline names, why SMT limits them, and main results against them"} -> 3 passages, 3 new: ['DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-1802-04408::47']  (Need to identify the relevant papers and the comparison passages before extracting baseline names, limitations, and results. | missing: ['baseline name for Castor', "why SMT limits Castor's baseline", "main result against Castor's baseline", 'baseline name for Hectare', "why SMT limits Hectare's baseline", "main result against Hectare's baseline", "passages from 'Deductive Optimization of Relational Data Storage', the paper that introduces castor (use search_in_paper with paper='castor')"])
+  answer {} ->   (The collected passages already identify each baseline, explain the SMT limitation, and report the main comparison result for both papers. | missing: [])
+chunks: ['DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-1802-04408::47']
+answer: Assumption: you mean the two systems named in the documents: **Castor** from *Deductive Optimization of Relational Data Storage* and **Hectare** from *Searching Entangled Program Spaces*.
+
+## Hectare
+- **Baseline:** **Hoogle+** — *Searching Entangled Program Spaces* says Hectare is compared with “the state-of-the-art synthesizer Hoogle+, based on an SMT encoding of Petri-net reachability.”  
+- **Why SMT limits it:** the document does **not** explicitly say SMT limits Hoogle+; it only says Hoogle+ is SMT-based. So this part is **missing** from the provided text.  
+- **Main result against it:** the paper says Hectare is evaluated against Hoogle+ on benchmarks, but the provided excerpt does **not** include the actual outcome numbers or summary result. It only states the comparison was performed.  
+  - Quote: “we evaluate the performance of Hectare and compare it with the state-of-the-art synthesizer Hoogle+, based on an SMT encoding of Petri-net reachability” (*Searching Entangled Program Spaces*).
+
+## Castor
+- **Baseline:** **Hyper** — *Deductive Optimization of Relational Data Storage* says, “We compare Castor with three other systems: Hyper [25], Cozy [23], and Chestnut [38].”  
+- **Why SMT limits it:** the provided text does **not** mention SMT for Hyper, nor does it explain any SMT-related limitation. Instead, it says Hyper is “an in-memory column-store” with its own query compiler. So this part is **missing** from the documents.  
+- **Main result against it:** the excerpt says Castor is compared to Hyper in two modes: “with the original TPC-H data and with a transformed version of the data and query that mimics the layout used by Castor,” and that the comparison is meant to show layout specialization is powerful and beneficial. But the excerpt does **not** give the actual reported performance result.  
+  - Quote: “We compare against vanilla Hyper to show that layout specialization is a powerful optimization that can compensate for the many lowlevel compiler optimizations in Hyper.” (*Deductive Optimization of Relational Data Storage*)
+
+## What is missing
+The documents provided do **not** contain:
+1. an explanation of **why SMT limits Hoogle+**;
+2. the **main experimental result** for Hectare vs. Hoogle+;
+3. any **SMT-based baseline** for Castor;
+4. the **main experimental result** for Castor vs. Hyper.
+
+So the answer can only identify the baselines and quote the paper’s stated motivations for the comparisons, not the full requested findings.
+------------------------------------------------------------------------
+[2026-10-15T07:17:54] SUMMARY
+system               pass  evidence  papers  calls   tokens  latency  chunks  steps   per task (passes/runs)
+agent_v3          0.33/3      29%     56%    4.4    9,453     9.1s     5.4    3.4   Q1 1/3  Q2 0/3  T3 0/3
+------------------------------------------------------------------------
+[2026-10-15T07:27:50] agent_v3 Q1 run1 verdict=fail
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  find_papers {"queries": ["fairness verifier deep recurrent neural network error probability 10^-10 time samples", "verifier deep recurrent neural network 10^-10 fairness verification sample count runtime", "fairness verification deep recurrent neural network probabilistic error 10^-10 experiment"]} -> 3 passages, 3 new: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_conf_nips_BastaniPS18::27', 'DBLP_conf_nips_ZhangSS18::37']  (Need to identify the relevant paper first, then extract the exact experiment numbers from it. | missing: ['the paper identifying the fairness verifier result', 'the verification time for the deep recurrent neural network at error probability 10^-10', 'the number of samples used'])
+  search_in_paper {"paper": "DBLP_journals_pacmpl_Bastani0S19::42", "query": "deep recurrent neural network error probability 10^-10 runtime samples fairness verifier"} -> 3 passages, 2 new: ['DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::53']  (The relevant paper and benchmark are identified; I need the exact passage with the runtime and sample count. | missing: ['exact runtime for verifying the deep recurrent neural network at error probability 10^-10', 'exact number of samples needed for that verification'])
+  search_in_paper {"paper": "DBLP_journals_pacmpl_Bastani0S19::53", "query": "error probability 10^-10 samples running time deep recurrent neural network benchmark table or figure"} -> 3 passages, 1 new: ['DBLP_journals_pacmpl_Bastani0S19::43']  (The paper is the right one, but we still need the exact passage with the reported runtime and sample count for δ=10^-10. | missing: ['the specific runtime for error probability 10^-10', 'the number of samples used at error probability 10^-10'])
+  search_in_paper {"paper": "DBLP_journals_pacmpl_Bastani0S19::53", "query": "error probability 10^-10 runtime samples for the deep recurrent neural network benchmark; look for exact verification time and number of samples"} -> 3 passages, 1 new: ['DBLP_journals_pacmpl_Bastani0S19::45']  (The collected passages identify the right paper and benchmark, but not yet the exact time and sample count. | missing: ['the exact runtime for the deep recurrent neural network with error probability 10^-10', 'the exact number of samples used for that setting'])
+  search_in_paper {"paper": "DBLP_journals_pacmpl_Bastani0S19::53", "query": "Table or passage with the deep recurrent neural network benchmark results: runtime and number of samples for error probability 10^-10"} -> 3 passages, 0 new: []  (We have the benchmark setup, but not yet the exact runtime and sample count for the deep recurrent neural network case. | missing: ['Exact verification time for the deep recurrent neural network at error probability 10^-10', 'Number of samples used for that run'])
+  answer {} ->   (The collected passages support the benchmark context and mention the error probability setting, but they do not yet contain the exact runtime or sample count for the deep recurrent neural network case. | missing: [])
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_conf_nips_BastaniPS18::27', 'DBLP_conf_nips_ZhangSS18::37', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::43', 'DBLP_journals_pacmpl_Bastani0S19::45']
+answer: Assumption: you are asking about the **deep recurrent neural network benchmark** in **“Probabilistic Verification of Fairness Properties via Concentration”** with the setting “\(\Delta = 10^{-10}\)” / “the probability of an incorrect response is at most \(10^{-10}\).”
+
+The documents say VeriFair “**scales to this benchmark**” and that the benchmark uses “**a deep recurrent neural network (RNN) classifier and a deep sequence-to-sequence variational autoencoder (VAE) population model**” with “**more than 16 million parameters**” (**“Probabilistic Verification of Fairness Properties via Concentration”**). However, the provided excerpts do **not** include the specific running time for that deep RNN benchmark or the number of samples needed.
+
+What is missing from the documents:
+- the **exact verification time** for the deep RNN benchmark at error probability \(10^{-10}\)
+- the **number of samples** used/needed for that benchmark
+
+So, based only on the provided documents, I can’t give the exact time or sample count.
+------------------------------------------------------------------------
+[2026-10-15T07:27:56] agent_v3 Q2 run1 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  find_papers {"queries": ["paper compares against SMT-based tool and argues SMT solving limits scalability", "baseline SMT solver tool evaluation scalability limitation", "approach compared with SMT-based baseline scalability"]} -> 4 passages, 4 new: ['DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::21', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_pacmpl_FeserM0S20::67']  (Need to identify candidate papers that both compare against an SMT-based tool and explicitly argue SMT solving limits scalability. | missing: ['which papers make the scalability argument', 'the SMT-based baseline name in each paper'])
+  answer {} ->   (The collected passages already support the requested papers, their SMT-based baselines, and the scalability claims. | missing: [])
+chunks: ['DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::21', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_pacmpl_FeserM0S20::67']
+answer: Assumption: “their approach” refers to the approach described in each paper, and you want only papers in the provided documents that explicitly compare against an SMT-based tool and say SMT solving limits scalability.
+
+- **“ReaS: Combining Numerical Optimization with SAT Solving”** compares against **dReal** (and also mentions **Z3** on one benchmark). The paper says: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**even Z3 could not solve with a timeout of 60 minutes**,” concluding that “**traditional SMT approaches do not scale for these kinds of synthesis problems**.”  
+  - Baseline: **dReal**; additionally **Z3** on the thermostat benchmark.
+
+- **“Deductive Optimization of Relational Data Storage”** compares against **Cozy**. It says: “**The best data structure synthesis tool-Cozy-uses an SMT solver to verify candidates, which does not scale to the TPC-H queries. Castor's use of deduction rules avoids this costly verification step.**”  
+  - Baseline: **Cozy**.
+
+I did not find any other paper in the provided documents that both compares to an SMT-based tool and explicitly argues that SMT solving limits scalability.
+------------------------------------------------------------------------
+[2026-10-15T07:28:18] agent_v3 T3 run1 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  find_papers {"queries": ["Castor paper compares against SMT-based baseline and explains SMT limits; main evaluation result against baseline", "Hectare Haskell synthesizer compares against SMT-based baseline and explains why SMT limits it; main result", "paper introducing Castor baseline SMT-based tool comparison", "paper introducing Hectare ECTA-based Haskell synthesizer SMT baseline comparison"]} -> 4 passages, 4 new: ['DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_AlurFSS16a::21', 'DBLP_journals_fmsd_FismanSS21::1']  (Need to identify the two relevant papers before extracting their baseline names, SMT-limit reasons, and reported results. | missing: ['which paper introduces Castor and its SMT-based baseline result', 'which paper introduces Hectare and its SMT-based baseline result', 'the exact reason each paper says SMT limits the baseline', 'the main result reported against each baseline', "passages from 'Deductive Optimization of Relational Data Storage', the paper that introduces castor (use search_in_paper with paper='castor')"])
+  find_papers {"queries": ["Castor paper compares against SMT-based baseline and explains why SMT limits it; main evaluation result against baseline", "Hectare Haskell synthesizer compares against SMT-based baseline and explains why SMT limits it; main result", "paper introducing Castor baseline SMT-based tool comparison", "paper introducing Hectare ECTA-based Haskell synthesizer SMT baseline comparison"]} -> 4 passages, 0 new: []  (The current passages are about unrelated papers, so I need to identify the correct Castor and Hectare papers before extracting the requested baseline, limitation, and result. | missing: ['The exact Castor paper passage naming the SMT-based baseline, the reason SMT limits it, and the main result against it.', 'The exact Hectare paper passage naming the SMT-based baseline, the reason SMT limits it, and the main result against it.'])
+  find_papers {"queries": ["Castor paper compares against an SMT-based baseline; identify the baseline, the stated SMT limitation, and the main result", "Hectare ECTA-based Haskell synthesizer compares against an SMT-based baseline; identify the baseline, the stated SMT limitation, and the main result", "Castor program synthesis evaluation against SMT-based competitor", "Hectare synthesis evaluation against SMT-based competitor"]} -> 3 passages, 0 new: []  (The current passages are from unrelated papers, so I need to find the specific Castor and Hectare papers before extracting the baseline, limitation, and result. | missing: ['The actual Castor paper passage naming its SMT-based baseline, why SMT limits it, and the reported result.', 'The actual Hectare paper passage naming its SMT-based baseline, why SMT limits it, and the reported result.'])
+  find_papers {"queries": ["Castor paper compares against the baseline Cozy; why SMT limits Cozy; main result versus Cozy", "Hectare ECTA-based Haskell synthesizer compares against the baseline Synquid or other SMT-based baseline; why SMT limits it; main result", "Castor evaluation against Cozy and explanation of SMT limitation", "Hectare evaluation against SMT-based baseline and explanation of SMT limitation"]} -> 4 passages, 2 new: ['DBLP_journals_pacmpl_FeserM0S20::65', 'DBLP_journals_pacmpl_KoppelGVSP22::71']  (The collected passages do not yet identify the exact baseline papers/results for Castor and Hectare, so I need more targeted paper finding before I can answer. | missing: ['The exact baseline name for Castor and Hectare', 'The paper-stated reason SMT limits each baseline', 'The main result reported against each baseline'])
+  search_in_paper {"paper": "Deductive Optimization of Relational Data Storage", "query": "baseline Cozy SMT limitation main result Castor slower than baseline or compared results"} -> 3 passages, 2 new: ['DBLP_journals_pacmpl_FeserM0S20::64', 'DBLP_journals_pacmpl_FeserM0S20::62']  (I have the Castor paper and a likely baseline (Cozy), but I still need the exact reported result and the paper’s stated SMT limitation in the relevant comparison passage. | missing: ['Castor’s exact main result against Cozy from the paper', 'the paper’s explicit explanation of why SMT limits Cozy (the collected passage only says verification is a significant slowdown)'])
+  answer {} ->   (The collected passages identify both SMT-based baselines, explain the stated SMT bottlenecks, and give the main reported outcomes against them. | missing: [])
+chunks: ['DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_AlurFSS16a::21', 'DBLP_journals_fmsd_FismanSS21::1', 'DBLP_journals_pacmpl_FeserM0S20::65', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_FeserM0S20::64', 'DBLP_journals_pacmpl_FeserM0S20::62']
+answer: Assumption: you mean the two papers **“Deductive Optimization of Relational Data Storage”** and **“Searching Entangled Program Spaces.”**
+
+## 1) Castor vs the SMT-based baseline
+- **Baseline name:** **Cozy**. The paper says, “**We compare Castor with three other systems: Hyper [25], Cozy [23], and Chestnut [38]**” and later, “**We transformed our input queries into Cozy's specification format and ran Cozy with a 6 hour timeout**” (**“Deductive Optimization of Relational Data Storage”**).
+- **Why SMT limits it:** The paper says, “**Although Cozy is effective at synthesizing data structures from small relational specifications, the size of the TPC-H queries causes a significant slowdown in its solver-based verification step**” (**“Deductive Optimization of Relational Data Storage”**). This is the SMT-related limitation described in the provided text.
+- **Main result against it:** Cozy “**was unable to make significant improvements on all but two of the TPC-H queries**”; for those two, “**In Q4, Cozy precomputed one of the joins and a filter. In Q17, Cozy added an index**” (**“Deductive Optimization of Relational Data Storage”**). The paper also reports that Castor’s generated layouts and query code were faster or significantly faster than Hyper for 15/18 queries, but the direct result against Cozy is that Cozy improved only Q4 and Q17.
+
+## 2) Hectare vs the SMT-based baseline
+- **Baseline name:** **Hoogle+**. The paper says Hoogle+ is “**based on an SMT encoding of Petri-net reachability**” (**“Searching Entangled Program Spaces”**).
+- **Why SMT limits it:** The provided excerpt does **not** explicitly say that SMT limits Hoogle+ or give a textual explanation of an SMT-related bottleneck. It only identifies Hoogle+ as SMT-based. So this part is **missing from the provided documents** (**“Searching Entangled Program Spaces”**).
+- **Main result against it:** The excerpt says the paper evaluates Hectare “**against the state-of-the-art synthesizer Hoogle+**” and frames the comparison with research questions about how Hectare performs, but the provided text does **not** include the actual outcome/results of that comparison. So the **main result is missing from the provided documents** (**“Searching Entangled Program Spaces”**).
+
+If you want, I can also reformat this into a two-row table.
+------------------------------------------------------------------------
+[2026-10-15T07:28:31] agent_v3 Q1 run2 verdict=fail
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  find_papers {"queries": ["fairness verifier deep recurrent neural network error probability 10^-10 runtime samples", "deep recurrent neural network fairness verification 10^-10 samples time", "verifier took to verify deep recurrent neural network error probability 10^-10 fairness"]} -> 3 passages, 3 new: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_conf_nips_BastaniPS18::27', 'DBLP_conf_nips_ZhangSS18::37']  (Need to identify the relevant paper and then extract the exact runtime and sample count. | missing: ['the runtime for verifying the deep recurrent neural network at error probability 10^-10', 'the number of samples needed'])
+  search_in_paper {"paper": "Probabilistic Verification of Fairness Properties via Concentration", "query": "error probability 10^-10 runtime samples deep recurrent neural network fairness verifier VeriFair"} -> 3 passages, 2 new: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::76']  (The relevant paper is VeriFair; I need the exact passage with the runtime and sample count for the deep recurrent neural network benchmark. | missing: ['the exact runtime for verifying the deep recurrent neural network at error probability 10^-10', 'the exact number of samples used'])
+  search_in_paper {"paper": "Probabilistic Verification of Fairness Properties via Concentration", "query": "runtime and number of samples for the deep recurrent neural network benchmark at error probability 10^-10"} -> 3 passages, 0 new: []  (The current passages identify the benchmark but do not yet expose the exact time or sample count, so I need the specific results passage. | missing: ['the exact verification time for the deep recurrent neural network at error probability 10^-10', 'the exact number of samples used in that verification'])
+  read_next {"chunk_id": "DBLP_journals_pacmpl_Bastani0S19::53"} -> 2 passages, 2 new: ['DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55']  (The current passage introduces the benchmark but stops before the numerical results, so I need the following chunk to extract the exact time and sample count. | missing: ['The exact running time to verify the deep recurrent neural network at error probability 10^-10', 'The number of samples used in that verification'])
+  answer {} ->   (The collected passages already state the runtime and sample count for the deep recurrent neural network at error probability 10^-10. | missing: [])
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_conf_nips_BastaniPS18::27', 'DBLP_conf_nips_ZhangSS18::37', 'DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55']
+answer: Assumption: “the fairness verifier” refers to VeriFair in the **Probabilistic Verification of Fairness Properties via Concentration** benchmark on the deep recurrent neural network.
+
+In **“Probabilistic Verification of Fairness Properties via Concentration”**, the document says: “using ∆ = 10 -10 , VeriFair terminated in **606** …” and, for the nearby reported result, “using ∆ = 10 -5 , VeriFair terminates in 301 seconds and uses 14,000 samples.” However, the provided excerpt is cut off right after “606”, so the **full runtime and sample count for ∆ = 10^-10 are missing** from the document excerpt. Therefore, I can’t reliably give the exact time or number of samples for the 10^-10 case from the provided text.
+
+What is missing:
+- the rest of the sentence after “VeriFair terminated in 606”
+- the sample count for the ∆ = 10^-10 run
+
+Title cited: **Probabilistic Verification of Fairness Properties via Concentration**
+------------------------------------------------------------------------
+[2026-10-15T07:28:39] agent_v3 Q2 run2 verdict=pass
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  find_papers {"queries": ["paper compares against an SMT-based tool and argues SMT solving limits scalability", "baseline is an SMT-based tool scalability limited by SMT solving in evaluation", "compared against SMT solver-based tool in experiments scalability bottleneck", "SMT-based baseline tool scalability limits paper compares approach against it"]} -> 4 passages, 4 new: ['DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::21', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_pacmpl_FeserM0S20::67']  (First identify candidate papers whose evaluation discusses an SMT-based baseline and scalability limits, then inspect the papers for the exact baseline names. | missing: ['Which papers make the SMT-scaling argument', 'The name of the SMT-based baseline in each paper'])
+  answer {} ->   (The collected passages already identify the relevant papers and baselines, and they explicitly state the scalability limitation of SMT solving. | missing: [])
+chunks: ['DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::21', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_pacmpl_FeserM0S20::67']
+answer: Assumption: “SMT-based tool” means a solver used as the comparison baseline in the paper, and “argue that SMT solving limits scalability” means the paper explicitly says SMT approaches do not scale or that SMT verification does not scale.
+
+The documents contain **two papers** that fit:
+
+1. **“ReaS: Combining Numerical Optimization with SAT Solving”**  
+   - Baseline: **dReal** (“a state-of-the-art SMT solver for reals”) and also **Z3** on one benchmark.  
+   - The paper says: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**even Z3 could not solve with a timeout of 60 minutes**.” It concludes: “**these results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.**”
+
+2. **“Deductive Optimization of Relational Data Storage”**  
+   - Baseline: **Cozy** (“the best data structure synthesis tool-Cozy-uses an SMT solver to verify candidates”).  
+   - The paper says this “**does not scale to the TPC-H queries**,” and contrasts this with Castor’s deduction rules: “**Castor's use of deduction rules avoids this costly verification step.**”
+
+So the baselines are:
+- **ReaS** → **dReal** (and also **Z3** for one benchmark)
+- **Deductive Optimization of Relational Data Storage** → **Cozy**
+------------------------------------------------------------------------
+[2026-10-15T07:28:50] agent_v3 T3 run2 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  find_papers {"queries": ["Castor paper compares against SMT-based baseline and reports main result", "Hectare Haskell synthesizer ECTA-based compares against SMT-based baseline and explains SMT limits", "baseline tool for Castor SMT limitations result", "baseline tool for Hectare SMT limitations result"]} -> 4 passages, 4 new: ['DBLP_journals_pacmpl_FeserM0S20::62', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_corr_AlurFSS16a::21', 'DBLP_journals_corr_abs-1802-04408::47']  (We need identify the two papers and then extract the exact comparison, limitation, and result from each. | missing: ['the baseline name for Castor', 'why SMT limits Castor', "Castor's main result against the baseline", 'the baseline name for Hectare', 'why SMT limits Hectare', "Hectare's main result against the baseline", "passages from 'Deductive Optimization of Relational Data Storage', the paper that introduces castor (use search_in_paper with paper='castor')"])
+  search_in_paper {"paper": "DBLP_journals_pacmpl_KoppelGVSP22::71", "query": "SMT limits Hectare baseline result Hoogle+ exact comparison why SMT limits it"} -> 3 passages, 2 new: ['DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_pacmpl_KoppelGVSP22::74']  (We need the exact baseline/result passage for Hectare from the paper preview before answering, and the Castor paper still needs its baseline/result identified precisely. | missing: ['Castor baseline name, why SMT limits it, and main result against it', 'Hectare baseline name, why SMT limits it, and main result against it'])
+  answer {} ->   (The collected passages already support both papers’ baselines, the SMT-related limitation, and the reported comparative results. | missing: [])
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::62', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_corr_AlurFSS16a::21', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_pacmpl_KoppelGVSP22::74']
+answer: Assumption: “SMT-based baseline” means the baseline system named in each paper that relies on SMT in the comparison.
+
+- **Castor**: The baseline is **Hyper**. In *“Deductive Optimization of Relational Data Storage”*, the paper says that if Hyper is given “specialized views and indexes,” “its performance is on par with Castor,” but “constructing and maintaining these views takes effort, and Hyper cannot assist the user in creating a collection of views which maintains the semantics of the original query.” The main result reported is that “the layouts and query code generated by Castor from expert queries are faster or significantly faster than Hyper for 15 out of 18 queries,” and when Hyper is given specialized views and indexes, “its performance is on par with Castor.”  
+  - **Paper title:** *Deductive Optimization of Relational Data Storage*
+
+- **Hectare**: The baseline is **Hoogle+**. In *“Searching Entangled Program Spaces,”* the paper identifies Hoogle+ as “a state-of-the-art synthesizer … based on an SMT encoding of Petri-net reachability.” The paper says the SMT-based approach is limited because “the poor performance of Hoogle+ can be mainly attributed to the brittleness of the abstraction-refinement loop it uses to support polymorphic components,” and because it “ends up wasting a lot of time enumerating ill-typed terms.” The main result reported is that “within the timeout, Hectare solves 43 out of 45 benchmarks, whereas Hoogle+ only solves 39,” and Hectare has “an average speedup (geometric mean) of 7×” on commonly solved benchmarks.  
+  - **Paper title:** *Searching Entangled Program Spaces*
+
+If you want, I can also put this into a two-column comparison table.
+------------------------------------------------------------------------
+[2026-10-15T07:29:02] agent_v3 Q1 run3 verdict=fail
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  find_papers {"queries": ["fairness verifier deep recurrent neural network error probability 10^-10 runtime samples", "deep recurrent neural network verification fairness verifier 10^-10 samples time", "fairness verification recurrent neural network probability 10^-10 experimental results"]} -> 3 passages, 3 new: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_conf_nips_ZhangSS18::37', 'DBLP_conf_nips_BastaniPS18::27']  (Need to identify the relevant paper and locate the exact experiment reporting time and sample count. | missing: ['exact runtime for verifying the deep recurrent neural network at error probability 10^-10', 'number of samples used'])
+  search_in_paper {"paper": "Probabilistic Verification of Fairness Properties via Concentration", "query": "error probability 10^-10 runtime samples deep recurrent neural network"} -> 3 passages, 2 new: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::12']  (The relevant paper and experiment have been identified, so now I need the exact passage with the runtime and sample count. | missing: ['the runtime for the deep recurrent neural network at error probability 10^-10', 'the number of samples used for that experiment'])
+  read_next {"chunk_id": "DBLP_journals_pacmpl_Bastani0S19::53"} -> 2 passages, 2 new: ['DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55']  (The current passage introduces the benchmark and says the needed result is in the following text, so we should read the next chunk for the exact numbers. | missing: ['the exact runtime to verify the deep recurrent neural network at error probability 10^-10', 'the number of samples used'])
+  answer {} ->   (The collected passages already state the runtime and sample count for the deep recurrent neural network at error probability 10^-10. | missing: [])
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_conf_nips_ZhangSS18::37', 'DBLP_conf_nips_BastaniPS18::27', 'DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55']
+answer: Assumption: the question refers to the **Quick Draw / deep recurrent neural network benchmark** in **“Probabilistic Verification of Fairness Properties via Concentration.”**
+
+The document says that for this benchmark, using an error probability of \(10^{-10}\), “**VeriFair terminated in 606**” seconds. The excerpt is cut off immediately after that, so the full sentence with the sample count is missing. It also says for \(\Delta = 10^{-5}\), VeriFair “**terminates in 301 seconds and uses 14,000 samples**,” but the \(10^{-10}\) sample count is not visible in the provided text.
+
+So, from the provided documents:
+- **Time for \(10^{-10}\): 606 seconds** — **“Probabilistic Verification of Fairness Properties via Concentration.”**
+- **Number of samples for \(10^{-10}\): not fully provided in the documents** — **“Probabilistic Verification of Fairness Properties via Concentration.”**
+
+If you want, I can also quote the exact surrounding passage.
+------------------------------------------------------------------------
+[2026-10-15T07:29:10] agent_v3 Q2 run3 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  find_papers {"queries": ["compare against SMT-based tool scalability limits SMT solving baseline", "evaluated against an SMT-based tool and argues SMT solving limits scalability", "baseline SMT solver tool comparison scalability paper"]} -> 4 passages, 4 new: ['DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_AlurFSS16a::21', 'DBLP_journals_pacmpl_FeserM0S20::58']  (First identify papers that both compare against SMT-based tools and make the scalability claim. | missing: ['which papers make the comparison', 'the baseline name in each paper', 'evidence that they argue SMT solving limits scalability'])
+  answer {} ->   (The collected passages already identify the relevant papers, their SMT-based baselines, and the scalability claim. | missing: [])
+chunks: ['DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_AlurFSS16a::21', 'DBLP_journals_pacmpl_FeserM0S20::58']
+answer: Assumption: “SMT-based tool” means the paper explicitly reports a comparison to an SMT solver or SMT-based baseline and comments on scalability.
+
+The documents mention **one paper that clearly makes this point**:
+
+- **ReaS: Combining Numerical Optimization with SAT Solving** — It compares ReaS with **dReal** (“a state-of-the-art SMT solver for reals”) and reports that “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**.” It also says that “**even Z3 could not solve**” the thermostat benchmark within 60 minutes. The paper concludes: “**These results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.**”  
+  - Baseline(s): **dReal**; also **Z3** on one benchmark.
+
+I do **not** see another provided document that both:
+1. compares against an SMT-based tool, and
+2. explicitly argues that SMT solving limits scalability.
+
+So, based on the supplied documents, the only qualifying paper is **ReaS: Combining Numerical Optimization with SAT Solving**.
+------------------------------------------------------------------------
+[2026-10-15T07:29:26] agent_v3 T3 run3 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  find_papers {"queries": ["Castor compare against SMT-based baseline and why SMT limits it", "Hectare ECTA-based Haskell synthesizer compare against SMT-based baseline and why SMT limits it", "paper says SMT-based baseline main result against Castor", "paper says SMT-based baseline main result against Hectare"]} -> 4 passages, 4 new: ['DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_fmsd_FismanSS21::1']  (Need to identify the relevant papers first, then inspect each for the exact baseline, limitation, and reported result. | missing: ['the baseline name for Castor', 'why SMT limits Castor', 'the main result reported against Castor', 'the baseline name for Hectare', 'why SMT limits Hectare', 'the main result reported against Hectare', "passages from 'Deductive Optimization of Relational Data Storage', the paper that introduces castor (use search_in_paper with paper='castor')"])
+  search_in_paper {"paper": "Deductive Optimization of Relational Data Storage", "query": "compare against the SMT-based baseline Cozy, why SMT limits it, and main result against Cozy"} -> 3 passages, 2 new: ['DBLP_journals_pacmpl_FeserM0S20::65', 'DBLP_journals_pacmpl_FeserM0S20::64']  (I found the relevant papers, but need exact passages for the baseline names, SMT limitation reasons, and results from each paper. | missing: ["Castor: exact baseline name, the paper's stated reason SMT limits the baseline, and the main result against it", "Hectare: exact baseline name, the paper's stated reason SMT limits the baseline, and the main result against it"])
+  search_in_paper {"paper": "Searching Entangled Program Spaces", "query": "why Hoogle+ is limited by SMT and the main result reported against it"} -> 3 passages, 2 new: ['DBLP_journals_pacmpl_KoppelGVSP22::61', 'DBLP_journals_pacmpl_KoppelGVSP22::73']  (We have the baseline name but still need the paper's stated SMT limitation and the outcome of the comparison. | missing: ["Hectare's explanation of how SMT limits Hoogle+", 'the main result reported against Hoogle+'])
+  search_in_paper {"paper": "Searching Entangled Program Spaces", "query": "Hoogle+ limitations: why SMT limits it, and the main result against Hectare"} -> 3 passages, 1 new: ['DBLP_journals_pacmpl_KoppelGVSP22::76']  (I have the Castor/Cozy evidence, but Hoogle+ still needs the exact limitation wording and the main result passage. | missing: ['Exact reason the paper says SMT limits Hoogle+', 'The headline quantitative result comparing Hectare to Hoogle+'])
+  answer {} ->   (The collected passages support both baselines, the SMT-related limitation for each, and the reported main results. | missing: [])
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_fmsd_FismanSS21::1', 'DBLP_journals_pacmpl_FeserM0S20::65', 'DBLP_journals_pacmpl_FeserM0S20::64', 'DBLP_journals_pacmpl_KoppelGVSP22::61', 'DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_pacmpl_KoppelGVSP22::76']
+answer: Assumption: by “the SMT-based baseline” you mean the baseline compared against in each paper’s evaluation.
+
+- **Castor — baseline: Hyper**  
+  - **Why SMT is said to limit it:** The provided Castor documents do **not** say that Hyper is SMT-based, so this part is **missing** from the documents. The documents instead say Hyper is “an in-memory column-store” with “a state-of-the art query compiler” and “low-level compiler optimizations” ([**Deductive Optimization of Relational Data Storage**]).  
+  - **Main result against it:** Castor’s specialized layouts were “much smaller than Hyper’s,” and “Castor’s peak memory use is significantly lower than Hyper for all expert queries” ([**Deductive Optimization of Relational Data Storage**]). The paper also says layout specialization can “compensate for the many lowlevel compiler optimizations in Hyper” ([**Deductive Optimization of Relational Data Storage**]).
+
+- **Hectare — baseline: Hoogle+**  
+  - **Why SMT limits it:** Hoogle+ is described as “a state-of-the-art synthesizer” that is “based on an SMT encoding of Petri-net reachability” ([**Searching Entangled Program Spaces**]). The paper also calls out a limitation of Hoogle+ as its “restricted support for higher-order functions” ([**Searching Entangled Program Spaces**]), but it does **not** explicitly say SMT is the reason for that limitation.  
+  - **Main result against it:** On the main Hoogle+ benchmark suite, “Within the timeout, Hectare solves 43 out of 45” benchmarks ([**Searching Entangled Program Spaces**]). The paper also says Hectare significantly simplifies implementation: Hoogle+ has “4000 LOC” while Hectare has “400” ([**Searching Entangled Program Spaces**]).
+
+If you want, I can also rewrite this as a two-row comparison table.
+------------------------------------------------------------------------
+[2026-10-15T07:29:26] SUMMARY
+system               pass  evidence  papers  calls   tokens  latency  chunks  steps   per task (passes/runs)
+agent_v3          0.33/3      33%     67%    4.9   11,485    11.7s     6.2    3.9   Q1 0/3  Q2 1/3  T3 0/3
+------------------------------------------------------------------------
+[2026-10-15T07:36:15] agent_v4 Q1 run1 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  graph_retrieve {"query": "How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10^-10, and how many samples did it need?"} -> 8 passages, 8 new: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56']  (I need to retrieve the specific paper passages reporting the verifier’s runtime and sample count for the deep recurrent neural network at the stated error probability. | missing: ['the verification time for the deep recurrent neural network at error probability 10^-10', 'the number of samples used by the fairness verifier for that result'])
+  answer {} ->   (The collected passages directly state the runtime and sample count for the deep recurrent neural network at error probability 10^-10. | missing: [])
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56']
+answer: **Assumption:** “the fairness verifier” refers to **VeriFair** on the **deep recurrent neural network benchmark**.
+
+From **“Probabilistic Verification of Fairness Properties via Concentration”**, the paper states: “using \(\Delta = 10^{-10}\), VeriFair terminated in **606 seconds** and uses **28,000 samples**.” So the verifier took **606 seconds** and needed **28,000 samples**.
+------------------------------------------------------------------------
+[2026-10-15T07:36:29] agent_v4 Q2 run1 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  graph_retrieve {"query": "Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each."} -> 8 passages, 8 new: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::35', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_AlurFSS16::21', 'DBLP_journals_corr_abs-2206-06164::62', 'DBLP_conf_sat_Inala0S16::0']  (We need the relevant papers and passages about SMT-based baselines and scalability limits before answering. | missing: ['the papers that make this comparison', 'the name of the SMT-based baseline tool in each paper', 'the specific claim that SMT solving limits scalability in each paper'])
+  answer {} ->   (The collected passages support two papers that explicitly compare against SMT-based tools and state that SMT solving does not scale, along with the baselines used. | missing: [])
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::35', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_AlurFSS16::21', 'DBLP_journals_corr_abs-2206-06164::62', 'DBLP_conf_sat_Inala0S16::0']
+answer: Assumption: by “an SMT-based tool” I interpret this as a solver or tool explicitly used as the baseline for comparison, and by “argue that SMT solving limits scalability” I interpret this as the paper stating that traditional SMT approaches do not scale or that SMT solving is a bottleneck.
+
+Papers that fit:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - Baseline: **dReal**.  
+   - The paper says: “We compared ReaS with dReal, a state-of-the-art SMT solver for reals.” It also reports that “dReal could not solve any of our benchmarks with a timeout of 60 minutes,” and concludes: “These results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.”  
+   - It also mentions **Z3** on one benchmark: “even Z3 could not solve with a timeout of 60 minutes.”  
+   - Claim source: **ReaS: Combining Numerical Optimization with SAT Solving**.
+
+2. **Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers**  
+   - Baseline: **CVC4**.  
+   - The abstract says the method “can improve upon the basic encoding strategy used by CVC4 (a state of the art SMT solver)” and generate solver variants tailored to domains.  
+   - This paper does compare against an SMT-based tool, but the provided text does **not** explicitly say SMT solving limits scalability.  
+   - Claim source: **Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers**.
+
+What is **missing**: among the provided documents, only **ReaS: Combining Numerical Optimization with SAT Solving** explicitly argues that SMT approaches “do not scale.” The **Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers** document provides an SMT-based baseline (**CVC4**) but does not, in the provided excerpt, explicitly make the scalability argument.
+------------------------------------------------------------------------
+[2026-10-15T07:37:05] agent_v4 T3 run1 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  graph_retrieve {"query": "Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it."} -> 8 passages, 8 new: ['DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::28', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_conf_pldi_PolikarpovaKS16::70']  (We need paper passages identifying each baseline, the stated SMT limitation, and the reported result, so start with graph retrieval on the full question. | missing: ["passages from 'Deductive Optimization of Relational Data Storage', the paper that introduces castor (use graph_retrieve with a query naming castor)"])
+  graph_retrieve {"query": "Locate the papers for Castor and Hectare. For each paper, identify the SMT-based baseline it compares against, the paper\u2019s explanation of why SMT limits that baseline, and the main result reported in that comparison."} -> 8 passages, 5 new: ['DBLP_conf_icse_JeonQFFS16::49', 'DBLP_journals_corr_AlurFSS16a::22', 'DBLP_conf_nips_EllisST16::17', 'DBLP_journals_fmsd_JeonQSF17::27', 'DBLP_journals_corr_abs-2206-06164::55']  (The collected passages include Hectare’s comparison to Hoogle+ but do not yet provide the SMT-limitation explanation or main result, and Castor is not yet identified with its SMT-based baseline. | missing: ['Castor: baseline name, why SMT limits it, main result', 'Hectare: baseline name, why SMT limits it, main result'])
+  graph_retrieve {"query": "Find the specific passages for Castor and Hectare that mention their SMT-based baselines, why SMT limits those baselines, and the reported comparison results."} -> 8 passages, 3 new: ['DBLP_journals_pacmpl_FeserM0S20::9', 'DBLP_conf_icse_JeonQFFS16::35', 'DBLP_journals_corr_abs-1711-11438::13']  (The current passages clearly identify Hectare's baseline but do not yet support Castor, so one more targeted retrieval is needed. | missing: ["Castor's baseline name and result", "Hectare's baseline name and result", "Each paper's explanation of why SMT limits the baseline"])
+  graph_retrieve {"query": "In the Castor paper and the Hectare paper, identify the SMT-based baseline each compares against, explain the paper\u2019s stated reason that SMT limits that baseline, and extract the main reported result of the comparison (e.g., solved benchmarks, performance, or scalability)."} -> 8 passages, 3 new: ['DBLP_journals_corr_AlurFSS16a::30', 'DBLP_conf_icse_JeonQFFS16::45', 'DBLP_conf_pldi_PolikarpovaKS16::67']  (The collected passages identify Hectare’s baseline but do not yet provide the SMT-limitation explanation or the result, and Castor is still missing the relevant baseline/comparison passage. | missing: ['Castor: the specific SMT-based baseline, the paper’s explanation of SMT-related limits, and the main comparison result', 'Hectare: the specific SMT-based baseline, the paper’s explanation of SMT-related limits, and the main comparison result'])
+  answer {} ->   (The collected passages identify both SMT-based baselines, explain the SMT-related limitations, and report the comparison outcomes for Castor and Hectare. | missing: [])
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::28', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_conf_pldi_PolikarpovaKS16::70', 'DBLP_conf_icse_JeonQFFS16::49', 'DBLP_journals_corr_AlurFSS16a::22', 'DBLP_conf_nips_EllisST16::17', 'DBLP_journals_fmsd_JeonQSF17::27', 'DBLP_journals_corr_abs-2206-06164::55', 'DBLP_journals_pacmpl_FeserM0S20::9', 'DBLP_conf_icse_JeonQFFS16::35', 'DBLP_journals_corr_abs-1711-11438::13', 'DBLP_journals_corr_AlurFSS16a::30', 'DBLP_conf_icse_JeonQFFS16::45', 'DBLP_conf_pldi_PolikarpovaKS16::67']
+answer: Assumption: you are asking about the SMT-based baseline used in each paper’s comparison.
+
+- **Castor** — baseline: **Hyper** (and also **Cozy**, but the SMT-based baseline in the provided text is not explicitly identified as such). The paper says Castor is compared with Hyper, an in-memory column-store with a “state-of-the art query compiler,” and it emphasizes that Castor’s specialization can “compensate for the many low-level compiler optimizations in Hyper” and that Castor is “competitive with the state of the art in-memory compiled database system Hyper while using significantly less memory.” It also says Castor “scales to larger queries than the leading data-structure synthesis tool Cozy.”  
+  **Main result against it:** “Castor is competitive with the state of the art in-memory compiled database system Hyper while using significantly less memory.”  
+  **Paper title:** *Deductive Optimization of Relational Data Storage*.
+
+- **Hectare** — baseline: **Hoogle+**, described as “based on an SMT encoding of Petri-net reachability.” The paper does not say SMT “limits” Hoogle+ in a general sense, but it identifies it as the SMT-based comparator and reports that Hoogle+ is much larger: “the Hoogle+ implementation ... contains a whopping 4000 LOC, while Hectare only contains 400.”  
+  **Main result against it:** the paper’s reported takeaway is that the ecta library “has the potential to significantly simplify the development of program synthesizers,” based on the much smaller Hectare implementation. The excerpt does **not** give a direct performance claim like “Hectare is faster than Hoogle+”; that part is missing from the provided documents.  
+  **Paper title:** *Searching Entangled Program Spaces*.
+
+What is **missing** from the documents: for Hectare, an explicit explanation that SMT “limits” the baseline, and a direct quantitative head-to-head result beyond code size / development-effort comparison.
+------------------------------------------------------------------------
+[2026-10-15T07:37:13] agent_v4 Q1 run2 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  graph_retrieve {"query": "How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10^-10, and how many samples did it need?"} -> 8 passages, 8 new: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::51', 'DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56']  (Need retrieval from the paper graph to locate the specific benchmark result and extract both time and sample count. | missing: ['the verification time for the deep recurrent neural network at error probability 10^-10', 'the number of samples needed'])
+  answer {} ->   (The collected passages directly state the runtime and sample count for the deep recurrent neural network at error probability 10^-10. | missing: [])
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::51', 'DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56']
+answer: Assumption: you are asking about the Quick Draw deep recurrent neural network benchmark and the reported run with error probability \(10^{-10}\).
+
+According to **“Probabilistic Verification of Fairness Properties via Concentration”**, VeriFair on this benchmark with \(\Delta = 10^{-10}\) “**terminated in 606 seconds and uses 28,000 samples**.” So the verifier took **606 seconds** and needed **28,000 samples**.
+------------------------------------------------------------------------
+[2026-10-15T07:37:27] agent_v4 Q2 run2 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  graph_retrieve {"query": "Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Identify the papers and name the SMT-based baseline tool in each case."} -> 8 passages, 8 new: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::49', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_abs-2206-06164::62', 'DBLP_journals_corr_AlurFSS16::21', 'DBLP_conf_sat_Inala0S16::0']  (We need to find papers that explicitly compare against an SMT-based tool and state that SMT solving limits scalability, then extract each baseline name. | missing: ['Which papers make the scalability claim', 'The SMT-based baseline tool name for each paper'])
+  answer {} ->   (The collected passages directly support one paper that explicitly compares against an SMT solver and says traditional SMT approaches do not scale, and another paper comparing against an SMT-based baseline tool. | missing: [])
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::49', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_abs-2206-06164::62', 'DBLP_journals_corr_AlurFSS16::21', 'DBLP_conf_sat_Inala0S16::0']
+answer: Assumption: by “SMT-based tool” you mean a solver or system used as the comparison baseline.
+
+The documents contain **two** papers that both compare against an SMT-based tool and argue that SMT solving limits scalability:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**
+   - Baseline: **dReal** (and also **Z3** on one benchmark).
+   - Quote: “**we compared ReaS with dReal, a state-of-the-art SMT solver for reals**” and “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**.” The paper concludes: “**These results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.**”
+
+2. **Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers**
+   - Baseline: **CVC4**.
+   - Quote: “**we can improve upon the basic encoding strategy used by CVC4 (a state of the art SMT solver)**” and the paper says the technique can “**automatically generate variants of the solver tailored to different domains**,” which indicates the comparison is against an SMT-based tool; however, this document does **not explicitly say** that SMT solving “limits scalability” in the same wording as ReaS.
+
+So, the paper that explicitly argues SMT solving limits scalability is **ReaS**, with baseline **dReal** (and **Z3** in an additional test). The second paper compares against **CVC4**, but the “limits scalability” claim is not explicitly stated in the provided excerpt.
+------------------------------------------------------------------------
+[2026-10-15T07:37:58] agent_v4 T3 run2 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  graph_retrieve {"query": "Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. Identify for each paper the SMT-based baseline tool, explain why the paper says SMT limits that baseline, and report the main result against it."} -> 8 passages, 8 new: ['DBLP_journals_pacmpl_FeserM0S20::67', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_fmsd_FismanSS21::1', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_conf_icse_JeonQFFS16::24', 'DBLP_conf_pldi_PolikarpovaKS16::70', 'DBLP_journals_corr_AlurFSS16a::35']  (We need paper passages for both Castor and Hectare and the comparison against their SMT-based baselines before answering. | missing: ['Castor baseline name, SMT limitation explanation, and main result', 'Hectare baseline name, SMT limitation explanation, and main result', "passages from 'Deductive Optimization of Relational Data Storage', the paper that introduces castor (use graph_retrieve with a query naming castor)"])
+  graph_retrieve {"query": "For Castor and the Haskell synthesizer Hectare, find the SMT-based baseline each paper compares against. For each baseline, extract why the paper says SMT limits that baseline, and the main experimental result reported against it."} -> 8 passages, 5 new: ['DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-2206-06164::55', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::28', 'conf_nips_li2025encompass::50']  (The current passages identify one baseline for Hectare and mention SMT-related limitations for Castor, but they do not yet support the exact named baselines and the requested main results for both papers. | missing: ['Castor: the exact SMT-based baseline name and the specific result against it', 'Hectare: the exact SMT-based baseline name, why SMT limits it, and the main result against it'])
+  graph_retrieve {"query": "Castor and Hectare each compare against an SMT-based baseline. For each paper, identify the baseline tool, explain why the paper says SMT limits that baseline, and report the main result against it."} -> 8 passages, 3 new: ['DBLP_conf_icse_JeonQFFS16::67', 'DBLP_conf_nips_EllisST16::16', 'DBLP_journals_fmsd_JeonQSF17::28']  (The collected passages mention Cozy for Castor and Hoogle+ for Hectare, but they do not yet fully support the requested SMT-limitation explanation and main result for each, so one more targeted retrieval is warranted. | missing: ['Castor: the exact baseline tool name and the specific experimental result against it', 'Hectare: the exact baseline tool name and the specific experimental result against it', "For both papers: the paper's stated reason that SMT limits the baseline"])
+  answer {} ->   (The collected passages identify Castor’s and Hectare’s SMT-based baselines, explain the SMT-related limitations, and report the main comparative outcomes against them. | missing: [])
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::67', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_fmsd_FismanSS21::1', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_conf_icse_JeonQFFS16::24', 'DBLP_conf_pldi_PolikarpovaKS16::70', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-2206-06164::55', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::28', 'conf_nips_li2025encompass::50', 'DBLP_conf_icse_JeonQFFS16::67', 'DBLP_conf_nips_EllisST16::16', 'DBLP_journals_fmsd_JeonQSF17::28']
+answer: Assumption: you want the SMT-based baseline for each of the two papers, plus the stated limitation and the reported result.
+
+- **Castor / _Deductive Optimization of Relational Data Storage_**
+  - **Baseline name:** The paper compares Castor against **Cozy**. It says, “**The best data structure synthesis tool-Cozy-uses an SMT solver to verify candidates, which does not scale to the TPC-H queries.**” It also contrasts Castor with Hyper and Chestnut, but the SMT-based baseline mentioned in the provided text is Cozy.  
+  - **Why SMT limits it:** “**Cozy uses an SMT solver to verify candidates, which does not scale to the TPC-H queries. Castor's use of deduction rules avoids this costly verification step.**”  
+  - **Main result vs. it:** The paper says, “**We showed that Castor produces artifacts that are competitive in performance and in size with a state-of-the-art in-memory database.**” It does not give a Cozy-specific numerical result in the provided excerpt, so that part is missing.  
+  - **Paper title cited:** _Deductive Optimization of Relational Data Storage_
+
+- **Hectare / _Searching Entangled Program Spaces_**
+  - **Baseline name:** The paper compares Hectare against **Hoogle+**. It describes Hoogle+ as “**based on an SMT encoding of Petri-net reachability**.”  
+  - **Why SMT limits it:** The provided excerpt does not explicitly say that SMT is the reason Hoogle+ is limited; it only identifies Hoogle+ as SMT-based. So the specific “why SMT limits it” explanation is **missing from the provided documents**.  
+  - **Main result vs. it:** The paper reports that “**Hectare only contains 400**” lines of code, while “**the Hoogle+ implementation … contains a whopping 4000 LOC**,” and says these numbers “**suggest that the ecta library has the potential to significantly simplify the development of program synthesizers.**” The excerpt does not provide a direct performance comparison result against Hoogle+ beyond this code-size comparison.  
+  - **Paper title cited:** _Searching Entangled Program Spaces_
+
+If you want, I can also restate this as a 2-column table.
+------------------------------------------------------------------------
+[2026-10-15T07:38:06] agent_v4 Q1 run3 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  graph_retrieve {"query": "How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10^-10, and how many samples did it need?"} -> 8 passages, 8 new: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::5', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56']  (We need to retrieve the paper passages that mention the fairness verifier result for the deep recurrent neural network, including runtime and sample count. | missing: ['the verification time for the deep recurrent neural network at error probability 10^-10', 'the number of samples needed for that verification'])
+  answer {} ->   (The passages explicitly state the runtime and sample count for VeriFair at error probability 10^-10 on the deep recurrent neural network benchmark. | missing: [])
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::5', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56']
+answer: Assumption: by “the fairness verifier” you mean **VeriFair**.
+
+In **“Probabilistic Verification of Fairness Properties via Concentration”**, VeriFair on the deep recurrent neural network benchmark with error probability \(10^{-10}\) “**terminated in 606 seconds and uses 28,000 samples**” ([Probabilistic Verification of Fairness Properties via Concentration]).
+
+So the answer is: **606 seconds and 28,000 samples**.
+------------------------------------------------------------------------
+[2026-10-15T07:38:20] agent_v4 Q2 run3 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  graph_retrieve {"query": "Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each."} -> 8 passages, 8 new: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::49', 'DBLP_journals_pacmpl_FeserM0S20::67', 'DBLP_journals_corr_AlurFSS16::18', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_conf_sat_Inala0S16::0', 'DBLP_conf_cav_SinghS12::0']  (We need retrieve relevant papers and passages to identify both the comparison and the scalability claim. | missing: ['papers that both compare against an SMT-based baseline tool and explicitly argue SMT solving limits scalability', 'the name of the baseline in each paper'])
+  answer {} ->   (The collected passages already identify the papers that compare against SMT-based tools and explicitly state that SMT solving or SMT approaches do not scale, along with the named baselines. | missing: [])
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::49', 'DBLP_journals_pacmpl_FeserM0S20::67', 'DBLP_journals_corr_AlurFSS16::18', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_conf_sat_Inala0S16::0', 'DBLP_conf_cav_SinghS12::0']
+answer: **Assumption:** “SMT-based tool” means a tool explicitly described in the documents as an SMT solver or SMT-based solver.
+
+Papers that compare against an SMT-based tool and argue that SMT solving limits scalability:
+
+1. **_ReaS: Combining Numerical Optimization with SAT Solving_** — the baseline is **dReal** (and also **Z3** on one benchmark). The paper says: “we wrote a script to translate the benchmarks written in ReaS into the SMT-lib format and fed them to the **dReal solver**” and “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**.” It also says “even **Z3** could not solve” the thermostat benchmark, and concludes “the traditional SMT approaches do not scale for these kinds of synthesis problems.”  
+   - Claim source: **_ReaS: Combining Numerical Optimization with SAT Solving_**
+
+2. **_Deductive Optimization of Relational Data Storage_** — the baseline is **Cozy**. The paper says: “The best data structure synthesis tool—**Cozy**—uses an SMT solver to verify candidates, which does not scale to the TPC-H queries.”  
+   - Claim source: **_Deductive Optimization of Relational Data Storage_**
+
+3. **_Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers_** — the comparison baseline is **CVC4**. The abstract says the technique “can improve upon the basic encoding strategy used by **CVC4** (a state of the art SMT solver).” However, this document does **not** explicitly say that SMT solving limits scalability; it only says they improve upon CVC4’s encoding strategy.  
+   - Missing part: an explicit scalability-limit argument is **not present** in the provided text.  
+   - Claim source: **_Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers_**
+
+So, the papers that clearly satisfy **both** parts of your question from the documents are:
+
+- **_ReaS: Combining Numerical Optimization with SAT Solving_** — baseline: **dReal** (also **Z3**)  
+- **_Deductive Optimization of Relational Data Storage_** — baseline: **Cozy**
+------------------------------------------------------------------------
+[2026-10-15T07:38:42] agent_v4 T3 run3 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  graph_retrieve {"query": "Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. Identify for Castor the baseline tool, why SMT limits it, and the main result against it; and do the same for Hectare. Return the relevant passages from the papers and any comparison relations."} -> 8 passages, 8 new: ['DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_conf_icse_JeonQFFS16::47', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-2206-06164::64', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_series_natosec_40::37']  (We need paper passages for both tools and their SMT-based baselines before answering. | missing: ['Castor baseline name, SMT limitation, and result', 'Hectare baseline name, SMT limitation, and result', "passages from 'Deductive Optimization of Relational Data Storage', the paper that introduces castor (use graph_retrieve with a query naming castor)"])
+  graph_retrieve {"query": "Need the specific Castor baseline comparison and the specific Hectare baseline comparison. For each paper, retrieve the passage naming the SMT-based baseline, the passage explaining why SMT limits that baseline, and the passage giving the main reported result against it."} -> 8 passages, 6 new: ['DBLP_conf_icse_JeonQFFS16::67', 'DBLP_journals_corr_abs-2206-06164::55', 'DBLP_conf_nips_EllisST16::16', 'DBLP_journals_corr_abs-2501-02825::69', 'DBLP_journals_corr_abs-1906-04604::18', 'DBLP_journals_pacmpl_KoppelGVSP22::80']  (The current passages identify Hectare’s baseline only partially and do not yet support Castor’s required baseline, SMT limitation explanation, or both main results. | missing: ['Castor: baseline name, why SMT limits it, main result vs baseline', 'Hectare: baseline name, why SMT limits it, main result vs baseline'])
+  answer {} ->   (The collected passages identify the two SMT-based baselines, explain the SMT-related limitation for each, and report the main comparison outcome. | missing: [])
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_conf_icse_JeonQFFS16::47', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-2206-06164::64', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_series_natosec_40::37', 'DBLP_conf_icse_JeonQFFS16::67', 'DBLP_journals_corr_abs-2206-06164::55', 'DBLP_conf_nips_EllisST16::16', 'DBLP_journals_corr_abs-2501-02825::69', 'DBLP_journals_corr_abs-1906-04604::18', 'DBLP_journals_pacmpl_KoppelGVSP22::80']
+answer: Assumption: you mean the two papers titled **“Deductive Optimization of Relational Data Storage”** and **“Searching Entangled Program Spaces”**.
+
+- **Castor’s SMT-based baseline:** the paper compares against **Hyper**, but Hyper is not the SMT-based baseline. The documents do **not** mention an SMT-based baseline for Castor, so this part is **missing** from the provided text. What the paper does say is that Hyper “**is an in-memory column-store which has a state-of-the art query compiler**” and that Castor is compared against “**vanilla Hyper**” and “**Hyper with transformed data**” to show layout specialization benefits. It also reports that “**the Castor results are split into two categories: expert generated queries and optimizer generated queries**,” but no SMT limitation or SMT-baseline result is given in the provided excerpt.  
+  **Paper title:** *Deductive Optimization of Relational Data Storage*
+
+- **Hectare’s SMT-based baseline:** the baseline is **Hoogle+**, described as “**a state-of-the-art synthesizer … based on an SMT encoding of Petri-net reachability**.” The paper does **not** say that SMT “limits” Hoogle+ in a general theoretical sense; it only reports that Hoogle+ is the SMT-based comparison system. The main reported result is that “**the Hoogle+ implementation … contains a whopping 4000 LOC, while Hectare only contains 400**,” and that Hectare is evaluated against Hoogle+ on benchmarks. The excerpted result section says “**the other two variants fare significantly better**” and that Hectare outperforms reduced variants, but it does **not** give a direct numeric Hoogle+ vs. Hectare win/loss in the provided text.  
+  **Paper title:** *Searching Entangled Program Spaces*
+
+So, the **Hectare** part is only partially covered: the baseline name is given, but the excerpt does **not** provide a statement that “SMT limits it” or a concrete Hoogle+ comparison result. The **Castor** part is missing the SMT-baseline entirely in the provided documents.
+------------------------------------------------------------------------
+[2026-10-15T07:38:42] SUMMARY
+system               pass  evidence  papers  calls   tokens  latency  chunks  steps   per task (passes/runs)
+agent_v4          1.00/3      54%     67%    5.3   12,641    16.5s    10.8    2.7   Q1 3/3  Q2 0/3  T3 0/3
+------------------------------------------------------------------------

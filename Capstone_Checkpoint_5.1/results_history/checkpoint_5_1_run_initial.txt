@@ -1,0 +1,114 @@
+Your agent plan:
+{
+  "tools": [
+    "graph_retrieve",
+    "clarify",
+    "answer"
+  ],
+  "stop_condition": "Answer is the only exit. For a research question the agent calls graph_retrieve once and answers from exactly what it returns (no second retrieval). Questions that need no papers (a greeting, what the agent can do, a follow-up already answered) are answered directly. Clarify is a pause, not a stop: if the wording has two or more plausible readings, the agent asks one narrowing question and plans again; in batch mode it states an assumption instead. A step limit and an unparseable decision both fall back to retrieving once and answering.",
+  "system_prompt_idea": "Decide first whether the question needs the papers: if it asks about research content, call graph_retrieve once with the question as written and answer only from what it returns, quoting each claim with its paper; answer directly only when no paper content is needed; clarify only when the wording has two or more plausible readings.",
+  "test_tasks": [
+    "How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?",
+    "Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.",
+    "Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it."
+  ]
+}
+Loaded 8087 chunks from 148 papers (skipped 4 whole-volume files over 400,000 chars).
+Loading existing vector DB from /Users/tsingh/projects/llm-rag-capstone/data/chroma_db/
+Paper graph: 8693 nodes {'paper': 148, 'chunk': 8087, 'tool': 458}; 16559 edges {'has_chunk': 8087, 'compares_against': 409, 'next_chunk': 7939, 'duplicate_of': 29, 'introduces': 95}.
+Hybrid retriever ready over 8087 chunks.
+
+=== run 1 | baseline_2_1 | Q1
+    FAIL  evidence 0/2  papers 1/1  calls 1  ~2086 tok  2.4s
+
+=== run 1 | baseline_2_1 | Q2
+    FAIL  evidence 0/3  papers 0/3  calls 1  ~1510 tok  2.3s
+
+=== run 1 | baseline_2_1 | T3
+    FAIL  evidence 2/3  papers 1/2  calls 1  ~1853 tok  2.0s
+
+=== run 1 | advanced_4_1 | Q1
+    PASS  evidence 2/2  papers 1/1  calls 2  ~3457 tok  4.1s
+
+=== run 1 | advanced_4_1 | Q2
+    FAIL  evidence 1/3  papers 1/3  calls 2  ~3551 tok  9.9s
+
+=== run 1 | advanced_4_1 | T3
+    FAIL  evidence 1/3  papers 2/2  calls 2  ~3725 tok  7.7s
+
+=== run 1 | agent | Q1
+  [plan] graph_retrieve — This is a question about a research result from the paper collection, so it requires retrieving the relevant paper conte
+    PASS  evidence 2/2  papers 1/1  calls 3  ~3787 tok  5.0s
+
+=== run 1 | agent | Q2
+  [plan] graph_retrieve — The user asks about research papers, comparisons against an SMT-based tool, and scalability claims, which requires searc
+    FAIL  evidence 1/3  papers 2/3  calls 3  ~4056 tok  7.5s
+
+=== run 1 | agent | T3
+  [plan] graph_retrieve — The user is asking about specific research papers, their SMT-based baselines, limitations, and reported results, which r
+    FAIL  evidence 1/3  papers 2/2  calls 3  ~4126 tok  7.5s
+
+=== run 2 | baseline_2_1 | Q1
+    FAIL  evidence 0/2  papers 1/1  calls 1  ~2068 tok  2.9s
+
+=== run 2 | baseline_2_1 | Q2
+    FAIL  evidence 0/3  papers 0/3  calls 1  ~1572 tok  2.5s
+
+=== run 2 | baseline_2_1 | T3
+    FAIL  evidence 2/3  papers 1/2  calls 1  ~1830 tok  2.5s
+
+=== run 2 | advanced_4_1 | Q1
+    PASS  evidence 2/2  papers 1/1  calls 2  ~3488 tok  5.4s
+
+=== run 2 | advanced_4_1 | Q2
+    FAIL  evidence 1/3  papers 1/3  calls 2  ~3496 tok  5.4s
+
+=== run 2 | advanced_4_1 | T3
+    FAIL  evidence 1/3  papers 2/2  calls 2  ~3764 tok  7.7s
+
+=== run 2 | agent | Q1
+  [plan] graph_retrieve — The question asks for a specific result from the paper collection about a fairness verifier’s runtime and sample count, 
+    PASS  evidence 2/2  papers 1/1  calls 3  ~3760 tok  4.8s
+
+=== run 2 | agent | Q2
+  [plan] graph_retrieve — This asks about research papers, comparisons against SMT-based tools, and scalability arguments, so it requires searchin
+    FAIL  evidence 2/3  papers 2/3  calls 3  ~3510 tok  6.8s
+
+=== run 2 | agent | T3
+  [plan] graph_retrieve — The user is asking about specific research papers, their baselines, limitations, and reported results, which requires se
+    FAIL  evidence 1/3  papers 2/2  calls 3  ~4291 tok  9.0s
+
+=== run 3 | baseline_2_1 | Q1
+    FAIL  evidence 0/2  papers 1/1  calls 1  ~2048 tok  1.8s
+
+=== run 3 | baseline_2_1 | Q2
+    FAIL  evidence 0/3  papers 0/3  calls 1  ~1498 tok  2.1s
+
+=== run 3 | baseline_2_1 | T3
+    FAIL  evidence 2/3  papers 1/2  calls 1  ~1800 tok  1.7s
+
+=== run 3 | advanced_4_1 | Q1
+    PASS  evidence 2/2  papers 1/1  calls 2  ~3460 tok  3.8s
+
+=== run 3 | advanced_4_1 | Q2
+    FAIL  evidence 1/3  papers 1/3  calls 2  ~3698 tok  6.6s
+
+=== run 3 | advanced_4_1 | T3
+    FAIL  evidence 1/3  papers 2/2  calls 2  ~3564 tok  10.4s
+
+=== run 3 | agent | Q1
+  [plan] graph_retrieve — The question asks about a specific research result from the paper collection, so it requires retrieving the relevant pap
+    PASS  evidence 2/2  papers 1/1  calls 3  ~3808 tok  5.0s
+
+=== run 3 | agent | Q2
+  [plan] graph_retrieve — The user is asking about content in the paper collection, specifically papers that compare against SMT-based tools and d
+    FAIL  evidence 1/3  papers 1/3  calls 3  ~3319 tok  6.1s
+
+=== run 3 | agent | T3
+  [plan] graph_retrieve — This asks about specific research papers, their SMT-based baselines, limitations, and reported results, so it requires r
+    FAIL  evidence 0/3  papers 1/2  calls 3  ~4023 tok  7.0s
+
+system             pass  evidence  papers  calls   tokens  latency   per task (passes/runs)
+baseline_2_1    0.00/3      25%     33%    1.0    1,807     2.2s   Q1 0/3  Q2 0/3  T3 0/3
+advanced_4_1    1.00/3      50%     67%    2.0    3,578     6.8s   Q1 3/3  Q2 0/3  T3 0/3
+agent_initial   1.00/3      50%     72%    3.0    3,853     6.5s   Q1 3/3  Q2 0/3  T3 0/3

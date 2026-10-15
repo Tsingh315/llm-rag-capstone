@@ -1,0 +1,109 @@
+Your agent plan:
+{
+  "tools": [
+    "graph_retrieve",
+    "clarify",
+    "answer"
+  ],
+  "stop_condition": "Answer is the only exit. For a research question the agent calls graph_retrieve once and answers from exactly what it returns (no second retrieval). Questions that need no papers (a greeting, what the agent can do, a follow-up already answered) are answered directly. Clarify is a pause, not a stop: if the wording has two or more plausible readings, the agent asks one narrowing question and plans again; in batch mode it states an assumption instead. A step limit and an unparseable decision both fall back to retrieving once and answering.",
+  "system_prompt_idea": "Decide first whether the question needs the papers: if it asks about research content, call graph_retrieve once with the question as written and answer only from what it returns, quoting each claim with its paper; answer directly only when no paper content is needed; clarify only when the wording has two or more plausible readings.",
+  "test_tasks": [
+    "How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?",
+    "Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.",
+    "What did Castor and Hectare compare themselves against, why do the authors say those tools fall short, and how much better did each do?"
+  ]
+}
+Loaded 8087 chunks from 148 papers (skipped 4 whole-volume files over 400,000 chars).
+Loading existing vector DB from /Users/tsingh/projects/llm-rag-capstone/data/chroma_db/
+Paper graph: 8693 nodes {'paper': 148, 'chunk': 8087, 'tool': 458}; 16559 edges {'has_chunk': 8087, 'compares_against': 409, 'next_chunk': 7939, 'duplicate_of': 29, 'introduces': 95}.
+Hybrid retriever ready over 8087 chunks.
+
+=== run 1 | agent | Q1
+  [plan] graph_retrieve focus=[] — This is a content question about a specific paper/result, so it needs retrieval from the paper collection.
+    PASS  evidence 2/2  papers 1/1  calls 3  ~3845 tok  7.1s
+
+=== run 1 | agent | Q2
+  [plan] graph_retrieve focus=['SMT-based tool'] — This asks about research content and specific comparisons against SMT-based tools, so it should be answered by searching
+    FAIL  evidence 1/3  papers 1/3  calls 3  ~3994 tok  11.2s
+
+=== run 1 | agent | T3
+  [plan] graph_retrieve focus=['Castor', 'Hectare'] — This is a research-content question comparing two named papers/tools and asking for their baselines, critiques, and repo
+    FAIL  evidence 2/3  papers 2/2  calls 3  ~4381 tok  7.5s
+
+=== run 1 | agent | Q3
+  [plan] graph_retrieve focus=[] — The user is asking about a research technique and a performance comparison, which requires searching the paper collectio
+    PASS  evidence 2/2  papers 1/1  calls 3  ~4502 tok  5.4s
+
+=== run 1 | agent | Q4
+  [plan] graph_retrieve focus=[] — The user is asking about research content from a specific paper and a comparison to DreamCoder, which requires retrievin
+    PASS  evidence 2/2  papers 1/1  calls 3  ~3531 tok  5.4s
+
+=== run 1 | agent | Q5
+  [plan] graph_retrieve focus=['ECTA-based Haskell synthesizer'] — This asks about specific research results on named tools and a benchmark suite, so it requires retrieval from the paper 
+    PASS  evidence 2/2  papers 1/1  calls 3  ~3434 tok  5.6s
+
+=== run 1 | agent | Q6
+  [plan] graph_retrieve focus=['Sketch'] — The user asks about research content across papers, so I should search the paper collection for papers using Sketch as s
+    FAIL  evidence 0/2  papers 0/2  calls 3  ~4233 tok  9.2s
+
+=== run 2 | agent | Q1
+  [plan] graph_retrieve focus=[] — This asks for specific experimental results from a paper in the collection, so retrieval is needed.
+    PASS  evidence 2/2  papers 1/1  calls 3  ~3871 tok  4.4s
+
+=== run 2 | agent | Q2
+  [plan] graph_retrieve focus=[] — This asks about research content across the paper collection, specifically identifying papers that compare against SMT-b
+    FAIL  evidence 1/3  papers 2/3  calls 3  ~4084 tok  20.0s
+
+=== run 2 | agent | T3
+  [plan] graph_retrieve focus=['Castor', 'Hectare'] — The user asks about comparative claims and performance of two named papers/tools, which requires searching the paper col
+    FAIL  evidence 2/3  papers 2/2  calls 3  ~4222 tok  6.0s
+
+=== run 2 | agent | Q3
+  [plan] graph_retrieve focus=[] — The user is asking about a research technique and a specific speed comparison, which requires searching the paper collec
+    FAIL  evidence 2/2  papers 1/1  calls 3  ~4104 tok  5.4s
+
+=== run 2 | agent | Q4
+  [plan] graph_retrieve focus=['DreamCoder'] — This is a research-content question about a paper, its introduced tool, and a comparison to DreamCoder, so it should be 
+    PASS  evidence 2/2  papers 1/1  calls 3  ~3573 tok  4.8s
+
+=== run 2 | agent | Q5
+  [plan] graph_retrieve focus=['ECTA-based Haskell synthesizer', 'Hoogle+'] — This asks about specific experimental results from research papers, so retrieval is needed.
+    PASS  evidence 2/2  papers 1/1  calls 3  ~3452 tok  4.7s
+
+=== run 2 | agent | Q6
+  [plan] graph_retrieve focus=['Sketch'] — The user asks about research content across papers and tools, so this should be answered by searching the paper collecti
+    FAIL  evidence 0/2  papers 0/2  calls 3  ~4007 tok  7.3s
+
+=== run 3 | agent | Q1
+  [plan] graph_retrieve focus=[] — The question asks for specific experimental results from a paper about a fairness verifier, so retrieval is needed to fi
+    PASS  evidence 2/2  papers 1/1  calls 3  ~3865 tok  5.4s
+
+=== run 3 | agent | Q2
+  [plan] graph_retrieve focus=[] — The user is asking about comparative claims across papers in the collection, which requires searching the paper corpus f
+    FAIL  evidence 1/3  papers 1/3  calls 3  ~3476 tok  7.1s
+
+=== run 3 | agent | T3
+  [plan] graph_retrieve focus=['Castor', 'Hectare'] — The user asks about research content and explicitly compares two named papers/tools, so we should retrieve from the pape
+    FAIL  evidence 2/3  papers 2/2  calls 3  ~4406 tok  7.2s
+
+=== run 3 | agent | Q3
+  [plan] graph_retrieve focus=[] — The user is asking about a research technique and a performance comparison on a specific benchmark, which requires looki
+    PASS  evidence 2/2  papers 1/1  calls 3  ~4507 tok  5.3s
+
+=== run 3 | agent | Q4
+  [plan] graph_retrieve focus=['top-down synthesis for library learning'] — This is a research-content question about a specific paper and its comparison to DreamCoder, so it should be answered by
+    PASS  evidence 2/2  papers 1/1  calls 3  ~3555 tok  4.8s
+
+=== run 3 | agent | Q5
+  [plan] graph_retrieve focus=['ECTA-based Haskell synthesizer', 'Hoogle+'] — This asks about benchmark results and a comparison between tools, which requires searching the paper collection.
+    PASS  evidence 2/2  papers 1/1  calls 3  ~3330 tok  4.5s
+
+=== run 3 | agent | Q6
+  [plan] graph_retrieve focus=['Sketch'] — The question asks about research content across the paper collection, specifically which papers use Sketch as a solver b
+    FAIL  evidence 0/2  papers 0/2  calls 3  ~4120 tok  7.5s
+
+system             pass  evidence  papers  calls   tokens  latency   per task (passes/runs)
+baseline_2_1    2.00/7      31%     55%    1.0    1,976     2.2s   Q1 0/3  Q2 0/3  Q3 0/3  Q4 3/3  Q5 3/3  Q6 0/3  T3 0/3
+advanced_4_1    3.67/7      58%     55%    2.0    3,468     5.6s   Q1 3/3  Q2 0/3  Q3 2/3  Q4 3/3  Q5 3/3  Q6 0/3  T3 0/3
+agent_initial   3.33/7      58%     61%    3.0    3,705     5.7s   Q1 3/3  Q2 0/3  Q3 1/3  Q4 3/3  Q5 3/3  Q6 0/3  T3 0/3
+agent_refined   3.67/7      69%     67%    3.0    3,928     6.9s   Q1 3/3  Q2 0/3  Q3 2/3  Q4 3/3  Q5 3/3  Q6 0/3  T3 0/3

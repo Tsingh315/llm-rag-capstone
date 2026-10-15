@@ -1,0 +1,61 @@
+Your agent plan:
+{
+  "tools": [
+    "graph_retrieve",
+    "clarify",
+    "answer"
+  ],
+  "stop_condition": "Answer is the only exit. For a research question the agent calls graph_retrieve once and answers from exactly what it returns (no second retrieval). Questions that need no papers (a greeting, what the agent can do, a follow-up already answered) are answered directly. Clarify is a pause, not a stop: if the wording has two or more plausible readings, the agent asks one narrowing question and plans again; in batch mode it states an assumption instead. A step limit and an unparseable decision both fall back to retrieving once and answering.",
+  "system_prompt_idea": "Decide first whether the question needs the papers: if it asks about research content, call graph_retrieve once with the question as written and answer only from what it returns, quoting each claim with its paper; answer directly only when no paper content is needed; clarify only when the wording has two or more plausible readings.",
+  "test_tasks": [
+    "How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?",
+    "Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.",
+    "Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it."
+  ]
+}
+Loaded 8087 chunks from 148 papers (skipped 4 whole-volume files over 400,000 chars).
+Loading existing vector DB from /Users/tsingh/projects/llm-rag-capstone/data/chroma_db/
+Paper graph: 8693 nodes {'paper': 148, 'chunk': 8087, 'tool': 458}; 16559 edges {'has_chunk': 8087, 'compares_against': 409, 'next_chunk': 7939, 'duplicate_of': 29, 'introduces': 95}.
+Hybrid retriever ready over 8087 chunks.
+
+=== run 1 | agent | Q1
+  [plan] graph_retrieve focus=[] — This asks about a specific research result (verification time and sample count), so I should retrieve from the paper col
+    PASS  evidence 2/2  papers 1/1  calls 3  ~3849 tok  5.7s
+
+=== run 1 | agent | Q2
+  [plan] graph_retrieve focus=[] — The user is asking about comparisons and scalability arguments across the paper collection, which requires searching the
+    FAIL  evidence 1/3  papers 1/3  calls 3  ~3782 tok  9.8s
+
+=== run 1 | agent | T3
+  [plan] graph_retrieve focus=['Castor', 'Hectare'] — The user is asking about specific research papers and their comparative results, which requires searching the paper coll
+    PASS  evidence 3/3  papers 2/2  calls 3  ~3922 tok  6.8s
+
+=== run 2 | agent | Q1
+  [plan] graph_retrieve focus=[] — The question asks for specific experimental results from a research paper, so it requires retrieval from the paper colle
+    PASS  evidence 2/2  papers 1/1  calls 3  ~3986 tok  5.7s
+
+=== run 2 | agent | Q2
+  [plan] graph_retrieve focus=[] — The user is asking about comparisons and scalability arguments across the paper collection, which requires searching the
+    FAIL  evidence 1/3  papers 1/3  calls 3  ~3682 tok  6.2s
+
+=== run 2 | agent | T3
+  [plan] graph_retrieve focus=['Castor', 'Hectare'] — The user asks about specific research papers and their comparative baselines/results, so this requires retrieving the re
+    PASS  evidence 2/3  papers 2/2  calls 3  ~4054 tok  6.1s
+
+=== run 3 | agent | Q1
+  [plan] graph_retrieve focus=[] — The question asks for specific experimental results from the paper collection, so retrieval is needed; the named paper/t
+    PASS  evidence 2/2  papers 1/1  calls 3  ~3834 tok  4.2s
+
+=== run 3 | agent | Q2
+  [plan] graph_retrieve focus=[] — The user is asking about comparative research claims across papers, so this requires searching the paper collection; the
+    FAIL  evidence 1/3  papers 2/3  calls 3  ~4106 tok  7.0s
+
+=== run 3 | agent | T3
+  [plan] graph_retrieve focus=['Castor', 'Hectare'] — The user is asking about specific research papers and their comparative baselines/results, so retrieval over the paper c
+    FAIL  evidence 3/3  papers 2/2  calls 3  ~4098 tok  7.4s
+
+system             pass  evidence  papers  calls   tokens  latency   per task (passes/runs)
+baseline_2_1    0.00/3      25%     33%    1.0    1,807     2.2s   Q1 0/3  Q2 0/3  T3 0/3
+advanced_4_1    1.00/3      50%     67%    2.0    3,578     6.8s   Q1 3/3  Q2 0/3  T3 0/3
+agent_initial   1.00/3      50%     72%    3.0    3,853     6.5s   Q1 3/3  Q2 0/3  T3 0/3
+agent_refined   1.67/3      71%     72%    3.0    3,924     6.5s   Q1 3/3  Q2 0/3  T3 2/3

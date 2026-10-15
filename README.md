@@ -33,6 +33,9 @@ answers. So far:
 - **4.1, advanced retrieval:** a paper graph (paper / chunk / tool nodes: reading order, duplicate copies,
   paper → baseline-tool relations) walked in two hops, seeded by LLM query decomposition. Same 3.1 evaluation at
   a matched 8-chunk budget: 3.00/4 pass (mean of 3 runs) vs 1.00/4 for the baseline.
+- **5.1, agent:** a LangGraph agent decides whether a question needs the papers, may ask one clarifying question,
+  and otherwise runs the 4.1 graph retrieval once and answers from it. On 7 questions × 3 runs it ties the fixed
+  4.1 pipeline (3.67/7 passes) with the most evidence reaching the LLM (69%), at one extra LLM call.
 
 Later checkpoints improve retrieval and keep re-running the same evaluation to measure progress.
 
@@ -66,6 +69,12 @@ Later checkpoints improve retrieval and keep re-running the same evaluation to m
 │   ├── checkpoint_4_1_responses.log, checkpoint_4_1_results.json, checkpoint_4_1_run_output.txt
 │   ├── screenshots/
 │   └── Tarundeep_Required_Capstone_Checkpoint_4_1_Worksheet.docx
+├── Capstone_Checkpoint_5.1/   # agent-based RAG: plan -> graph_retrieve (4.1, one shot) -> answer
+│   ├── README.md
+│   ├── capstone_checkpoint_5_1_agent_rag_starter.py   # solution file (imports the 4.1 system)
+│   ├── checkpoint_5_1_summary.txt, checkpoint_5_1_results.json, checkpoint_5_1_agent.log
+│   ├── screenshots/, experiments/, results_history/, exploration_v1_v4/
+│   └── Tarundeep_Required_Capstone_Checkpoint_5_1_Worksheet.docx
 ├── data/                      # git-ignored, shared by all checkpoints
 │   ├── ResearchPapers/        # the course PDFs
 │   ├── papers_txt/            # parsed text (written by ingest_papers.py)
@@ -76,7 +85,8 @@ Later checkpoints improve retrieval and keep re-running the same evaluation to m
 Each checkpoint folder has its own README: [Checkpoint 1.1](Capstone_Checkpoint_1.1/README.md) ·
 [Checkpoint 2.1](Capstone_Checkpoint_2.1/README.md) ·
 [Checkpoint 3.1](Capstone_Checkpoint_3.1/README.md) ·
-[Checkpoint 4.1](Capstone_Checkpoint_4.1/README.md).
+[Checkpoint 4.1](Capstone_Checkpoint_4.1/README.md) ·
+[Checkpoint 5.1](Capstone_Checkpoint_5.1/README.md).
 
 ## Setup
 
@@ -112,6 +122,10 @@ python capstone_checkpoint_3_1_evaluation_starter.py              # add SHOW_CHU
 # 4.1: advanced retrieval vs baseline (reuses data/; first run extracts tool relations once, ~119 LLM calls)
 cd ../Capstone_Checkpoint_4.1
 python capstone_checkpoint_4_1_advanced_retrieval_starter.py      # or --ask "question" for one traced retrieval
+
+# 5.1: the agent (needs langgraph); --chat to talk to it, no flags to run the evaluation
+cd ../Capstone_Checkpoint_5.1
+python capstone_checkpoint_5_1_agent_rag_starter.py --chat
 ```
 
 Building a vector index embeds all 8,087 chunks once (an embedding API cost); later runs reuse it unless the
@@ -126,3 +140,4 @@ chunks change. 2.1 keeps its own index in `Capstone_Checkpoint_2.1/chroma_db/` (
 | 2.1 | Retrieval strategy design and baseline (hybrid BM25 + vector) | ✅ Complete |
 | 3.1 | Evaluation infrastructure and baseline diagnosis (LLM judge) | ✅ Complete |
 | 4.1 | Advanced retrieval: graph-based multi-hop + query decomposition | ✅ Complete |
+| 5.1 | Agent-based RAG: plan, clarify, one-shot graph retrieval; evaluated vs 2.1 and 4.1 | ✅ Complete |

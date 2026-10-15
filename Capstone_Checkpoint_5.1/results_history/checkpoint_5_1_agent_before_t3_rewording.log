@@ -1,0 +1,599 @@
+[2026-10-15T07:48:39] baseline_2_1 Q1 run1 verdict=fail
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  fixed: one hybrid search, top 5
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_corr_abs-1812-02573::53', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_corr_abs-1812-02573::0', 'DBLP_journals_corr_abs-1812-02573::42']
+answer: The provided documents do not contain the specific running time or sample count for the deep recurrent neural network at error probability \(10^{-10}\).
+
+What the documents do say is that VeriFair was used on a “deep recurrent neural network (RNN)” benchmark and that it uses “adaptive concentration inequalities” and can make “the probability of error … extremely small,” but I do not see the exact time or number of samples for \(\delta = 10^{-10}\) in the text provided.
+
+If you have the figure or table that reports that result, I can extract the exact numbers.
+------------------------------------------------------------------------
+[2026-10-15T07:48:43] baseline_2_1 Q2 run1 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  fixed: one hybrid search, top 5
+chunks: ['DBLP_conf_icse_JeonQFFS16::28', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_conf_icse_JeonQFFS16::40', 'DBLP_conf_icse_JeonQFFS16::24', 'DBLP_journals_corr_abs-2206-06164::59']
+answer: Two papers in the provided documents do this:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - It compares against **dReal** (and also **Z3** on one benchmark).  
+   - The paper says: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**these results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.**”
+
+2. **Metric Program Synthesis**  
+   - It compares against **Regel**, described as “**a state-of-the-art regular expression synthesis tool**” that “**uses a number of SMT-based pruning strategies**.”  
+   - However, the provided excerpt does **not** explicitly say that SMT solving limits scalability in the same way as the ReaS paper does.
+
+So, the paper that clearly matches your description is **ReaS**, with baseline **dReal**.
+------------------------------------------------------------------------
+[2026-10-15T07:48:46] baseline_2_1 T3 run1 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  fixed: one hybrid search, top 5
+chunks: ['DBLP_journals_corr_abs-2206-07828::71', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_corr_abs-2206-07828::7', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_corr_abs-2206-07828::73']
+answer: The documents only give a clear comparison for **Hectare**; they do **not** mention **Castor** or its SMT-based baseline.
+
+For **Hectare**, the baseline is **Hoogle+**:
+
+- The paper says Hoogle+ is “**based on an SMT encoding of Petri-net reachability**.”
+- It also says Hectare outperforms it “**despite our implementation being only a tenth of the size**.”
+- Main reported result: “**Hectare is able to solve 88% of synthesis problems in the combined benchmark suite compared to only 64% by Hoogle+, and on commonly solved benchmarks Hectare is 8× faster on average.**”
+
+On why SMT limits it, the provided documents do not explicitly explain that limitation for Hoogle+ beyond noting its SMT/Petri-net basis.
+
+If you want, I can also pull out the exact quoted sentences about Hectare vs. Hoogle+ from the documents.
+------------------------------------------------------------------------
+[2026-10-15T07:48:50] advanced_4_1 Q1 run1 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  fixed: plan scope=single, hop 1 + hop 2
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56']
+answer: For the deep recurrent neural network benchmark, the paper says that using \(\Delta = 10^{-10}\), VeriFair "terminated in **606 seconds** and uses **28,000 samples**" ([CONTEXT passage 3](#)).
+------------------------------------------------------------------------
+[2026-10-15T07:49:01] advanced_4_1 Q2 run1 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  fixed: plan scope=multi, hop 1 + hop 2
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_conf_icse_JeonQFFS16::49', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_AlurFSS16::18', 'DBLP_journals_corr_abs-2206-06164::62', 'DBLP_conf_sat_Inala0S16::0']
+answer: The documents explicitly make that argument in at least these papers:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - Baseline: **dReal** (and also **Z3** for one benchmark).  
+   - Quote: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**These results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems**.”  
+   - It also says: “**even Z3 could not solve with a timeout of 60 minutes**.”
+
+2. **Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers**  
+   - Baseline: **CVC4**.  
+   - Quote: “...improve upon the basic encoding strategy used by **CVC4** (a state of the art SMT solver)...”
+
+From the provided documents, **ReaS** is the one that clearly argues SMT solving limits scalability. The CNF encoder paper compares against an SMT-based tool, but the supplied passage does not explicitly say SMT solving limits scalability.
+
+If you want, I can also list the SMT-based baselines mentioned in the related/context papers (e.g., Sketch uses SMT solvers, SOSYTOAST uses an SMT solver, etc.).
+------------------------------------------------------------------------
+[2026-10-15T07:49:10] advanced_4_1 T3 run1 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  fixed: plan scope=multi, hop 1 + hop 2
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::49', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_AlurFSS16::2']
+answer: The documents only let me answer this **partially**.
+
+### Hectare
+- **Baseline:** **Hoogle+**
+- **Why SMT limits it:** the paper says Hoogle+ is “**based on an SMT encoding of Petri-net reachability**.”
+- **Main result reported:** Hectare is much smaller to implement: “**Hoogle+ implementation … contains a whopping 4000 LOC, while Hectare only contains 400**.” The paper says this suggests the ecta library “**has the potential to significantly simplify the development of program synthesizers**.”
+
+### Castor
+- I can confirm from the Castor paper excerpt that it compares against **Hyper**, **Cozy**, and **Chestnut**, but **the provided documents do not mention an SMT-based baseline for Castor** or explain an SMT limitation for Castor.
+- So I can’t name a Castor SMT baseline or report a Castor-vs-SMT result from the supplied text.
+
+If you want, I can also help identify whether another provided document in the broader graph likely contains the missing Castor comparison.
+------------------------------------------------------------------------
+[2026-10-15T07:49:16] agent_initial Q1 run1 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  plan -> graph_retrieve (This is a question about a research result from the paper collection, so it requires retrieving the relevant paper content.)
+  graph_retrieve -> scope single, 8 passages from: Probabilistic Verification of Fairness Properties via Concentration
+  answer
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56']
+answer: The paper says that with \( \Delta = 10^{-10} \), VeriFair “**terminated in 606 seconds and uses 28,000 samples**.” It also notes elsewhere that on the deep neural network benchmark, the algorithm can require an error probability as small as \(10^{-10}\) and still terminate quickly.
+------------------------------------------------------------------------
+[2026-10-15T07:49:24] agent_initial Q2 run1 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  plan -> graph_retrieve (The user asks about research papers, comparisons against an SMT-based tool, and scalability claims, which requires searching the paper collection.)
+  graph_retrieve -> scope multi, 8 passages from: Special Issue on Syntax-Guided Synthesis Preface; MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agents; Deductive Optimization of Relational Data Storage; ReaS: Combining
+  answer
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::49', 'DBLP_journals_pacmpl_FeserM0S20::67', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16::18', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_conf_sat_Inala0S16::0', 'DBLP_journals_pacmpl_Bastani0S19::42']
+answer: The documents mention these papers comparing against an SMT-based tool and arguing that SMT solving limits scalability:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - Baseline: **dReal** (and also **Z3** on one benchmark).  
+   - Quote: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**even Z3 could not solve with a timeout of 60 minutes**.”  
+   - They conclude: “**traditional SMT approaches do not scale for these kinds of synthesis problems**.”
+
+2. **Deductive Optimization of Relational Data Storage**  
+   - Baseline: **Cozy**.  
+   - Quote: “**The best data structure synthesis tool-Cozy-uses an SMT solver to verify candidates, which does not scale to the TPC-H queries. Castor's use of deduction rules avoids this costly verification step.**”
+
+3. **Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers**  
+   - Baseline: **CVC4**.  
+   - Quote: they “**improve upon the basic encoding strategy used by CVC4 (a state of the art SMT solver)**” by generating tailored encoders, implying the SMT-based baseline is the scalability bottleneck.
+
+4. **Probabilistic Verification of Fairness Properties via Concentration**  
+   - Baseline: **FairSqare**.  
+   - Quote: “**VeriFair scales substantially better than FairSqare**” and “**the scalability of FairSqare depends on the complexity**” of the classifier/model, while VeriFair avoids that limitation.
+
+From the provided documents, these are the papers that clearly fit the pattern.
+------------------------------------------------------------------------
+[2026-10-15T07:49:33] agent_initial T3 run1 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  plan -> graph_retrieve (The user is asking about specific research papers, their SMT-based baselines, limitations, and reported results, which requires retrieving information from the paper collection.)
+  graph_retrieve -> scope multi, 8 passages from: Deductive Optimization of Relational Data Storage; Metric Program Synthesis; SyGuS-Comp 2016: Results and Analysis; MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agents; 
+  answer
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_conf_icse_JeonQFFS16::49', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_AlurFSS16::2', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_corr_abs-1802-04408::47']
+answer: From the provided documents, I can answer this for **Hectare** but **not fully for Castor**.
+
+## Hectare
+The paper says Hectare is compared against **“the state-of-the-art synthesizer Hoogle+, based on an SMT encoding of Petri-net reachability”**. It also notes that Hoogle+ is much larger to implement: **“the Hoogle+ implementation (excluding tests and parsing) contains a whopping 4000 LOC, while Hectare only contains 400.”**
+
+- **Baseline:** Hoogle+
+- **Why SMT limits it:** the document does **not** explicitly say SMT is the limiting factor for Hoogle+; it only says it is **“based on an SMT encoding of Petri-net reachability.”**
+- **Main result against it:** Hectare is presented as much simpler to implement, with **400 LOC vs. 4000 LOC** for Hoogle+.
+
+## Castor
+The Castor document fragment says Castor is compared with **Hyper**, including **“vanilla Hyper”** and **“Hyper with transformed data”**, but it does **not** identify Hyper as an SMT-based baseline, nor does this excerpt explain an SMT limitation or report the main result of that comparison.
+
+So, using only the provided text:
+- **Castor baseline:** Hyper
+- **SMT limitation:** **not stated in the excerpt**
+- **Main result:** **not fully stated in the excerpt**
+
+If you want, I can also extract the exact comparison language for Castor from the excerpt and state precisely what is and is not available there.
+------------------------------------------------------------------------
+[2026-10-15T07:49:36] baseline_2_1 Q1 run2 verdict=fail
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  fixed: one hybrid search, top 5
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_corr_abs-1812-02573::53', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_corr_abs-1812-02573::0', 'DBLP_journals_corr_abs-1812-02573::42']
+answer: The provided documents do **not** give the exact verification time or the number of samples for the deep recurrent neural network at error probability \(10^{-10}\).
+
+What the documents do say is that VeriFair was evaluated on this benchmark and that it can choose “the probability of error to be extremely small,” and they mention a setting of “\(\Delta = 10^{-10}\)” in the discussion of the benchmark, but the specific runtime and sample count you ask for are not stated in the provided text.
+------------------------------------------------------------------------
+[2026-10-15T07:49:40] baseline_2_1 Q2 run2 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  fixed: one hybrid search, top 5
+chunks: ['DBLP_conf_icse_JeonQFFS16::28', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_conf_icse_JeonQFFS16::40', 'DBLP_conf_icse_JeonQFFS16::24', 'DBLP_journals_corr_abs-2206-06164::59']
+answer: Two papers in the provided documents do this:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - It compares against **dReal** and also **Z3**.  
+   - The paper says: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**even Z3 could not solve with a timeout of 60 minutes**,” concluding that “**traditional SMT approaches do not scale for these kinds of synthesis problems**.”
+
+2. **Metric Program Synthesis**  
+   - It compares against **Regel**, described as “**a state-of-the-art regular expression synthesis tool**” that “**uses a number of SMT-based pruning strategies**.”  
+   - However, the provided excerpt does **not** explicitly say SMT solving limits scalability in the same way as ReaS does.
+
+So the clear match for “compare their approach against an SMT-based tool and argue that SMT solving limits scalability” is:
+
+- **ReaS** — baseline: **dReal** (and also **Z3** in one benchmark)
+
+If you want, I can also list any other papers in the documents that mention SMT, even if they do not make the scalability argument explicitly.
+------------------------------------------------------------------------
+[2026-10-15T07:49:43] baseline_2_1 T3 run2 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  fixed: one hybrid search, top 5
+chunks: ['DBLP_journals_corr_abs-2206-07828::71', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_corr_abs-2206-07828::7', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_corr_abs-2206-07828::73']
+answer: The documents mention **Hoogle+** as the SMT-based baseline for **Hectare**:
+
+- The paper says Hoogle+ is “**based on an SMT encoding of Petri-net reachability**” and that Hectare is compared against it.
+- It says Hectare “**significantly outperforms**” Hoogle+, “**despite our implementation being only a tenth of the size**.”
+- The main reported result is: “**Hectare is able to solve 88% of synthesis problems in the combined benchmark suite compared to only 64% by Hoogle+, and on commonly solved benchmarks Hectare is 8× faster on average**.”
+
+For **Castor**, I don’t see any document here that mentions Castor, its SMT-based baseline, or the reason SMT limits it. So I can’t answer that part from the provided documents.
+------------------------------------------------------------------------
+[2026-10-15T07:49:49] advanced_4_1 Q1 run2 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  fixed: plan scope=single, hop 1 + hop 2
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56']
+answer: The verifier terminated in **606 seconds** and used **28,000 samples** when run with error probability **\(10^{-10}\)**.
+
+This is stated in the CONTEXT passage: “**using ∆ = 10 -10 , VeriFair terminated in 606 seconds and uses 28,000 samples**.”
+------------------------------------------------------------------------
+[2026-10-15T07:49:55] advanced_4_1 Q2 run2 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  fixed: plan scope=multi, hop 1 + hop 2
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::49', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_AlurFSS16::18', 'DBLP_journals_corr_abs-2206-06164::62', 'DBLP_conf_sat_Inala0S16::0']
+answer: The documents explicitly mention two papers that compare against an SMT-based tool and argue that SMT solving limits scalability:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - Baseline: **dReal**  
+   - The paper says: “We compared ReaS with **dReal**, a state-of-the-art SMT solver for reals… dReal could not solve any of our benchmarks with a timeout of 60 minutes… These results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.”
+
+2. **Results and Analysis of SyGuS-Comp'15** (context document)  
+   - Baseline: **Sketch**  
+   - It says: “The Sketch solver follows a symbolic approach to CEGIS and uses an SMT solvers to choose the next candidate expression.”
+
+A more direct “SMT-based tool limits scalability” claim is clearly made only in **ReaS**. The provided documents do not explicitly say in the SyGuS-Comp'15 excerpt that SMT solving limits scalability; they only describe Sketch as SMT-based.
+------------------------------------------------------------------------
+[2026-10-15T07:50:04] advanced_4_1 T3 run2 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  fixed: plan scope=multi, hop 1 + hop 2
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_conf_icse_JeonQFFS16::67', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_pldi_PolikarpovaKS16::67', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_conf_icml_NyeHTS19::16']
+answer: The documents mention one SMT-based baseline for **Hectare**, but they do **not** provide enough information in the provided text to answer the Castor part or to give the “main result” against Castor’s SMT baseline.
+
+### Hectare
+- **Baseline name:** **Hoogle+**
+- **Why SMT limits it:** The paper says Hoogle+ is “**based on an SMT encoding of Petri-net reachability**.”
+- **Main result reported:** The evaluation says Hectare is compared with Hoogle+, and notes that **Hoogle+ has about 4000 LOC while Hectare only contains 400**, suggesting Hectare is much simpler to implement: “**the ecta library has the potential to significantly simplify the development of program synthesizers**.”  
+  The excerpt does **not** report a specific performance win/loss number against Hoogle+.
+
+### Castor
+- **Baseline name:** not stated in the provided excerpt.
+- **Why SMT limits it:** not stated in the provided excerpt.
+- **Main result reported:** not stated in the provided excerpt.
+
+If you want, I can also summarize the Castor comparison from a different passage if you provide it.
+------------------------------------------------------------------------
+[2026-10-15T07:50:09] agent_initial Q1 run2 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  plan -> graph_retrieve (The question asks for a specific result from the paper collection about a fairness verifier’s runtime and sample count, so retrieval is needed.)
+  graph_retrieve -> scope single, 8 passages from: Probabilistic Verification of Fairness Properties via Concentration
+  answer
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56']
+answer: For the deep recurrent neural network benchmark, VeriFair “terminated in **606 seconds** and uses **28,000 samples**” when \(\Delta = 10^{-10}\) (error probability \(10^{-10}\)).
+------------------------------------------------------------------------
+[2026-10-15T07:50:17] agent_initial Q2 run2 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  plan -> graph_retrieve (This asks about research papers, comparisons against SMT-based tools, and scalability arguments, so it requires searching the paper collection.)
+  graph_retrieve -> scope multi, 8 passages from: Deductive Optimization of Relational Data Storage; MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agents; Special Issue on Syntax-Guided Synthesis Preface; ReaS: Combining
+  answer
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::67', 'DBLP_conf_icse_JeonQFFS16::24', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_AlurFSS16::21', 'DBLP_conf_sat_Inala0S16::34', 'DBLP_journals_pacmpl_KoppelGVSP22::71']
+answer: The documents explicitly make this argument in several papers:
+
+1. **Deductive Optimization of Relational Data Storage**  
+   - Baseline/tool mentioned: **Cozy**  
+   - Quote: “**The best data structure synthesis tool-Cozy-uses an SMT solver to verify candidates, which does not scale to the TPC-H queries. Castor's use of deduction rules avoids this costly verification step.**”
+
+2. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - Baseline/tool mentioned: **dReal** (and also **Z3** on one benchmark)  
+   - Quote: “**we wrote a script to translate the benchmarks written in ReaS into the SMT-lib format and fed them to the dReal solver. However, dReal could not solve any of our benchmarks with a timeout of 60 minutes.**”  
+   - Also: “**even Z3 could not solve with a timeout of 60 minutes**” for the thermostat benchmark.  
+   - The paper concludes: “**these results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.**”
+
+3. **Searching Entangled Program Spaces**  
+   - Baseline/tool mentioned: **Hoogle+**  
+   - Quote: “**compare it with the state-of-the-art synthesizer Hoogle+, based on an SMT encoding of Petri-net reachability**”  
+   - However, this passage does **not** explicitly say SMT solving limits scalability; it mainly says Hoogle+ is SMT-based.
+
+If you want only the papers that **explicitly argue SMT solving limits scalability**, the clearest matches in the provided documents are **Deductive Optimization of Relational Data Storage** (baseline: Cozy) and **ReaS: Combining Numerical Optimization with SAT Solving** (baseline: dReal / Z3).
+------------------------------------------------------------------------
+[2026-10-15T07:50:26] agent_initial T3 run2 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  plan -> graph_retrieve (The user is asking about specific research papers, their baselines, limitations, and reported results, which requires searching the paper collection.)
+  graph_retrieve -> scope multi, 8 passages from: Deductive Optimization of Relational Data Storage; Metric Program Synthesis; Special Issue on Syntax-Guided Synthesis Preface; SyGuS-Comp 2017: Results and Analysis; SyGuS-Comp 2016: Results and Analy
+  answer
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-1711-11438::10', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_AlurFSS16::18', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_pacmpl_KoppelGVSP22::71']
+answer: From the provided documents, I can identify the two SMT-based baselines and the reported outcomes, but only one document gives an explicit explanation of why SMT is a limitation.
+
+### Castor
+- **Baseline:** The excerpt says Castor is compared with **Hyper**, **Cozy**, and **Chestnut**; none of these are described here as SMT-based. So I **cannot confirm an SMT-based baseline for Castor from the provided text**.
+- **Why SMT limits it:** **Not stated in the provided Castor excerpt.**
+- **Main result vs baseline:** The excerpt only says Castor is compared against those systems and that layout specialization can compensate for compiler optimizations, but it does **not** provide the result against an SMT-based baseline. So the requested SMT comparison for Castor is **not contained in the documents provided**.
+
+### Hectare
+- **Baseline:** **Hoogle+**.
+- **Why SMT limits it:** The paper says Hoogle+ is “**based on an SMT encoding of Petri-net reachability**” and contrasts it with Hectare’s ecta-based approach; it also notes that Hoogle+ is much larger (“**4000 LOC**” vs “**400**”), suggesting the SMT-based approach is more complex to implement. However, the excerpt does **not explicitly say that SMT limits scalability or performance** beyond identifying the SMT encoding.
+- **Main result reported:** The excerpt says they compare Hectare “**against the state-of-the-art synthesizer Hoogle+**” and that the evaluation addresses how Hectare compares on existing and new benchmarks, but it does **not include the actual benchmark result** in the provided passage.
+
+### Closest explicit SMT-based comparison in the documents
+If you meant the clearly stated SMT comparison in the provided text, the strongest explicit example is:
+- **ReaS vs. dReal**
+- The paper says “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**,” and even “**Z3 could not solve**” the thermostat benchmark within 60 minutes.
+- Main result: traditional SMT approaches “**do not scale for these kinds of synthesis problems**.”
+
+If you want, I can also help map which of the provided papers are actually SMT-based comparisons and which are not.
+------------------------------------------------------------------------
+[2026-10-15T07:50:29] baseline_2_1 Q1 run3 verdict=fail
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  fixed: one hybrid search, top 5
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_corr_abs-1812-02573::53', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_corr_abs-1812-02573::0', 'DBLP_journals_corr_abs-1812-02573::42']
+answer: The provided documents do **not** contain the exact runtime or sample count for verifying the deep recurrent neural network at error probability \(10^{-10}\).
+
+What the documents do say is that the benchmark used a deep RNN and that VeriFair “can choose the probability of error to be extremely small,” but I do not see the specific figure or numeric result for “how long” or “how many samples” in the text provided.
+------------------------------------------------------------------------
+[2026-10-15T07:50:31] baseline_2_1 Q2 run3 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  fixed: one hybrid search, top 5
+chunks: ['DBLP_conf_icse_JeonQFFS16::28', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_conf_icse_JeonQFFS16::40', 'DBLP_conf_icse_JeonQFFS16::24', 'DBLP_journals_corr_abs-2206-06164::59']
+answer: Two papers in the provided documents do this:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - It compares against **dReal** (“a state-of-the-art SMT solver for reals”) and also runs **Z3**.  
+   - The paper concludes: “**traditional SMT approaches do not scale for these kinds of synthesis problems**.”
+
+2. **Metric Program Synthesis**  
+   - It compares against **Regel**, which is described as “**a state-of-the-art regular expression synthesis tool**” that “**uses a number of SMT-based pruning strategies**.”  
+   - However, the provided excerpt does **not** say that SMT solving itself limits scalability, only that Regel uses SMT-based pruning.
+
+So the paper that clearly matches your description is **ReaS**, with baseline **dReal** (and also **Z3** in one benchmark).
+------------------------------------------------------------------------
+[2026-10-15T07:50:35] baseline_2_1 T3 run3 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  fixed: one hybrid search, top 5
+chunks: ['DBLP_journals_corr_abs-2206-07828::71', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_corr_abs-2206-07828::7', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_corr_abs-2206-07828::73']
+answer: For **Hectare**, the SMT-based baseline is **Hoogle+**. The paper says Hoogle+ is “**based on an SMT encoding of Petri-net reachability**.” It reports that this SMT-based approach is outperformed by Hectare: “**Hectare significantly outperforms its state-of-the-art competitor Hoogle+**,” solving “**88% of synthesis problems in the combined benchmark suite compared to only 64% by Hoogle+**,” and being “**8× faster on average**” on commonly solved benchmarks.
+
+For **Castor**, I don’t see enough information in the provided documents to identify the SMT-based baseline or the specific result against it.
+------------------------------------------------------------------------
+[2026-10-15T07:50:39] advanced_4_1 Q1 run3 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  fixed: plan scope=single, hop 1 + hop 2
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56']
+answer: The verifier took **606 seconds** and used **28,000 samples** to verify the deep recurrent neural network with error probability **10⁻¹⁰**.
+
+This is stated in the context passage: “using ∆ = 10 -10 , VeriFair terminated in **606 seconds** and uses **28,000 samples**.”
+------------------------------------------------------------------------
+[2026-10-15T07:50:46] advanced_4_1 Q2 run3 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  fixed: plan scope=multi, hop 1 + hop 2
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::67', 'DBLP_conf_icse_JeonQFFS16::49', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_abs-2206-06164::62', 'DBLP_journals_corr_AlurFSS16::18', 'DBLP_conf_sat_Inala0S16::0']
+answer: The documents explicitly mention a few papers that compare against an SMT-based tool and argue that SMT solving does not scale well:
+
+1. **Deductive Optimization of Relational Data Storage**  
+   - It says: “The best data structure synthesis tool—Cozy—uses an SMT solver to verify candidates, which does not scale to the TPC-H queries.”  
+   - **Baseline:** **Cozy** (which uses an SMT solver to verify candidates).
+
+2. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - It says: “We compared ReaS with dReal, a state-of-the-art SMT solver for reals… dReal could not solve any of our benchmarks with a timeout of 60 minutes… even Z3 could not solve with a timeout of 60 minutes. These results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.”  
+   - **Baseline:** **dReal**; additionally they also report **Z3** on one benchmark.
+
+3. **Results and Analysis of SyGuS-Comp’15**  
+   - It describes **Sketch** as “a symbolic approach to CEGIS and uses an SMT solvers to choose the next candidate expression,” and compares solvers in the competition, but the excerpt does not itself state a specific “does not scale” claim. So I would not count it as clearly answering your question from the provided text.
+
+4. **Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers**  
+   - The abstract says they improve upon “the basic encoding strategy used by CVC4 (a state of the art SMT solver),” but the provided excerpt does **not** explicitly say SMT solving limits scalability.
+
+So the clearest matches are:
+- **Deductive Optimization of Relational Data Storage** — baseline **Cozy**
+- **ReaS: Combining Numerical Optimization with SAT Solving** — baseline **dReal** (and also **Z3** in a reported test)
+------------------------------------------------------------------------
+[2026-10-15T07:50:57] advanced_4_1 T3 run3 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  fixed: plan scope=multi, hop 1 + hop 2
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_conf_icse_JeonQFFS16::45', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_pldi_PolikarpovaKS16::70', 'DBLP_journals_corr_abs-1802-04408::47']
+answer: The documents give these two SMT-based baseline comparisons:
+
+## 1) Castor
+- **Baseline:** **Hyper** (an in-memory column-store with a state-of-the-art query compiler)
+- **Why SMT limits it:** The Castor paper excerpt does **not** say that Hyper is SMT-based, so I can’t support the “SMT limits it” claim from the provided text. What it *does* say is that Hyper uses “compilation techniques (e.g. vectorization) that are well outside the scope of this paper,” and Castor compares against it to show that “layout specialization is a powerful optimization.”
+- **Main result reported against it:** Castor compares in two modes:
+  - “with the original TPC-H data”
+  - “with a transformed version of the data and query that mimics the layout used by Castor”
+  
+  The stated purpose is to show that “layout specialization is a powerful optimization” and that the specialization techniques Castor uses “are beneficial in other systems.”
+
+## 2) Hectare
+- **Baseline:** **Hoogle+**
+- **Why SMT limits it:** The paper says Hoogle+ is “based on an SMT encoding of Petri-net reachability,” but the excerpt does **not** explain in detail why SMT limits it. It only identifies the baseline as SMT-based.
+- **Main result reported against it:** The excerpt says Hectare is evaluated “against the state-of-the-art synthesizer Hoogle+” and notes a code-size comparison: Hoogle+ has “a whopping 4000 LOC,” while Hectare “only contains 400.” The paper says this suggests the ecta library “has the potential to significantly simplify the development of program synthesizers.”
+
+## Important limitation
+From the provided documents, I **cannot** fully answer the part about “why the paper says SMT limits it” for **Castor**, because the Castor excerpt does not mention SMT at all. The Hectare excerpt also does not explicitly explain SMT as a bottleneck; it only identifies Hoogle+ as SMT-based. If you want, I can still give you a cleaner two-column summary of just what is explicitly supported by the documents.
+------------------------------------------------------------------------
+[2026-10-15T07:51:03] agent_initial Q1 run3 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  plan -> graph_retrieve (The question asks about a specific research result from the paper collection, so it requires retrieving the relevant paper rather than clarifying or answering from general knowledge.)
+  graph_retrieve -> scope single, 8 passages from: Probabilistic Verification of Fairness Properties via Concentration
+  answer
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56']
+answer: For the deep recurrent neural network benchmark, VeriFair with error probability \(10^{-10}\) **terminated in 606 seconds** and **used 28,000 samples**.
+
+This is stated in the context passage: “using \(\Delta = 10^{-10}\), VeriFair terminated in 606 seconds and uses 28,000 samples.”
+------------------------------------------------------------------------
+[2026-10-15T07:51:10] agent_initial Q2 run3 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  plan -> graph_retrieve (The user is asking about content in the paper collection, specifically papers that compare against SMT-based tools and discuss scalability limits, so retrieval is needed.)
+  graph_retrieve -> scope multi, 8 passages from: Special Issue on Syntax-Guided Synthesis Preface; ReaS: Combining Numerical Optimization with SAT Solving; Deductive Optimization of Relational Data Storage; MANTRA: Synthesizing SMT-Validated Complia
+  answer
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_conf_icse_JeonQFFS16::24', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_AlurFSS16::21', 'DBLP_conf_sat_Inala0S16::30', 'DBLP_journals_corr_abs-2206-06164::62']
+answer: The documents explicitly support one paper making that argument:
+
+- **ReaS: Combining Numerical Optimization with SAT Solving** compares against **dReal** (and also **Z3** on one benchmark) and says:  
+  > “dReal could not solve any of our benchmarks with a timeout of 60 minutes… These results support our claim that the traditional SMT approaches do not scale for these kinds of synthesis problems.”
+
+I do **not** see any other PRIMARY document here that both:
+1. compares against an SMT-based tool, and  
+2. explicitly argues that SMT solving limits scalability.
+
+So, from the provided documents, the answer is just **ReaS vs. dReal** (with **Z3** also mentioned as unable to solve the thermostat benchmark).
+------------------------------------------------------------------------
+[2026-10-15T07:51:18] agent_initial T3 run3 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  plan -> graph_retrieve (This asks about specific research papers, their SMT-based baselines, limitations, and reported results, so it requires retrieval from the paper collection.)
+  graph_retrieve -> scope multi, 8 passages from: Deductive Optimization of Relational Data Storage; MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agents; Special Issue on Syntax-Guided Synthesis Preface; Metric Program 
+  answer
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_conf_icse_JeonQFFS16::35', 'DBLP_journals_fmsd_FismanSS21::2', 'DBLP_journals_corr_abs-2206-06164::52', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_abs-2409-17490::12', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_pacmpl_KoppelSS18::60']
+answer: I can answer this only partially from the provided documents.
+
+- **Castor:** the PRIMARY document says Castor is compared with “**Hyper, Cozy, and Chestnut**,” but it does **not** name an SMT-based baseline for Castor, nor does it explain any SMT limitation or report a result against such a baseline in the excerpt provided.
+- **Hectare:** none of the provided documents mention **Hectare**, its SMT-based baseline, the paper’s explanation of SMT limits, or the reported result against that baseline.
+
+So, based on the supplied documents, I **can’t identify the requested baselines or results** for Castor and Hectare without guessing.
+------------------------------------------------------------------------
+[2026-10-15T07:51:18] SUMMARY
+system             pass  evidence  papers  calls   tokens  latency   per task (passes/runs)
+baseline_2_1    0.00/3      25%     33%    1.0    1,807     2.2s   Q1 0/3  Q2 0/3  T3 0/3
+advanced_4_1    1.00/3      50%     67%    2.0    3,578     6.8s   Q1 3/3  Q2 0/3  T3 0/3
+agent_initial   1.00/3      50%     72%    3.0    3,853     6.5s   Q1 3/3  Q2 0/3  T3 0/3
+------------------------------------------------------------------------
+[2026-10-15T08:08:38] agent_refined Q1 run1 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  plan -> graph_retrieve focus=[] (This asks about a specific research result (verification time and sample count), so I should retrieve from the paper collection rather than answer from general knowledge.)
+  graph_retrieve -> scope single, 8 passages from: Probabilistic Verification of Fairness Properties via Concentration
+  answer
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56']
+answer: The verifier took **606 seconds** and needed **28,000 samples** for error probability **10⁻¹⁰**.
+
+This is stated in the context passage: “using ∆ = 10 -10 , VeriFair terminated in **606 seconds** and uses **28,000 samples**.”
+------------------------------------------------------------------------
+[2026-10-15T08:08:48] agent_refined Q2 run1 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  plan -> graph_retrieve focus=[] (The user is asking about comparisons and scalability arguments across the paper collection, which requires searching the papers; the question is unambiguous.)
+  graph_retrieve -> scope multi, 8 passages from: Special Issue on Syntax-Guided Synthesis Preface; MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agents; Deductive Optimization of Relational Data Storage; ReaS: Combining
+  answer
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::49', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_abs-2206-06164::62', 'DBLP_journals_corr_AlurFSS16::21', 'DBLP_conf_sat_Inala0S16::30']
+answer: The documents explicitly show at least two papers making this kind of comparison:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - Baseline SMT tool: **dReal**  
+   - The paper says: “*We compared ReaS with dReal, a state-of-the-art SMT solver for reals*” and reports that “*dReal could not solve any of our benchmarks with a timeout of 60 minutes*.” It concludes that “*the traditional SMT approaches do not scale for these kinds of synthesis problems*.”
+
+2. **Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers**  
+   - Baseline SMT-based tool: **CVC4**  
+   - The context says OptCNF samples benchmarks and runs “*CVC4 to collect all the formulas just before they are encoded to SAT*,” and then augments “*CVC4 code with the generated encoders*.” This indicates the comparison baseline is CVC4, an SMT solver.
+
+The provided documents do **not** explicitly state the scalability-limiting argument for OptCNF in the same way as ReaS; the clearest explicit “SMT limits scalability” claim in the PRIMARY documents is from **ReaS vs. dReal**.
+------------------------------------------------------------------------
+[2026-10-15T08:08:56] agent_refined T3 run1 verdict=pass
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  plan -> graph_retrieve focus=['Castor', 'Hectare'] (The user is asking about specific research papers and their comparative results, which requires searching the paper collection.)
+  focus resolved: ['Castor -> Deductive Optimization of Relational Data Storage', 'Hectare -> Searching Entangled Program Spaces']
+  graph_retrieve -> scope focus(multi), 8 passages from: Deductive Optimization of Relational Data Storage; Searching Entangled Program Spaces
+  answer
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_FeserM0S20::62', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_pacmpl_FeserM0S20::67', 'DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_pacmpl_FeserM0S20::65', 'DBLP_journals_pacmpl_KoppelGVSP22::80']
+answer: - **Castor’s SMT-based baseline:** **Cozy**.  
+  The paper says Cozy is “**a state-of-the-art program synthesis tool**” that uses “**an SMT solver to verify candidates**,” and that this “**does not scale to the TPC-H queries**.” In the evaluation, “**the size of the TPC-H queries causes a significant slowdown in its solver-based verification step**.”  
+  **Main result against it:** Castor’s produced layouts/query code are “**faster or significantly faster than Hyper for 15 out of 18 queries**,” and the paper notes that Cozy could only handle “**all but two of the TPC-H queries**,” with **Q4 slower than baseline Hyper** and **Q17 too slow to run on the entire TPC-H dataset**.
+
+- **Hectare’s SMT-based baseline:** **Hoogle+**.  
+  The paper says Hoogle+ is “**based on an SMT encoding of Petri-net reachability**.” The limitation described is not that SMT is inherently bad in general, but that Hectare’s experiments show Hoogle+ is much less effective on the benchmark suite; the paper attributes Hectare’s advantage to its ECTA-based approach, while noting Hoogle+’s implementation is much larger (“**4000 LOC**” vs. “**400**”).  
+  **Main result against it:** “**Hectare significantly outperforms**” Hoogle+; specifically, “**Hectare is able to solve 88% of synthesis problems in the combined benchmark suite compared to only 64% by Hoogle+, and on commonly solved benchmarks Hectare is 8× faster on average**.”
+------------------------------------------------------------------------
+[2026-10-15T08:09:02] agent_refined Q1 run2 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  plan -> graph_retrieve focus=[] (The question asks for specific experimental results from a research paper, so it requires retrieval from the paper collection.)
+  graph_retrieve -> scope single, 8 passages from: Probabilistic Verification of Fairness Properties via Concentration
+  answer
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::5', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56']
+answer: For the deep recurrent neural network benchmark, VeriFair “terminated in **606 seconds** and uses **28,000 samples**” when the error probability was \(10^{-10}\).
+------------------------------------------------------------------------
+[2026-10-15T08:09:09] agent_refined Q2 run2 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  plan -> graph_retrieve focus=[] (The user is asking about comparisons and scalability arguments across the paper collection, which requires searching the papers rather than answering from general knowledge.)
+  graph_retrieve -> scope multi, 8 passages from: Special Issue on Syntax-Guided Synthesis Preface; MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agents; Deductive Optimization of Relational Data Storage; ReaS: Combining
+  answer
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::28', 'DBLP_journals_pacmpl_FeserM0S20::67', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_abs-2206-06164::62', 'DBLP_conf_cav_JeonQSF15::43', 'DBLP_conf_sat_Inala0S16::0']
+answer: The documents support **two papers** that explicitly compare against an SMT-based tool and say SMT solving does not scale well:
+
+1. **ReaS: Combining Numerical Optimization with SAT Solving**  
+   - Baseline SMT tools: **dReal** and **Z3**  
+   - The paper says: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**even Z3 could not solve with a timeout of 60 minutes**.” It concludes: “**the traditional SMT approaches do not scale for these kinds of synthesis problems**.”
+
+2. **Deductive Optimization of Relational Data Storage**  
+   - Baseline SMT-based tool: **Cozy**  
+   - The paper says: “**The best data structure synthesis tool-Cozy-uses an SMT solver to verify candidates, which does not scale to the TPC-H queries**.”
+
+A third relevant paper in the provided documents is **Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers**, which compares against **CVC4**, but the excerpt provided says it “improve[s] upon” CVC4’s encoding; it does **not** explicitly argue that SMT solving limits scalability.
+
+
+------------------------------------------------------------------------
+[2026-10-15T08:09:16] agent_refined T3 run2 verdict=pass
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  plan -> graph_retrieve focus=['Castor', 'Hectare'] (The user asks about specific research papers and their comparative baselines/results, so this requires retrieving the relevant papers from the collection.)
+  focus resolved: ['Castor -> Deductive Optimization of Relational Data Storage', 'Hectare -> Searching Entangled Program Spaces']
+  graph_retrieve -> scope focus(multi), 8 passages from: Deductive Optimization of Relational Data Storage; Searching Entangled Program Spaces
+  answer
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::62', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_FeserM0S20::67', 'DBLP_journals_pacmpl_KoppelGVSP22::86', 'DBLP_journals_pacmpl_FeserM0S20::65', 'DBLP_journals_pacmpl_KoppelGVSP22::77']
+answer: The papers compare against these SMT-based baselines:
+
+- **Castor baseline:** **Cozy**
+  - **Why SMT limits it:** The paper says Cozy is “a state-of-the-art data structure synthesis tool” and that it “uses an SMT solver to verify candidates, which does not scale to the TPC-H queries.” It also notes that Cozy’s “solver-based verification step” causes “a significant slowdown.”
+  - **Main result against it:** Castor is reported to be “competitive in performance and in size with a state-of-the-art in-memory database,” and specifically its results are “faster or significantly faster than Hyper for 15 out of 18 queries”; compared with Cozy, the context says Cozy only handled “all but two” TPC-H queries, with Q4 slower than baseline Hyper and Q17 too slow on the full dataset.
+
+- **Hectare baseline:** **Hoogle+**
+  - **Why SMT limits it:** The paper describes Hoogle+ as being “based on an SMT encoding of Petri-net reachability.” The related discussion says that translating ECTAs to SAT/SMT “does not work” because it would require unfolding the automaton into a tree; this is “a complete non-starter for cyclic ECTAs” and can become exponential for acyclic ones.
+  - **Main result against it:** Hectare “significantly outperforms” Hoogle+, solving “88% of synthesis problems in the combined benchmark suite compared to only 64% by Hoogle+,” and on commonly solved benchmarks it is “8× faster on average.”
+------------------------------------------------------------------------
+[2026-10-15T08:09:21] agent_refined Q1 run3 verdict=pass
+Q: How long did the fairness verifier take to verify the deep recurrent neural network with an error probability of 10⁻¹⁰, and how many samples did it need?
+trace:
+  plan -> graph_retrieve focus=[] (The question asks for specific experimental results from the paper collection, so retrieval is needed; the named paper/tool is not explicit in the question.)
+  graph_retrieve -> scope single, 8 passages from: Probabilistic Verification of Fairness Properties via Concentration
+  answer
+chunks: ['DBLP_journals_pacmpl_Bastani0S19::53', 'DBLP_journals_pacmpl_Bastani0S19::12', 'DBLP_journals_pacmpl_Bastani0S19::42', 'DBLP_journals_pacmpl_Bastani0S19::0', 'DBLP_journals_pacmpl_Bastani0S19::76', 'DBLP_journals_pacmpl_Bastani0S19::54', 'DBLP_journals_pacmpl_Bastani0S19::55', 'DBLP_journals_pacmpl_Bastani0S19::56']
+answer: For the deep recurrent neural network benchmark, VeriFair with error probability \(10^{-10}\) **terminated in 606 seconds** and **used 28,000 samples**.
+
+Quoted from the document: “**using \(\Delta = 10^{-10}\), VeriFair terminated in 606 seconds and uses 28,000 samples**.”
+------------------------------------------------------------------------
+[2026-10-15T08:09:29] agent_refined Q2 run3 verdict=fail
+Q: Which papers compare their approach against an SMT-based tool and argue that SMT solving limits scalability? Name the baseline in each.
+trace:
+  plan -> graph_retrieve focus=[] (The user is asking about comparative research claims across papers, so this requires searching the paper collection; the question is unambiguous.)
+  graph_retrieve -> scope multi, 8 passages from: Special Issue on Syntax-Guided Synthesis Preface; MANTRA: Synthesizing SMT-Validated Compliance Benchmarks for Tool-Using LLM Agents; Deductive Optimization of Relational Data Storage; ReaS: Combining
+  answer
+chunks: ['DBLP_journals_fmsd_FismanSS21::2', 'DBLP_conf_icse_JeonQFFS16::49', 'DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_corr_abs-1802-04408::47', 'DBLP_journals_corr_AlurFSS16a::35', 'DBLP_journals_corr_AlurFSS16::18', 'DBLP_conf_sat_Inala0S16::0', 'DBLP_journals_pacmpl_Bastani0S19::42']
+answer: The documents mention several papers that compare against an SMT-based tool and argue that SMT solving limits scalability:
+
+- **ReaS: Combining Numerical Optimization with SAT Solving** — baseline: **dReal** (also **Z3** on one benchmark). The paper says: “**dReal could not solve any of our benchmarks with a timeout of 60 minutes**” and “**even Z3 could not solve with a timeout of 60 minutes**,” supporting the claim that “**traditional SMT approaches do not scale**.”
+
+- **Results and Analysis of SyGuS-Comp’15** — baseline: **Sketch**. The context says “**The Sketch solver follows a symbolic approach ... and uses an SMT solvers**,” and it is discussed as part of the SMT-based solver comparison in the SyGuS competition results, including **Sketch Adaptive-Concretization**.
+
+- **Synthesis of Domain Specific CNF Encoders for Bit-Vector Solvers** — baseline: **CVC4**. It says the method can “**improve upon the basic encoding strategy used by CVC4 (a state of the art SMT solver)**.”
+
+- **Probabilistic Verification of Fairness Properties via Concentration** — baseline: **FairSqare**. The context says VeriFair “**scales substantially better than FairSqare**” and that “**the scalability of FairSqare depends on the complexity**” of the classifier and population model.
+
+If you want, I can narrow this to only the papers that **explicitly blame SMT solving for the scalability limit** rather than just comparing to an SMT-based baseline.
+------------------------------------------------------------------------
+[2026-10-15T08:09:37] agent_refined T3 run3 verdict=fail
+Q: Castor and the ECTA-based Haskell synthesizer Hectare each compare against an SMT-based baseline. For each, name the baseline, explain why the paper says SMT limits it, and give the main result reported against it.
+trace:
+  plan -> graph_retrieve focus=['Castor', 'Hectare'] (The user is asking about specific research papers and their comparative baselines/results, so retrieval over the paper collection is needed.)
+  focus resolved: ['Castor -> Deductive Optimization of Relational Data Storage', 'Hectare -> Searching Entangled Program Spaces']
+  graph_retrieve -> scope focus(multi), 8 passages from: Deductive Optimization of Relational Data Storage; Searching Entangled Program Spaces
+  answer
+chunks: ['DBLP_journals_pacmpl_FeserM0S20::57', 'DBLP_journals_pacmpl_KoppelGVSP22::7', 'DBLP_journals_pacmpl_FeserM0S20::67', 'DBLP_journals_pacmpl_KoppelGVSP22::71', 'DBLP_journals_pacmpl_FeserM0S20::62', 'DBLP_journals_pacmpl_KoppelGVSP22::73', 'DBLP_journals_pacmpl_FeserM0S20::65', 'DBLP_journals_pacmpl_KoppelGVSP22::77']
+answer: The papers mention these SMT-based baselines:
+
+1. **Castor → Cozy**
+   - **Baseline name:** Cozy.
+   - **Why SMT limits it:** The paper says, “The best data structure synthesis tool—Cozy—uses an SMT solver to verify candidates, which does not scale to the TPC-H queries.” It also notes that “the size of the TPC-H queries causes a significant slowdown in its solver-based verification step.”
+   - **Main result against it:** Castor is competitive with the state-of-the-art in-memory database and, in the TPC-H evaluation, its expert-generated layouts/code are “faster or significantly faster than Hyper for 15 out of 18 queries.” Against Cozy specifically, the text says Cozy is effective on small specifications, but for TPC-H its solver-based verification slows it down, and one query (“Q17”) was “too slow to run on the entire TPC-H dataset.”
+
+2. **Hectare → Hoogle+**
+   - **Baseline name:** Hoogle+.
+   - **Why SMT limits it:** The paper says Hoogle+ is “based on an SMT encoding of Petri-net reachability.” In the provided passages, the limitation is not described as SMT-specific in detail; rather, the paper emphasizes that the baseline relies on that SMT encoding and that a naïve “rejection sampling” baseline cannot solve any benchmarks. The passages do say Hoogle+ is outperformed, but they do not explicitly state in the provided text that SMT itself is the limiting factor.
+   - **Main result against it:** Hectare “significantly outperforms” Hoogle+: it solves **88%** of the combined benchmark suite compared to **64%** for Hoogle+, and on commonly solved benchmarks Hectare is **8× faster on average**.
+
+If you want, I can also turn this into a compact comparison table.
+------------------------------------------------------------------------
+[2026-10-15T08:09:37] SUMMARY
+system             pass  evidence  papers  calls   tokens  latency   per task (passes/runs)
+baseline_2_1    0.00/3      25%     33%    1.0    1,807     2.2s   Q1 0/3  Q2 0/3  T3 0/3
+advanced_4_1    1.00/3      50%     67%    2.0    3,578     6.8s   Q1 3/3  Q2 0/3  T3 0/3
+agent_initial   1.00/3      50%     72%    3.0    3,853     6.5s   Q1 3/3  Q2 0/3  T3 0/3
+agent_refined   1.67/3      71%     72%    3.0    3,924     6.5s   Q1 3/3  Q2 0/3  T3 2/3
+------------------------------------------------------------------------
