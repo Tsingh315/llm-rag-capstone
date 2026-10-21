@@ -1,4 +1,4 @@
-[← Repository README](../README.md) · [← Checkpoint 4.1](../Capstone_Checkpoint_4.1/README.md)
+[← Repository README](../README.md) · [← Checkpoint 4.1](../Capstone_Checkpoint_4.1/README.md) · [Next: Checkpoint 6.1 →](../Capstone_Checkpoint_6.1/README.md)
 
 # Capstone Checkpoint 5.1 — Designing and Evaluating an Agent-Based RAG System
 
