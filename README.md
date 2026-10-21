@@ -86,7 +86,8 @@ Each checkpoint folder has its own README: [Checkpoint 1.1](Capstone_Checkpoint_
 [Checkpoint 2.1](Capstone_Checkpoint_2.1/README.md) ·
 [Checkpoint 3.1](Capstone_Checkpoint_3.1/README.md) ·
 [Checkpoint 4.1](Capstone_Checkpoint_4.1/README.md) ·
-[Checkpoint 5.1](Capstone_Checkpoint_5.1/README.md).
+[Checkpoint 5.1](Capstone_Checkpoint_5.1/README.md) ·
+[Checkpoint 6.1](Capstone_Checkpoint_6.1/README.md).
 
 ## Setup
 
@@ -141,3 +142,4 @@ chunks change. 2.1 keeps its own index in `Capstone_Checkpoint_2.1/chroma_db/` (
 | 3.1 | Evaluation infrastructure and baseline diagnosis (LLM judge) | ✅ Complete |
 | 4.1 | Advanced retrieval: graph-based multi-hop + query decomposition | ✅ Complete |
 | 5.1 | Agent-based RAG: plan, clarify, one-shot graph retrieval; evaluated vs 2.1 and 4.1 | ✅ Complete |
+| 6.1 | Security and performance audit of the 5.1 agent (probes, token cost) | 🟡 In progress (audit harness ready) |
