@@ -36,6 +36,9 @@ answers. So far:
 - **5.1, agent:** a LangGraph agent decides whether a question needs the papers, may ask one clarifying question,
   and otherwise runs the 4.1 graph retrieval once and answers from it. On 7 questions × 3 runs it ties the fixed
   4.1 pipeline (3.67/7 passes) with the most evidence reaching the LLM (69%), at one extra LLM call.
+- **6.1, security and cost audit:** the 5.1 agent, unchanged, under 10 probes and the test tasks, twice, with real
+  token counts. The research path resisted command injection and a poisoned passage; the no-retrieval path did not
+  (role-play accepted, refusals that add offers, a promised search never run). The answer call is 65% of input tokens.
 
 Later checkpoints improve retrieval and keep re-running the same evaluation to measure progress.
 
@@ -75,6 +78,12 @@ Later checkpoints improve retrieval and keep re-running the same evaluation to m
 │   ├── checkpoint_5_1_summary.txt, checkpoint_5_1_results.json, checkpoint_5_1_agent.log
 │   ├── screenshots/, experiments/, results_history/, exploration_v1_v4/
 │   └── Tarundeep_Required_Capstone_Checkpoint_5_1_Worksheet.docx
+├── Capstone_Checkpoint_6.1/   # security and cost audit of the 5.1 agent (probes, real token split)
+│   ├── README.md
+│   ├── capstone_checkpoint_6_1_security_cost_starter.py   # solution file (imports the 5.1 agent)
+│   ├── checkpoint_6_1_summary.txt, checkpoint_6_1_results_run*.json, checkpoint_6_1_agent_run*.log
+│   ├── screenshots/
+│   └── Tarundeep_Required_Capstone_Checkpoint_6_1_Worksheet.docx
 ├── data/                      # git-ignored, shared by all checkpoints
 │   ├── ResearchPapers/        # the course PDFs
 │   ├── papers_txt/            # parsed text (written by ingest_papers.py)
@@ -127,6 +136,10 @@ python capstone_checkpoint_4_1_advanced_retrieval_starter.py      # or --ask "qu
 # 5.1: the agent (needs langgraph); --chat to talk to it, no flags to run the evaluation
 cd ../Capstone_Checkpoint_5.1
 python capstone_checkpoint_5_1_agent_rag_starter.py --chat
+
+# 6.1: security probes + token split on the 5.1 agent (~40 LLM calls)
+cd ../Capstone_Checkpoint_6.1
+python capstone_checkpoint_6_1_security_cost_starter.py
 ```
 
 Building a vector index embeds all 8,087 chunks once (an embedding API cost); later runs reuse it unless the
@@ -142,4 +155,4 @@ chunks change. 2.1 keeps its own index in `Capstone_Checkpoint_2.1/chroma_db/` (
 | 3.1 | Evaluation infrastructure and baseline diagnosis (LLM judge) | ✅ Complete |
 | 4.1 | Advanced retrieval: graph-based multi-hop + query decomposition | ✅ Complete |
 | 5.1 | Agent-based RAG: plan, clarify, one-shot graph retrieval; evaluated vs 2.1 and 4.1 | ✅ Complete |
-| 6.1 | Security and performance audit of the 5.1 agent (probes, token cost) | 🟡 In progress (audit harness ready) |
+| 6.1 | Security and performance audit of the 5.1 agent (probes, token cost) | ✅ Complete |
