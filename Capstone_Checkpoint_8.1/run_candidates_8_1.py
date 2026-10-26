@@ -128,7 +128,7 @@ def main() -> None:
     ap.add_argument("--out", default="checkpoint_8_1_results")
     ap.add_argument("--resume", action="store_true", help="keep finished (system, run) blocks from the saved JSON")
     a = ap.parse_args()
-    cases = json.loads((HERE / "testset_7_1.json").read_text(encoding="utf-8"))   # copy of the 7.1 file, kept here so 8.1 is self-contained
+    cases = json.loads((HERE / "testset_8_1.json").read_text(encoding="utf-8"))   # copy of the 7.1 file, kept here so 8.1 is self-contained
     if a.ids:
         cases = [c for c in cases if c["id"] in set(a.ids.split(","))]
     llm = cp71.make_llm()

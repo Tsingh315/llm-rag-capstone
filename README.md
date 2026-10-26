@@ -191,8 +191,8 @@ chunks change. 2.1 keeps its own index in `Capstone_Checkpoint_2.1/chroma_db/` (
 - **Known weak spots.** Trend questions reach only 17% of the needed evidence; cross-paper questions reach 23% (A) and 63% (B).
 - **Not built.** The cache is exact-match (not semantic) and the 7.1 router is not part of the 8.1 candidates.
 - **Presentation.** The slides and prep notes are in [`Capstone_Checkpoint_8.1/presentation/`](Capstone_Checkpoint_8.1/presentation);
-  the test set and results they cite are in [7.1](Capstone_Checkpoint_7.1/testset_7_1.md) and
-  [8.1](Capstone_Checkpoint_8.1/checkpoint_8_1_results.md).
+  the test set and results they cite are in [8.1](Capstone_Checkpoint_8.1/testset_8_1.md) and
+  [results](Capstone_Checkpoint_8.1/checkpoint_8_1_results.md).
 
 ## Progress
 

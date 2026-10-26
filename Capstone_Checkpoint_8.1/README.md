@@ -3,14 +3,14 @@
 # Capstone Checkpoint 8.1 — Design Review: Two Production Candidates
 
 For the Module 8 design review. Two candidates for production are built and compared on the same 35-question test set
-([`testset_7_1.md`](testset_7_1.md): 7 categories x 5, built in Checkpoint 7.1 and copied here unchanged), each with the 7.1 hardening layer:
+([`testset_8_1.md`](testset_8_1.md): 7 categories x 5, built in Checkpoint 7.1 and copied here unchanged), each with the 7.1 hardening layer:
 
 - **A: 4.1 advanced pipeline + 7.1** — query plan, graph multi-hop retrieval, one answer call.
 - **B: 5.1 agent + 7.1** — the agent plans, then retrieves, clarifies or answers; same graph retrieval.
 
 | File | What it is |
 |---|---|
-| [`testset_7_1.md`](testset_7_1.md) / `.csv` / `.json` | The 35 test questions with category, expected behaviour, grading notes and evidence strings (identical copy of the 7.1 files; the runner reads the `.json`) |
+| [`testset_8_1.md`](testset_8_1.md) / `.csv` / `.json` | The 35 test questions with category, expected behaviour, grading notes and evidence strings (identical in content to `Capstone_Checkpoint_7.1/testset_7_1.*`; the runner reads the `.json`) |
 | `capstone_checkpoint_8_1_candidates.py` | The merged code: imports 4.1, 5.1 and 7.1 (nothing copied) and wraps each candidate in the shared 7.1 layer |
 | `run_candidates_8_1.py` | Runs both candidates on the test set, N runs each; writes the results below |
 | `checkpoint_8_1_results.md` | Summary tables: pass per category, evidence, tokens, calls, latency, paths |
@@ -80,7 +80,7 @@ Reading it:
 
 `presentation/Capstone Design Review Presentation.pptx` (14 slides) is the deck for the recorded presentation, with
 `Capstone Design Review Preparation Notes.docx` as the speaker notes. Its numbers come from the files in this folder
-and from [`testset_7_1.md`](testset_7_1.md); the slides link to
+and from [`testset_8_1.md`](testset_8_1.md); the slides link to
 the results table here.
 
 ## How the run went
