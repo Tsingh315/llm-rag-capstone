@@ -16,6 +16,16 @@ For the Module 8 design review. Two candidates for production are built and comp
 | `checkpoint_8_1_results_per_question.csv` | Per question: category, pass count, evidence, tokens, seconds, for A and B |
 | `checkpoint_8_1_results.json` | Every record: answer, retrieved chunk ids, tokens in/out, calls, latency |
 | `checkpoint_8_1_run_output_part1.txt`, `_part2.txt` | Console output (see "How the run went") |
+| `presentation/` | The design-review slides (.pptx) and preparation notes (.docx) |
+
+## Prerequisites and setup
+
+Follow the [repository setup](../README.md#setup) first: virtual environment, `pip install -r requirements.txt`, and a `.env`
+with `OPENROUTER_API_KEY` (copy `.env.example`). This checkpoint also needs what Checkpoints 2.1 to 4.1 build:
+the corpus in `data/ResearchPapers/`, the parsed text in `data/papers_txt/` (GROBID, needs Docker, see
+[2.1](../Capstone_Checkpoint_2.1/README_INGESTION.md)), the vector index in `data/chroma_db/` and the tool relations in
+`data/graph_relations.json` (both built on first run of 3.1/4.1). Without them, `run_candidates_8_1.py` stops at load time.
+A full run is about 1,000 LLM calls and 25 minutes; `--ids SP1,RT5 --runs 1` is a quick check.
 
 ## The merged code
 
@@ -56,6 +66,21 @@ Reading it:
 - Trend questions fail for both (0.0 and 0.7 of 5); evidence reached is 17% for both, so this is retrieval.
 - The difference in total passes (22 vs 24) is small next to the run-to-run spread, so it does not settle the choice.
 - The 7.1 test-set results (24/35) used the 2.1 hybrid retriever and are a different measurement.
+
+## Known limitations
+
+- Questions are my own and graded by an LLM judge; 3 runs, and the 22.0 vs 24.0 gap is small next to run-to-run variation.
+- Red teaming is 5 questions; the 10 Lab 6.1 probes were not re-run on these candidates.
+- Trend questions reach 17% of the needed evidence in both candidates, and cross-paper questions 23% in A.
+- Tokens are the cost measure; no dollar prices are applied.
+- PDF parsing flattens tables and equations (see the repository README).
+
+## Presentation
+
+`presentation/Capstone Design Review Presentation.pptx` (14 slides) is the deck for the recorded presentation, with
+`Capstone Design Review Preparation Notes.docx` as the speaker notes. Its numbers come from the files in this folder
+and from [`../Capstone_Checkpoint_7.1/testset_7_1.md`](../Capstone_Checkpoint_7.1/testset_7_1.md); the slides link to
+the results table here.
 
 ## How the run went
 

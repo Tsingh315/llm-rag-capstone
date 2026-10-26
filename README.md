@@ -112,7 +112,8 @@ Each checkpoint folder has its own README: [Checkpoint 1.1](Capstone_Checkpoint_
 [Checkpoint 4.1](Capstone_Checkpoint_4.1/README.md) ·
 [Checkpoint 5.1](Capstone_Checkpoint_5.1/README.md) ·
 [Checkpoint 6.1](Capstone_Checkpoint_6.1/README.md) ·
-[Checkpoint 7.1](Capstone_Checkpoint_7.1/README.md).
+[Checkpoint 7.1](Capstone_Checkpoint_7.1/README.md) ·
+[Checkpoint 8.1](Capstone_Checkpoint_8.1/README.md).
 
 ## Setup
 
@@ -122,6 +123,8 @@ cd llm-rag-capstone
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 ```
+
+Developed and run with Python 3.14; other recent Python 3 versions should work but are untested.
 
 Copy `.env.example` to `.env` and add your OpenRouter key (`.env` is git-ignored — never commit it).
 The scripts use Jupytext `# %%` cells, so they also open as notebooks in VS Code.
@@ -157,7 +160,8 @@ python capstone_checkpoint_5_1_agent_rag_starter.py --chat
 cd ../Capstone_Checkpoint_6.1
 python capstone_checkpoint_6_1_security_cost_starter.py
 
-# 8.1: compare the two production candidates on the 35-question test set (~1,000 LLM calls)
+# 8.1: compare the two production candidates on the 35-question test set
+#      (~1,000 LLM calls, about 25 minutes; needs data/papers_txt and data/chroma_db from the steps above)
 cd ../Capstone_Checkpoint_8.1
 python run_candidates_8_1.py --runs 3
 
@@ -169,6 +173,26 @@ python capstone_checkpoint_7_1_production_ready_starter.py
 Building a vector index embeds all 8,087 chunks once (an embedding API cost); later runs reuse it unless the
 chunks change. 2.1 keeps its own index in `Capstone_Checkpoint_2.1/chroma_db/` (git-ignored); 3.1 uses
 `data/chroma_db/`. To avoid embedding twice, copy the 2.1 index to `data/chroma_db/` before running 3.1.
+
+## Known limitations and notes for reviewers
+
+- **Setup is not self-contained.** The 153-paper corpus (~500 MB) is not in the repo, parsing it needs Docker (GROBID),
+  and every LLM step needs an OpenRouter API key. The only parts that run without the corpus are 1.1 and the 7.1 demo.
+- **Cost and time.** Building the index embeds 8,087 chunks once. The 8.1 comparison makes about 1,000 LLM calls and takes
+  about 25 minutes; the 7.1 test-set run is about 70 questions.
+- **Parsing.** 152 of 153 PDFs parsed and 148 papers were indexed (five proceedings volumes lost). Tables and equations are
+  flattened, sections are not saved, and the quality checks only sample the start of each file. At least six filenames do
+  not match the paper inside (titles come from the text).
+- **Evaluation.** Questions were written by me and graded by an LLM judge (4 questions in 3.1/4.1, 7 in 5.1, 35 in 7.1/8.1).
+  Results move by a question or two between runs; in 8.1 the gap between the candidates (22.0 vs 24.0 of 35) is small.
+- **What 8.1 does and does not show.** Red-team pass is measured on 5 questions; the 10 Lab 6.1 probes were not re-run on
+  the 8.1 candidates. The 7.1 demo and its 24/35 test-set result used a 3-passage sample and the 2.1 retriever
+  respectively, not the 4.1 graph.
+- **Known weak spots.** Trend questions reach only 17% of the needed evidence; cross-paper questions reach 23% (A) and 63% (B).
+- **Not built.** The cache is exact-match (not semantic) and the 7.1 router is not part of the 8.1 candidates.
+- **Presentation.** The slides and prep notes are in [`Capstone_Checkpoint_8.1/presentation/`](Capstone_Checkpoint_8.1/presentation);
+  the test set and results they cite are in [7.1](Capstone_Checkpoint_7.1/testset_7_1.md) and
+  [8.1](Capstone_Checkpoint_8.1/checkpoint_8_1_results.md).
 
 ## Progress
 
