@@ -2,6 +2,9 @@
 
 # Capstone Checkpoint 8.1 — Design Review: Two Production Candidates
 
+**Status:** complete — the design-review presentation has been submitted. Choosing between the two candidates is left open
+until both are fine-tuned and re-measured on the same test set.
+
 For the Module 8 design review. Two candidates for production are built and compared on the same 35-question test set
 ([`testset_8_1.md`](testset_8_1.md): 7 categories x 5, built in Checkpoint 7.1 and copied here unchanged), each with the 7.1 hardening layer:
 

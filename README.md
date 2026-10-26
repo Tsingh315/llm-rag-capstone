@@ -222,4 +222,4 @@ chunks change. 2.1 keeps its own index in `Capstone_Checkpoint_2.1/chroma_db/` (
 | 5.1 | Agent-based RAG: plan, clarify, one-shot graph retrieval; evaluated vs 2.1 and 4.1 | ✅ Complete |
 | 6.1 | Security and performance audit of the 5.1 agent (probes, token cost) | ✅ Complete |
 | 7.1 | Production readiness: safeguards and cost/latency optimizations, measured before vs after | ✅ Complete |
-| 8.1 | Design review: the 4.1 pipeline and the 5.1 agent, each with the 7.1 hardening, compared on a 35-question test set | 🟡 In progress (draft presentation done; final decision pending) |
+| 8.1 | Design review: the 4.1 pipeline and the 5.1 agent, each with the 7.1 hardening, compared on a 35-question test set | ✅ Complete (presentation submitted) |
