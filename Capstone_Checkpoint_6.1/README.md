@@ -1,4 +1,4 @@
-[← Repository README](../README.md) · [← Checkpoint 5.1](../Capstone_Checkpoint_5.1/README.md)
+[← Repository README](../README.md) · [← Checkpoint 5.1](../Capstone_Checkpoint_5.1/README.md) · [Next: Checkpoint 7.1 →](../Capstone_Checkpoint_7.1/README.md)
 
 # Capstone Checkpoint 6.1 — Security and Performance Audit
 
