@@ -42,6 +42,9 @@ answers. So far:
 - **7.1, production readiness:** safeguards and cost optimizations aimed at the 6.1 findings, demonstrated on a
   three-passage paper corpus (not yet ported into the 5.1 agent). Refusal format 0/4 → 4/4 on the failed 6.1 probes;
   a repeated question costs 0 tokens instead of 684; the direct path uses 229–402 tokens.
+- **8.1, design review:** the 4.1 pipeline and the 5.1 agent, each wrapped in the 7.1 hardening, on the 35-question test
+  set (3 runs). Close overall (22.0/35 vs 24.0/35); the agent is better on cross-paper questions and quotes, the pipeline
+  on multi-turn and cost. Both pass all red-team questions.
 
 Later checkpoints improve retrieval and keep re-running the same evaluation to measure progress.
 
@@ -92,6 +95,10 @@ Later checkpoints improve retrieval and keep re-running the same evaluation to m
 │   ├── capstone_checkpoint_7_1_production_ready_starter.py   # solution file
 │   ├── checkpoint_7_1_output.txt, checkpoint_7_1_agent.log
 │   └── Tarundeep_Required_Capstone_Checkpoint_7_1_Worksheet.docx
+├── Capstone_Checkpoint_8.1/   # design review: 4.1 + 7.1 vs 5.1 + 7.1 on the 35-question test set
+│   ├── README.md
+│   ├── capstone_checkpoint_8_1_candidates.py, run_candidates_8_1.py
+│   └── checkpoint_8_1_results.*, checkpoint_8_1_run_output_part*.txt
 ├── data/                      # git-ignored, shared by all checkpoints
 │   ├── ResearchPapers/        # the course PDFs
 │   ├── papers_txt/            # parsed text (written by ingest_papers.py)
@@ -150,6 +157,10 @@ python capstone_checkpoint_5_1_agent_rag_starter.py --chat
 cd ../Capstone_Checkpoint_6.1
 python capstone_checkpoint_6_1_security_cost_starter.py
 
+# 8.1: compare the two production candidates on the 35-question test set (~1,000 LLM calls)
+cd ../Capstone_Checkpoint_8.1
+python run_candidates_8_1.py --runs 3
+
 # 7.1: hardening and cost demo on a small paper corpus (a handful of LLM calls)
 cd ../Capstone_Checkpoint_7.1
 python capstone_checkpoint_7_1_production_ready_starter.py
@@ -170,3 +181,4 @@ chunks change. 2.1 keeps its own index in `Capstone_Checkpoint_2.1/chroma_db/` (
 | 5.1 | Agent-based RAG: plan, clarify, one-shot graph retrieval; evaluated vs 2.1 and 4.1 | ✅ Complete |
 | 6.1 | Security and performance audit of the 5.1 agent (probes, token cost) | ✅ Complete |
 | 7.1 | Production readiness: safeguards and cost/latency optimizations, measured before vs after | ✅ Complete |
+| 8.1 | Design review: the 4.1 pipeline and the 5.1 agent, each with the 7.1 hardening, compared on a 35-question test set | 🟡 In progress |
