@@ -1,4 +1,4 @@
-"""Compare the two production candidates on the 35-question test set (reused from Checkpoint 7.1).
+"""Compare the two production candidates on the 35-question test set (a copy of the Checkpoint 7.1 file, in this folder).
 
     python run_candidates_8_1.py --runs 3                 # A and B, 3 runs each
     python run_candidates_8_1.py --ids SP1,RT5 --runs 1   # a quick subset
@@ -128,7 +128,7 @@ def main() -> None:
     ap.add_argument("--out", default="checkpoint_8_1_results")
     ap.add_argument("--resume", action="store_true", help="keep finished (system, run) blocks from the saved JSON")
     a = ap.parse_args()
-    cases = json.loads((cand.REPO / "Capstone_Checkpoint_7.1" / "testset_7_1.json").read_text(encoding="utf-8"))
+    cases = json.loads((HERE / "testset_7_1.json").read_text(encoding="utf-8"))   # copy of the 7.1 file, kept here so 8.1 is self-contained
     if a.ids:
         cases = [c for c in cases if c["id"] in set(a.ids.split(","))]
     llm = cp71.make_llm()
