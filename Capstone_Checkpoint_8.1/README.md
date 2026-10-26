@@ -17,7 +17,7 @@ For the Module 8 design review. Two candidates for production are built and comp
 | `checkpoint_8_1_results_per_question.csv` | Per question: category, pass count, evidence, tokens, seconds, for A and B |
 | `checkpoint_8_1_results.json` | Every record: answer, retrieved chunk ids, tokens in/out, calls, latency |
 | `checkpoint_8_1_run_output_part1.txt`, `_part2.txt` | Console output (see "How the run went") |
-| `presentation/` | The design-review slides (.pptx) and preparation notes (.docx) |
+| [`presentation/`](presentation) | The design-review slides ([.pptx](presentation/Capstone%20Design%20Review%20Presentation.pptx)) and preparation notes ([.docx](presentation/Capstone%20Design%20Review%20Preparation%20Notes.docx)) |
 
 ## Prerequisites and setup
 
@@ -78,8 +78,8 @@ Reading it:
 
 ## Presentation
 
-`presentation/Capstone Design Review Presentation.pptx` (14 slides) is the deck for the recorded presentation, with
-`Capstone Design Review Preparation Notes.docx` as the speaker notes. Its numbers come from the files in this folder
+[`Capstone Design Review Presentation.pptx`](presentation/Capstone%20Design%20Review%20Presentation.pptx) (14 slides) is the deck for the recorded presentation, with
+[`Capstone Design Review Preparation Notes.docx`](presentation/Capstone%20Design%20Review%20Preparation%20Notes.docx) as the speaker notes. Its numbers come from the files in this folder
 and from [`testset_8_1.md`](testset_8_1.md); the slides link to
 the results table here.
 
