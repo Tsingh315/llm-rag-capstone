@@ -48,6 +48,16 @@ answers. So far:
 
 Later checkpoints improve retrieval and keep re-running the same evaluation to measure progress.
 
+## Where to look first (for reviewers)
+
+| What | Where |
+|---|---|
+| Final comparison of the two production candidates (4.1 + 7.1 vs 5.1 + 7.1) | [Checkpoint 8.1 README](Capstone_Checkpoint_8.1/README.md) and [results](Capstone_Checkpoint_8.1/checkpoint_8_1_results.md) |
+| Recorded-presentation slides and notes | [`Capstone_Checkpoint_8.1/presentation/`](Capstone_Checkpoint_8.1/presentation) |
+| The 35 test questions, with categories | [`testset_8_1.md`](Capstone_Checkpoint_8.1/testset_8_1.md) |
+| The GROBID PDF parsing pipeline and its limitations | [`ingest_papers.py`](Capstone_Checkpoint_2.1/ingest_papers.py), [`README_INGESTION.md`](Capstone_Checkpoint_2.1/README_INGESTION.md) |
+| Security and cost findings that drove the hardening | [Checkpoint 6.1 README](Capstone_Checkpoint_6.1/README.md) |
+
 ## Repository structure
 
 ```
@@ -94,11 +104,15 @@ Later checkpoints improve retrieval and keep re-running the same evaluation to m
 │   ├── README.md
 │   ├── capstone_checkpoint_7_1_production_ready_starter.py   # solution file
 │   ├── checkpoint_7_1_output.txt, checkpoint_7_1_agent.log
+│   ├── testset_7_1.md/.csv/.json, run_testset_7_1.py     # 35-question test set and its runner (full corpus)
+│   ├── checkpoint_7_1_testset_results.*                  # last run: hardened vs plain path
 │   └── Tarundeep_Required_Capstone_Checkpoint_7_1_Worksheet.docx
 ├── Capstone_Checkpoint_8.1/   # design review: 4.1 + 7.1 vs 5.1 + 7.1 on the 35-question test set
 │   ├── README.md
-│   ├── capstone_checkpoint_8_1_candidates.py, run_candidates_8_1.py
-│   └── checkpoint_8_1_results.*, checkpoint_8_1_run_output_part*.txt
+│   ├── capstone_checkpoint_8_1_candidates.py, run_candidates_8_1.py   # the merged candidates and the comparison runner
+│   ├── testset_8_1.md/.csv/.json                          # the 35 test questions (copy of the 7.1 set)
+│   ├── checkpoint_8_1_results.*, checkpoint_8_1_run_output_part*.txt
+│   └── presentation/                                      # design-review slides and prep notes
 ├── data/                      # git-ignored, shared by all checkpoints
 │   ├── ResearchPapers/        # the course PDFs
 │   ├── papers_txt/            # parsed text (written by ingest_papers.py)
@@ -118,7 +132,7 @@ Each checkpoint folder has its own README: [Checkpoint 1.1](Capstone_Checkpoint_
 ## Setup
 
 ```bash
-git clone <this-repo-url>
+git clone https://github.com/Tsingh315/llm-rag-capstone.git
 cd llm-rag-capstone
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
@@ -160,14 +174,16 @@ python capstone_checkpoint_5_1_agent_rag_starter.py --chat
 cd ../Capstone_Checkpoint_6.1
 python capstone_checkpoint_6_1_security_cost_starter.py
 
+# 7.1: hardening and cost demo on a small paper corpus (a handful of LLM calls)
+cd ../Capstone_Checkpoint_7.1
+python capstone_checkpoint_7_1_production_ready_starter.py
+# 7.1 on the full corpus + the 35-question test set (about 70 question runs)
+python run_testset_7_1.py --baseline
+
 # 8.1: compare the two production candidates on the 35-question test set
 #      (~1,000 LLM calls, about 25 minutes; needs data/papers_txt and data/chroma_db from the steps above)
 cd ../Capstone_Checkpoint_8.1
 python run_candidates_8_1.py --runs 3
-
-# 7.1: hardening and cost demo on a small paper corpus (a handful of LLM calls)
-cd ../Capstone_Checkpoint_7.1
-python capstone_checkpoint_7_1_production_ready_starter.py
 ```
 
 Building a vector index embeds all 8,087 chunks once (an embedding API cost); later runs reuse it unless the
@@ -179,16 +195,17 @@ chunks change. 2.1 keeps its own index in `Capstone_Checkpoint_2.1/chroma_db/` (
 - **Setup is not self-contained.** The 153-paper corpus (~500 MB) is not in the repo, parsing it needs Docker (GROBID),
   and every LLM step needs an OpenRouter API key. The only parts that run without the corpus are 1.1 and the 7.1 demo.
 - **Cost and time.** Building the index embeds 8,087 chunks once. The 8.1 comparison makes about 1,000 LLM calls and takes
-  about 25 minutes; the 7.1 test-set run is about 70 questions.
+  about 25 minutes; the 7.1 test-set run is 70 question runs (35 questions x 2 paths).
 - **Parsing.** 152 of 153 PDFs parsed and 148 papers were indexed (five proceedings volumes lost). Tables and equations are
   flattened, sections are not saved, and the quality checks only sample the start of each file. At least six filenames do
   not match the paper inside (titles come from the text).
-- **Evaluation.** Questions were written by me and graded by an LLM judge (4 questions in 3.1/4.1, 7 in 5.1, 35 in 7.1/8.1).
+- **Evaluation.** Questions were written by me and graded by an LLM judge (4 questions in 3.1, 6 in 4.1, 7 in 5.1, 35 in 7.1/8.1).
   Results move by a question or two between runs; in 8.1 the gap between the candidates (22.0 vs 24.0 of 35) is small.
 - **What 8.1 does and does not show.** Red-team pass is measured on 5 questions; the 10 Lab 6.1 probes were not re-run on
   the 8.1 candidates. The 7.1 demo and its 24/35 test-set result used a 3-passage sample and the 2.1 retriever
   respectively, not the 4.1 graph.
 - **Known weak spots.** Trend questions reach only 17% of the needed evidence; cross-paper questions reach 23% (A) and 63% (B).
+- **Duplicate files.** The test set is stored twice, as `testset_7_1.*` in 7.1 and `testset_8_1.*` in 8.1 (identical content).
 - **Not built.** The cache is exact-match (not semantic) and the 7.1 router is not part of the 8.1 candidates.
 - **Presentation.** The slides ([.pptx](Capstone_Checkpoint_8.1/presentation/Capstone%20Design%20Review%20Presentation.pptx)) and prep notes ([.docx](Capstone_Checkpoint_8.1/presentation/Capstone%20Design%20Review%20Preparation%20Notes.docx)) are in [`Capstone_Checkpoint_8.1/presentation/`](Capstone_Checkpoint_8.1/presentation);
   the test set and results they cite are in [8.1](Capstone_Checkpoint_8.1/testset_8_1.md) and
@@ -205,4 +222,4 @@ chunks change. 2.1 keeps its own index in `Capstone_Checkpoint_2.1/chroma_db/` (
 | 5.1 | Agent-based RAG: plan, clarify, one-shot graph retrieval; evaluated vs 2.1 and 4.1 | ✅ Complete |
 | 6.1 | Security and performance audit of the 5.1 agent (probes, token cost) | ✅ Complete |
 | 7.1 | Production readiness: safeguards and cost/latency optimizations, measured before vs after | ✅ Complete |
-| 8.1 | Design review: the 4.1 pipeline and the 5.1 agent, each with the 7.1 hardening, compared on a 35-question test set | 🟡 In progress |
+| 8.1 | Design review: the 4.1 pipeline and the 5.1 agent, each with the 7.1 hardening, compared on a 35-question test set | 🟡 In progress (draft presentation done; final decision pending) |
