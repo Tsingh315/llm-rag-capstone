@@ -39,6 +39,9 @@ answers. So far:
 - **6.1, security and cost audit:** the 5.1 agent, unchanged, under 10 probes and the test tasks, twice, with real
   token counts. The research path resisted command injection and a poisoned passage; the no-retrieval path did not
   (role-play accepted, refusals that add offers, a promised search never run). The answer call is 65% of input tokens.
+- **7.1, production readiness:** safeguards and cost optimizations aimed at the 6.1 findings, demonstrated on a
+  three-passage paper corpus (not yet ported into the 5.1 agent). Refusal format 0/4 → 4/4 on the failed 6.1 probes;
+  a repeated question costs 0 tokens instead of 684; the direct path uses 229–402 tokens.
 
 Later checkpoints improve retrieval and keep re-running the same evaluation to measure progress.
 
@@ -84,6 +87,11 @@ Later checkpoints improve retrieval and keep re-running the same evaluation to m
 │   ├── checkpoint_6_1_summary.txt, checkpoint_6_1_results_run*.json, checkpoint_6_1_agent_run*.log
 │   ├── screenshots/
 │   └── Tarundeep_Required_Capstone_Checkpoint_6_1_Worksheet.docx
+├── Capstone_Checkpoint_7.1/   # production readiness: safeguards + cost optimizations (small-corpus demo)
+│   ├── README.md
+│   ├── capstone_checkpoint_7_1_production_ready_starter.py   # solution file
+│   ├── checkpoint_7_1_output.txt, checkpoint_7_1_agent.log
+│   └── Tarundeep_Required_Capstone_Checkpoint_7_1_Worksheet.docx
 ├── data/                      # git-ignored, shared by all checkpoints
 │   ├── ResearchPapers/        # the course PDFs
 │   ├── papers_txt/            # parsed text (written by ingest_papers.py)
@@ -141,6 +149,10 @@ python capstone_checkpoint_5_1_agent_rag_starter.py --chat
 # 6.1: security probes + token split on the 5.1 agent (~40 LLM calls)
 cd ../Capstone_Checkpoint_6.1
 python capstone_checkpoint_6_1_security_cost_starter.py
+
+# 7.1: hardening and cost demo on a small paper corpus (a handful of LLM calls)
+cd ../Capstone_Checkpoint_7.1
+python capstone_checkpoint_7_1_production_ready_starter.py
 ```
 
 Building a vector index embeds all 8,087 chunks once (an embedding API cost); later runs reuse it unless the
@@ -157,4 +169,4 @@ chunks change. 2.1 keeps its own index in `Capstone_Checkpoint_2.1/chroma_db/` (
 | 4.1 | Advanced retrieval: graph-based multi-hop + query decomposition | ✅ Complete |
 | 5.1 | Agent-based RAG: plan, clarify, one-shot graph retrieval; evaluated vs 2.1 and 4.1 | ✅ Complete |
 | 6.1 | Security and performance audit of the 5.1 agent (probes, token cost) | ✅ Complete |
-| 7.1 | Production readiness: safeguards and cost/latency optimizations, measured before vs after | 🟡 In progress |
+| 7.1 | Production readiness: safeguards and cost/latency optimizations, measured before vs after | ✅ Complete |

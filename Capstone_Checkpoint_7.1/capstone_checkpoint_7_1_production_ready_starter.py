@@ -82,6 +82,7 @@ warnings.filterwarnings("ignore")
 import json
 import os
 import re
+import sys
 import time
 from datetime import datetime
 from pathlib import Path
@@ -96,6 +97,11 @@ OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 LLM_MODEL = "openai/gpt-5.4-mini"
 TEMPERATURE = 0.2
 MAX_STEPS = 3
+REPO = Path(__file__).resolve().parents[1]
+# Retrieval depth: the sample corpus is 6 tiny docs; the full corpus uses the matched 8-chunk budget of 4.1.
+AGENT_K = 2    # per sub-query on the agent path
+DIRECT_K = 3   # on the direct path
+RETRIEVAL_LOG: list[str] = []   # chunk ids returned by retrieve(), for the test-set runner
 LOG_PATH = Path.cwd() / "checkpoint_7_1_agent.log"
 
 # === SET THIS to the scenario you chose in Checkpoint 1.1 ===
@@ -181,6 +187,31 @@ def retrieve(query: str, k: int = 2) -> list[str]:
     scored = [(d["id"], len(q & set(re.findall(r"[a-z0-9]+", d["text"].lower())))) for d in SAMPLE_DOCS]
     scored.sort(key=lambda x: x[1], reverse=True)
     return [doc_id for doc_id, s in scored[:k] if s > 0]
+
+
+def use_full_corpus() -> None:
+    """Swap the 6-doc sample for the real corpus: the Checkpoint 2.1 hybrid retriever (BM25 + vector)
+    over the 8,087 chunks of the 153 papers, reusing the saved index in data/chroma_db.
+
+    Everything below (sanitizer, cache, router, agent loop, refusal guard) is unchanged: it only
+    ever calls retrieve() and DOC_BY_ID, so it runs on the full corpus as is.
+    """
+    global DOC_BY_ID, retrieve, AGENT_K, DIRECT_K
+    sys.path.insert(0, str(REPO / "Capstone_Checkpoint_2.1"))
+    from capstone_checkpoint_2_1_baseline_retrieval_starter import (  # noqa: E402
+        HybridRetriever, build_or_load_db, load_chunks)
+    papers_dir, chroma_dir = REPO / "data" / "papers_txt", REPO / "data" / "chroma_db"
+    chunks = load_chunks(papers_dir)
+    retriever = HybridRetriever(chunks, build_or_load_db(chunks, chroma_dir))
+    DOC_BY_ID = {c["chunk_id"]: {"id": c["chunk_id"], "text": c["text"]} for c in chunks}
+
+    def retrieve_full(query: str, k: int = 5) -> list[str]:
+        ids = [cid for cid, _, _ in retriever.getTopK(query, k)]
+        RETRIEVAL_LOG.extend(ids)
+        return ids
+
+    retrieve = retrieve_full
+    AGENT_K, DIRECT_K = 5, 8
 
 
 # %% [markdown]
@@ -287,6 +318,23 @@ def enforce_refusal_format(answer: str) -> str:
     return " ".join(first.split()[:MAX_REFUSAL_WORDS])
 
 
+CONTEXTUALIZE_SYSTEM = (
+    "Rewrite the user's last message as one standalone question that can be understood without the "
+    "conversation, resolving pronouns and references (it, its, that paper, the abstract) using the earlier "
+    "turns. Keep the meaning and every named paper or number. Output ONLY the rewritten question."
+)
+
+
+def contextualize(llm: ChatOpenAI, history: list[tuple[str, str]], question: str) -> tuple[str, dict[str, int]]:
+    """Multi-turn: turn a follow-up into a standalone question so retrieval and the cache see the full intent."""
+    if not history:
+        return question, {"input": 0, "output": 0}
+    convo = "\n".join(f"User: {q}\nAssistant: {a[:400]}" for q, a in history[-3:])
+    resp = llm.invoke([SystemMessage(content=CONTEXTUALIZE_SYSTEM),
+                       HumanMessage(content=f"{convo}\n\nLast message: {question}")])
+    return resp.content.strip() or question, _usage(resp)
+
+
 def route(question: str) -> str:
     """Trivial heuristic router: 'agent' for multipart questions, else 'direct'.
 
@@ -335,7 +383,7 @@ def agentic_answer(llm: ChatOpenAI, question: str) -> tuple[str, dict[str, int]]
     pending = [question]
     for step in range(MAX_STEPS):
         for q in pending:
-            for doc_id in retrieve(q):
+            for doc_id in retrieve(q, k=AGENT_K):
                 collected[doc_id] = DOC_BY_ID[doc_id]["text"]
             executed.append(q)
         d, u = decide(llm, question, collected, executed)
@@ -357,7 +405,7 @@ def agentic_answer(llm: ChatOpenAI, question: str) -> tuple[str, dict[str, int]]
 def answer_direct(llm: ChatOpenAI, question: str) -> tuple[str, dict[str, int]]:
     """The cheap path the router picks for simple one-hop questions: one retrieve, one call."""
     usage = {"planner_input": 0, "planner_output": 0, "answer_input": 0, "answer_output": 0}
-    collected = {i: DOC_BY_ID[i]["text"] for i in retrieve(question, k=3)}
+    collected = {i: DOC_BY_ID[i]["text"] for i in retrieve(question, k=DIRECT_K)}
     context = "\n\n".join(f"[{i}] {collected[i]}" for i in collected) or "(none)"
     resp = llm.invoke([SystemMessage(content=ANSWER_SYSTEM),
                        HumanMessage(content=f"Documents:\n{context}\n\nQuestion: {question}")])
@@ -367,8 +415,8 @@ def answer_direct(llm: ChatOpenAI, question: str) -> tuple[str, dict[str, int]]:
     return resp.content, usage
 
 
-def answer_routed(llm: ChatOpenAI, question: str,
-                  cache: SimpleCache) -> tuple[str, dict[str, int], str]:
+def answer_routed(llm: ChatOpenAI, question: str, cache: SimpleCache,
+                  history: list[tuple[str, str]] | None = None) -> tuple[str, dict[str, int], str]:
     """Sanitize → cache → router → answer → refusal guard. Returns (answer, usage, path).
 
     The sanitized text keys the cache and drives retrieval and the prompt, so attack
@@ -376,12 +424,15 @@ def answer_routed(llm: ChatOpenAI, question: str,
     """
     zero = {"planner_input": 0, "planner_output": 0, "answer_input": 0, "answer_output": 0}
     question = _sanitize_user_text(question)
+    question, cu = contextualize(llm, history or [], question)
     cached = cache.get(question)
     if cached is not None:
-        return cached, dict(zero), "cache-hit"
+        return cached, {**zero, "planner_input": cu["input"], "planner_output": cu["output"]}, "cache-hit"
     decision = route(question)
     answer, usage = (answer_direct(llm, question) if decision == "direct"
                      else agentic_answer(llm, question))
+    usage["planner_input"] += cu["input"]
+    usage["planner_output"] += cu["output"]
     answer = enforce_refusal_format(answer)
     if not answer.startswith(REFUSAL_PREFIX):
         cache.put(question, answer)
@@ -641,7 +692,10 @@ def run() -> None:
     print("Done. Harden and cost-tune this agent for your real system, then write it up.")
 
 
-run()
+if __name__ == "__main__":
+    if "--full-corpus" in sys.argv:
+        use_full_corpus()
+    run()
 
 # %% [markdown]
 # ## Step 4 — Your completed Required Capstone Checkpoint 7.1 Worksheet

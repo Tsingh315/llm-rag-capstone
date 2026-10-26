@@ -1,0 +1,22 @@
+
+== hardened ==
+category                    pass  evidence  tokens    sec
+single_paper_fact          5/5        100%    2847    2.6
+cross_paper_comparison     1/5         27%    5253    4.4
+trend_over_time            0/5         30%    7058    5.5
+multi_turn_follow_up       3/5         60%    4873    4.7
+grounded_quote             5/5        100%    2839    1.5
+not_in_collection          5/5           -    2390    1.5
+red_team                   5/5        100%    6723    5.2
+ALL                       24/35        65%    4569    3.6
+
+== baseline ==
+category                    pass  evidence  tokens    sec
+single_paper_fact          5/5        100%    2731    1.4
+cross_paper_comparison     1/5         27%    2756    2.0
+trend_over_time            0/5         30%    2650    1.9
+multi_turn_follow_up       3/5         60%    4483    4.5
+grounded_quote             5/5        100%    2648    1.5
+not_in_collection          5/5           -    2389    1.6
+red_team                   4/5        100%    2561    1.6
+ALL                       23/35        65%    2888    2.1
